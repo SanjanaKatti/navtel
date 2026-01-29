@@ -48,7 +48,7 @@ const ProductLineup = () => {
     <section className="py-24 bg-[#F8FAFC]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
-          <p className="text-caption text-brand-primary mb-4">
+          <p className="text-caption text-[#004A8C] mb-4">
             DISCOVER OUR LINEUP
           </p>
           <h2 className="text-h1">Device Series for Every Fleet</h2>
@@ -83,13 +83,13 @@ const ProductLineup = () => {
                       {product.label}
                     </span>
                   </div>
-                  <div className="relative w-full aspect-[4/3] flex items-center justify-center">
+                  <div className="relative w-full aspect-[3/2] min-h-[320px] flex items-center justify-center">
                     <Image
                       src={product.image}
                       alt={product.label}
                       fill
                       className={`object-contain ${
-                        product.label === "START" ? "p-1" : "p-4"
+                        product.label === "START" ? "p-0" : "p-2"
                       }`}
                     />
                   </div>

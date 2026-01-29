@@ -21,7 +21,7 @@ const Navbar = () => {
           </Link>
 
           {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8 ml-auto">
             <Link
               href="/"
               className="text-gray-700 hover:text-brand-primary font-medium transition-colors"
@@ -33,6 +33,12 @@ const Navbar = () => {
               className="text-gray-700 hover:text-brand-primary font-medium transition-colors"
             >
               ABOUT US
+            </Link>
+            <Link
+              href="/about/color"
+              className="text-gray-700 hover:text-brand-primary font-medium transition-colors"
+            >
+              ABOUT US – COLOR
             </Link>
 
             {/* Products Dropdown */}
@@ -54,17 +60,17 @@ const Navbar = () => {
                 </svg>
               </button>
 
-              {/* Category Dropdown */}
-              <div className="absolute left-0 top-full w-64 bg-white border border-gray-200 shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 rounded-xl">
+              {/* Category Dropdown - right-aligned so it doesn't get cut off */}
+              <div className="absolute right-0 top-full w-64 bg-white border border-gray-200 shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 rounded-xl">
                 {/* Tracking Devices */}
                 <div className="relative group/sub">
                   <Link
                     href="/products/tracking-devices"
-                    className="w-full flex justify-between items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
+                    className="w-full flex items-center gap-2 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
                   >
-                    Tracking Devices
+                    <span className="flex-1 text-left">Tracking Devices</span>
                     <svg
-                      className="w-4 h-4"
+                      className="w-4 h-4 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -78,23 +84,23 @@ const Navbar = () => {
                     </svg>
                   </Link>
 
-                  {/* Series Dropdown (Side) */}
-                  <div className="absolute left-full top-0 w-64 bg-white border border-gray-200 shadow-xl py-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 z-50 rounded-xl">
+                  {/* Series Dropdown - opens to the left so it stays in view */}
+                  <div className="absolute right-full top-0 w-64 bg-white border border-gray-200 shadow-xl py-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 z-50 rounded-xl ml-0">
                     <Link
                       href="/products/tracking-devices/start-series"
-                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
                     >
                       START Series
                     </Link>
                     <Link
                       href="/products/tracking-devices/smart-series"
-                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
                     >
                       SMART Series
                     </Link>
                     <Link
                       href="/products/tracking-devices/signal-series"
-                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
                     >
                       SIGNAL Series
                     </Link>
@@ -105,11 +111,11 @@ const Navbar = () => {
                 <div className="relative group/sub">
                   <Link
                     href="/products/software-products"
-                    className="w-full flex justify-between items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
+                    className="w-full flex items-center gap-2 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
                   >
-                    Software Solutions
+                    <span className="flex-1 text-left">Software Solutions</span>
                     <svg
-                      className="w-4 h-4"
+                      className="w-4 h-4 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -123,12 +129,12 @@ const Navbar = () => {
                     </svg>
                   </Link>
 
-                  {/* Software Dropdown (Side) */}
-                  <div className="absolute left-full top-0 w-64 bg-white border border-gray-200 shadow-xl py-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 z-50 rounded-xl">
-                  <Link
-                    href="/products/software-products/ntc-configurator"
-                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
-                  >
+                  {/* Software Dropdown - opens to the left so it stays in view */}
+                  <div className="absolute right-full top-0 w-64 bg-white border border-gray-200 shadow-xl py-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 z-50 rounded-xl">
+                    <Link
+                      href="/products/software-products/ntc-configurator"
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
+                    >
                       NTC Configurator
                     </Link>
                     <Link
@@ -179,8 +185,8 @@ const Navbar = () => {
                 </svg>
               </button>
 
-              {/* Support Dropdown Menu */}
-              <div className="absolute left-0 top-full w-64 bg-white border border-gray-200 shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 rounded-xl">
+              {/* Support Dropdown Menu - right-aligned so it doesn't get cut off */}
+              <div className="absolute right-0 top-full w-64 bg-white border border-gray-200 shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 rounded-xl">
                 <Link
                   href="/support/knowledge-base"
                   className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
@@ -208,36 +214,6 @@ const Navbar = () => {
             >
               CONTACT US
             </Link>
-          </div>
-
-          {/* Social Icons */}
-          <div className="flex items-center space-x-4">
-            <a
-              href="#"
-              className="text-gray-400 hover:text-blue-600 transition-colors"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-              </svg>
-            </a>
-            <a
-              href="#"
-              className="text-gray-400 hover:text-pink-600 transition-colors"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                viewBox="0 0 24 24"
-              >
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </a>
           </div>
         </div>
       </div>
