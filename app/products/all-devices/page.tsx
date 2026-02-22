@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
+import Image from "next/image";
 import Footer from "@/components/Footer";
 import { Check, X, Funnel } from "phosphor-react";
 
@@ -21,7 +22,22 @@ interface Device {
 }
 
 const AllDevicesPage = () => {
-  const [selectedDevices, setSelectedDevices] = useState<Device[]>([]);
+  const seriesImages: Record<Device["series"], string> = {
+    START: "/Navtelecom/sample1.png",
+    SMART: "/Navtelecom/sample2.png",
+    SIGNAL: "/Navtelecom/sample3.png",
+  };
+
+  const [selectedDevices, setSelectedDevices] = useState<Device[]>(() => {
+    if (typeof window === "undefined") return [];
+    const stored = localStorage.getItem("compareDevices");
+    if (!stored) return [];
+    try {
+      return JSON.parse(stored) as Device[];
+    } catch {
+      return [];
+    }
+  });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   
   // Old style quick filters
@@ -209,11 +225,6 @@ const AllDevicesPage = () => {
   };
 
   useEffect(() => {
-    const stored = localStorage.getItem('compareDevices');
-    if (stored) setSelectedDevices(JSON.parse(stored));
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem('compareDevices', JSON.stringify(selectedDevices));
   }, [selectedDevices]);
 
@@ -311,21 +322,23 @@ const AllDevicesPage = () => {
                     <div key={key} className="space-y-3">
                       <h3 className="text-label text-brand-navy/60">{key}</h3>
                       <div className="space-y-2">
-                        {options.map(option => (
+                        {options.map((option) => {
+                          const filterKey = key as keyof typeof filters;
+                          return (
                           <label key={option} className="flex items-center gap-3 cursor-pointer group">
                             <div 
-                              onClick={() => toggleFilter(key as any, option)}
+                              onClick={() => toggleFilter(filterKey, option)}
                               className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
-                                filters[key as keyof typeof filters].includes(option)
+                                filters[filterKey].includes(option)
                                   ? 'bg-brand-primary border-brand-primary text-white'
                                   : 'border-gray-200 group-hover:border-brand-primary'
                               }`}
                             >
-                              {filters[key as keyof typeof filters].includes(option) && <Check size={12} weight="bold" />}
+                              {filters[filterKey].includes(option) && <Check size={12} weight="bold" />}
                             </div>
                             <span className="text-body-sm group-hover:text-brand-navy transition-colors">{option}</span>
                           </label>
-                        ))}
+                        )})}
                       </div>
                     </div>
                   ))}
@@ -380,11 +393,15 @@ const AllDevicesPage = () => {
 
                       {/* Hardware Visualization */}
                       <div className="w-full aspect-[16/10] mb-6 bg-brand-light-3 rounded-2xl flex items-center justify-center relative overflow-hidden group-hover:bg-brand-light-2 transition-colors duration-500">
-                        <div className="w-4/5 h-3/5 bg-brand-navy rounded-xl shadow-xl relative transform -rotate-2 group-hover:rotate-0 transition-all duration-700 flex items-center justify-center">
-                          <span className="text-brand-primary text-2xl font-black tracking-widest uppercase opacity-80">
-                            {device.name}
-                          </span>
-                        </div>
+                        <Image
+                          src={seriesImages[device.series]}
+                          alt={`${device.series} series device`}
+                          fill
+                          className="object-contain p-4"
+                        />
+                        <span className="absolute left-4 top-4 text-brand-navy text-base font-black tracking-wider uppercase">
+                          {device.name}
+                        </span>
                       </div>
 
                       {/* Specs Summary */}
@@ -453,21 +470,23 @@ const AllDevicesPage = () => {
                 <div key={key} className="space-y-4">
                   <h3 className="text-label text-brand-navy/60">{key}</h3>
                   <div className="space-y-3">
-                    {options.map(option => (
+                    {options.map((option) => {
+                      const filterKey = key as keyof typeof filters;
+                      return (
                       <label key={option} className="flex items-center gap-3">
                         <div 
-                          onClick={() => toggleFilter(key as any, option)}
+                          onClick={() => toggleFilter(filterKey, option)}
                           className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all ${
-                            filters[key as keyof typeof filters].includes(option)
+                            filters[filterKey].includes(option)
                               ? 'bg-brand-primary border-brand-primary text-white'
                               : 'border-gray-200'
                           }`}
                         >
-                          {filters[key as keyof typeof filters].includes(option) && <Check size={14} weight="bold" />}
+                          {filters[filterKey].includes(option) && <Check size={14} weight="bold" />}
                         </div>
                         <span className="text-body">{option}</span>
                       </label>
-                    ))}
+                    )})}
                   </div>
                 </div>
               ))}

@@ -20,10 +20,6 @@ const StartSeriesPage = () => {
   const router = useRouter();
   const lineupRef = useRef<HTMLDivElement>(null);
 
-  const scrollToLineup = () => {
-    lineupRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
   const scrollToLineupFromExplore = () => {
     lineupRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -62,7 +58,7 @@ const StartSeriesPage = () => {
     {
       name: "S-2011",
       connectivity: "2g" as const,
-      image: "/Navtelecom/sample2.png",
+      image: "/Navtelecom/sample1.png",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -75,7 +71,7 @@ const StartSeriesPage = () => {
     {
       name: "S-2013",
       connectivity: "2g" as const,
-      image: "/Navtelecom/sample3.png",
+      image: "/Navtelecom/sample1.png",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -90,6 +86,7 @@ const StartSeriesPage = () => {
     {
       name: "S-4011",
       connectivity: "4g" as const,
+      image: "/Navtelecom/sample1.png",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -102,6 +99,7 @@ const StartSeriesPage = () => {
     {
       name: "S-4013",
       connectivity: "4g" as const,
+      image: "/Navtelecom/sample1.png",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -195,7 +193,7 @@ const StartSeriesPage = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
               {[
                 {
                   title: "RS-485 Ready",
@@ -270,17 +268,19 @@ const StartSeriesPage = () => {
               ].map((feature, idx) => (
                 <div
                   key={idx}
-                  className="group p-8 md:p-10 bg-white rounded-[2.5rem] border border-gray-100 hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
+                  className="group p-10 md:p-12 bg-white rounded-[3rem] border border-gray-100 hover:shadow-2xl transition-all duration-500 relative overflow-hidden min-h-[18rem] lg:min-h-[20rem]"
                 >
-                  <div className="absolute top-8 right-8 text-gray-300 group-hover:text-brand-primary transition-colors duration-500">
+                  <div className="absolute top-8 right-8 text-gray-300 group-hover:text-brand-primary transition-colors duration-500 scale-110">
                     {feature.icon}
                   </div>
-                  <div className="pt-4">
-                    <h3 className="text-h3 mb-1">{feature.title}</h3>
+                  <div className="pt-5 pr-4">
+                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-navy mb-2">
+                      {feature.title}
+                    </h3>
                     <p className="text-caption text-brand-primary mb-3">
                       {feature.sub}
                     </p>
-                    <p className="text-body-sm">{feature.desc}</p>
+                    <p className="text-body">{feature.desc}</p>
                   </div>
                 </div>
               ))}
@@ -437,7 +437,7 @@ const StartSeriesPage = () => {
               Why <span className="text-brand-primary">START</span> Stands Out
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
               {[
                 {
                   title: "Reliable Updates",
@@ -466,12 +466,12 @@ const StartSeriesPage = () => {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#F8FAFC] p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-brand-navy/5 border border-white group hover:-translate-y-2 transition-all duration-500"
+                  className="bg-[#F8FAFC] p-10 md:p-12 rounded-[3rem] shadow-xl shadow-brand-navy/5 border border-white group hover:-translate-y-2 transition-all duration-500"
                 >
-                  <h3 className="text-h3 mb-4 group-hover:text-brand-primary transition-colors leading-tight">
+                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-navy mb-4 group-hover:text-brand-primary transition-colors leading-tight">
                     {item.title}
                   </h3>
-                  <p className="text-body-sm text-gray-400">{item.desc}</p>
+                  <p className="text-body">{item.desc}</p>
                 </div>
               ))}
             </div>

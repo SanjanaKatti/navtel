@@ -8,12 +8,136 @@ import {
   Geography,
   Marker,
 } from "react-simple-maps";
+import { geoCentroid } from "d3-geo";
 import LayoutContainer from "@/components/LayoutContainer";
 
 const geoUrl = "https://unpkg.com/world-atlas@2.0.2/countries-110m.json";
+type MapGeo = {
+  rsmKey: string;
+  properties: Record<string, string | undefined>;
+};
+const highlightedCountryCodes = new Set([
+  "ARG",
+  "ARM",
+  "AZE",
+  "BGD",
+  "BLR",
+  "BOL",
+  "BRA",
+  "BFA",
+  "CMR",
+  "CHL",
+  "COL",
+  "DJI",
+  "ETH",
+  "GHA",
+  "GIN",
+  "HND",
+  "IND",
+  "JOR",
+  "KAZ",
+  "KEN",
+  "KWT",
+  "KGZ",
+  "MLI",
+  "MEX",
+  "MAR",
+  "MOZ",
+  "NAM",
+  "NPL",
+  "OMN",
+  "PAN",
+  "PRY",
+  "PER",
+  "PHL",
+  "SAU",
+  "SEN",
+  "SRB",
+  "ZAF",
+  "TJK",
+  "TUN",
+  "UGA",
+  "ARE",
+  "TZA",
+  "UZB",
+  "ZMB",
+  "ZWE",
+]);
+const highlightedCountryNames = new Set([
+  "ARGENTINA",
+  "ARMENIA",
+  "AZERBAIJAN",
+  "BANGLADESH",
+  "BELARUS",
+  "BOLIVIA",
+  "BRAZIL",
+  "BURKINA",
+  "BURKINA FASO",
+  "CAMEROON",
+  "CHILE",
+  "COLOMBIA",
+  "DJIBOUTI",
+  "ETHIOPIA",
+  "GHANA",
+  "GUINEA",
+  "HONDURAS",
+  "INDIA",
+  "JORDAN",
+  "KAZAKHSTAN",
+  "KENYA",
+  "KUWAIT",
+  "KYRGYZSTAN",
+  "MALI",
+  "MEXICO",
+  "MOROCCO",
+  "MOZAMBIQUE",
+  "NAMIBIA",
+  "NEPAL",
+  "OMAN",
+  "PANAMA",
+  "PARAGUAY",
+  "PERU",
+  "PHILIPPINES",
+  "SAUDI ARABIA",
+  "SENEGAL",
+  "SERBIA",
+  "SOUTH AFRICA",
+  "TAJIKISTAN",
+  "TUNISIA",
+  "UGANDA",
+  "UNITED ARAB EMIRATES",
+  "UAE",
+  "UNITED REPUBLIC OF TANZANIA",
+  "TANZANIA",
+  "UZBEKISTAN",
+  "ZAMBIA",
+  "ZIMBABWE",
+]);
+
+const normalizeCountryName = (value?: string) =>
+  (value || "")
+    .toUpperCase()
+    .replace(/\(.*?\)/g, "")
+    .replace(/[^A-Z\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const isTargetCountry = (geo: MapGeo) => {
+  const code =
+    geo.properties.ISO_A3 || geo.properties.iso_a3 || geo.properties.ISO3;
+  const rawName =
+    geo.properties.NAME_LONG || geo.properties.name || geo.properties.NAME;
+  const normalizedName = normalizeCountryName(rawName);
+  return (
+    (typeof code === "string" && highlightedCountryCodes.has(code)) ||
+    highlightedCountryNames.has(normalizedName)
+  );
+};
 
 const AboutPage = () => {
-  const [hoverCountry, setHoverCountry] = useState<string | null>(null);
+  const [hoverPin, setHoverPin] = useState<{ key: string; name: string } | null>(
+    null,
+  );
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-brand-navy overflow-x-hidden">
@@ -78,8 +202,7 @@ const AboutPage = () => {
               </p>
             </div>
 
-            <div className="relative bg-brand-light-3 rounded-[3rem] p-4 lg:p-12 border border-gray-100 shadow-inner overflow-hidden">
-              {/* Global markers map */}
+            <div className="relative bg-brand-light-3 rounded-[3rem] p-4 lg:p-12 border border-gray-100 shadow-inner overflow-visible">
               <div className="w-full">
                 <ComposableMap
                   projectionConfig={{
@@ -93,176 +216,100 @@ const AboutPage = () => {
                   }}
                 >
                   <Geographies geography={geoUrl}>
-                    {({ geographies }: { geographies: any[] }) =>
-                      geographies.map((geo) => (
-                        <Geography
-                          key={geo.rsmKey}
-                          geography={geo}
-                          fill="#E2E8F0"
-                          stroke="none"
-                          style={{
-                            default: { outline: "none" },
-                            hover: { outline: "none" },
-                            pressed: { outline: "none" },
-                          }}
-                        />
-                      ))
-                    }
-                  </Geographies>
+                    {({ geographies }: { geographies: MapGeo[] }) => {
+                      const markerGeographies = geographies.filter(isTargetCountry);
 
-                  {/* Example Markers - These can be updated later */}
-                  <Marker coordinates={[77.5946, 12.9716]}>
-                    <g className="cursor-pointer group">
-                      <circle
-                        r={8}
-                        fill="#002D49"
-                        opacity={0.3}
-                        className="animate-ping"
-                      />
-                      <circle
-                        r={4}
-                        fill="#002D49"
-                        stroke="#fff"
-                        strokeWidth={2}
-                      />
-                      <text
-                        textAnchor="middle"
-                        y={-15}
-                        className="text-[10px] font-bold fill-brand-navy opacity-0 group-hover:opacity-100 transition-opacity"
-                      >
-                        India
-                      </text>
-                    </g>
-                  </Marker>
+                      return (
+                        <>
+                          {geographies.map((geo) => {
+                            const isHighlighted = isTargetCountry(geo);
 
-                  <Marker coordinates={[55.2708, 25.2048]}>
-                    <g className="cursor-pointer group">
-                      <circle
-                        r={8}
-                        fill="#002D49"
-                        opacity={0.3}
-                        className="animate-ping"
-                      />
-                      <circle
-                        r={4}
-                        fill="#002D49"
-                        stroke="#fff"
-                        strokeWidth={2}
-                      />
-                      <text
-                        textAnchor="middle"
-                        y={-15}
-                        className="text-[10px] font-bold fill-brand-navy opacity-0 group-hover:opacity-100 transition-opacity"
-                      >
-                        UAE
-                      </text>
-                    </g>
-                  </Marker>
+                            return (
+                              <Geography
+                                key={geo.rsmKey}
+                                geography={geo}
+                                fill={isHighlighted ? "#D8DEE9" : "#E5E7EB"}
+                                stroke="none"
+                                style={{
+                                  default: { outline: "none" },
+                                  hover: { outline: "none" },
+                                  pressed: { outline: "none" },
+                                }}
+                              />
+                            );
+                          })}
 
-                  <Marker coordinates={[37.6173, 55.7558]}>
-                    <g className="cursor-pointer group">
-                      <circle
-                        r={8}
-                        fill="#002D49"
-                        opacity={0.3}
-                        className="animate-ping"
-                      />
-                      <circle
-                        r={4}
-                        fill="#002D49"
-                        stroke="#fff"
-                        strokeWidth={2}
-                      />
-                      <text
-                        textAnchor="middle"
-                        y={-15}
-                        className="text-[10px] font-bold fill-brand-navy opacity-0 group-hover:opacity-100 transition-opacity"
-                      >
-                        Russia
-                      </text>
-                    </g>
-                  </Marker>
-                </ComposableMap>
-              </div>
+                          {markerGeographies.map((geo) => {
+                            const markerKey = `marker-${geo.rsmKey}`;
+                            const code =
+                              geo.properties.ISO_A3 ||
+                              geo.properties.iso_a3 ||
+                              geo.properties.ISO3;
+                            const countryName =
+                              geo.properties.NAME_LONG ||
+                              geo.properties.name ||
+                              geo.properties.NAME ||
+                              code;
+                            const [longitude, latitude] = geoCentroid(geo);
 
-              {/* Country highlight map */}
-              <div className="w-full mt-10 pt-8 border-t border-white/40">
-                <ComposableMap
-                  projectionConfig={{
-                    scale: 200,
-                  }}
-                  width={1000}
-                  height={500}
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                  }}
-                >
-                  <Geographies geography={geoUrl}>
-                    {({ geographies }: { geographies: any[] }) =>
-                      geographies.map((geo) => {
-                        const code =
-                          geo.properties.ISO_A3 ||
-                          geo.properties.iso_a3 ||
-                          geo.properties.ISO3;
-                        const name =
-                          geo.properties.name ||
-                          geo.properties.NAME ||
-                          geo.properties.NAME_LONG;
-
-                        // Highlight India, Russia and UAE explicitly
-                        const isHighlighted =
-                          code === "IND" ||
-                          code === "RUS" ||
-                          code === "ARE" ||
-                          name === "India" ||
-                          name === "Russia" ||
-                          name === "Russian Federation" ||
-                          name === "United Arab Emirates" ||
-                          name === "U.A.E.";
-
-                        const label =
-                          code === "IND" || name?.includes("India")
-                            ? "INDIA"
-                            : code === "RUS" || name?.includes("Russia")
-                              ? "RUSSIA"
-                              : code === "ARE" ||
-                                  name === "United Arab Emirates" ||
-                                  name === "U.A.E."
-                                ? "UAE"
-                                : null;
-
-                        return (
-                          <Geography
-                            key={geo.rsmKey}
-                            geography={geo}
-                            fill={isHighlighted ? "#002D49" : "#E5E7EB"}
-                            stroke="none"
-                            style={{
-                              default: { outline: "none" },
-                              hover: { outline: "none" },
-                              pressed: { outline: "none" },
-                            }}
-                            onMouseEnter={() => {
-                              if (label) setHoverCountry(label);
-                            }}
-                            onMouseLeave={() => {
-                              if (label) setHoverCountry(null);
-                            }}
-                          />
-                        );
-                      })
-                    }
+                            return (
+                              <Marker
+                                key={markerKey}
+                                coordinates={[longitude, latitude]}
+                                onMouseEnter={() =>
+                                  setHoverPin({
+                                    key: markerKey,
+                                    name: String(countryName).toUpperCase(),
+                                  })
+                                }
+                                onMouseLeave={() => setHoverPin(null)}
+                              >
+                                <g className="cursor-pointer">
+                                  <path
+                                    d="M0 -11 C-6 -11 -10 -6 -10 -1 C-10 6 -2 12 0 15 C2 12 10 6 10 -1 C10 -6 6 -11 0 -11 Z"
+                                    fill="#002D49"
+                                    stroke="#ffffff"
+                                    strokeWidth={1.25}
+                                  />
+                                  <circle
+                                    cx="0"
+                                    cy="-2"
+                                    r="3"
+                                    fill="#ffffff"
+                                  />
+                                  {hoverPin?.key === markerKey && (
+                                    <g pointerEvents="none">
+                                      <rect
+                                        x="12"
+                                        y="-30"
+                                        rx="6"
+                                        ry="6"
+                                        width={Math.max(
+                                          hoverPin.name.length * 6.9 + 12,
+                                          74,
+                                        )}
+                                        height="20"
+                                        fill="#002D49"
+                                        opacity="0.95"
+                                      />
+                                      <text
+                                        x="18"
+                                        y="-16"
+                                        className="fill-white text-[9px] font-bold tracking-wide"
+                                      >
+                                        {hoverPin.name}
+                                      </text>
+                                    </g>
+                                  )}
+                                </g>
+                              </Marker>
+                            );
+                          })}
+                        </>
+                      );
+                    }}
                   </Geographies>
                 </ComposableMap>
-
-                {hoverCountry && (
-                  <div className="mt-6 text-center">
-                    <span className="text-xs font-black tracking-[0.35em] text-brand-navy">
-                      {hoverCountry}
-                    </span>
-                  </div>
-                )}
               </div>
             </div>
           </LayoutContainer>
