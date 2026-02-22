@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import LayoutContainer from "../LayoutContainer";
 
 interface ProductHeroProps {
   title: string;
@@ -20,18 +21,23 @@ const ProductHero: React.FC<ProductHeroProps> = ({
   onButtonClick,
   visual,
   badge,
-  rightText
+  rightText,
 }) => {
   return (
-    <section className="py-12 md:py-16 bg-[#F8FAFC] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-[1.2fr_1.5fr_0.8fr] gap-8 items-center">
+    <section className="bg-[#EFEFEF] overflow-y-auto h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex flex-col justify-center">
+      {/* Full-width hero: override LayoutContainer's max-width for this section */}
+      <LayoutContainer className="max-w-none px-0 py-8 md:py-12 w-full flex-1 flex items-center">
+        <div className="grid lg:grid-cols-[1.2fr_1.6fr_0.8fr] gap-8 items-center">
           {/* Left Content */}
           <div className="space-y-6">
             <div>
               <h1 className="flex flex-col">
-                <span className="text-h3 opacity-80 uppercase tracking-widest mb-1">{subtitle}</span>
-                <span className="text-display text-brand-primary drop-shadow-sm">{title}</span>
+                <span className="text-h3 opacity-80 uppercase tracking-widest mb-1">
+                  {subtitle}
+                </span>
+                <span className="text-display text-brand-primary drop-shadow-sm">
+                  {title}
+                </span>
               </h1>
             </div>
             <div className="space-y-2 max-w-sm">
@@ -41,7 +47,7 @@ const ProductHero: React.FC<ProductHeroProps> = ({
                 </p>
               ))}
             </div>
-            <button 
+            <button
               onClick={onButtonClick}
               className="bg-brand-navy text-white px-8 py-3.5 rounded-xl font-black text-base hover:bg-brand-primary transition-all shadow-lg shadow-brand-navy/20 transform hover:-translate-y-1"
             >
@@ -49,20 +55,26 @@ const ProductHero: React.FC<ProductHeroProps> = ({
             </button>
           </div>
 
-          {/* Middle Visual */}
-          <div className="relative flex justify-center scale-90 md:scale-100">
-            {visual}
+          {/* Middle Visual - fixed height so image scales to fit on any screen, no zoom/crop */}
+          <div className="relative flex justify-center items-center w-full h-[calc(100vh-12rem)] min-h-[200px] shrink-0">
+            <div className="w-full h-full max-w-2xl flex items-center justify-center [&>*]:max-h-full [&>*]:max-w-full">
+              {visual}
+            </div>
           </div>
 
           {/* Right Text Accent */}
           <div className="lg:text-right hidden md:block">
-            <h2 className="text-display flex flex-col items-end opacity-10">
-              <span className="text-brand-primary">{rightText?.split(' ')[0]}</span>
-              <span>{rightText?.split(' ')[1]}</span>
+            <h2 className="text-display flex flex-col items-end opacity-40">
+              <span className="text-brand-primary">
+                {rightText?.split(" ")[0]}
+              </span>
+              <span className="text-brand-primary/80">
+                {rightText?.split(" ")[1]}
+              </span>
             </h2>
           </div>
         </div>
-      </div>
+      </LayoutContainer>
     </section>
   );
 };

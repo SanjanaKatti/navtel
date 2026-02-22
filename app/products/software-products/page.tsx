@@ -53,7 +53,7 @@ const SoftwareProductsPage = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-32 bg-gradient-to-b from-[#F8FAFC] to-white border-b border-gray-200 relative overflow-hidden">
+        <section className="h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center py-12 md:py-16 bg-gradient-to-b from-[#F8FAFC] to-white border-b border-gray-200 relative overflow-hidden">
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#00529B] transform rotate-45 translate-x-1/2 -translate-y-1/2"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#00529B] transform -rotate-45 -translate-x-1/2 translate-y-1/2"></div>

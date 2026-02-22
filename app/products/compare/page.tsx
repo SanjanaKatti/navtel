@@ -14,11 +14,16 @@ const deviceData = {
     specs: {
       "SIM Support": "Single SIM",
       "Engine Hours": "Engine Hours",
-      "RS-485": "-",
       "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": false,
+      "Communication interface": "UART, Micro USB",
+      "Custom Logic": false,
+      "Interfaces and Protocols": "1-Wire",
       "Inputs": "4 Digital IN & 1 Analog IN",
       "Outputs": "1 OUT",
-      "Battery": "-"
+      "CAN": false,
+      "Voice Communication": false,
+      "Battery": false
     }
   },
   "S-2011": {
@@ -28,10 +33,15 @@ const deviceData = {
     specs: {
       "SIM Support": "Single SIM",
       "Engine Hours": "Engine Hours",
-      "RS-485": "-",
       "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": false,
+      "Communication interface": "UART, Micro USB",
+      "Custom Logic": false,
+      "Interfaces and Protocols": "1-Wire",
       "Inputs": "4 Digital IN & 1 Analog IN",
       "Outputs": "1 OUT",
+      "CAN": false,
+      "Voice Communication": false,
       "Battery": "130 mAh"
     }
   },
@@ -42,10 +52,15 @@ const deviceData = {
     specs: {
       "SIM Support": "Single SIM",
       "Engine Hours": "Engine Hours",
-      "RS-485": "RS-485",
       "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": true,
+      "Communication interface": "RS-485",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire",
       "Inputs": "2 Digital IN & 1 Analog IN",
       "Outputs": "1 OUT",
+      "CAN": true,
+      "Voice Communication": false,
       "Battery": "130 mAh"
     }
   },
@@ -56,10 +71,15 @@ const deviceData = {
     specs: {
       "SIM Support": "Single SIM",
       "Engine Hours": "Engine Hours",
-      "RS-485": "-",
       "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": false,
+      "Communication interface": "UART, Micro USB",
+      "Custom Logic": false,
+      "Interfaces and Protocols": "1-Wire",
       "Inputs": "4 Digital IN & 1 Analog IN",
       "Outputs": "1 OUT",
+      "CAN": false,
+      "Voice Communication": false,
       "Battery": "130 mAh"
     }
   },
@@ -70,11 +90,301 @@ const deviceData = {
     specs: {
       "SIM Support": "Single SIM",
       "Engine Hours": "Engine Hours",
-      "RS-485": "RS-485",
       "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": true,
+      "Communication interface": "RS-485",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire",
       "Inputs": "2 Digital IN & 1 Analog IN",
       "Outputs": "1 OUT",
+      "CAN": true,
+      "Voice Communication": false,
       "Battery": "130 mAh"
+    }
+  },
+  "S-4513": {
+    name: "S-4513",
+    series: "Smart Series",
+    connectivity: "4G",
+    specs: {
+      "SIM Support": "Dual SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0 (v5.0 compatible)",
+      "Eco Driving": true,
+      "Communication interface": "RS-485",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire, MODBUS",
+      "Inputs": "4 Digital IN & 1 Analog IN",
+      "Outputs": "2 OUT",
+      "CAN": "Dual CAN",
+      "Voice Communication": false,
+      "Battery": "380 mAh"
+    }
+  },
+  "S-4511": {
+    name: "S-4511",
+    series: "Smart Series",
+    connectivity: "4G",
+    specs: {
+      "SIM Support": "Single SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0 (v5.0 compatible)",
+      "Eco Driving": false,
+      "Communication interface": "RS-485",
+      "Custom Logic": false,
+      "Interfaces and Protocols": "1-Wire, MODBUS",
+      "Inputs": "4 Digital IN & 1 Analog IN",
+      "Outputs": "2 OUT",
+      "CAN": false,
+      "Voice Communication": false,
+      "Battery": "380 mAh"
+    }
+  },
+  "S-4537": {
+    name: "S-4537",
+    series: "Smart Series",
+    connectivity: "4G",
+    specs: {
+      "SIM Support": "Dual SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0 (v5.0 compatible)",
+      "Eco Driving": true,
+      "Communication interface": "RS-485",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire, MODBUS",
+      "Inputs": "3 Universal IN",
+      "Outputs": "2 OUT",
+      "CAN": "Dual CAN",
+      "Voice Communication": false,
+      "Battery": "800 mAh"
+    }
+  },
+  "S-4535": {
+    name: "S-4535",
+    series: "Smart Series",
+    connectivity: "4G",
+    specs: {
+      "SIM Support": "Dual SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0 (v5.0 compatible)",
+      "Eco Driving": true,
+      "Communication interface": "RS-485, RS-232",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire, MODBUS",
+      "Inputs": "3 Universal IN",
+      "Outputs": "2 OUT",
+      "CAN": "CAN",
+      "Voice Communication": false,
+      "Battery": "800 mAh"
+    }
+  },
+  "S-4533": {
+    name: "S-4533",
+    series: "Smart Series",
+    connectivity: "4G",
+    specs: {
+      "SIM Support": "Dual SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0 (v5.0 compatible)",
+      "Eco Driving": true,
+      "Communication interface": "RS-485, RS-232",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire, MODBUS",
+      "Inputs": "3 Universal IN",
+      "Outputs": "2 OUT",
+      "CAN": false,
+      "Voice Communication": false,
+      "Battery": "800 mAh"
+    }
+  },
+  "S-2437": {
+    name: "S-2437",
+    series: "Signal Series",
+    connectivity: "2G",
+    specs: {
+      "SIM Support": "Dual SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": true,
+      "Communication interface": "RS-485",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire, MODBUS",
+      "Inputs": "3 Universal IN",
+      "Outputs": "2 OUT",
+      "CAN": "Dual CAN",
+      "Voice Communication": true,
+      "Battery": "800 mAh"
+    }
+  },
+  "S-2435": {
+    name: "S-2435",
+    series: "Signal Series",
+    connectivity: "2G",
+    specs: {
+      "SIM Support": "Dual SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": true,
+      "Communication interface": "RS-485, RS-232",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire, MODBUS",
+      "Inputs": "3 Universal IN",
+      "Outputs": "2 OUT",
+      "CAN": "CAN",
+      "Voice Communication": true,
+      "Battery": "800 mAh"
+    }
+  },
+  "S-2433": {
+    name: "S-2433",
+    series: "Signal Series",
+    connectivity: "2G",
+    specs: {
+      "SIM Support": "Single SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": true,
+      "Communication interface": "RS-485, RS-232",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire, MODBUS",
+      "Inputs": "3 Universal IN",
+      "Outputs": "2 OUT",
+      "CAN": false,
+      "Voice Communication": true,
+      "Battery": "800 mAh"
+    }
+  },
+  "S-2425": {
+    name: "S-2425",
+    series: "Signal Series",
+    connectivity: "2G",
+    specs: {
+      "SIM Support": "Dual SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": true,
+      "Communication interface": "RS-485, RS-232",
+      "Custom Logic": false,
+      "Interfaces and Protocols": "1-Wire",
+      "Inputs": "3 Universal IN",
+      "Outputs": "2 OUT",
+      "CAN": false,
+      "Voice Communication": false,
+      "Battery": "380 mAh"
+    }
+  },
+  "S-2423": {
+    name: "S-2423",
+    series: "Signal Series",
+    connectivity: "2G",
+    specs: {
+      "SIM Support": "Dual SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": true,
+      "Communication interface": "RS-485",
+      "Custom Logic": false,
+      "Interfaces and Protocols": "1-Wire",
+      "Inputs": "3 Universal IN",
+      "Outputs": "2 OUT",
+      "CAN": false,
+      "Voice Communication": false,
+      "Battery": "380 mAh"
+    }
+  },
+  "S-2653": {
+    name: "S-2653",
+    series: "Signal Series",
+    connectivity: "2G",
+    specs: {
+      "SIM Support": "Dual SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": true,
+      "Communication interface": "RS-485",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire, MODBUS",
+      "Inputs": "6 Universal IN",
+      "Outputs": "4 OUT",
+      "CAN": "Dual CAN",
+      "Voice Communication": true,
+      "Battery": "800 mAh"
+    }
+  },
+  "S-2613": {
+    name: "S-2613",
+    series: "Signal Series",
+    connectivity: "2G",
+    specs: {
+      "SIM Support": "Single SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": false,
+      "Communication interface": "RS-485",
+      "Custom Logic": false,
+      "Interfaces and Protocols": "-",
+      "Inputs": "4 Digital IN & 1 Analog IN",
+      "Outputs": "4 OUT",
+      "CAN": false,
+      "Voice Communication": true,
+      "Battery": "800 mAh"
+    }
+  },
+  "S-2651": {
+    name: "S-2651",
+    series: "Signal Series",
+    connectivity: "2G",
+    specs: {
+      "SIM Support": "Dual SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0",
+      "Eco Driving": true,
+      "Communication interface": "RS-485, RS-232",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire, MODBUS",
+      "Inputs": "6 Universal IN",
+      "Outputs": "4 OUT",
+      "CAN": "CAN",
+      "Voice Communication": true,
+      "Battery": "800 mAh"
+    }
+  },
+  "S-4753": {
+    name: "S-4753",
+    series: "Signal Series",
+    connectivity: "4G",
+    specs: {
+      "SIM Support": "Dual SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0 (v5.0 compatible)",
+      "Eco Driving": true,
+      "Communication interface": "RS-485",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire, MODBUS",
+      "Inputs": "6 Universal IN",
+      "Outputs": "4 OUT",
+      "CAN": "Dual CAN",
+      "Voice Communication": true,
+      "Battery": "800 mAh"
+    }
+  },
+  "S-4751": {
+    name: "S-4751",
+    series: "Signal Series",
+    connectivity: "4G",
+    specs: {
+      "SIM Support": "Dual SIM",
+      "Engine Hours": "Engine Hours",
+      "Bluetooth": "Bluetooth 4.0 (v5.0 compatible)",
+      "Eco Driving": true,
+      "Communication interface": "RS-485, RS-232",
+      "Custom Logic": true,
+      "Interfaces and Protocols": "1-Wire, MODBUS",
+      "Inputs": "6 Universal IN",
+      "Outputs": "4 OUT",
+      "CAN": "CAN",
+      "Voice Communication": true,
+      "Battery": "800 mAh"
     }
   }
 };
@@ -92,10 +402,15 @@ const ComparisonContent = () => {
   const parameters = [
     "SIM Support",
     "Engine Hours",
-    "RS-485",
     "Bluetooth",
+    "Eco Driving",
+    "Communication interface",
+    "Custom Logic",
+    "Interfaces and Protocols",
     "Inputs",
     "Outputs",
+    "CAN",
+    "Voice Communication",
     "Battery"
   ];
 
@@ -142,8 +457,8 @@ const ComparisonContent = () => {
                       <div className="inline-block px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary text-[10px] font-black uppercase tracking-widest">
                         {device.connectivity} Network
                       </div>
-                      <h3 className="text-h3 text-3xl">{device.name}</h3>
-                      <p className="text-label text-gray-400">{device.series}</p>
+                      <h3 className="text-h3 text-3xl">%{device.name}%</h3>
+                      <p className="text-label text-gray-400">%{device.series}%</p>
                       <Link 
                         href={`/products/tracking-devices/start-series/${device.name.toLowerCase()}`}
                         className="inline-block text-xs font-black text-brand-navy hover:text-brand-primary transition-colors underline underline-offset-4"
@@ -163,22 +478,29 @@ const ComparisonContent = () => {
                   </td>
                   {selectedDevices.map((device, dIdx) => {
                     const value = device.specs[param as keyof typeof device.specs];
-                    const isAvailable = value !== "-";
-                    
+
                     return (
                       <td key={dIdx} className="p-8 text-center border-l border-gray-100">
-                        {isAvailable ? (
-                          <div className="flex flex-col items-center gap-2">
-                            <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-1">
-                              <Check size={14} weight="bold" />
+                        {typeof value === 'boolean' ? (
+                          value ? (
+                            <div className="flex flex-col items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-1">
+                                <Check size={14} weight="bold" />
+                              </div>
                             </div>
-                            <span className="text-body-sm font-bold text-brand-navy">{value}</span>
-                          </div>
+                          ) : (
+                            <div className="flex flex-col items-center gap-2 opacity-20">
+                              <Minus size={20} weight="bold" className="text-gray-400" />
+                            </div>
+                          )
                         ) : (
-                          <div className="flex flex-col items-center gap-2 opacity-20">
-                            <Minus size={20} weight="bold" className="text-gray-400" />
-                            <span className="text-body-sm font-medium text-gray-400">Not Available</span>
-                          </div>
+                          value !== "-" && value !== "" ? (
+                            <span className="text-body-sm font-bold text-brand-navy">{value}</span>
+                          ) : (
+                            <div className="flex flex-col items-center gap-2 opacity-20">
+                              <Minus size={20} weight="bold" className="text-gray-400" />
+                            </div>
+                          )
                         )}
                       </td>
                     );

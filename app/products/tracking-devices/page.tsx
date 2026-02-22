@@ -34,7 +34,7 @@ const TrackingDevicesPage = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-24 bg-white">
+        <section className="h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center py-12 md:py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <p className="text-sm font-bold text-gray-500 tracking-[0.2em] uppercase mb-4">

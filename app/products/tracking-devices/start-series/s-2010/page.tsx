@@ -8,13 +8,13 @@ import DeviceFeatures from "@/components/product/DeviceFeatures";
 import TechnicalSpecs from "@/components/product/TechnicalSpecs";
 import ProductCenter from "@/components/product/ProductCenter";
 import ProductFAQ from "@/components/product/ProductFAQ";
-import { 
-  Cpu, 
-  Bluetooth, 
-  ArrowsIn, 
-  ClockCounterClockwise, 
+import {
+  Cpu,
+  Bluetooth,
+  ArrowsIn,
+  ClockCounterClockwise,
   GlobeSimple,
-  ArrowsLeftRight
+  ArrowsLeftRight,
 } from "phosphor-react";
 
 const S2010Page = () => {
@@ -30,21 +30,19 @@ const S2010Page = () => {
           rightText="2G GSM"
           description={[
             "Basic GPS tracking for location and fuel monitoring.",
-            "Reliable and cost-effective solution for fleet operations and transport automation."
+            "Reliable and cost-effective solution for fleet operations and transport automation.",
           ]}
           buttonText="Explore"
           visual={
-            <div className="relative flex justify-center w-full">
-              <div className="w-full max-w-lg aspect-[1.4/1] relative group/hardware">
-                <div className="relative w-full h-full">
-                  <Image 
-                    src="/Navtelecom/Start_bd.svg" 
-                    alt="START Hardware Blueprint" 
-                    fill 
-                    className="object-contain"
-                    priority
-                  />
-                </div>
+            <div className="relative flex justify-center items-center w-full h-full">
+              <div className="w-full max-w-2xl max-h-full aspect-[4/3] relative rounded-3xl overflow-hidden bg-[#EFEFEF]">
+                <Image
+                  src="/Navtelecom/start_device.png"
+                  alt="S-2010 device"
+                  fill
+                  className="object-contain"
+                  priority
+                />
               </div>
             </div>
           }
@@ -60,43 +58,49 @@ const S2010Page = () => {
               title: "5 Input Lines",
               sub: "Reliable. Clear control.",
               desc: "Connect ignition, doors, seat belts and other switches.",
-              icon: <ArrowsLeftRight size={32} weight="light" />
+              icon: <ArrowsLeftRight size={32} weight="light" />,
             },
             {
               title: "BLE Available",
               sub: "Wireless. Effortless.",
               desc: "Seamlessly connect BLE sensors to your tracker.",
-              icon: <Bluetooth size={32} weight="light" />
+              icon: <Bluetooth size={32} weight="light" />,
             },
             {
               title: "Ultra-Compact Design",
               sub: "Install anywhere. Stay invisible.",
               desc: "Tiny size allows discreet installation even in tight or unexpected places.",
-              icon: <ArrowsIn size={32} weight="light" />
+              icon: <ArrowsIn size={32} weight="light" />,
             },
             {
               title: "USB Type-C",
               sub: "Fast setup. Flexible use.",
               desc: "Configure or switch modes with ease using a modern USB-C connection.",
               icon: (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  className="w-8 h-8"
+                >
                   <rect x="4" y="10" width="16" height="4" rx="2" />
                   <circle cx="12" cy="12" r="1" fill="currentColor" />
                 </svg>
-              )
+              ),
             },
             {
               title: "Engine Hours Calculation",
               sub: "Smart logic. Clear insights.",
               desc: "Track engine runtime based on internal algorithms — no external sensors needed.",
-              icon: <ClockCounterClockwise size={32} weight="light" />
+              icon: <ClockCounterClockwise size={32} weight="light" />,
             },
             {
               title: "Remote Control",
               sub: "Configure anytime. From anywhere.",
               desc: "Remote setup made easy.",
-              icon: <GlobeSimple size={32} weight="light" />
-            }
+              icon: <GlobeSimple size={32} weight="light" />,
+            },
           ]}
         />
 
@@ -106,70 +110,113 @@ const S2010Page = () => {
             {
               groupName: "Interfaces",
               items: [
-                { label: "Digital Inputs", value: "4 (with overvoltage protection up to 200 V)" },
-                { label: "Analog Inputs", value: "1 (configurable as Digital, range 0–31 V)" },
-                { label: "Digital Outputs", value: "1 (up to 48 V / 500 mA, open collector type)" },
-                { label: "USB Interface", value: "Type-C (configuration, data, diagnostics)" },
-                { label: "Supported Antennas", value: "Internal GNSS / Cellular" },
-                { label: "3-Axis Accelerometer", value: true }
-              ]
+                {
+                  label: "Digital Inputs",
+                  value: "4 (with overvoltage protection up to 200 V)",
+                },
+                {
+                  label: "Analog Inputs",
+                  value: "1 (configurable as Digital, range 0–31 V)",
+                },
+                {
+                  label: "Digital Outputs",
+                  value: "1 (up to 48 V / 500 mA, open collector type)",
+                },
+                {
+                  label: "USB Interface",
+                  value: "Type-C (configuration, data, diagnostics)",
+                },
+                {
+                  label: "Supported Antennas",
+                  value: "Internal GNSS / Cellular",
+                },
+                { label: "3-Axis Accelerometer", value: true },
+              ],
             },
             {
               groupName: "Bluetooth",
               items: [
-                { label: "Version", value: "4.0 + LE (up to 4 BLE sensors supported)" },
-                { label: "Supported Peripherals", value: "Fuel Level, Temperature & Humidity, Axle Load, Tilt Angle" },
-                { label: "All Sensor Parameters", value: "Battery Voltage, Signal Strength, Pressure, Illumination, etc." }
-              ]
+                {
+                  label: "Version",
+                  value: "4.0 + LE (up to 4 BLE sensors supported)",
+                },
+                {
+                  label: "Supported Peripherals",
+                  value:
+                    "Fuel Level, Temperature & Humidity, Axle Load, Tilt Angle",
+                },
+                {
+                  label: "All Sensor Parameters",
+                  value:
+                    "Battery Voltage, Signal Strength, Pressure, Illumination, etc.",
+                },
+              ],
             },
             {
               groupName: "Power",
               items: [
                 { label: "Input Voltage Range", value: "9.5 – 47 V DC" },
                 { label: "Average Current Consumption (12 V)", value: "75 mA" },
-                { label: "Current Consumption (12 V, GNSS & GSM off)", value: "25 mA" },
+                {
+                  label: "Current Consumption (12 V, GNSS & GSM off)",
+                  value: "25 mA",
+                },
                 { label: "Max. Current Consumption (12 V)", value: "200 mA" },
                 { label: "Overvoltage Protection", value: "up to 200 V" },
                 { label: "Backup Battery", value: false },
-                { label: "EEPROM Data Retention", value: "5 days" }
-              ]
+                { label: "EEPROM Data Retention", value: "5 days" },
+              ],
             },
             {
               groupName: "GNSS",
               items: [
                 { label: "Supported Systems", value: "GPS / GLONASS / BeiDou" },
                 { label: "Channels", value: "99 acquisition, 33 tracking" },
-                { label: "Sensitivity", value: "–167 dBm (tracking), –149 dBm (cold start)" },
-                { label: "Time to First Fix", value: "Hot start < 1 s, Warm start < 22 s, Cold start < 29 s" },
-                { label: "Accuracy", value: "2.5 m (horizontal), 5 m (vertical)" },
-                { label: "Update Rate", value: "1 Hz" }
-              ]
+                {
+                  label: "Sensitivity",
+                  value: "–167 dBm (tracking), –149 dBm (cold start)",
+                },
+                {
+                  label: "Time to First Fix",
+                  value:
+                    "Hot start < 1 s, Warm start < 22 s, Cold start < 29 s",
+                },
+                {
+                  label: "Accuracy",
+                  value: "2.5 m (horizontal), 5 m (vertical)",
+                },
+                { label: "Update Rate", value: "1 Hz" },
+              ],
             },
             {
               groupName: "Cellular",
               items: [
                 { label: "Network", value: "GSM / GPRS" },
                 { label: "Max Data Rate", value: "85.6 kbps" },
-                { label: "2G Bands", value: "Class 4 (2W) in GSM 850/900, Class 1 (1W) in DCS 1800/1900" },
+                {
+                  label: "2G Bands",
+                  value:
+                    "Class 4 (2W) in GSM 850/900, Class 1 (1W) in DCS 1800/1900",
+                },
                 { label: "Data Support", value: "SMS (Text / Data)" },
                 { label: "SIM Slots", value: "1" },
-                { label: "SIM Type", value: "Nano-SIM" }
-              ]
+                { label: "SIM Type", value: "Nano-SIM" },
+              ],
             },
             {
               groupName: "Memory & Storage",
               items: [
                 { label: "Internal Memory", value: "4 MB Flash" },
-                { label: "Data Storage", value: "up to 25,000 records" }
-              ]
+                { label: "Data Storage", value: "up to 25,000 records" },
+              ],
             },
             {
               groupName: "Environmental",
               items: [
                 { label: "Operating Temperature", value: "–40 °C to +85 °C" },
                 { label: "Storage Temperature", value: "–40 °C to +85 °C" },
-                { label: "Humidity", value: "up to 95% non-condensing" }
-              ]
+                { label: "Humidity", value: "up to 95% non-condensing" },
+              ],
             },
             {
               groupName: "Physical Specification",
@@ -178,70 +225,78 @@ const S2010Page = () => {
                 { label: "Shock Resistance", value: "up to 24 g" },
                 { label: "Dimensions", value: "65.5 × 38.4 × 14.3 mm" },
                 { label: "Weight", value: "31 g" },
-                { label: "Indicators (LEDs)", value: "SYS, GSM, GNSS" }
-              ]
-            }
+                { label: "Indicators (LEDs)", value: "SYS, GSM, GNSS" },
+              ],
+            },
           ]}
         />
 
         {/* Product Center Section */}
-            <ProductCenter
-              heading="Product Center"
-              products={[
-                {
-                  name: "Brochures",
-                  series: "Download product brochures with key features and benefits.",
-                  connectivity: "2g",
-                  specs: [],
-                  buttonText: "Download"
-                },
-                {
-                  name: "Knowledge Base",
-                  series: "Explore pages with full manuals, and guides.",
-                  connectivity: "2g",
-                  specs: [],
-                  buttonText: "Explore"
-                },
-                {
-                  name: "PC Configurator",
-                  series: "Configure, update, and manage devices from your desktop.",
-                  connectivity: "2g",
-                  specs: [],
-                  buttonText: "Download"
-                },
-                {
-                  name: "Android Configurator",
-                  series: "Set up and control devices on the go with our mobile app.",
-                  connectivity: "2g",
-                  specs: [],
-                  buttonText: "Download"
-                }
-              ]}
-            />
+        <ProductCenter
+          heading="Product Center"
+          products={[
+            {
+              name: "Brochures",
+              series:
+                "Download product brochures with key features and benefits.",
+              connectivity: "2g",
+              specs: [],
+              buttonText: "Download",
+            },
+            {
+              name: "Knowledge Base",
+              series: "Explore pages with full manuals, and guides.",
+              connectivity: "2g",
+              specs: [],
+              buttonText: "Explore",
+            },
+            {
+              name: "PC Configurator",
+              series:
+                "Configure, update, and manage devices from your desktop.",
+              connectivity: "2g",
+              specs: [],
+              buttonText: "Download",
+            },
+            {
+              name: "Android Configurator",
+              series:
+                "Set up and control devices on the go with our mobile app.",
+              connectivity: "2g",
+              specs: [],
+              buttonText: "Download",
+            },
+          ]}
+        />
 
         {/* FAQ Section */}
         <ProductFAQ
           faqs={[
             {
               question: "Where can I download the Configurator?",
-              answer: "You can download the latest version of our PC and Android Configurator from the Product Center section above."
+              answer:
+                "You can download the latest version of our PC and Android Configurator from the Product Center section above.",
             },
             {
               question: "How can I manage devices remotely?",
-              answer: "Devices can be managed remotely via SMS commands or through our specialized NTC Control software."
+              answer:
+                "Devices can be managed remotely via SMS commands or through our specialized NTC Control software.",
             },
             {
               question: "Where can I find SMS/GPRS commands?",
-              answer: "Detailed lists of all supported commands are available in the device manual within our Knowledge Base."
+              answer:
+                "Detailed lists of all supported commands are available in the device manual within our Knowledge Base.",
             },
             {
               question: "Which device should I choose — 2G or 4G?",
-              answer: "2G is cost-effective for basic tracking. 4G provides faster data transfer and is better for future-proofing in regions where 2G is being phased out."
+              answer:
+                "2G is cost-effective for basic tracking. 4G provides faster data transfer and is better for future-proofing in regions where 2G is being phased out.",
             },
             {
               question: "How long is the warranty on Navtelecom devices?",
-              answer: "We offer a 36-month manufacturer warranty on all tracking equipment."
-            }
+              answer:
+                "We offer a 36-month manufacturer warranty on all tracking equipment.",
+            },
           ]}
         />
       </main>

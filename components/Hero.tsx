@@ -18,9 +18,9 @@ const Hero = () => {
   }, [images.length]);
 
   return (
-    <section className="relative pt-20 overflow-hidden bg-white">
-      <div className="w-full relative z-10">
-        <div className="relative w-full h-[500px] overflow-hidden shadow-2xl">
+    <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden bg-white">
+      <div className="w-full h-full relative z-10">
+        <div className="relative w-full h-full min-h-[280px] overflow-hidden shadow-2xl">
           {images.map((src, idx) => (
             <div
               key={idx}
@@ -32,7 +32,7 @@ const Hero = () => {
                 src={src}
                 alt={`Navtelecom Hero ${idx + 1}`}
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority={idx === 0}
               />
             </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import LayoutContainer from "./LayoutContainer";
 
 const tools = [
   {
@@ -36,12 +37,12 @@ const tools = [
 const ToolsSection = () => {
   return (
     <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <LayoutContainer>
         <div className="flex flex-col md:flex-row justify-between items-start mb-16 gap-8">
           <p className="text-base md:text-lg font-bold uppercase tracking-[0.2em] text-gray-400 pt-2">
             DISCOVER OUR TOOLS
           </p>
-          <h2 className="text-h1">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-left max-w-none">
             Telematics hardware.
             <br />
             Reliable. Integrable.
@@ -78,7 +79,7 @@ const ToolsSection = () => {
             </div>
           ))}
         </div>
-      </div>
+      </LayoutContainer>
     </section>
   );
 };

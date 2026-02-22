@@ -8,6 +8,7 @@ import {
   Geography,
   Marker,
 } from "react-simple-maps";
+import LayoutContainer from "@/components/LayoutContainer";
 
 const geoUrl = "https://unpkg.com/world-atlas@2.0.2/countries-110m.json";
 
@@ -19,37 +20,20 @@ const AboutPage = () => {
       <Navbar />
 
       <main className="pt-20">
-        {/* CONCEPT 2: ASYMMETRIC SPLIT */}
-        <section className="py-32 relative bg-brand-light-3 overflow-hidden">
-          {/* Decorative Dashed Line */}
-          <svg
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-10 hidden lg:block"
-            viewBox="0 0 1000 600"
-          >
-            <path
-              d="M100,150 Q500,300 900,450"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeDasharray="12,12"
-              className="text-brand-primary"
-            />
-          </svg>
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Hero Section */}
+        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center bg-brand-light-3 overflow-hidden">
+          <LayoutContainer className="relative">
             {/* About Us: Title Left, Text Right */}
             <div className="grid lg:grid-cols-2 gap-0 items-center mb-40">
               <div className="relative pr-12 lg:pr-20">
-                <p className="text-caption text-brand-primary mb-4">
-                  WHO WE ARE
-                </p>
+                <p className="text-caption text-brand-navy mb-4">WHO WE ARE</p>
                 <h1 className="text-display leading-none">
                   About
                   <br />
-                  <span className="text-brand-primary">Us</span>
+                  <span className="text-brand-navy">Us</span>
                 </h1>
               </div>
-              <div className="lg:pl-20 border-l-4 border-brand-primary/20 hover:border-brand-primary transition-colors duration-500 py-4">
+              <div className="lg:pl-20 border-l-4 border-brand-navy/20 hover:border-brand-navy transition-colors duration-500 py-4">
                 <p className="text-body-lg">
                   We manufacture such GPS tracking equipment that ensures stable
                   and efficient solutions for our customers. Our devices provide
@@ -69,26 +53,24 @@ const AboutPage = () => {
                 </p>
               </div>
               <div className="order-1 lg:order-2 pl-12 lg:pl-20 text-right lg:text-left relative">
-                <p className="text-caption text-brand-primary mb-4">OUR GOAL</p>
+                <p className="text-caption text-brand-navy mb-4">OUR GOAL</p>
                 <h2 className="text-display leading-none text-brand-navy">
                   Our
                   <br />
-                  <span className="text-brand-primary">Mission</span>
+                  <span className="text-brand-navy">Mission</span>
                 </h2>
               </div>
             </div>
-          </div>
+          </LayoutContainer>
         </section>
 
         {/* Global Presence Section */}
         <section className="py-24 bg-white overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LayoutContainer>
             <div className="text-center mb-16">
-              <p className="text-caption text-brand-primary mb-4">
-                GLOBAL REACH
-              </p>
+              <p className="text-caption text-brand-navy mb-4">GLOBAL REACH</p>
               <h2 className="text-h1 mb-6">
-                Our Global <span className="text-brand-primary">Presence</span>
+                Our Global <span className="text-brand-navy">Presence</span>
               </h2>
               <p className="text-body-lg max-w-2xl mx-auto">
                 Supporting businesses and fleets across the globe with reliable
@@ -133,13 +115,13 @@ const AboutPage = () => {
                     <g className="cursor-pointer group">
                       <circle
                         r={8}
-                        fill="#32BEF0"
+                        fill="#002D49"
                         opacity={0.3}
                         className="animate-ping"
                       />
                       <circle
                         r={4}
-                        fill="#32BEF0"
+                        fill="#002D49"
                         stroke="#fff"
                         strokeWidth={2}
                       />
@@ -157,13 +139,13 @@ const AboutPage = () => {
                     <g className="cursor-pointer group">
                       <circle
                         r={8}
-                        fill="#32BEF0"
+                        fill="#002D49"
                         opacity={0.3}
                         className="animate-ping"
                       />
                       <circle
                         r={4}
-                        fill="#32BEF0"
+                        fill="#002D49"
                         stroke="#fff"
                         strokeWidth={2}
                       />
@@ -181,13 +163,13 @@ const AboutPage = () => {
                     <g className="cursor-pointer group">
                       <circle
                         r={8}
-                        fill="#32BEF0"
+                        fill="#002D49"
                         opacity={0.3}
                         className="animate-ping"
                       />
                       <circle
                         r={4}
-                        fill="#32BEF0"
+                        fill="#002D49"
                         stroke="#fff"
                         strokeWidth={2}
                       />
@@ -254,7 +236,7 @@ const AboutPage = () => {
                           <Geography
                             key={geo.rsmKey}
                             geography={geo}
-                            fill={isHighlighted ? "#32BEF0" : "#E5E7EB"}
+                            fill={isHighlighted ? "#002D49" : "#E5E7EB"}
                             stroke="none"
                             style={{
                               default: { outline: "none" },
@@ -276,22 +258,22 @@ const AboutPage = () => {
 
                 {hoverCountry && (
                   <div className="mt-6 text-center">
-                    <span className="text-xs font-black tracking-[0.35em] text-brand-primary">
+                    <span className="text-xs font-black tracking-[0.35em] text-brand-navy">
                       {hoverCountry}
                     </span>
                   </div>
                 )}
               </div>
             </div>
-          </div>
+          </LayoutContainer>
         </section>
 
         {/* Focus Section */}
         <section className="py-24 bg-white border-t border-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LayoutContainer>
             <div className="text-center mb-20">
               <h2 className="text-h2 mb-4">Our Focus</h2>
-              <div className="w-20 h-1.5 bg-brand-primary mx-auto rounded-full"></div>
+              <div className="w-20 h-1.5 bg-brand-navy mx-auto rounded-full"></div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -375,30 +357,30 @@ const AboutPage = () => {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="group p-8 bg-[#F8FAFC] rounded-2xl border border-gray-100 hover:bg-white hover:shadow-xl hover:border-brand-primary transition-all duration-300"
+                  className="group p-8 bg-[#F8FAFC] rounded-2xl border border-gray-100 hover:bg-white hover:shadow-xl hover:border-brand-navy transition-all duration-300"
                 >
-                  <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center text-brand-primary mb-6 group-hover:bg-brand-primary group-hover:text-white transition-colors">
+                  <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center text-brand-navy mb-6 group-hover:bg-brand-navy group-hover:text-white transition-colors">
                     {item.icon}
                   </div>
-                  <h3 className="text-h3 mb-3 group-hover:text-brand-primary transition-colors">
+                  <h3 className="text-h3 mb-3 group-hover:text-brand-navy transition-colors">
                     {item.title}
                   </h3>
                   <p className="text-body">{item.desc}</p>
                 </div>
               ))}
             </div>
-          </div>
+          </LayoutContainer>
         </section>
 
         {/* Why Choose Us Highlight */}
         <section className="py-24 bg-brand-light-3">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LayoutContainer>
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-h1 mb-8">
                   Why Choose
                   <br />
-                  <span className="text-brand-primary whitespace-nowrap">
+                  <span className="text-brand-navy whitespace-nowrap">
                     Navtelecom?
                   </span>
                 </h2>
@@ -420,26 +402,24 @@ const AboutPage = () => {
                     key={idx}
                     className="bg-white p-10 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center"
                   >
-                    <p className="text-h1 text-brand-primary mb-4">
-                      {stat.value}
-                    </p>
+                    <p className="text-h1 text-brand-navy mb-4">{stat.value}</p>
                     <p className="text-label">{stat.label}</p>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
+          </LayoutContainer>
         </section>
 
         {/* Social Media Section */}
         <section className="py-24 bg-white border-t border-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LayoutContainer>
             <div className="text-center">
-              <p className="text-caption text-brand-primary mb-4">
+              <p className="text-caption text-brand-navy mb-4">
                 CONNECT WITH US
               </p>
               <h2 className="text-h1 mb-8">
-                Social <span className="text-brand-primary">Media</span>
+                Social <span className="text-brand-navy">Media</span>
               </h2>
               <p className="text-body-lg max-w-xl mx-auto mb-12">
                 Follow us for the latest news, product updates, and industry
@@ -487,7 +467,7 @@ const AboutPage = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </LayoutContainer>
         </section>
       </main>
 

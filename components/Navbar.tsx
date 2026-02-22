@@ -1,49 +1,47 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import LayoutContainer from "./LayoutContainer";
 
 const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+      <LayoutContainer>
+        <div className="flex items-center h-20 min-w-0 gap-4 sm:gap-6 lg:gap-8">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center">
-            <div className="relative h-12 w-48">
+            <div className="relative h-10 w-36 sm:h-11 sm:w-40 lg:h-12 lg:w-48">
               <Image
                 src="/Navtelecom/Navtelecom_logo.svg"
                 alt="Navtelecom Logo"
                 fill
-                className="object-contain"
+                className="object-contain object-left"
                 priority
               />
             </div>
           </Link>
 
+          {/* Flexible space between logo and nav links - ensures minimum gap on all screens */}
+          <div className="flex-1 min-w-[1.5rem] sm:min-w-[2rem] lg:min-w-[3rem]" />
+
           {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8 ml-auto">
+          <div className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8 flex-shrink-0">
             <Link
               href="/"
-              className="text-gray-700 hover:text-brand-primary font-medium transition-colors"
+              className="text-gray-700 hover:text-brand-primary font-medium transition-colors whitespace-nowrap text-sm lg:text-base"
             >
               HOME
             </Link>
             <Link
               href="/about"
-              className="text-gray-700 hover:text-brand-primary font-medium transition-colors"
+              className="text-gray-700 hover:text-brand-primary font-medium transition-colors whitespace-nowrap text-sm lg:text-base"
             >
               ABOUT US
-            </Link>
-            <Link
-              href="/about/color"
-              className="text-gray-700 hover:text-brand-primary font-medium transition-colors"
-            >
-              ABOUT US – COLOR
             </Link>
 
             {/* Products Dropdown */}
             <div className="relative group">
-              <button className="flex items-center text-gray-700 hover:text-brand-primary font-medium transition-colors py-8">
+              <button className="flex items-center text-gray-700 hover:text-brand-primary font-medium transition-colors py-8 whitespace-nowrap text-sm lg:text-base">
                 PRODUCTS
                 <svg
                   className="ml-1 w-4 h-4"
@@ -168,7 +166,7 @@ const Navbar = () => {
 
             {/* Support Dropdown */}
             <div className="relative group">
-              <button className="flex items-center text-gray-700 hover:text-brand-primary font-medium transition-colors py-8">
+              <button className="flex items-center text-gray-700 hover:text-brand-primary font-medium transition-colors py-8 whitespace-nowrap text-sm lg:text-base">
                 SUPPORT
                 <svg
                   className="ml-1 w-4 h-4"
@@ -210,13 +208,13 @@ const Navbar = () => {
 
             <Link
               href="/contact"
-              className="text-gray-700 hover:text-brand-primary font-medium transition-colors"
+              className="text-gray-700 hover:text-brand-primary font-medium transition-colors whitespace-nowrap text-sm lg:text-base"
             >
               CONTACT US
             </Link>
           </div>
         </div>
-      </div>
+      </LayoutContainer>
     </nav>
   );
 };

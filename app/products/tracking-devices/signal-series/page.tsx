@@ -145,7 +145,7 @@ const SignalSeriesPage = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-16 md:py-20 bg-[#F8FAFC] overflow-hidden">
+        <section className="h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center bg-[#F8FAFC] overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center">
               {/* Left Info */}

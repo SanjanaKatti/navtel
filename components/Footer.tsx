@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { X } from "phosphor-react";
 import Image from "next/image";
+import LayoutContainer from "./LayoutContainer";
 
 const Footer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,13 +17,14 @@ const Footer = () => {
     <>
       {/* Newsletter Subscription Section */}
       <section className="bg-[#0F172A] text-white py-16 border-t border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <LayoutContainer>
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               SUBSCRIBE TO OUR NEWSLETTER
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Stay updated with the latest news, product updates, and industry insights.
+              Stay updated with the latest news, product updates, and industry
+              insights.
             </p>
           </div>
           <div className="max-w-md mx-auto text-center">
@@ -33,21 +35,21 @@ const Footer = () => {
               SUBSCRIBE NOW
             </button>
           </div>
-        </div>
+        </LayoutContainer>
       </section>
 
       {/* Newsletter Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           {/* Backdrop */}
-          <div 
+          <div
             className="absolute inset-0 bg-brand-navy/80 backdrop-blur-sm transition-opacity"
             onClick={() => setIsModalOpen(false)}
           ></div>
-          
+
           {/* Modal Content */}
           <div className="relative bg-white w-full max-w-lg rounded-[2.5rem] shadow-2xl p-8 md:p-12 overflow-hidden animate-in fade-in zoom-in duration-300">
-            <button 
+            <button
               onClick={() => setIsModalOpen(false)}
               className="absolute top-6 right-6 text-gray-400 hover:text-brand-navy transition-colors"
             >
@@ -55,8 +57,12 @@ const Footer = () => {
             </button>
 
             <div className="text-center mb-10">
-              <h2 className="text-h2 mb-3">Join our <span className="text-brand-primary">Newsletter</span></h2>
-              <p className="text-body-sm">Get the latest telematics updates directly in your inbox.</p>
+              <h2 className="text-h2 mb-3">
+                Join our <span className="text-brand-primary">Newsletter</span>
+              </h2>
+              <p className="text-body-sm">
+                Get the latest telematics updates directly in your inbox.
+              </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -124,7 +130,7 @@ const Footer = () => {
 
       {/* Footer */}
       <footer className="bg-[#0F172A] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <LayoutContainer>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-gray-700 pb-16">
             <div className="space-y-6">
               <div className="flex items-center gap-2">
@@ -148,17 +154,26 @@ const Footer = () => {
               <h4 className="font-bold text-lg mb-6">Equipment</h4>
               <ul className="space-y-4 text-gray-400 text-sm">
                 <li>
-                  <a href="/products/tracking-devices/start-series" className="hover:text-blue-400 transition-colors">
+                  <a
+                    href="/products/tracking-devices/start-series"
+                    className="hover:text-blue-400 transition-colors"
+                  >
                     START Series
                   </a>
                 </li>
                 <li>
-                  <a href="/products/tracking-devices/smart-series" className="hover:text-blue-400 transition-colors">
+                  <a
+                    href="/products/tracking-devices/smart-series"
+                    className="hover:text-blue-400 transition-colors"
+                  >
                     SMART Series
                   </a>
                 </li>
                 <li>
-                  <a href="/products/tracking-devices/signal-series" className="hover:text-blue-400 transition-colors">
+                  <a
+                    href="/products/tracking-devices/signal-series"
+                    className="hover:text-blue-400 transition-colors"
+                  >
                     SIGNAL Series
                   </a>
                 </li>
@@ -174,22 +189,34 @@ const Footer = () => {
               <h4 className="font-bold text-lg mb-6">Support</h4>
               <ul className="space-y-4 text-gray-400 text-sm">
                 <li>
-                  <a href="/support/knowledge-base" className="hover:text-blue-400 transition-colors">
+                  <a
+                    href="/support/knowledge-base"
+                    className="hover:text-blue-400 transition-colors"
+                  >
                     Knowledge Base
                   </a>
                 </li>
                 <li>
-                  <a href="/support/telegram-bot" className="hover:text-blue-400 transition-colors">
+                  <a
+                    href="/support/telegram-bot"
+                    className="hover:text-blue-400 transition-colors"
+                  >
                     Telegram Support Bot
                   </a>
                 </li>
                 <li>
-                  <a href="/support/warranty" className="hover:text-blue-400 transition-colors">
+                  <a
+                    href="/support/warranty"
+                    className="hover:text-blue-400 transition-colors"
+                  >
                     Warranty
                   </a>
                 </li>
                 <li>
-                  <a href="/contact" className="hover:text-blue-400 transition-colors">
+                  <a
+                    href="/contact"
+                    className="hover:text-blue-400 transition-colors"
+                  >
                     Contact Support
                   </a>
                 </li>
@@ -216,11 +243,10 @@ const Footer = () => {
               </a>
             </div>
           </div>
-        </div>
+        </LayoutContainer>
       </footer>
     </>
   );
 };
 
 export default Footer;
-

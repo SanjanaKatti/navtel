@@ -9,8 +9,8 @@ const ProductPage = () => {
 
       <main className="pt-20">
         {/* Section 1: Image and Description */}
-        <section className="py-24 bg-gradient-to-b from-[#F8FAFC] to-white overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center bg-gradient-to-b from-[#F8FAFC] to-white overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
             <div className="grid lg:grid-cols-2 gap-20 items-center">
               <div className="relative group">
                 <div className="absolute -inset-4 bg-blue-500/5 rounded-[60px] blur-3xl group-hover:bg-blue-500/10 transition-all duration-700"></div>

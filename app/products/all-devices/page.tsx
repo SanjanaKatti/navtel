@@ -223,7 +223,7 @@ const AllDevicesPage = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-16 md:py-20 bg-white border-b border-gray-100">
+        <section className="h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center py-12 md:py-16 bg-white border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-caption text-brand-primary mb-4">COMPLETE CATALOG</p>
             <h1 className="text-h1 mb-6">Explore All <span className="text-brand-primary">Devices</span></h1>

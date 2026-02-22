@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { X } from "phosphor-react";
+import LayoutContainer from "./LayoutContainer";
 
 const products = [
   {
@@ -46,7 +47,7 @@ const ProductLineup = () => {
 
   return (
     <section className="py-24 bg-[#F8FAFC]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <LayoutContainer>
         <div className="text-center mb-20">
           <p className="text-caption text-[#004A8C] mb-4">
             DISCOVER OUR LINEUP
@@ -61,46 +62,55 @@ const ProductLineup = () => {
               className="group relative bg-white px-10 pt-10 pb-12 flex flex-col transition-all duration-300 hover:shadow-lg border border-gray-200 rounded-3xl"
             >
               {/* Heading */}
-              <div className="mb-8 min-h-[80px] flex flex-col justify-start">
+              <div className="min-h-[80px] flex flex-col justify-start">
                 <h3 className="text-h3 font-black text-[#004A8C]">
                   {product.seriesTitle}
                 </h3>
-                <p className="mt-1 text-[11px] font-bold tracking-[0.25em] text-gray-400 uppercase">
+                <p className="mt-1 text-[11px] font-extrabold tracking-normal text-gray-400 uppercase">
                   {product.subtitle}
                 </p>
               </div>
 
               {/* Image frame with label strip */}
-              <div className="w-full mb-8">
+              <div className="w-full mb-2">
                 <div className="w-full bg-[#F8FAFC] rounded-2xl border border-gray-200 overflow-hidden">
                   <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
                     <div className="flex gap-1.5">
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#FEBB2E]" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#07bcd4]" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#4bae51]" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#ff9800]" />
                     </div>
                     <span className="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                       {product.label}
                     </span>
                   </div>
-                  <div className="relative w-full aspect-[3/2] min-h-[320px] flex items-center justify-center">
-                    <Image
-                      src={product.image}
-                      alt={product.label}
-                      fill
-                      className={`object-contain ${
-                        product.label === "START" ? "p-0" : "p-2"
-                      }`}
-                    />
+                  <div className="px-6 py-4">
+                    <div
+                      className="relative flex items-start justify-center w-full h-[280px] sm:h-[300px]"
+                    >
+                      <Image
+                        src={product.image}
+                        alt={product.label}
+                        className={`absolute w-full h-full object-scale-down object-top ${
+                          product.label === "START"
+                            ? "!h-[380px] !w-[480px] sm:!h-[430px] sm:!w-[530px] -translate-y-[10%]"
+                            : "!h-[180px] !w-[230px] sm:!h-[200px] sm:!w-[250px]"
+                        }`}
+                        width={product.label === "START" ? 700 : 300}
+                        height={product.label === "START" ? 500 : 200}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Description */}
-              <p className="text-body mb-10">{product.description}</p>
+              <p className="text-body mb-6 font-semibold">
+                {product.description}
+              </p>
 
               {/* Actions – keep existing buttons */}
-              <div className="mt-auto pt-6 border-t border-gray-200 flex flex-col gap-4">
+              <div className="mt-auto pt-4 border-t border-gray-200 flex flex-col gap-4">
                 <Link
                   href={product.href}
                   className="w-full bg-[#004A8C] text-white py-4 px-8 font-bold rounded-xl hover:bg-[#003366] transition-colors shadow-lg shadow-blue-900/20 flex items-center justify-center uppercase tracking-wider text-sm"
@@ -117,7 +127,7 @@ const ProductLineup = () => {
             </div>
           ))}
         </div>
-      </div>
+      </LayoutContainer>
 
       {/* Contact Sales Modal */}
       {isModalOpen && (

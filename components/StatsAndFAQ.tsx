@@ -1,7 +1,14 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import LayoutContainer from "./LayoutContainer";
 
-const AnimatedCounter = ({ value, label }: { value: string; label: string }) => {
+const AnimatedCounter = ({
+  value,
+  label,
+}: {
+  value: string;
+  label: string;
+}) => {
   const [count, setCount] = useState(0);
   const countRef = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -17,7 +24,7 @@ const AnimatedCounter = ({ value, label }: { value: string; label: string }) => 
           setHasAnimated(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (countRef.current) {
@@ -56,11 +63,11 @@ const AnimatedCounter = ({ value, label }: { value: string; label: string }) => 
 
   return (
     <div ref={countRef} className="text-center">
-      <p className="text-display mb-2">
+      <p className="text-6xl md:text-7xl lg:text-[90px] xl:text-[120px] font-bold text-brand-navy mb-2">
         {count}
         {suffix}
       </p>
-      <p className="text-body text-gray-500">{label}</p>
+      <p className="text-xl md:text-2xl text-gray-500">{label}</p>
     </div>
   );
 };
@@ -78,8 +85,15 @@ const faqs = [
     a: (
       <div className="space-y-4">
         <p>You can download the latest version of NTC Configurator here:</p>
-        <a href="#" className="inline-block text-brand-primary font-bold hover:underline">Get the latest version</a>
-        <p className="text-sm text-gray-400 italic">Note: Available for Windows OS only.</p>
+        <a
+          href="#"
+          className="inline-block text-brand-primary font-bold hover:underline"
+        >
+          Get the latest version
+        </a>
+        <p className="text-sm text-gray-400 italic">
+          Note: Available for Windows OS only.
+        </p>
       </div>
     ),
   },
@@ -89,18 +103,44 @@ const faqs = [
       <div className="space-y-6">
         <div>
           <p className="font-bold text-brand-navy mb-1">SMS Commands</p>
-          <p className="mb-2">Send direct commands to the device (e.g. APN, server, status, reboot).</p>
-          <a href="#" className="text-brand-primary text-sm font-bold hover:underline">Full command list</a>
+          <p className="mb-2">
+            Send direct commands to the device (e.g. APN, server, status,
+            reboot).
+          </p>
+          <a
+            href="#"
+            className="text-brand-primary text-sm font-bold hover:underline"
+          >
+            Full command list
+          </a>
         </div>
         <div>
-          <p className="font-bold text-brand-navy mb-1">Remote connection via NTC Configurator</p>
-          <p className="mb-2">Connect to an online device via Internet, read/write config, update firmware.</p>
-          <a href="#" className="text-brand-primary text-sm font-bold hover:underline">How it works</a>
+          <p className="font-bold text-brand-navy mb-1">
+            Remote connection via NTC Configurator
+          </p>
+          <p className="mb-2">
+            Connect to an online device via Internet, read/write config, update
+            firmware.
+          </p>
+          <a
+            href="#"
+            className="text-brand-primary text-sm font-bold hover:underline"
+          >
+            How it works
+          </a>
         </div>
         <div>
           <p className="font-bold text-brand-navy mb-1">DRC Cloud Service</p>
-          <p className="mb-2">Cloud-based platform for remote updates, config sync, diagnostics, and device health monitoring.</p>
-          <a href="#" className="text-brand-primary text-sm font-bold hover:underline">Learn more</a>
+          <p className="mb-2">
+            Cloud-based platform for remote updates, config sync, diagnostics,
+            and device health monitoring.
+          </p>
+          <a
+            href="#"
+            className="text-brand-primary text-sm font-bold hover:underline"
+          >
+            Learn more
+          </a>
         </div>
       </div>
     ),
@@ -110,9 +150,21 @@ const faqs = [
     a: (
       <div className="space-y-4">
         <p>You can find the full list of SMS/GPRS commands here:</p>
-        <a href="#" className="inline-block text-brand-primary font-bold hover:underline">Full command list</a>
+        <a
+          href="#"
+          className="inline-block text-brand-primary font-bold hover:underline"
+        >
+          Full command list
+        </a>
         <div className="pt-2 border-t border-gray-100">
-          If you need a complex combined command, please contact Technical Support at <a href="mailto:support@navtelecom.in" className="text-brand-primary hover:underline">support@navtelecom.in</a>
+          If you need a complex combined command, please contact Technical
+          Support at{" "}
+          <a
+            href="mailto:support@navtelecom.in"
+            className="text-brand-primary hover:underline"
+          >
+            support@navtelecom.in
+          </a>
         </div>
       </div>
     ),
@@ -121,8 +173,15 @@ const faqs = [
     q: "Where can I check supported vehicles for CAN decoding?",
     a: (
       <div className="space-y-4">
-        <p>The list of supported vehicles and decoding files is available here:</p>
-        <a href="#" className="inline-block text-brand-primary font-bold hover:underline">Supported vehicles list</a>
+        <p>
+          The list of supported vehicles and decoding files is available here:
+        </p>
+        <a
+          href="#"
+          className="inline-block text-brand-primary font-bold hover:underline"
+        >
+          Supported vehicles list
+        </a>
       </div>
     ),
   },
@@ -130,8 +189,14 @@ const faqs = [
     q: "How can I integrate Navtelecom devices with my system?",
     a: (
       <div className="space-y-4">
-        <p>You can integrate Navtelecom devices with your system using the FLEX protocol.</p>
-        <p>We provide documentation and developer consultations to support integration.</p>
+        <p>
+          You can integrate Navtelecom devices with your system using the FLEX
+          protocol.
+        </p>
+        <p>
+          We provide documentation and developer consultations to support
+          integration.
+        </p>
       </div>
     ),
   },
@@ -142,21 +207,23 @@ const StatsAndFAQ = () => {
     <div className="bg-brand-light-3">
       {/* Stats Section */}
       <section className="py-24 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <LayoutContainer>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {stats.map((stat, idx) => (
-              <AnimatedCounter key={idx} value={stat.value} label={stat.label} />
+              <AnimatedCounter
+                key={idx}
+                value={stat.value}
+                label={stat.label}
+              />
             ))}
           </div>
-        </div>
+        </LayoutContainer>
       </section>
 
       {/* Partners Section */}
       <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-h2 mb-12">
-            OUR PARTNERS
-          </h2>
+        <LayoutContainer className="text-center">
+          <h2 className="text-h2 mb-12">OUR PARTNERS</h2>
           <div className="bg-brand-light-3 p-16 flex flex-wrap justify-center items-center gap-x-20 gap-y-12 border border-gray-200 rounded-2xl">
             {[
               { name: "COMPANY 1", color: "hover:text-brand-primary" },
@@ -174,13 +241,13 @@ const StatsAndFAQ = () => {
               </span>
             ))}
           </div>
-        </div>
+        </LayoutContainer>
       </section>
 
-          {/* FAQ Section */}
-          <section className="py-12 bg-white">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h2 className="text-h1 mb-12 text-center">FAQs</h2>
+      {/* FAQ Section */}
+      <section className="py-12 bg-white">
+        <LayoutContainer className="text-center max-w-4xl">
+          <h2 className="text-h1 mb-12 text-center">FAQs</h2>
 
           <div className="space-y-4 text-left">
             {faqs.map((faq, idx) => (
@@ -214,7 +281,7 @@ const StatsAndFAQ = () => {
               </details>
             ))}
           </div>
-        </div>
+        </LayoutContainer>
       </section>
     </div>
   );

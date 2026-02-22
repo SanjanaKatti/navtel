@@ -12,7 +12,7 @@ export default function Home() {
     <div className="min-h-screen bg-white font-sans antialiased text-[#0F172A]">
       <Navbar />
 
-      <main>
+      <main className="pt-20">
         <Hero />
         <ValueProposition />
         <ProductLineup />
