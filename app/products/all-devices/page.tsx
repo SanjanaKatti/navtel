@@ -23,9 +23,9 @@ interface Device {
 
 const AllDevicesPage = () => {
   const seriesImages: Record<Device["series"], string> = {
-    START: "/Navtelecom/sample1.png",
-    SMART: "/Navtelecom/sample2.png",
-    SIGNAL: "/Navtelecom/sample3.png",
+    START: "/Navtelecom/sample1.PNG",
+    SMART: "/Navtelecom/sample2.PNG",
+    SIGNAL: "/Navtelecom/sample3.PNG",
   };
 
   const [selectedDevices, setSelectedDevices] = useState<Device[]>(() => {
@@ -655,7 +655,7 @@ const AllDevicesPage = () => {
                         href={device.href}
                         className="w-full bg-brand-navy text-white py-5 rounded-2xl font-black text-sm hover:bg-brand-primary transition-all text-center block uppercase tracking-widest shadow-xl shadow-brand-navy/10 transform hover:-translate-y-1 active:scale-95"
                       >
-                        View Specifications
+                        Learn More
                       </Link>
                     </div>
                   </div>

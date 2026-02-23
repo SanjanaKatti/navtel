@@ -46,7 +46,7 @@ const StartSeriesPage = () => {
     {
       name: "S-2010",
       connectivity: "2g" as const,
-      image: "/Navtelecom/sample1.png",
+      image: "/Navtelecom/sample1.PNG",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -58,7 +58,7 @@ const StartSeriesPage = () => {
     {
       name: "S-2011",
       connectivity: "2g" as const,
-      image: "/Navtelecom/sample1.png",
+      image: "/Navtelecom/sample1.PNG",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -71,7 +71,7 @@ const StartSeriesPage = () => {
     {
       name: "S-2013",
       connectivity: "2g" as const,
-      image: "/Navtelecom/sample1.png",
+      image: "/Navtelecom/sample1.PNG",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -86,7 +86,7 @@ const StartSeriesPage = () => {
     {
       name: "S-4011",
       connectivity: "4g" as const,
-      image: "/Navtelecom/sample1.png",
+      image: "/Navtelecom/sample1.PNG",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -99,7 +99,7 @@ const StartSeriesPage = () => {
     {
       name: "S-4013",
       connectivity: "4g" as const,
-      image: "/Navtelecom/sample1.png",
+      image: "/Navtelecom/sample1.PNG",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -440,27 +440,63 @@ const StartSeriesPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
               {[
                 {
-                  title: <>Reliable<br />Updates</>,
+                  title: (
+                    <>
+                      Reliable
+                      <br />
+                      Updates
+                    </>
+                  ),
                   desc: "New features and improvements, delivered with stability in mind.",
                 },
                 {
-                  title: <>Easy USB<br />Configuration</>,
+                  title: (
+                    <>
+                      Easy USB
+                      <br />
+                      Configuration
+                    </>
+                  ),
                   desc: "Configure the device directly via USB — no external power supply required.",
                 },
                 {
-                  title: <>Expert<br />Support</>,
+                  title: (
+                    <>
+                      Expert
+                      <br />
+                      Support
+                    </>
+                  ),
                   desc: "Fast, clear, and helpful assistance — from people who know the product inside and out.",
                 },
                 {
-                  title: <>36-Month<br />Warranty</>,
+                  title: (
+                    <>
+                      36-Month
+                      <br />
+                      Warranty
+                    </>
+                  ),
                   desc: "Enjoy extended protection with a 3-year manufacturer warranty.",
                 },
                 {
-                  title: <>Industry-Proven<br />Reliability</>,
+                  title: (
+                    <>
+                      Industry-Proven
+                      <br />
+                      Reliability
+                    </>
+                  ),
                   desc: "10+ years of service life in real-world deployments.",
                 },
                 {
-                  title: <>Russian<br />Engineering</>,
+                  title: (
+                    <>
+                      Russian
+                      <br />
+                      Engineering
+                    </>
+                  ),
                   desc: "Produced in Russia. Delivered to you — without third-party layers.",
                 },
               ].map((item, idx) => (
