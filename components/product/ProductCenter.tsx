@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { Check } from "phosphor-react";
 import Link from "next/link";
 import LayoutContainer from "../LayoutContainer";
 
@@ -21,11 +20,11 @@ interface ProductCenterProps {
 
 const ProductCenter: React.FC<ProductCenterProps> = ({ heading, products }) => {
   return (
-    <section className="py-16 md:py-20 bg-white">
+    <section className="pt-12 pb-8 md:pt-12 md:pb-20 bg-white">
       <LayoutContainer>
         <div className="text-center mb-12">
           <h2 className="text-h1 mb-3">{heading}</h2>
-          <p className="text-body max-w-2xl mx-auto">
+          <p className="text-lg max-w-2xl mx-auto">
             Resources and tools for implementation
           </p>
         </div>
@@ -34,31 +33,35 @@ const ProductCenter: React.FC<ProductCenterProps> = ({ heading, products }) => {
           {products.map((product, idx) => (
             <div
               key={idx}
-              className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.05)] transition-all duration-500 flex flex-col items-center text-center group relative border-b-2 hover:border-brand-primary"
+              className="bg-gray-50/50 p-10 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col items-center text-center group relative"
             >
-              {/* Heading with fixed height */}
-              <div className="min-h-[60px] flex items-center justify-center mb-2">
-                <h3 className="text-h3 leading-tight">{product.name}</h3>
+              {/* Heading with fixed height for alignment */}
+              <div className="min-h-[72px] flex items-center justify-center mb-3">
+                <h3 className="text-h3 leading-tight text-brand-navy">
+                  {product.name}
+                </h3>
               </div>
 
-              {/* Description with fixed height */}
-              <div className="min-h-[80px] flex items-start justify-center mb-6 px-2">
-                <p className="text-body-sm text-gray-400">{product.series}</p>
+              {/* Description with fixed height for consistent card heights */}
+              <div className="min-h-[96px] flex items-start justify-center mb-8 px-2">
+                <p className="text-body-[18px] text-gray-500">
+                  {product.series}
+                </p>
               </div>
 
-              {/* Button with fixed position at bottom */}
+              {/* CTA anchored to bottom of card */}
               <div className="mt-auto w-full">
                 {product.href ? (
                   <Link
                     href={product.href}
-                    className="w-full py-3 rounded-xl font-black text-xs transition-all transform hover:-translate-y-1 active:scale-95 shadow-md bg-brand-navy text-white shadow-brand-navy/20 hover:bg-brand-primary flex items-center justify-center"
+                    className="w-full py-5 rounded-2xl font-black text-sm transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-brand-navy/10 bg-brand-navy text-white hover:bg-brand-primary flex items-center justify-center uppercase tracking-widest"
                   >
                     {product.buttonText}
                   </Link>
                 ) : (
                   <button
                     onClick={product.onButtonClick}
-                    className="w-full py-3 rounded-xl font-black text-xs transition-all transform hover:-translate-y-1 active:scale-95 shadow-md bg-brand-navy text-white shadow-brand-navy/20 hover:bg-brand-primary"
+                    className="w-full py-5 rounded-2xl font-black text-sm transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-brand-navy/10 bg-brand-navy text-white hover:bg-brand-primary uppercase tracking-widest"
                   >
                     {product.buttonText}
                   </button>

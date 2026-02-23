@@ -12,24 +12,23 @@ const TrackingDevicesPage = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center overflow-hidden bg-brand-light-3">
+        <section className="relative h-[calc(60vh+80px)] min-h-[480px] flex items-center overflow-hidden bg-brand-light-3 pb-20">
           <Image
-            src="/Navtelecom/Alldevices.png"
+            src="/Navtelecom/Alldevices_banner.png"
             alt="Tracking devices lineup"
             fill
             priority
-            className="object-contain object-center"
+            className="object-cover object-bottom"
           />
-          <div className="absolute inset-0 bg-white/65" />
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <p className="text-caption mb-4">
+          <div className="relative z-40 max-w-xl px-4 sm:px-6 lg:px-8 pt-6 md:pl-10">
+            <div className="text-left">
+              <p className="text-caption mb-4 text-brand-navy">
                 TRACKING DEVICES
               </p>
               <h1 className="text-h1 mb-6">
                 Professional GPS Tracking Solutions
               </h1>
-              <p className="text-body-lg max-w-3xl mx-auto">
+              <p className="text-body-lg max-w-3xl text-brand-navy">
                 Comprehensive range of telematics devices designed for fleet
                 management, asset tracking, and vehicle monitoring.
               </p>
@@ -46,8 +45,18 @@ const TrackingDevicesPage = () => {
                 className="inline-flex items-center gap-3 bg-[#00529B] text-white px-8 py-4 font-bold hover:bg-[#003d74] transition-colors border-2 border-[#00529B]"
               >
                 <span>View All Devices</span>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               </Link>
             </div>
@@ -63,4 +72,3 @@ const TrackingDevicesPage = () => {
 };
 
 export default TrackingDevicesPage;
-

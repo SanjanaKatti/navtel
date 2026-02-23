@@ -51,7 +51,7 @@ const DeviceFeatures: React.FC<DeviceFeaturesProps> = ({
                     {feature.sub}
                   </p>
                 )}
-                <p className="text-body-sm">{feature.desc}</p>
+                <p className="text-body-[18px]">{feature.desc}</p>
               </div>
             </div>
           ))}

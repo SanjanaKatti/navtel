@@ -268,16 +268,16 @@ const StartSeriesPage = () => {
               ].map((feature, idx) => (
                 <div
                   key={idx}
-                  className="group p-10 md:p-12 bg-white rounded-[3rem] border border-gray-100 hover:shadow-2xl transition-all duration-500 relative overflow-hidden min-h-[18rem] lg:min-h-[20rem]"
+                  className="group p-10 md:p-12 bg-white rounded-[3rem] border border-gray-100 hover:shadow-2xl transition-all duration-500 relative overflow-hidden min-h-[16rem] lg:min-h-[17rem]"
                 >
                   <div className="absolute top-8 right-8 text-gray-300 group-hover:text-brand-primary transition-colors duration-500 scale-110">
                     {feature.icon}
                   </div>
                   <div className="pt-5 pr-4">
-                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-navy mb-2">
+                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-navy mb-2 min-h-[72px] flex items-center">
                       {feature.title}
                     </h3>
-                    <p className="text-caption text-brand-primary mb-3">
+                    <p className="text-caption text-brand-primary mb-3 min-h-[20px]">
                       {feature.sub}
                     </p>
                     <p className="text-body">{feature.desc}</p>
@@ -431,36 +431,36 @@ const StartSeriesPage = () => {
         </section>
 
         {/* WHY START STANDS OUT */}
-        <section className="py-16 md:py-20 bg-white">
+        <section className="py-12 md:py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-h1 text-center mb-16">
+            <h2 className="text-h1 text-center mb-10">
               Why <span className="text-brand-primary">START</span> Stands Out
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
               {[
                 {
-                  title: "Reliable Updates",
+                  title: <>Reliable<br />Updates</>,
                   desc: "New features and improvements, delivered with stability in mind.",
                 },
                 {
-                  title: "Easy USB Configuration",
+                  title: <>Easy USB<br />Configuration</>,
                   desc: "Configure the device directly via USB — no external power supply required.",
                 },
                 {
-                  title: "Expert Support",
+                  title: <>Expert<br />Support</>,
                   desc: "Fast, clear, and helpful assistance — from people who know the product inside and out.",
                 },
                 {
-                  title: "36-Month Warranty",
+                  title: <>36-Month<br />Warranty</>,
                   desc: "Enjoy extended protection with a 3-year manufacturer warranty.",
                 },
                 {
-                  title: "Industry-Proven Reliability",
+                  title: <>Industry-Proven<br />Reliability</>,
                   desc: "10+ years of service life in real-world deployments.",
                 },
                 {
-                  title: "Russian Engineering",
+                  title: <>Russian<br />Engineering</>,
                   desc: "Produced in Russia. Delivered to you — without third-party layers.",
                 },
               ].map((item, idx) => (
@@ -468,7 +468,7 @@ const StartSeriesPage = () => {
                   key={idx}
                   className="bg-[#F8FAFC] p-10 md:p-12 rounded-[3rem] shadow-xl shadow-brand-navy/5 border border-white group hover:-translate-y-2 transition-all duration-500"
                 >
-                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-navy mb-4 group-hover:text-brand-primary transition-colors leading-tight">
+                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-navy mb-4 group-hover:text-brand-primary transition-colors leading-tight min-h-[80px]">
                     {item.title}
                   </h3>
                   <p className="text-body">{item.desc}</p>

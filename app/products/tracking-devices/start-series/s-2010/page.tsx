@@ -3,7 +3,6 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
-import ProductHero from "@/components/product/ProductHero";
 import DeviceFeatures from "@/components/product/DeviceFeatures";
 import TechnicalSpecs from "@/components/product/TechnicalSpecs";
 import ProductCenter from "@/components/product/ProductCenter";
@@ -24,29 +23,57 @@ const S2010Page = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <ProductHero
-          title="S-2010"
-          subtitle="START"
-          rightText="2G GSM"
-          description={[
-            "Basic GPS tracking for location and fuel monitoring.",
-            "Reliable and cost-effective solution for fleet operations and transport automation.",
-          ]}
-          buttonText="Explore"
-          visual={
-            <div className="relative flex justify-center items-center w-full h-full">
-              <div className="w-full max-w-2xl max-h-full aspect-[4/3] relative rounded-3xl overflow-hidden bg-[#EFEFEF]">
-                <Image
-                  src="/Navtelecom/start_device.png"
-                  alt="S-2010 device"
-                  fill
-                  className="object-contain"
-                  priority
-                />
+        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-center bg-[#EFEFEF]">
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="relative w-full h-full">
+              <Image
+                src="/Navtelecom/start_device.png"
+                alt="S-2010 device"
+                fill
+                className="object-cover object-[center_85%] scale-90 -translate-y-[15%]"
+                priority
+              />
+            </div>
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center py-12 md:py-20">
+              {/* Left Info */}
+              <div className="space-y-8 ml-10">
+                <div>
+                  <h1 className="text-h1">
+                    S-2010
+                    <br />
+                    <span className="text-brand-primary">START</span>
+                  </h1>
+                </div>
+                <div className="space-y-4 max-w-sm">
+                  <p className="text-body-lg">
+                    Basic GPS tracking for location and fuel monitoring.
+                  </p>
+                  <p className="text-body-lg">
+                    Reliable and cost-effective solution for fleet operations
+                    and transport automation.
+                  </p>
+                </div>
+                <button className="bg-brand-navy text-white px-20 py-4 rounded-full font-bold text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1">
+                  Explore
+                </button>
+              </div>
+
+              {/* Middle spacer column (background image already covers the section) */}
+              <div className="ml-10" />
+
+              {/* Right Big Text */}
+              <div className="lg:text-right">
+                <h2 className="text-display mr-10">
+                  <span className="text-brand-primary">2G</span>
+                  <br />
+                  GSM
+                </h2>
               </div>
             </div>
-          }
-        />
+          </div>
+        </section>
 
         {/* Device Features Section */}
         <DeviceFeatures

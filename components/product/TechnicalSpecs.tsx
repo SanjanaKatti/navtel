@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Check } from "phosphor-react";
+import LayoutContainer from "../LayoutContainer";
 
 interface SpecItem {
   label: string;
@@ -19,7 +20,7 @@ interface TechnicalSpecsProps {
 const TechnicalSpecs: React.FC<TechnicalSpecsProps> = ({ groups }) => {
   return (
     <section className="py-16 md:py-20 bg-[#F8FAFC]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <LayoutContainer className="max-w-4xl">
         <div className="text-center mb-12">
           <h2 className="text-h1 mb-3">Technical Specifications</h2>
           <p className="text-body max-w-2xl mx-auto">Detailed hardware and software capabilities</p>
@@ -66,7 +67,7 @@ const TechnicalSpecs: React.FC<TechnicalSpecsProps> = ({ groups }) => {
             </details>
           ))}
         </div>
-      </div>
+      </LayoutContainer>
     </section>
   );
 };

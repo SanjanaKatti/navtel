@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import LayoutContainer from "../LayoutContainer";
 
 interface FAQItem {
   question: string;
@@ -12,8 +13,8 @@ interface ProductFAQProps {
 
 const ProductFAQ: React.FC<ProductFAQProps> = ({ faqs }) => {
   return (
-    <section className="py-16 md:py-20 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section className="py-8 md:py-12 bg-white">
+      <LayoutContainer className="text-center max-w-4xl">
         <div className="text-center mb-12">
           <h2 className="text-h1 mb-3">FAQs</h2>
           <p className="text-body max-w-2xl mx-auto">
@@ -53,7 +54,7 @@ const ProductFAQ: React.FC<ProductFAQProps> = ({ faqs }) => {
             </details>
           ))}
         </div>
-      </div>
+      </LayoutContainer>
     </section>
   );
 };

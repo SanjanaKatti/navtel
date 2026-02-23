@@ -135,9 +135,10 @@ const isTargetCountry = (geo: MapGeo) => {
 };
 
 const AboutPage = () => {
-  const [hoverPin, setHoverPin] = useState<{ key: string; name: string } | null>(
-    null,
-  );
+  const [hoverPin, setHoverPin] = useState<{
+    key: string;
+    name: string;
+  } | null>(null);
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-brand-navy overflow-x-hidden">
@@ -157,7 +158,7 @@ const AboutPage = () => {
                   <span className="text-brand-navy">Us</span>
                 </h1>
               </div>
-              <div className="lg:pl-20 border-l-4 border-brand-navy/20 hover:border-brand-navy transition-colors duration-500 py-4">
+              <div className="lg:pl-20 border-l-4 border-brand-navy/20 hover:border-brand-navy transition-colors duration-500 py-8">
                 <p className="text-body-lg">
                   We manufacture such GPS tracking equipment that ensures stable
                   and efficient solutions for our customers. Our devices provide
@@ -169,7 +170,7 @@ const AboutPage = () => {
 
             {/* Mission: Title Right, Text Left */}
             <div className="grid lg:grid-cols-2 gap-0 items-center">
-              <div className="order-2 lg:order-1 lg:pr-20 lg:text-right border-r-4 border-brand-navy/20 hover:border-brand-navy transition-colors duration-500 py-4">
+              <div className="order-2 lg:order-1 lg:pr-20 lg:text-right border-r-4 border-brand-navy/20 hover:border-brand-navy transition-colors duration-500 py-10">
                 <p className="text-body-lg">
                   We deliver reliable and user-friendly telematics solutions,
                   allowing integrators to create efficient tracking systems with
@@ -189,7 +190,7 @@ const AboutPage = () => {
         </section>
 
         {/* Global Presence Section */}
-        <section className="py-24 bg-white overflow-hidden">
+        <section className="pt-24 pb-12 bg-white overflow-hidden">
           <LayoutContainer>
             <div className="text-center mb-16">
               <p className="text-caption text-brand-navy mb-4">GLOBAL REACH</p>
@@ -217,7 +218,8 @@ const AboutPage = () => {
                 >
                   <Geographies geography={geoUrl}>
                     {({ geographies }: { geographies: MapGeo[] }) => {
-                      const markerGeographies = geographies.filter(isTargetCountry);
+                      const markerGeographies =
+                        geographies.filter(isTargetCountry);
 
                       return (
                         <>
@@ -271,12 +273,7 @@ const AboutPage = () => {
                                     stroke="#ffffff"
                                     strokeWidth={1.25}
                                   />
-                                  <circle
-                                    cx="0"
-                                    cy="-2"
-                                    r="3"
-                                    fill="#ffffff"
-                                  />
+                                  <circle cx="0" cy="-2" r="3" fill="#ffffff" />
                                   {hoverPin?.key === markerKey && (
                                     <g pointerEvents="none">
                                       <rect
@@ -316,10 +313,10 @@ const AboutPage = () => {
         </section>
 
         {/* Focus Section */}
-        <section className="py-24 bg-white border-t border-gray-50">
+        <section className="py-12 bg-white border-t border-gray-50">
           <LayoutContainer>
             <div className="text-center mb-20">
-              <h2 className="text-h2 mb-4">Our Focus</h2>
+              <h2 className="text-h1 mb-4">Our Focus</h2>
               <div className="w-20 h-1.5 bg-brand-navy mx-auto rounded-full"></div>
             </div>
 
@@ -409,10 +406,10 @@ const AboutPage = () => {
                   <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center text-brand-navy mb-6 group-hover:bg-brand-navy group-hover:text-white transition-colors">
                     {item.icon}
                   </div>
-                  <h3 className="text-h3 mb-3 group-hover:text-brand-navy transition-colors">
+                  <h3 className="text-h3 mb-3 group-hover:text-brand-navy transition-colors min-h-[50px]">
                     {item.title}
                   </h3>
-                  <p className="text-body">{item.desc}</p>
+                  <p className="text-body-lg">{item.desc}</p>
                 </div>
               ))}
             </div>

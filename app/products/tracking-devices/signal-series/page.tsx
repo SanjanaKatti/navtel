@@ -1,50 +1,62 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
+import Image from "next/image";
 import Footer from "@/components/Footer";
-import { Check, X } from "phosphor-react";
+import {
+  Bluetooth,
+  ArrowsIn,
+  ClockCounterClockwise,
+  GlobeSimple,
+  Check,
+  X,
+} from "phosphor-react";
+import { useRouter } from "next/navigation";
+import ProductFAQ from "@/components/product/ProductFAQ";
+
+type DeviceConnectivity = "2g" | "4g";
 
 interface Device {
   name: string;
-  connectivity: "2g" | "4g";
+  connectivity: DeviceConnectivity;
+  image: string;
   specs: string[];
-  href: string;
 }
 
 const SignalSeriesPage = () => {
   const [filter, setFilter] = useState<"all" | "2g" | "4g">("all");
-  const [selectedDevices, setSelectedDevices] = useState<Device[]>([]);
+  const [selectedForCompare, setSelectedForCompare] = useState<string[]>([]);
+  const router = useRouter();
+  const lineupRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const storedDevices = localStorage.getItem('compareDevices');
-    if (storedDevices) {
-      setSelectedDevices(JSON.parse(storedDevices));
-    }
-  }, []);
+  const scrollToLineupFromExplore = () => {
+    lineupRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
-  useEffect(() => {
-    localStorage.setItem('compareDevices', JSON.stringify(selectedDevices));
-  }, [selectedDevices]);
-
-  const handleCompareToggle = (device: Device) => {
-    setSelectedDevices(prevSelected => {
-      if (prevSelected.some(d => d.name === device.name)) {
-        return prevSelected.filter(d => d.name !== device.name);
-      } else {
-        if (prevSelected.length < 4) {
-          return [...prevSelected, device];
-        }
-        return prevSelected; // Max 4 devices
+  const toggleCompare = (deviceName: string) => {
+    setSelectedForCompare((prev) => {
+      if (prev.includes(deviceName)) {
+        return prev.filter((name) => name !== deviceName);
       }
+      if (prev.length >= 4) return prev;
+      return [...prev, deviceName];
     });
   };
 
+  const handleCompareNow = () => {
+    if (selectedForCompare.length > 0) {
+      const query = selectedForCompare.join(",");
+      router.push(`/products/compare?devices=${query}`);
+    }
+  };
+
   const devices: Device[] = [
-    // 2G Models (from first image)
-    { 
-      name: "S-2653", 
+    // 2G Models
+    {
+      name: "S-2653",
       connectivity: "2g",
+      image: "/Navtelecom/sample3.PNG",
       specs: [
         "Dual SIM",
         "Eco Driving",
@@ -56,31 +68,27 @@ const SignalSeriesPage = () => {
         "Bluetooth 4.0",
         "6 Universal IN",
         "4 OUT",
-        "800 mAh"
+        "800 mAh",
       ],
-      href: "/products/tracking-devices/signal-series/s-2653"
     },
-    { 
-      name: "S-2613", 
+    {
+      name: "S-2613",
       connectivity: "2g",
+      image: "/Navtelecom/sample3.PNG",
       specs: [
         "Single SIM",
-        "—",
         "Voice communication",
-        "—",
         "RS-485",
-        "—",
-        "—",
         "Bluetooth 4.0",
         "4 Digital IN & 1 Analog IN",
         "4 OUT",
-        "800 mAh"
+        "800 mAh",
       ],
-      href: "/products/tracking-devices/signal-series/s-2613"
     },
-    { 
-      name: "S-2651", 
+    {
+      name: "S-2651",
       connectivity: "2g",
+      image: "/Navtelecom/sample3.PNG",
       specs: [
         "Dual SIM",
         "Eco Driving",
@@ -92,14 +100,14 @@ const SignalSeriesPage = () => {
         "Bluetooth 4.0",
         "6 Universal IN",
         "4 OUT",
-        "800 mAh"
+        "800 mAh",
       ],
-      href: "/products/tracking-devices/signal-series/s-2651"
     },
-    // 4G Models (from second image)
-    { 
-      name: "S-4753", 
+    // 4G Models
+    {
+      name: "S-4753",
       connectivity: "4g",
+      image: "/Navtelecom/sample3.PNG",
       specs: [
         "Dual SIM",
         "Eco Driving",
@@ -111,13 +119,13 @@ const SignalSeriesPage = () => {
         "Bluetooth 4.0 (v5.0 compatible)",
         "6 Universal IN",
         "4 OUT",
-        "800 mAh"
+        "800 mAh",
       ],
-      href: "/products/tracking-devices/signal-series/s-4753"
     },
-    { 
-      name: "S-4751", 
+    {
+      name: "S-4751",
       connectivity: "4g",
+      image: "/Navtelecom/sample3.PNG",
       specs: [
         "Dual SIM",
         "Eco Driving",
@@ -129,107 +137,240 @@ const SignalSeriesPage = () => {
         "Bluetooth 4.0 (v5.0 compatible)",
         "6 Universal IN",
         "4 OUT",
-        "800 mAh"
+        "800 mAh",
       ],
-      href: "/products/tracking-devices/signal-series/s-4751"
     },
   ];
 
-  const filteredDevices = filter === "all" 
-    ? devices 
-    : devices.filter(device => device.connectivity === filter);
+  const signalFaqs = [
+    {
+      question: "Where can I download the Configurator?",
+      answer:
+        "You can download the latest version of NTC Configurator here: Get the latest version (https://www.navtelecom.ru/en/downloads/software). Note: Available for Windows OS only.",
+    },
+    {
+      question: "How can I manage devices remotely?",
+      answer:
+        "SMS Commands: Send direct commands to the device (e.g. APN, server, status, reboot). Full command list (https://www.navtelecom.ru/en/downloads/sms-commands). Remote connection via NTC Configurator: Connect to an online device via Internet, read/write config, update firmware. How it works (https://www.navtelecom.ru/en/cloud/remote-configurator). DRC Cloud Service: Cloud-based platform for remote updates, config sync, diagnostics, and device health monitoring. Learn more (https://www.navtelecom.ru/en/cloud/drc-cloud).",
+    },
+    {
+      question: "Where can I find SMS/GPRS commands?",
+      answer:
+        "You can find the full list of SMS/GPRS commands here: Full command list (https://www.navtelecom.ru/en/downloads/sms-commands). If you need a complex combined command, please contact Technical Support at support@navtelecom.in",
+    },
+    {
+      question: "Where can I check supported vehicles for CAN decoding?",
+      answer:
+        "The list of supported vehicles and decoding files is available here: Supported vehicles list (https://www.navtelecom.ru/en/downloads/can-decoder-list).",
+    },
+    {
+      question: "Which device should I choose — 2G or 4G?",
+      answer:
+        "2G models are budget-friendly and work where 2G networks are stable. 4G models support both 4G and 2G, offering longer lifecycle and future-proof connectivity. Need advice? Contact support@navtelecom.in",
+    },
+    {
+      question: "How long is the warranty on Navtelecom devices?",
+      answer:
+        "All Navtelecom devices are covered by a 3-year warranty. The backup battery and the RTC battery (clock battery) are covered for 1 year.",
+    },
+  ];
+
+  const filteredDevices =
+    filter === "all"
+      ? devices
+      : devices.filter((device) => device.connectivity === filter);
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased text-brand-navy">
       <Navbar />
 
       <main className="pt-20">
-        {/* Hero Section */}
-        <section className="h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center bg-[#F8FAFC] overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center">
+        {/* HERO SECTION */}
+        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-center bg-[#EFEFEF]">
+          {/* Hero image - larger, device aligned to top */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="relative w-full h-full">
+              <Image
+                src="/Navtelecom/signal_device.png"
+                alt="SIGNAL Series"
+                fill
+                className="object-contain object-center scale-100"
+                priority
+              />
+            </div>
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center py-12 md:py-20">
               {/* Left Info */}
-              <div className="space-y-8">
+              <div className="space-y-8 ml-10">
                 <div>
                   <h1 className="text-h1">
-                    SIGNAL<br/>
+                    SIGNAL
+                    <br />
                     <span className="text-brand-primary">Series</span>
                   </h1>
                 </div>
                 <div className="space-y-4 max-w-sm">
                   <p className="text-body-lg">
-                    External antennas and pro-grade features for demanding telematics.
-                  </p>
-                  <p className="text-body-lg">
-                    Extended GNSS, fuel control, diagnostics, and voice communication.
+                    All-in-one tracking and control solution for transport,
+                    fleets, and industrial automation.
                   </p>
                 </div>
-                <button className="bg-brand-primary text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1">
+                <button
+                  onClick={scrollToLineupFromExplore}
+                  className="bg-brand-navy text-white px-20 py-4 rounded-full font-bold text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1"
+                >
                   Explore
                 </button>
               </div>
 
-              {/* Middle Hardware Outline */}
-              <div className="relative flex justify-center">
-                <div className="w-full max-w-md aspect-[4/3] border-4 border-brand-primary/20 rounded-[3rem] p-8 flex flex-col justify-between relative bg-white/50 backdrop-blur-sm shadow-inner">
-                  <div className="flex justify-center gap-2">
-                    {[...Array(12)].map((_, i) => (
-                      <div key={i} className="w-2 h-8 bg-brand-primary/10 rounded-full"></div>
-                    ))}
-                  </div>
-                  <div className="flex justify-between items-center px-4">
-                    <div className="space-y-2 text-[10px] font-black text-brand-primary/40">
-                      <div>• +U<sub>G</sub></div>
-                      <div>• VOICE +</div>
-                      <div>• VOICE -</div>
-                      <div>• CAN H</div>
-                      <div>• CAN L</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="w-8 h-8 text-brand-primary/30 mx-auto mb-2">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
-                      </div>
-                      <p className="text-[8px] font-black tracking-widest text-brand-navy/30 uppercase">NAVTELECOM</p>
-                    </div>
-                    <div className="text-right space-y-2 text-[10px] font-black text-brand-primary/40 uppercase tracking-widest">
-                      <p>EXT GNSS</p>
-                      <p>EXT GSM</p>
-                      <p>SYS</p>
-                    </div>
-                  </div>
-                  <div className="flex justify-center gap-2 transform rotate-180">
-                    {[...Array(12)].map((_, i) => (
-                      <div key={i} className="w-2 h-8 bg-brand-primary/10 rounded-full"></div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              {/* Middle spacer column (background image already covers the section) */}
+              <div className="ml-10" />
 
               {/* Right Big Text */}
               <div className="lg:text-right">
-                <h2 className="text-display opacity-10">
-                  <span className="text-brand-primary">Pro</span><br/>
-                  Grade
+                <h2 className="text-display mr-10">
+                  <span className="text-brand-primary">PRO</span>
+                  <br />
+                  Models
                 </h2>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Explore the Lineup */}
-        <section className="py-16 md:py-20 bg-white">
+        {/* KEY FEATURES */}
+        <section className="py-16 md:py-20 bg-white shadow-2xl relative z-10 -mt-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-h2 text-center mb-12">Explore the Lineup</h2>
-            
-            {/* Filter Buttons */}
-            <div className="flex justify-center gap-4 mb-16">
+            <div className="text-center mb-12">
+              <h2 className="text-h1 mb-3">
+                The Most Advanced Fleet Tracker We've{" "}
+                <span className="text-brand-primary">Ever Built</span>
+              </h2>
+              <p className="text-body max-w-2xl mx-auto">
+                All our technologies in one powerful device built for ultimate
+                fleet monitoring and control.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
+              {[
+                {
+                  title: "RS-485 Ready",
+                  sub: "Wired. Reliable. Universal.",
+                  desc: "Supports MODBUS. Connect fuel, temperature, and more.",
+                  icon: (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="w-10 h-10"
+                    >
+                      <rect x="4" y="6" width="16" height="12" rx="2" />
+                      <circle cx="8" cy="10" r="0.5" fill="currentColor" />
+                      <circle cx="12" cy="10" r="0.5" fill="currentColor" />
+                      <circle cx="16" cy="10" r="0.5" fill="currentColor" />
+                      <circle cx="10" cy="14" r="0.5" fill="currentColor" />
+                      <circle cx="14" cy="14" r="0.5" fill="currentColor" />
+                    </svg>
+                  ),
+                },
+                {
+                  title: "BLE Available",
+                  sub: "Wireless. Effortless.",
+                  desc: "Seamlessly connect any BLE sensors to your tracker.",
+                  icon: <Bluetooth size={40} weight="light" />,
+                },
+                {
+                  title: "CAN Connected",
+                  sub: "Vehicle data. No delay.",
+                  desc: "Fuel, RPM, mileage — straight from the bus.",
+                  icon: (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="w-10 h-10"
+                    >
+                      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 17a7 7 0 1 1 0-14 7 7 0 0 1 0 14zM12 8l4 4-4 4-4-4 4-4z" />
+                    </svg>
+                  ),
+                },
+                {
+                  title: "Eco Driving",
+                  sub: "Less fuel. Less risk.",
+                  desc: "Monitor driving style and reduce costs fleet-wide.",
+                  icon: (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="w-10 h-10"
+                    >
+                      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 17a7 7 0 1 1 0-14 7 7 0 0 1 0 14zM12 8l4 4-4 4-4-4 4-4z" />
+                    </svg>
+                  ),
+                },
+                {
+                  title: "Custom Algorithm",
+                  sub: "Smart triggers. Smarter fleets.",
+                  desc: "Create your own logic inside the device.",
+                  icon: (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="w-10 h-10"
+                    >
+                      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 17a7 7 0 1 1 0-14 7 7 0 0 1 0 14zM12 8l4 4-4 4-4-4 4-4z" />
+                    </svg>
+                  ),
+                },
+                {
+                  title: "Remote Control",
+                  sub: "Configure anytime. From anywhere.",
+                  desc: "Remote setup made easy.",
+                  icon: <GlobeSimple size={40} weight="light" />,
+                },
+              ].map((feature, idx) => (
+                <div
+                  key={idx}
+                  className="group p-10 md:p-12 bg-white rounded-[3rem] border border-gray-100 hover:shadow-2xl transition-all duration-500 relative overflow-hidden min-h-[16rem] lg:min-h-[17rem]"
+                >
+                  <div className="absolute top-8 right-8 text-gray-300 group-hover:text-brand-primary transition-colors duration-500 scale-110">
+                    {feature.icon}
+                  </div>
+                  <div className="pt-5 pr-4">
+                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-navy mb-2 min-h-[72px] flex items-center">
+                      {feature.title}
+                    </h3>
+                    <p className="text-caption text-brand-primary mb-3 min-h-[20px]">
+                      {feature.sub}
+                    </p>
+                    <p className="text-body">{feature.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* EXPLORE THE LINEUP (Screenshot UI with Rounding) */}
+        <section ref={lineupRef} className="py-16 md:py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-h1 text-center mb-10">Explore the Lineup</h2>
+
+            {/* Filter Buttons - Squared from Screenshot */}
+            <div className="flex justify-center gap-4 mb-12">
               {["all", "2g", "4g"].map((f) => (
                 <button
                   key={f}
-                  onClick={() => setFilter(f as any)}
-                  className={`px-10 py-3 font-bold transition-all border-2 rounded-xl uppercase text-sm tracking-wider ${
+                  onClick={() => setFilter(f as "all" | "2g" | "4g")}
+                  className={`px-10 py-3 font-bold transition-all border-2 rounded-xl ${
                     filter === f
                       ? "bg-brand-navy text-white border-brand-navy"
                       : "bg-white text-brand-navy border-gray-200 hover:border-brand-navy"
@@ -240,60 +381,86 @@ const SignalSeriesPage = () => {
               ))}
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredDevices.map((device, idx) => (
                 <div
                   key={idx}
-                  className="bg-white flex flex-col border border-gray-100 rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden group relative"
+                  className={`bg-white flex flex-col border rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden group relative ${
+                    selectedForCompare.includes(device.name)
+                      ? "border-brand-primary ring-2 ring-brand-primary/20"
+                      : "border-gray-100"
+                  }`}
                 >
-                  <div className="p-10 pb-0 flex flex-col items-start">
-                    {/* Compare Checkbox */}
-                    <div className="absolute top-6 right-6 z-10">
-                      <button
-                        onClick={() => handleCompareToggle(device)}
-                        className={`w-8 h-8 rounded-md border-2 flex items-center justify-center transition-colors duration-200 ${
-                          selectedDevices.some(d => d.name === device.name)
-                            ? 'bg-brand-primary border-brand-primary text-white'
-                            : 'bg-white border-gray-300 text-transparent hover:border-brand-primary hover:bg-brand-light-3'
-                        }`}
-                      >
-                        {selectedDevices.some(d => d.name === device.name) && <Check size={18} weight="bold" />}
-                      </button>
-                    </div>
+                  {/* Compare Toggle Button */}
+                  <button
+                    onClick={() => toggleCompare(device.name)}
+                    className={`absolute top-6 right-6 z-20 w-6 h-6 rounded-md border-2 transition-all flex items-center justify-center ${
+                      selectedForCompare.includes(device.name)
+                        ? "bg-brand-primary border-brand-primary shadow-lg"
+                        : "bg-white/80 backdrop-blur-sm border-gray-300 hover:border-brand-primary"
+                    }`}
+                    title="Add to comparison"
+                  >
+                    {selectedForCompare.includes(device.name) && (
+                      <Check size={14} weight="bold" className="text-white" />
+                    )}
+                  </button>
 
+                  <div className="p-10 pb-0 flex flex-col items-start">
                     {/* Connectivity Highlight */}
                     <div className="mb-8 w-full flex justify-between items-center">
-                      <div className={`px-4 py-1.5 rounded-full text-caption border ${
-                        device.connectivity === '4g' 
-                          ? 'bg-brand-primary/10 text-brand-primary border-brand-primary/20' 
-                          : 'bg-gray-100 text-gray-500 border-gray-200'
-                      }`}>
-                        {device.connectivity.toUpperCase()} Network
+                      <div
+                        className={`px-4 py-1.5 rounded-full text-caption border ${
+                          device.connectivity === "4g"
+                            ? "bg-brand-primary/10 text-brand-primary border-brand-primary/20"
+                            : "bg-blue-100 text-blue-800 border-blue-200"
+                        }`}
+                      >
+                        {device.connectivity} Network
                       </div>
                     </div>
 
-                    {/* Stylized Hardware Visualization with Device Name */}
-                    <div className="w-full aspect-[16/10] mb-8 bg-brand-light-3 rounded-2xl flex items-center justify-center relative overflow-hidden group-hover:bg-brand-light-2 transition-colors duration-500">
-                      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
-                      <div className="w-4/5 h-3/5 bg-brand-navy rounded-xl shadow-2xl relative transform -rotate-2 group-hover:rotate-0 transition-all duration-700 flex items-center justify-center">
-                        <span className="text-brand-primary text-3xl font-black tracking-widest uppercase opacity-80 group-hover:opacity-100 transition-opacity">
-                          {device.name}
-                        </span>
-                        <div className="absolute inset-x-6 bottom-4 h-px bg-white/10"></div>
-                        <div className="absolute inset-x-6 bottom-6 h-px bg-white/5"></div>
+                    {/* Device image area – responsive card with aspect ratio */}
+                    <div className="w-full mb-12 flex flex-col justify-start">
+                      <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden flex items-center justify-center mb-4 bg-[#EFEFEF]">
+                        {device.image ? (
+                          <>
+                            <Image
+                              src={device.image}
+                              alt={`${device.name} device`}
+                              fill
+                              className="object-contain"
+                            />
+                            <span className="absolute left-6 top-6 text-brand-navy text-xl font-black tracking-widest uppercase">
+                              {device.name}
+                            </span>
+                          </>
+                        ) : (
+                          <span className="text-brand-navy text-2xl font-black tracking-widest uppercase">
+                            {device.name}
+                          </span>
+                        )}
                       </div>
                     </div>
 
+                    {/* Subtitle / Series Info */}
                     <div className="mb-8">
                       <p className="text-label">Signal Series</p>
                     </div>
-                    
-                    {/* Feature list */}
+
+                    {/* Feature list - Left Aligned with Tick */}
                     <div className="space-y-4 mb-12 w-full">
                       {device.specs.map((spec, sIdx) => (
-                        <div key={sIdx} className="flex items-center gap-3 group/item">
+                        <div
+                          key={sIdx}
+                          className="flex items-center gap-3 group/item"
+                        >
                           <div className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-primary/10 flex items-center justify-center group-hover/item:bg-brand-primary transition-colors duration-300">
-                            <Check size={12} weight="bold" className="text-brand-primary group-hover/item:text-white transition-colors duration-300" />
+                            <Check
+                              size={12}
+                              weight="bold"
+                              className="text-brand-primary group-hover/item:text-white transition-colors duration-300"
+                            />
                           </div>
                           <span className="text-caption text-gray-500 group-hover:text-brand-navy transition-colors duration-300">
                             {spec}
@@ -304,7 +471,10 @@ const SignalSeriesPage = () => {
                   </div>
 
                   <div className="p-10 pt-0 mt-auto">
-                    <Link href={device.href} className="w-full bg-brand-navy text-white py-5 rounded-2xl font-black text-sm hover:bg-brand-primary transition-all shadow-xl shadow-brand-navy/10 transform hover:-translate-y-1 active:scale-95 text-center block uppercase tracking-widest">
+                    <Link
+                      href={`/products/tracking-devices/signal-series/${device.name.toLowerCase()}`}
+                      className="w-full bg-brand-navy text-white py-5 rounded-2xl font-black text-sm hover:bg-brand-primary transition-all shadow-xl shadow-brand-navy/10 transform hover:-translate-y-1 active:scale-95 flex items-center justify-center"
+                    >
                       Learn more
                     </Link>
                   </div>
@@ -313,40 +483,149 @@ const SignalSeriesPage = () => {
             </div>
           </div>
         </section>
-      </main>
 
-      {/* Floating Compare Bar */}
-      {selectedDevices.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-brand-navy text-white p-4 z-50 shadow-lg">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="text-body-sm font-bold whitespace-nowrap">Devices selected for comparison:</span>
-              {selectedDevices.map(device => (
-                <span key={device.name} className="bg-brand-primary text-white px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
-                  {device.name}
-                  <button onClick={() => handleCompareToggle(device)} className="ml-1 text-white/80 hover:text-white">
-                    <X size={12} weight="bold" />
-                  </button>
-                </span>
+        {/* WHY SMART STANDS OUT */}
+        <section className="py-12 md:py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-h1 text-center mb-10">
+              Why <span className="text-brand-primary">SIGNAL</span> Stands Out
+              in GPS Tracking
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
+              {[
+                {
+                  title: (
+                    <>
+                      Reliable
+                      <br />
+                      Updates
+                    </>
+                  ),
+                  desc: "New features and improvements, delivered with stability in mind.",
+                },
+                {
+                  title: (
+                    <>
+                      Easy USB
+                      <br />
+                      Configuration
+                    </>
+                  ),
+                  desc: "Configure the device directly via USB — no external power supply required.",
+                },
+                {
+                  title: (
+                    <>
+                      Expert
+                      <br />
+                      Support
+                    </>
+                  ),
+                  desc: "Fast, clear, and helpful assistance — from people who know the product inside and out.",
+                },
+                {
+                  title: (
+                    <>
+                      36-Month
+                      <br />
+                      Warranty
+                    </>
+                  ),
+                  desc: "Enjoy extended protection with a 3-year manufacturer warranty.",
+                },
+                {
+                  title: (
+                    <>
+                      Industry-Proven
+                      <br />
+                      Reliability
+                    </>
+                  ),
+                  desc: "10+ years of service life in real-world deployments.",
+                },
+                {
+                  title: (
+                    <>
+                      Russian
+                      <br />
+                      Engineering
+                    </>
+                  ),
+                  desc: "Produced in Russia. Delivered to you — without third-party layers.",
+                },
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="bg-[#F8FAFC] p-10 md:p-12 rounded-[3rem] shadow-xl shadow-brand-navy/5 border border-white group hover:-translate-y-2 transition-all duration-500"
+                >
+                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-navy mb-4 group-hover:text-brand-primary transition-colors leading-tight min-h-[80px]">
+                    {item.title}
+                  </h3>
+                  <p className="text-body">{item.desc}</p>
+                </div>
               ))}
-              {selectedDevices.length < 4 && (
-                <span className="text-body-sm text-gray-400">Select up to {4 - selectedDevices.length} more devices</span>
-              )}
             </div>
-            <Link 
-              href={`/products/compare?devices=${selectedDevices.map(d => d.name).join(',')}`}
-              className="bg-white text-brand-navy px-6 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition-colors whitespace-nowrap"
-            >
-              Compare Now ({selectedDevices.length})
-            </Link>
           </div>
-        </div>
-      )}
+        </section>
 
-      <Footer />
+        {/* WHY SMART STANDS OUT */}
+        <ProductFAQ faqs={signalFaqs} />
+
+        {/* Floating Compare Bar */}
+        {selectedForCompare.length > 0 && (
+          <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
+            <div className="bg-brand-navy text-white p-4 md:p-6 rounded-[2rem] shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10 backdrop-blur-md">
+              <div className="flex flex-col gap-2">
+                <p className="text-sm font-bold">
+                  Devices selected for comparison:
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {selectedForCompare.map((name, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-full border border-white/10 group/tag"
+                    >
+                      <span className="text-xs font-black tracking-widest">
+                        {name}
+                      </span>
+                      <button
+                        onClick={() => toggleCompare(name)}
+                        className="hover:text-brand-primary transition-colors"
+                      >
+                        <X size={14} weight="bold" />
+                      </button>
+                    </div>
+                  ))}
+                  {selectedForCompare.length < 4 && (
+                    <div className="flex items-center px-3 py-1.5 rounded-full border border-dashed border-white/20 text-[10px] uppercase tracking-widest text-white/40">
+                      Select up to 4 devices
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="flex items-center gap-4 w-full md:w-auto">
+                <button
+                  onClick={() => setSelectedForCompare([])}
+                  className="text-xs font-bold text-white/60 hover:text-white transition-colors px-4"
+                >
+                  Clear All
+                </button>
+                <button
+                  onClick={handleCompareNow}
+                  className="flex-1 md:flex-none bg-brand-primary text-white px-8 py-3 rounded-xl font-black text-sm hover:bg-white hover:text-brand-navy transition-all shadow-lg active:scale-95 whitespace-nowrap"
+                >
+                  Compare Now
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <Footer />
+      </main>
     </div>
   );
 };
 
 export default SignalSeriesPage;
-
