@@ -584,7 +584,7 @@ const AllDevicesPage = () => {
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 {filteredDevices.map((device, idx) => (
                   <div
                     key={idx}
@@ -614,17 +614,17 @@ const AllDevicesPage = () => {
                         </span>
                       </div>
 
-                      {/* Hardware Visualization */}
+                      {/* Device name + hardware visualization */}
+                      <h3 className="text-3xl font-black tracking-widest uppercase text-brand-navy mb-4 leading-none">
+                        {device.name}
+                      </h3>
                       <div className="w-full aspect-[4/3] mb-4 bg-[#EFEFEF] rounded-2xl flex items-center justify-center relative overflow-hidden">
                         <Image
                           src={seriesImages[device.series]}
                           alt={`${device.series} series device`}
                           fill
-                          className="object-cover object-bottom"
+                          className="object-contain object-bottom"
                         />
-                        <span className="absolute left-6 top-6 text-brand-navy text-xl font-black tracking-widest uppercase">
-                          {device.name}
-                        </span>
                       </div>
 
                       {/* Specs Summary */}
