@@ -9,11 +9,14 @@ import {
   Marker,
 } from "react-simple-maps";
 import { geoCentroid } from "d3-geo";
+import type { GeometryObject } from "geojson";
 import LayoutContainer from "@/components/LayoutContainer";
 
 const geoUrl = "https://unpkg.com/world-atlas@2.0.2/countries-110m.json";
 type MapGeo = {
   rsmKey: string;
+  type: "Feature";
+  geometry: GeometryObject | null;
   properties: Record<string, string | undefined>;
 };
 const highlightedCountryCodes = new Set([
@@ -252,7 +255,7 @@ const AboutPage = () => {
                               geo.properties.name ||
                               geo.properties.NAME ||
                               code;
-                            const [longitude, latitude] = geoCentroid(geo.feature);
+                            const [longitude, latitude] = geoCentroid(geo);
 
                             return (
                               <Marker
