@@ -252,7 +252,7 @@ const AboutPage = () => {
                               geo.properties.name ||
                               geo.properties.NAME ||
                               code;
-                            const [longitude, latitude] = geoCentroid(geo);
+                            const [longitude, latitude] = geoCentroid(geo.feature);
 
                             return (
                               <Marker
