@@ -392,4 +392,4 @@ const SmartS2010Page = () => {
   );
 };
 
-export default SmartS2010Page;"
+export default SmartS2010Page;
