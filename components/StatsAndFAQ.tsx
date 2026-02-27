@@ -213,34 +213,6 @@ const faqs = [
 ];
 
 const StatsAndFAQ = () => {
-  const partnersScrollerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const scroller = partnersScrollerRef.current;
-    if (!scroller) return;
-
-    const interval = window.setInterval(() => {
-      const firstItem = scroller.querySelector(
-        "[data-partner-item='true']",
-      ) as HTMLElement | null;
-      if (!firstItem) return;
-
-      const styles = window.getComputedStyle(scroller);
-      const gap = Number.parseFloat(styles.columnGap || styles.gap || "0") || 0;
-      const step = firstItem.getBoundingClientRect().width + gap;
-      const maxScrollLeft = scroller.scrollWidth - scroller.clientWidth;
-      const nextScrollLeft = scroller.scrollLeft + step;
-
-      if (nextScrollLeft >= maxScrollLeft - 2) {
-        scroller.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        scroller.scrollTo({ left: nextScrollLeft, behavior: "smooth" });
-      }
-    }, 2400);
-
-    return () => window.clearInterval(interval);
-  }, []);
-
   return (
     <div className="bg-brand-light-3">
       {/* Stats Section */}
@@ -262,25 +234,22 @@ const StatsAndFAQ = () => {
       <section className="py-24 bg-white">
         <LayoutContainer className="text-center">
           <h2 className="text-h1 mb-12">OUR PARTNERS</h2>
-          <div
-            ref={partnersScrollerRef}
-            className="bg-brand-light-3 p-6 sm:p-8 md:p-10 border border-gray-200 rounded-2xl overflow-x-auto overflow-y-hidden scroll-smooth"
-          >
+          <div className="bg-brand-light-3 p-6 sm:p-8 md:p-10 border border-gray-200 rounded-2xl overflow-hidden">
             <div
               className="flex w-max items-center gap-10 sm:gap-14 md:gap-16"
+              style={{ animation: "partnersMarquee 26s linear infinite" }}
             >
               {[...partners, ...partners].map((partner, idx) => (
                 <div
                   key={`${partner.src}-${idx}`}
-                  data-partner-item="true"
-                  className="relative h-10 w-28 sm:h-12 sm:w-32 md:h-14 md:w-36 shrink-0"
+                  className="relative h-14 w-36 sm:h-16 sm:w-44 md:h-20 md:w-52 shrink-0"
                 >
                   <Image
                     src={partner.src}
                     alt={partner.alt}
                     fill
                     className="object-contain grayscale hover:grayscale-0 transition duration-300"
-                    sizes="(min-width: 768px) 144px, 112px"
+                    sizes="(min-width: 768px) 208px, (min-width: 640px) 176px, 144px"
                   />
                 </div>
               ))}
@@ -328,6 +297,16 @@ const StatsAndFAQ = () => {
           </div>
         </LayoutContainer>
       </section>
+      <style jsx>{`
+        @keyframes partnersMarquee {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
     </div>
   );
 };
