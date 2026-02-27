@@ -21,7 +21,7 @@ const LayoutContainer: React.FC<LayoutContainerProps> = ({
   return (
     <div
       className={
-        "w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 " + className
+        "w-full max-w-[1920px] mx-auto px-[clamp(1rem,2.8vw,4rem)] " + className
       }
     >
       {children}

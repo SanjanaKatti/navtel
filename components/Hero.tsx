@@ -9,6 +9,7 @@ const Hero = () => {
     '/Navtelecom/hero_2.png',
     '/Navtelecom/hero_3.png'
   ];
+  const activeIndicatorColors = ['bg-[#0F3A62]', 'bg-[#1E4E89]', 'bg-[#2A6FA8]'];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -18,9 +19,8 @@ const Hero = () => {
   }, [images.length]);
 
   return (
-    <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden bg-white">
-      <div className="w-full h-full relative z-10">
-        <div className="relative w-full h-full min-h-[280px] overflow-hidden shadow-2xl">
+    <section className="relative overflow-hidden bg-white">
+      <div className="relative w-full h-[320px] sm:h-[540px] overflow-hidden">
           {images.map((src, idx) => (
             <div
               key={idx}
@@ -32,25 +32,28 @@ const Hero = () => {
                 src={src}
                 alt={`Navtelecom Hero ${idx + 1}`}
                 fill
-                className="object-contain"
+                className="object-contain object-top 2xl:object-cover 2xl:object-top"
+                sizes="100vw"
                 priority={idx === 0}
               />
             </div>
           ))}
           
           {/* Slider Indicators */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+          <div className="absolute bottom-[24%] sm:bottom-[16%] lg:bottom-[14%] left-1/2 -translate-x-1/2 flex items-center gap-2.5 z-20">
             {images.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentImage(idx)}
-                className={`w-12 h-1.5 rounded-full transition-all duration-300 ${
-                  idx === currentImage ? 'bg-brand-primary w-16' : 'bg-white/30 hover:bg-white/50'
+                aria-label={`Show slide ${idx + 1}`}
+                className={`rounded-full transition-all duration-300 ${
+                  idx === currentImage
+                    ? `${activeIndicatorColors[idx]} w-3.5 h-3.5 shadow-md shadow-black/20`
+                    : 'w-2.5 h-2.5 bg-white/75 border border-[#0F3A62]/25 hover:bg-white'
                 }`}
               />
             ))}
           </div>
-        </div>
       </div>
     </section>
   );

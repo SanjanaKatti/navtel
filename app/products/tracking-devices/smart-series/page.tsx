@@ -266,7 +266,7 @@ const SmartSeriesPage = () => {
                 src="/Navtelecom/smart_device.png"
                 alt="SMART Series"
                 fill
-                className="object-contain object-center scale-100"
+                className="object-contain object-center scale-100 2xl:object-cover 2xl:object-center"
                 priority
               />
             </div>
@@ -274,7 +274,7 @@ const SmartSeriesPage = () => {
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
             <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center py-12 md:py-20">
               {/* Left Info */}
-              <div className="space-y-8 ml-10">
+              <div className="space-y-8 ml-0 lg:ml-10">
                 <div>
                   <h1 className="text-h1">
                     SMART
@@ -297,7 +297,7 @@ const SmartSeriesPage = () => {
               </div>
 
               {/* Middle spacer column (background image already covers the section) */}
-              <div className="ml-10" />
+              <div className="ml-0 lg:ml-10" />
 
               {/* Right Big Text */}
               <div className="lg:text-right">
@@ -442,7 +442,7 @@ const SmartSeriesPage = () => {
                 <button
                   key={f}
                   onClick={() => setFilter(f as "all" | "2g" | "4g")}
-                  className={`px-10 py-3 font-bold transition-all border-2 rounded-xl ${
+                  className={`px-10 py-3 font-bold transition-all border-2 rounded-full ${
                     filter === f
                       ? "bg-brand-navy text-white border-brand-navy"
                       : "bg-white text-brand-navy border-gray-200 hover:border-brand-navy"
@@ -466,7 +466,7 @@ const SmartSeriesPage = () => {
                   {/* Compare Toggle Button */}
                   <button
                     onClick={() => toggleCompare(device.name)}
-                    className={`absolute top-6 right-6 z-20 w-6 h-6 rounded-md border-2 transition-all flex items-center justify-center ${
+                    className={`absolute top-6 right-6 z-20 w-6 h-6 rounded-full border-2 transition-all flex items-center justify-center ${
                       selectedForCompare.includes(device.name)
                         ? "bg-brand-primary border-brand-primary shadow-lg"
                         : "bg-white/80 backdrop-blur-sm border-gray-300 hover:border-brand-primary"
@@ -545,7 +545,7 @@ const SmartSeriesPage = () => {
                   <div className="p-10 pt-0 mt-auto">
                     <Link
                       href={`/products/tracking-devices/smart-series/${device.name.toLowerCase()}`}
-                      className="w-full bg-brand-navy text-white py-5 rounded-2xl font-black text-sm hover:bg-brand-primary transition-all shadow-xl shadow-brand-navy/10 transform hover:-translate-y-1 active:scale-95 flex items-center justify-center"
+                      className="w-full bg-brand-navy text-white py-5 rounded-full font-black text-sm hover:bg-brand-primary transition-all shadow-xl shadow-brand-navy/10 transform hover:-translate-y-1 active:scale-95 flex items-center justify-center"
                     >
                       Learn more
                     </Link>
@@ -685,7 +685,7 @@ const SmartSeriesPage = () => {
                 </button>
                 <button
                   onClick={handleCompareNow}
-                  className="flex-1 md:flex-none bg-brand-primary text-white px-8 py-3 rounded-xl font-black text-sm hover:bg-white hover:text-brand-navy transition-all shadow-lg active:scale-95 whitespace-nowrap"
+                  className="flex-1 md:flex-none bg-brand-primary text-white px-8 py-3 rounded-full font-black text-sm hover:bg-white hover:text-brand-navy transition-all shadow-lg active:scale-95 whitespace-nowrap"
                 >
                   Compare Now
                 </button>

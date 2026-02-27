@@ -418,7 +418,7 @@ const AllDevicesPage = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative h-[calc(60vh+80px)] min-h-[480px] flex items-start overflow-hidden bg-brand-light-3">
+        <section className="relative min-h-[clamp(24rem,62vh,42rem)] flex items-start overflow-hidden bg-brand-light-3">
           <Image
             src="/Navtelecom/Alldevices2_banner.png"
             alt="All devices lineup banner"
@@ -426,7 +426,7 @@ const AllDevicesPage = () => {
             priority
             className="object-cover object-bottom"
           />
-          <div className="relative z-40 max-w-xl px-4 sm:px-6 lg:px-8 pt-6 md:pl-10">
+          <div className="relative z-40 w-full max-w-[1440px] mx-auto px-[clamp(1rem,2.4vw,2.5rem)] pt-6 md:pt-8">
             <div className="text-left">
               <p className="text-caption mb-4 text-brand-navy">
                 COMPLETE CATALOG
@@ -454,7 +454,7 @@ const AllDevicesPage = () => {
                     <button
                       key={s}
                       onClick={() => setQuickSeries(s)}
-                      className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                      className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
                         quickSeries === s
                           ? "bg-brand-navy text-white shadow-md"
                           : "text-gray-500 hover:text-brand-navy"
@@ -476,7 +476,7 @@ const AllDevicesPage = () => {
                     <button
                       key={n}
                       onClick={() => setQuickNetwork(n)}
-                      className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                      className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
                         quickNetwork === n
                           ? "bg-brand-navy text-white shadow-md"
                           : "text-gray-500 hover:text-brand-navy"
@@ -566,7 +566,7 @@ const AllDevicesPage = () => {
             {/* Mobile Filter Button */}
             <button
               onClick={() => setIsFilterOpen(true)}
-              className="lg:hidden w-full bg-white p-4 rounded-xl border border-gray-200 flex items-center justify-center gap-2 font-bold text-brand-navy shadow-sm mb-8"
+              className="lg:hidden w-full bg-white p-4 rounded-full border border-gray-200 flex items-center justify-center gap-2 font-bold text-brand-navy shadow-sm mb-8"
             >
               <Funnel size={20} weight="bold" />
               Detailed Filters ({Object.values(filters).flat().length})
@@ -595,7 +595,7 @@ const AllDevicesPage = () => {
                       <div className="absolute top-6 right-6 z-10">
                         <button
                           onClick={() => handleCompareToggle(device)}
-                          className={`w-7 h-7 rounded-md border-2 flex items-center justify-center transition-colors duration-200 ${
+                          className={`w-7 h-7 rounded-full border-2 flex items-center justify-center transition-colors duration-200 ${
                             selectedDevices.some((d) => d.name === device.name)
                               ? "bg-brand-primary border-brand-primary text-white"
                               : "bg-white border-gray-300 text-transparent hover:border-brand-primary"
@@ -653,7 +653,7 @@ const AllDevicesPage = () => {
                     <div className="p-10 pt-0 mt-auto">
                       <Link
                         href={device.href}
-                        className="w-full bg-brand-navy text-white py-5 rounded-2xl font-black text-sm hover:bg-brand-primary transition-all text-center block uppercase tracking-widest shadow-xl shadow-brand-navy/10 transform hover:-translate-y-1 active:scale-95"
+                        className="w-full bg-brand-navy text-white py-5 rounded-full font-black text-sm hover:bg-brand-primary transition-all text-center block uppercase tracking-widest shadow-xl shadow-brand-navy/10 transform hover:-translate-y-1 active:scale-95"
                       >
                         Learn More
                       </Link>
@@ -747,7 +747,7 @@ const AllDevicesPage = () => {
             <div className="p-6 border-t border-gray-100">
               <button
                 onClick={() => setIsFilterOpen(false)}
-                className="w-full py-4 bg-brand-navy text-white rounded-xl font-black uppercase tracking-widest"
+                className="w-full py-4 bg-brand-navy text-white rounded-full font-black uppercase tracking-widest"
               >
                 Apply Filters
               </button>

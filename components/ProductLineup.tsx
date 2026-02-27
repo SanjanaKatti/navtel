@@ -49,7 +49,7 @@ const ProductLineup = () => {
     <section className="py-24 bg-[#F8FAFC]">
       <LayoutContainer>
         <div className="text-center mb-20">
-          <p className="text-caption text-[#004A8C] mb-4">
+          <p className="text-base md:text-lg font-bold uppercase tracking-[0.2em] text-[#004A8C] mb-2 md:mb-3">
             DISCOVER OUR LINEUP
           </p>
           <h2 className="text-h1">Device Series for Every Fleet</h2>
@@ -63,7 +63,7 @@ const ProductLineup = () => {
             >
               {/* Heading */}
               <div className="min-h-[80px] flex flex-col justify-start">
-                <h3 className="text-h3 font-black text-[#004A8C]">
+                <h3 className="text-h3 font-black text-[#28398c]">
                   {product.seriesTitle}
                 </h3>
                 <p className="mt-1 text-[11px] font-extrabold tracking-normal text-gray-400 uppercase">
@@ -85,19 +85,19 @@ const ProductLineup = () => {
                     </span>
                   </div>
                   <div className="px-6 py-4">
-                    <div
-                      className="relative flex items-start justify-center w-full h-[280px] sm:h-[300px]"
-                    >
+                    <div className="relative w-full aspect-[4/3]">
                       <Image
                         src={product.image}
                         alt={product.label}
-                        className={`absolute w-full h-full object-scale-down object-top ${
+                        fill
+                        sizes="(min-width: 1024px) 28vw, (min-width: 640px) 44vw, 90vw"
+                        className={`object-contain object-center ${
                           product.label === "START"
-                            ? "!h-[380px] !w-[480px] sm:!h-[430px] sm:!w-[530px] -translate-y-[10%]"
-                            : "!h-[180px] !w-[230px] sm:!h-[200px] sm:!w-[250px]"
+                            ? "scale-[1.32]"
+                            : product.label === "SMART"
+                              ? "scale-[1.42]"
+                              : "scale-[1.36]"
                         }`}
-                        width={product.label === "START" ? 700 : 300}
-                        height={product.label === "START" ? 500 : 200}
                       />
                     </div>
                   </div>
@@ -113,13 +113,13 @@ const ProductLineup = () => {
               <div className="mt-auto pt-4 border-t border-gray-200 flex flex-col gap-4">
                 <Link
                   href={product.href}
-                  className="w-full bg-[#004A8C] text-white py-4 px-8 font-bold rounded-xl hover:bg-[#003366] transition-colors shadow-lg shadow-blue-900/20 flex items-center justify-center uppercase tracking-wider text-sm"
+                  className="w-full bg-[#004A8C] text-white py-4 px-8 font-bold rounded-full hover:bg-[#003366] transition-colors shadow-lg shadow-blue-900/20 flex items-center justify-center uppercase tracking-wider text-sm"
                 >
                   View Specifications
                 </Link>
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="w-full bg-[#004A8C] text-white py-4 px-8 font-bold rounded-xl hover:bg-[#003366] transition-colors shadow-lg shadow-blue-900/20 uppercase tracking-wider text-sm"
+                  className="w-full bg-[#004A8C] text-white py-4 px-8 font-bold rounded-full hover:bg-[#003366] transition-colors shadow-lg shadow-blue-900/20 uppercase tracking-wider text-sm"
                 >
                   Contact Us
                 </button>
@@ -208,7 +208,7 @@ const ProductLineup = () => {
 
               <button
                 type="submit"
-                className="w-full py-4 bg-brand-navy text-white rounded-xl font-black text-sm hover:bg-brand-primary transition-all transform hover:-translate-y-1 active:scale-95 shadow-lg shadow-brand-navy/20 mt-4"
+                className="w-full py-4 bg-brand-navy text-white rounded-full font-black text-sm hover:bg-brand-primary transition-all transform hover:-translate-y-1 active:scale-95 shadow-lg shadow-brand-navy/20 mt-4"
               >
                 SEND MESSAGE
               </button>

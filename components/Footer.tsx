@@ -30,7 +30,7 @@ const Footer = () => {
           <div className="max-w-md mx-auto text-center">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-brand-primary text-white px-12 py-4 font-black text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1 rounded-xl"
+              className="bg-brand-primary text-white px-12 py-4 font-black text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1 rounded-full"
             >
               SUBSCRIBE NOW
             </button>
@@ -119,7 +119,7 @@ const Footer = () => {
 
               <button
                 type="submit"
-                className="w-full py-4 bg-brand-navy text-white rounded-xl font-black text-sm hover:bg-brand-primary transition-all transform hover:-translate-y-1 active:scale-95 shadow-lg shadow-brand-navy/20 mt-4"
+                className="w-full py-4 bg-brand-navy text-white rounded-full font-black text-sm hover:bg-brand-primary transition-all transform hover:-translate-y-1 active:scale-95 shadow-lg shadow-brand-navy/20 mt-4"
               >
                 SUBSCRIBE
               </button>

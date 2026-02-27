@@ -138,9 +138,14 @@ const isTargetCountry = (geo: MapGeo) => {
 };
 
 const AboutPage = () => {
+  type PinStyle = "needle-ball" | "pulse";
+  const [pinStyle, setPinStyle] = useState<PinStyle>("needle-ball");
   const [hoverPin, setHoverPin] = useState<{
     key: string;
     name: string;
+    longitude: number;
+    latitude: number;
+    tooltipWidth: number;
   } | null>(null);
 
   return (
@@ -154,7 +159,9 @@ const AboutPage = () => {
             {/* About Us: Title Left, Text Right */}
             <div className="grid lg:grid-cols-2 gap-0 items-center mb-40">
               <div className="relative pr-12 lg:pr-20">
-                <p className="text-caption text-brand-navy mb-4">WHO WE ARE</p>
+                <p className="text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.2em] mb-4 md:mb-6 md:whitespace-nowrap">
+                  WHO WE ARE
+                </p>
                 <h1 className="text-display leading-none">
                   About
                   <br />
@@ -181,7 +188,9 @@ const AboutPage = () => {
                 </p>
               </div>
               <div className="order-1 lg:order-2 pl-12 lg:pl-20 text-right lg:text-left relative">
-                <p className="text-caption text-brand-navy mb-4">OUR GOAL</p>
+                <p className="text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.2em] mb-4 md:mb-6 md:whitespace-nowrap">
+                  OUR GOAL
+                </p>
                 <h2 className="text-display leading-none text-brand-navy">
                   Our
                   <br />
@@ -196,7 +205,9 @@ const AboutPage = () => {
         <section className="pt-24 pb-12 bg-white overflow-hidden">
           <LayoutContainer>
             <div className="text-center mb-16">
-              <p className="text-caption text-brand-navy mb-4">GLOBAL REACH</p>
+              <p className="text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.2em] mb-4 md:mb-6 md:whitespace-nowrap">
+                GLOBAL REACH
+              </p>
               <h2 className="text-h1 mb-6">
                 Our Global <span className="text-brand-navy">Presence</span>
               </h2>
@@ -204,6 +215,24 @@ const AboutPage = () => {
                 Supporting businesses and fleets across the globe with reliable
                 telematics infrastructure.
               </p>
+              <div className="mt-6 flex flex-wrap justify-center gap-2">
+                {[
+                  { key: "needle-ball", label: "Needle + Ball" },
+                  { key: "pulse", label: "Pulse Dot" },
+                ].map((style) => (
+                  <button
+                    key={style.key}
+                    onClick={() => setPinStyle(style.key as PinStyle)}
+                    className={`px-4 py-2 text-xs font-bold rounded-full border transition-colors ${
+                      pinStyle === style.key
+                        ? "bg-brand-navy text-white border-brand-navy"
+                        : "bg-white text-brand-navy border-gray-200 hover:border-brand-navy"
+                    }`}
+                  >
+                    {style.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div className="relative bg-brand-light-3 rounded-[3rem] p-4 lg:p-12 border border-gray-100 shadow-inner overflow-visible">
@@ -256,6 +285,10 @@ const AboutPage = () => {
                               geo.properties.NAME ||
                               code;
                             const [longitude, latitude] = geoCentroid(geo);
+                            const tooltipWidth = Math.max(
+                              String(countryName).length * 6.9 + 12,
+                              74,
+                            );
 
                             return (
                               <Marker
@@ -265,46 +298,101 @@ const AboutPage = () => {
                                   setHoverPin({
                                     key: markerKey,
                                     name: String(countryName).toUpperCase(),
+                                    longitude,
+                                    latitude,
+                                    tooltipWidth,
                                   })
                                 }
                                 onMouseLeave={() => setHoverPin(null)}
                               >
                                 <g className="cursor-pointer">
-                                  <path
-                                    d="M0 -11 C-6 -11 -10 -6 -10 -1 C-10 6 -2 12 0 15 C2 12 10 6 10 -1 C10 -6 6 -11 0 -11 Z"
-                                    fill="#002D49"
-                                    stroke="#ffffff"
-                                    strokeWidth={1.25}
-                                  />
-                                  <circle cx="0" cy="-2" r="3" fill="#ffffff" />
-                                  {hoverPin?.key === markerKey && (
-                                    <g pointerEvents="none">
-                                      <rect
-                                        x="12"
-                                        y="-30"
-                                        rx="6"
-                                        ry="6"
-                                        width={Math.max(
-                                          hoverPin.name.length * 6.9 + 12,
-                                          74,
-                                        )}
-                                        height="20"
-                                        fill="#002D49"
-                                        opacity="0.95"
+                                  {pinStyle === "needle-ball" ? (
+                                    <>
+                                      <line
+                                        x1="0"
+                                        y1="-1"
+                                        x2="0"
+                                        y2="8"
+                                        stroke="#28398c"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
                                       />
-                                      <text
-                                        x="18"
-                                        y="-16"
-                                        className="fill-white text-[9px] font-bold tracking-wide"
+                                      <circle
+                                        cx="0"
+                                        cy="-3.5"
+                                        r="3.8"
+                                        fill="#28398c"
+                                        stroke="#ffffff"
+                                        strokeWidth="1.1"
+                                      />
+                                    </>
+                                  ) : (
+                                    <>
+                                      <circle
+                                        cx="0"
+                                        cy="-2"
+                                        r="4"
+                                        fill="#28398c"
+                                      />
+                                      <circle
+                                        cx="0"
+                                        cy="-2"
+                                        r="4"
+                                        fill="none"
+                                        stroke="#28398c"
+                                        strokeWidth="1.5"
                                       >
-                                        {hoverPin.name}
-                                      </text>
-                                    </g>
+                                        <animate
+                                          attributeName="r"
+                                          from="4"
+                                          to="9"
+                                          dur="1.4s"
+                                          repeatCount="indefinite"
+                                        />
+                                        <animate
+                                          attributeName="opacity"
+                                          from="0.7"
+                                          to="0"
+                                          dur="1.4s"
+                                          repeatCount="indefinite"
+                                        />
+                                      </circle>
+                                    </>
                                   )}
                                 </g>
                               </Marker>
                             );
                           })}
+                          {hoverPin && (
+                            <Marker
+                              coordinates={[
+                                hoverPin.longitude,
+                                hoverPin.latitude,
+                              ]}
+                            >
+                              <g pointerEvents="none">
+                                <rect
+                                  x={-hoverPin.tooltipWidth / 2}
+                                  y="-30"
+                                  rx="6"
+                                  ry="6"
+                                  width={hoverPin.tooltipWidth}
+                                  height="20"
+                                  fill="#002D49"
+                                  opacity="0.95"
+                                />
+                                <text
+                                  x="0"
+                                  y="-20"
+                                  textAnchor="middle"
+                                  dominantBaseline="middle"
+                                  className="fill-white text-[9px] font-bold tracking-wide"
+                                >
+                                  {hoverPin.name}
+                                </text>
+                              </g>
+                            </Marker>
+                          )}
                         </>
                       );
                     }}
@@ -462,7 +550,7 @@ const AboutPage = () => {
         <section className="py-24 bg-white border-t border-gray-50">
           <LayoutContainer>
             <div className="text-center">
-              <p className="text-caption text-brand-navy mb-4">
+              <p className="text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.2em] mb-4 md:mb-6 md:whitespace-nowrap">
                 CONNECT WITH US
               </p>
               <h2 className="text-h1 mb-8">

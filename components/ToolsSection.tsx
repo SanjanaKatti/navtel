@@ -38,16 +38,14 @@ const ToolsSection = () => {
   return (
     <section className="py-24 bg-white">
       <LayoutContainer>
-        <div className="flex flex-col md:flex-row justify-between items-start mb-16 gap-8">
+        <div className="flex flex-col justify-center items-center mb-16 gap-8">
           <p className="text-base md:text-lg font-bold uppercase tracking-[0.2em] text-gray-400 pt-2">
             DISCOVER OUR TOOLS
           </p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-left max-w-none">
-            Telematics hardware.
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight text-center max-w-none">
+            Professional Tools for Configuration,
             <br />
-            Reliable. Integrable.
-            <br />
-            Scalable.
+            CAN Analysis & Cloud Control
           </h2>
         </div>
 

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import LayoutContainer from "./LayoutContainer";
+import Image from "next/image";
 
 const AnimatedCounter = ({
   value,
@@ -73,10 +74,19 @@ const AnimatedCounter = ({
 };
 
 const stats = [
-  { value: "18+", label: "Years in Industry" },
+  { value: "20+", label: "Years in Industry" },
   { value: "3M", label: "Total Devices" },
   { value: "45+", label: "Countries Deployed" },
   { value: "3K", label: "Customers Worldwide" },
+];
+
+const partners = [
+  { src: "/Navtelecom/logo_1.png", alt: "Partner logo 1" },
+  { src: "/Navtelecom/logo_2.png", alt: "Partner logo 2" },
+  { src: "/Navtelecom/logo_3.png", alt: "Partner logo 3" },
+  { src: "/Navtelecom/logo_4.png", alt: "Partner logo 4" },
+  { src: "/Navtelecom/logo_5.png", alt: "Partner logo 5" },
+  { src: "/Navtelecom/logo_6.png", alt: "Partner logo 6" },
 ];
 
 const faqs = [
@@ -109,7 +119,7 @@ const faqs = [
           </p>
           <a
             href="#"
-            className="text-brand-primary text-sm font-bold hover:underline"
+            className="text-[#28398c] text-sm font-bold hover:underline"
           >
             Full command list
           </a>
@@ -124,7 +134,7 @@ const faqs = [
           </p>
           <a
             href="#"
-            className="text-brand-primary text-sm font-bold hover:underline"
+            className="text-[#28398c] text-sm font-bold hover:underline"
           >
             How it works
           </a>
@@ -137,7 +147,7 @@ const faqs = [
           </p>
           <a
             href="#"
-            className="text-brand-primary text-sm font-bold hover:underline"
+            className="text-[#28398c] text-sm font-bold hover:underline"
           >
             Learn more
           </a>
@@ -152,7 +162,7 @@ const faqs = [
         <p>You can find the full list of SMS/GPRS commands here:</p>
         <a
           href="#"
-          className="inline-block text-brand-primary font-bold hover:underline"
+          className="inline-block text-[#28398c] font-bold hover:underline"
         >
           Full command list
         </a>
@@ -161,7 +171,7 @@ const faqs = [
           Support at{" "}
           <a
             href="mailto:support@navtelecom.in"
-            className="text-brand-primary hover:underline"
+            className="text-[#28398c] hover:underline"
           >
             support@navtelecom.in
           </a>
@@ -178,7 +188,7 @@ const faqs = [
         </p>
         <a
           href="#"
-          className="inline-block text-brand-primary font-bold hover:underline"
+          className="inline-block text-[#28398c] font-bold hover:underline"
         >
           Supported vehicles list
         </a>
@@ -203,6 +213,34 @@ const faqs = [
 ];
 
 const StatsAndFAQ = () => {
+  const partnersScrollerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scroller = partnersScrollerRef.current;
+    if (!scroller) return;
+
+    const interval = window.setInterval(() => {
+      const firstItem = scroller.querySelector(
+        "[data-partner-item='true']",
+      ) as HTMLElement | null;
+      if (!firstItem) return;
+
+      const styles = window.getComputedStyle(scroller);
+      const gap = Number.parseFloat(styles.columnGap || styles.gap || "0") || 0;
+      const step = firstItem.getBoundingClientRect().width + gap;
+      const maxScrollLeft = scroller.scrollWidth - scroller.clientWidth;
+      const nextScrollLeft = scroller.scrollLeft + step;
+
+      if (nextScrollLeft >= maxScrollLeft - 2) {
+        scroller.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        scroller.scrollTo({ left: nextScrollLeft, behavior: "smooth" });
+      }
+    }, 2400);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
   return (
     <div className="bg-brand-light-3">
       {/* Stats Section */}
@@ -223,23 +261,30 @@ const StatsAndFAQ = () => {
       {/* Partners Section */}
       <section className="py-24 bg-white">
         <LayoutContainer className="text-center">
-          <h2 className="text-h2 mb-12">OUR PARTNERS</h2>
-          <div className="bg-brand-light-3 p-16 flex flex-wrap justify-center items-center gap-x-20 gap-y-12 border border-gray-200 rounded-2xl">
-            {[
-              { name: "COMPANY 1", color: "hover:text-brand-primary" },
-              { name: "COMPANY 2", color: "hover:text-red-500" },
-              { name: "COMPANY 3", color: "hover:text-green-500" },
-              { name: "COMPANY 4", color: "hover:text-orange-500" },
-              { name: "COMPANY 5", color: "hover:text-purple-600" },
-              { name: "COMPANY 6", color: "hover:text-pink-500" },
-            ].map((company, idx) => (
-              <span
-                key={idx}
-                className={`text-h3 text-gray-300 tracking-tighter transition-all duration-300 cursor-default grayscale hover:grayscale-0 ${company.color}`}
-              >
-                {company.name}
-              </span>
-            ))}
+          <h2 className="text-h1 mb-12">OUR PARTNERS</h2>
+          <div
+            ref={partnersScrollerRef}
+            className="bg-brand-light-3 p-6 sm:p-8 md:p-10 border border-gray-200 rounded-2xl overflow-x-auto overflow-y-hidden scroll-smooth"
+          >
+            <div
+              className="flex w-max items-center gap-10 sm:gap-14 md:gap-16"
+            >
+              {[...partners, ...partners].map((partner, idx) => (
+                <div
+                  key={`${partner.src}-${idx}`}
+                  data-partner-item="true"
+                  className="relative h-10 w-28 sm:h-12 sm:w-32 md:h-14 md:w-36 shrink-0"
+                >
+                  <Image
+                    src={partner.src}
+                    alt={partner.alt}
+                    fill
+                    className="object-contain grayscale hover:grayscale-0 transition duration-300"
+                    sizes="(min-width: 768px) 144px, 112px"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </LayoutContainer>
       </section>
@@ -256,10 +301,10 @@ const StatsAndFAQ = () => {
                 className="group bg-brand-light-3 border border-gray-200 px-6 sm:px-8 transition-all duration-200 open:shadow-sm rounded-xl"
               >
                 <summary className="flex justify-between items-center cursor-pointer list-none py-6">
-                  <span className="text-h3 group-hover:text-brand-primary transition-colors pr-6">
+                  <span className="text-h3 group-hover:text-[#28398c] transition-colors pr-6">
                     {faq.q}
                   </span>
-                  <div className="flex-shrink-0 w-8 h-8 bg-white border border-gray-300 flex items-center justify-center text-gray-400 group-open:bg-brand-primary group-open:text-white group-open:border-brand-primary transition-all rounded">
+                  <div className="flex-shrink-0 w-8 h-8 bg-white border border-gray-300 flex items-center justify-center text-gray-400 group-open:bg-[#28398c] group-open:text-white group-open:border-[#28398c] transition-all rounded">
                     <svg
                       className="w-5 h-5 group-open:rotate-180 transition-transform"
                       fill="none"
@@ -275,7 +320,7 @@ const StatsAndFAQ = () => {
                     </svg>
                   </div>
                 </summary>
-                <div className="text-body pb-8 pt-2 border-t border-gray-200 mt-2">
+                <div className="text-body text-[#28398c] pb-8 pt-2 border-t border-gray-200 mt-2">
                   {faq.a}
                 </div>
               </details>
@@ -288,3 +333,4 @@ const StatsAndFAQ = () => {
 };
 
 export default StatsAndFAQ;
+

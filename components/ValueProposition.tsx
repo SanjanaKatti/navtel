@@ -3,8 +3,13 @@ import LayoutContainer from "./LayoutContainer";
 
 const ValueProposition = () => {
   return (
-    <section className="py-16 md:py-24 bg-brand-light-3">
-      <LayoutContainer className="text-center">
+    <section className="relative py-16 md:py-24 overflow-hidden">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/Navtelecom/homepage_sample.jpeg')" }}
+      />
+      <div className="absolute inset-0 bg-white/72" />
+      <LayoutContainer className="text-center relative z-10">
         <p className="text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.2em] mb-4 md:mb-6 md:whitespace-nowrap">
           POWERED BY NAVTELECOM
         </p>

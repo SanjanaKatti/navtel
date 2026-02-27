@@ -30,7 +30,8 @@ const S2010Page = () => {
                 src="/Navtelecom/start_device.png"
                 alt="S-2010 device"
                 fill
-                className="object-cover object-[center_85%] scale-90 -translate-y-[15%]"
+                className="object-contain object-center scale-[1.02] 2xl:object-cover 2xl:object-[center_60%] 2xl:scale-100"
+                sizes="100vw"
                 priority
               />
             </div>
@@ -38,7 +39,7 @@ const S2010Page = () => {
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
             <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center py-12 md:py-20">
               {/* Left Info */}
-              <div className="space-y-8 ml-10">
+              <div className="space-y-8 ml-0 lg:ml-10">
                 <div>
                   <h1 className="text-h1">
                     S-2010
@@ -61,7 +62,7 @@ const S2010Page = () => {
               </div>
 
               {/* Middle spacer column (background image already covers the section) */}
-              <div className="ml-10" />
+              <div className="ml-0 lg:ml-10" />
 
               {/* Right Big Text */}
               <div className="lg:text-right">

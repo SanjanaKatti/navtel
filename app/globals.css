@@ -95,4 +95,43 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Responsive baseline: normalize legacy fixed-width wrappers across pages */
+.max-w-7xl {
+  max-width: min(94vw, 120rem) !important; /* up to 1920px */
+  width: 100%;
+}
+
+/* Ensure predictable image scaling inside responsive media frames */
+.media-frame > span,
+.media-frame img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Global button color unification */
+button[class*="bg-brand-primary"],
+button[class*="bg-brand-navy"],
+a[class*="bg-brand-primary"],
+a[class*="bg-brand-navy"],
+button[class*="bg-[#004A8C]"],
+a[class*="bg-[#004A8C]"],
+button[class*="bg-[#00529B]"],
+a[class*="bg-[#00529B]"] {
+  background-color: #28398c !important;
+  border-color: #28398c !important;
+}
+
+button[class*="hover:bg-brand-primary"]:hover,
+a[class*="hover:bg-brand-primary"]:hover,
+button[class*="hover:bg-brand-deep"]:hover,
+a[class*="hover:bg-brand-deep"]:hover,
+button[class*="hover:bg-[#003366]"]:hover,
+a[class*="hover:bg-[#003366]"]:hover,
+button[class*="hover:bg-[#003d74]"]:hover,
+a[class*="hover:bg-[#003d74]"]:hover {
+  background-color: #28398c !important;
+  border-color: #28398c !important;
 }

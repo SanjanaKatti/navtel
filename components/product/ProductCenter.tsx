@@ -54,14 +54,14 @@ const ProductCenter: React.FC<ProductCenterProps> = ({ heading, products }) => {
                 {product.href ? (
                   <Link
                     href={product.href}
-                    className="w-full py-5 rounded-2xl font-black text-sm transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-brand-navy/10 bg-brand-navy text-white hover:bg-brand-primary flex items-center justify-center uppercase tracking-widest"
+                    className="w-full py-5 rounded-full font-black text-sm transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-brand-navy/10 bg-brand-navy text-white hover:bg-brand-primary flex items-center justify-center uppercase tracking-widest"
                   >
                     {product.buttonText}
                   </Link>
                 ) : (
                   <button
                     onClick={product.onButtonClick}
-                    className="w-full py-5 rounded-2xl font-black text-sm transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-brand-navy/10 bg-brand-navy text-white hover:bg-brand-primary uppercase tracking-widest"
+                    className="w-full py-5 rounded-full font-black text-sm transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-brand-navy/10 bg-brand-navy text-white hover:bg-brand-primary uppercase tracking-widest"
                   >
                     {product.buttonText}
                   </button>

@@ -29,10 +29,10 @@ const ProductFAQ: React.FC<ProductFAQProps> = ({ faqs }) => {
               className="group bg-brand-light-3 border border-gray-200 px-5 sm:px-6 transition-all duration-200 open:shadow-md rounded-xl"
             >
               <summary className="flex justify-between items-center cursor-pointer list-none py-6">
-                <span className="text-h3 group-hover:text-brand-primary transition-colors pr-6">
+                <span className="text-h3 group-hover:text-[#28398c] transition-colors pr-6">
                   {faq.question}
                 </span>
-                <div className="flex-shrink-0 w-8 h-8 bg-white border border-gray-200 flex items-center justify-center text-gray-400 group-open:bg-brand-primary group-open:text-white group-open:border-brand-primary transition-all rounded-lg shadow-sm">
+                <div className="flex-shrink-0 w-8 h-8 bg-white border border-gray-200 flex items-center justify-center text-gray-400 group-open:bg-[#28398c] group-open:text-white group-open:border-[#28398c] transition-all rounded-lg shadow-sm">
                   <svg
                     className="w-4 h-4 group-open:rotate-180 transition-transform"
                     fill="none"

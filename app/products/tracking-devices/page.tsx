@@ -12,7 +12,7 @@ const TrackingDevicesPage = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative h-[calc(60vh+80px)] min-h-[480px] flex items-center overflow-hidden bg-brand-light-3 pb-20">
+        <section className="relative min-h-[clamp(24rem,62vh,42rem)] flex items-center overflow-hidden bg-brand-light-3 pb-12 md:pb-16">
           <Image
             src="/Navtelecom/Alldevices_banner.png"
             alt="Tracking devices lineup"
@@ -20,7 +20,7 @@ const TrackingDevicesPage = () => {
             priority
             className="object-cover object-bottom"
           />
-          <div className="relative z-40 max-w-xl px-4 sm:px-6 lg:px-8 pt-6 md:pl-10">
+          <div className="relative z-40 w-full max-w-[1440px] mx-auto px-[clamp(1rem,2.4vw,2.5rem)] pt-6 md:pt-8">
             <div className="text-left">
               <p className="text-caption mb-4 text-brand-navy">
                 TRACKING DEVICES
@@ -42,7 +42,7 @@ const TrackingDevicesPage = () => {
             <div className="text-center">
               <Link
                 href="/products/all-devices"
-                className="inline-flex items-center gap-3 bg-[#00529B] text-white px-8 py-4 font-bold hover:bg-[#003d74] transition-colors border-2 border-[#00529B]"
+                className="inline-flex items-center gap-3 bg-[#00529B] text-white px-8 py-4 font-bold hover:bg-[#003d74] transition-colors border-2 border-[#00529B] rounded-full"
               >
                 <span>View All Devices</span>
                 <svg
