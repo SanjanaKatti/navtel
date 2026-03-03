@@ -186,20 +186,32 @@ const SignalSeriesPage = () => {
 
       <main className="pt-20">
         {/* HERO SECTION */}
-        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-center bg-[#EFEFEF]">
-          {/* Hero image - larger, device aligned to top */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="relative w-full h-full">
-              <Image
-                src="/Navtelecom/signal_device.png"
-                alt="SIGNAL Series"
-                fill
-                className="object-contain object-center scale-100 2xl:object-cover 2xl:object-center"
-                priority
-              />
-            </div>
-          </div>
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        <section className="relative overflow-hidden bg-[#EFEFEF]">
+          <picture className="block w-full">
+            <source
+              media="(max-width: 639px)"
+              srcSet="/Navtelecom/signl_1080x1350.png"
+            />
+            <source
+              media="(min-width: 640px) and (max-width: 1279px)"
+              srcSet="/Navtelecom/signal_2048x1365.png"
+            />
+            <source
+              media="(min-width: 1280px) and (max-width: 1919px)"
+              srcSet="/Navtelecom/signal_2560x1440.png"
+            />
+            <source
+              media="(min-width: 1920px)"
+              srcSet="/Navtelecom/signal_3840x1646.png"
+            />
+            <img
+              src="/Navtelecom/signal_2048x1365.png"
+              alt="SIGNAL Series"
+              className="w-full h-auto block"
+              loading="eager"
+            />
+          </picture>
+          <div className="absolute inset-0 z-10 max-w-7xl mx-auto left-0 right-0 px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center py-12 md:py-20">
               {/* Left Info */}
               <div className="space-y-8 ml-0 lg:ml-10">
@@ -226,15 +238,6 @@ const SignalSeriesPage = () => {
 
               {/* Middle spacer column (background image already covers the section) */}
               <div className="ml-0 lg:ml-10" />
-
-              {/* Right Big Text */}
-              <div className="lg:text-right">
-                <h2 className="text-display mr-10">
-                  <span className="text-brand-primary">PRO</span>
-                  <br />
-                  Models
-                </h2>
-              </div>
             </div>
           </div>
         </section>
