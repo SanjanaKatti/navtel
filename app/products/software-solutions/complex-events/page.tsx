@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import Footer from "@/components/Footer";
@@ -54,37 +54,6 @@ const canUseCases = [
 ];
 
 const ComplexEventsPage = () => {
-  const carouselRef = useRef<HTMLDivElement | null>(null);
-  const [isAutoScrollPaused, setIsAutoScrollPaused] = useState(false);
-
-  useEffect(() => {
-    if (isAutoScrollPaused) return;
-
-    const node = carouselRef.current;
-    if (!node) return;
-
-    const interval = window.setInterval(() => {
-      const firstCard = node.firstElementChild as HTMLElement | null;
-      if (!firstCard) return;
-
-      const cardWidth = firstCard.getBoundingClientRect().width;
-      const styles = window.getComputedStyle(node);
-      const gap = Number.parseFloat(styles.columnGap || styles.gap || "0") || 0;
-      const step = cardWidth + gap;
-      const maxScrollLeft = node.scrollWidth - node.clientWidth;
-      const nextLeft = node.scrollLeft + step;
-
-      if (nextLeft >= maxScrollLeft - 2) {
-        node.scrollTo({ left: 0, behavior: "smooth" });
-        return;
-      }
-
-      node.scrollTo({ left: nextLeft, behavior: "smooth" });
-    }, 2800);
-
-    return () => window.clearInterval(interval);
-  }, [isAutoScrollPaused]);
-
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-brand-navy">
       <Navbar />
@@ -175,90 +144,102 @@ const ComplexEventsPage = () => {
               </p>
             </div>
 
-            <div
-              ref={carouselRef}
-              onClick={() => setIsAutoScrollPaused(true)}
-              className="grid grid-flow-col auto-cols-[92%] sm:auto-cols-[78%] lg:auto-cols-[calc((100%-1rem)/2)] gap-4 overflow-x-auto pb-2 snap-x snap-mandatory"
-            >
-              <div className="snap-start bg-[#1E293B] rounded-3xl border border-white/10 p-8 text-white">
-                <h3 className="text-h3 text-white mb-4">
-                  What Complex Events Enables
-                </h3>
-                <p className="text-body text-white mb-4">This means you can:</p>
-                <ul className="space-y-2 text-body text-white">
-                  {enablesItems.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="snap-start bg-[#1E293B] rounded-3xl border border-white/10 p-8 text-white">
-                <h3 className="text-h3 text-white mb-4">
-                  Interface-Level Control
-                </h3>
-                <p className="text-body text-white mb-4">
-                  The module allows you to build algorithms based on data
-                  received through:
-                </p>
-                <ul className="space-y-2 text-body text-white mb-5">
-                  {interfaceItems.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="rounded-2xl bg-white/10 border border-white/20 p-4">
-                  <p className="text-body-sm text-white">
-                    Any parameter can become a condition.
+            <div className="space-y-6">
+              <div className="grid lg:grid-cols-2 gap-4">
+                <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
+                  <p className="text-base md:text-lg mb-4 text-white/90">
+                    This means you can:
                   </p>
-                  <p className="text-body-sm text-white">
-                    Any condition can trigger an action.
-                  </p>
+                  <ul className="space-y-2 text-base md:text-lg text-white/90">
+                    {enablesItems.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
+                  <h3 className="text-h2">What Complex Events Enables</h3>
                 </div>
               </div>
 
-              <div className="snap-start bg-[#1E293B] rounded-3xl border border-white/10 p-8 text-white">
-                <h3 className="text-h3 text-white mb-4">Device Actions</h3>
-                <p className="text-body text-white mb-4">
-                  When defined conditions are met, the device can:
-                </p>
-                <ul className="space-y-2 text-body text-white mb-5">
-                  {actionItems.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-body-sm text-white">
-                  All actions are processed inside the tracker, without server
-                  dependency.
-                </p>
+              <div className="grid lg:grid-cols-2 gap-4">
+                <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
+                  <h3 className="text-h2">Interface-Level Control</h3>
+                </div>
+                <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
+                  <p className="text-base md:text-lg mb-4 text-white/90">
+                    The module allows you to build algorithms based on data
+                    received through:
+                  </p>
+                  <ul className="space-y-2 text-base md:text-lg mb-5 text-white/90">
+                    {interfaceItems.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="rounded-2xl bg-white/10 border border-white/20 p-4">
+                    <p className="text-sm md:text-base text-white/90">
+                      Any parameter can become a condition.
+                    </p>
+                    <p className="text-sm md:text-base text-white/90">
+                      Any condition can trigger an action.
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              <div className="snap-start bg-[#1E293B] rounded-3xl border border-white/10 p-8 text-white">
-                <h3 className="text-h3 text-white mb-4">Working with CAN</h3>
-                <p className="text-body text-white mb-4">
-                  Complex Events allows CAN data to be used not only for
-                  transmission to the server, but as part of device logic.
-                </p>
-                <p className="text-body text-white mb-3">For example:</p>
-                <ul className="space-y-2 text-body text-white mb-5">
-                  {canUseCases.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-body-sm text-white">
-                  This transforms the tracker from a passive data collector into
-                  an active system component.
-                </p>
+              <div className="grid lg:grid-cols-2 gap-4">
+                <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
+                  <p className="text-base md:text-lg mb-4 text-white/90">
+                    When defined conditions are met, the device can:
+                  </p>
+                  <ul className="space-y-2 text-base md:text-lg mb-5 text-white/90">
+                    {actionItems.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-sm md:text-base text-white/90">
+                    All actions are processed inside the tracker, without server
+                    dependency.
+                  </p>
+                </div>
+                <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
+                  <h3 className="text-h2">Device Actions</h3>
+                </div>
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-4">
+                <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
+                  <h3 className="text-h2">Working with CAN</h3>
+                </div>
+                <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
+                  <p className="text-base md:text-lg mb-4 text-white/90">
+                    Complex Events allows CAN data to be used not only for
+                    transmission to the server, but as part of device logic.
+                  </p>
+                  <p className="text-base md:text-lg mb-3 text-white/90">
+                    For example:
+                  </p>
+                  <ul className="space-y-2 text-base md:text-lg mb-5 text-white/90">
+                    {canUseCases.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-sm md:text-base text-white/90">
+                    This transforms the tracker from a passive data collector
+                    into an active system component.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

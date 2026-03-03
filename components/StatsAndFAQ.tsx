@@ -87,6 +87,9 @@ const partners = [
   { src: "/Navtelecom/logo_4.png", alt: "Partner logo 4" },
   { src: "/Navtelecom/logo_5.png", alt: "Partner logo 5" },
   { src: "/Navtelecom/logo_6.png", alt: "Partner logo 6" },
+  { src: "/Navtelecom/logo_7.", alt: "Partner logo 7" },
+  { src: "/Navtelecom/logo_8.png", alt: "Partner logo 8" },
+  { src: "/Navtelecom/logo_9.svg", alt: "Partner logo 9" },
 ];
 
 const faqs = [
@@ -260,40 +263,42 @@ const StatsAndFAQ = () => {
 
       {/* FAQ Section */}
       <section className="py-12 bg-white">
-        <LayoutContainer className="text-center max-w-4xl">
-          <h2 className="text-h1 mb-12 text-center">FAQs</h2>
+        <LayoutContainer className="text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-h1 mb-12 text-center">FAQs</h2>
 
-          <div className="space-y-4 text-left">
-            {faqs.map((faq, idx) => (
-              <details
-                key={idx}
-                className="group bg-brand-light-3 border border-gray-200 px-6 sm:px-8 transition-all duration-200 open:shadow-sm rounded-xl"
-              >
-                <summary className="flex justify-between items-center cursor-pointer list-none py-6">
-                  <span className="text-h3 group-hover:text-[#28398c] transition-colors pr-6">
-                    {faq.q}
-                  </span>
-                  <div className="flex-shrink-0 w-8 h-8 bg-white border border-gray-300 flex items-center justify-center text-gray-400 group-open:bg-[#28398c] group-open:text-white group-open:border-[#28398c] transition-all rounded">
-                    <svg
-                      className="w-5 h-5 group-open:rotate-180 transition-transform"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
+            <div className="space-y-4 text-left">
+              {faqs.map((faq, idx) => (
+                <details
+                  key={idx}
+                  className="group bg-brand-light-3 border border-gray-200 px-6 sm:px-8 transition-all duration-200 open:shadow-sm rounded-xl"
+                >
+                  <summary className="flex justify-between items-center cursor-pointer list-none py-6">
+                    <span className="text-h3 group-hover:text-[#28398c] transition-colors pr-6">
+                      {faq.q}
+                    </span>
+                    <div className="flex-shrink-0 w-8 h-8 bg-white border border-gray-300 flex items-center justify-center text-gray-400 group-open:bg-[#28398c] group-open:text-white group-open:border-[#28398c] transition-all rounded">
+                      <svg
+                        className="w-5 h-5 group-open:rotate-180 transition-transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+                  </summary>
+                  <div className="text-body text-[#28398c] pb-8 pt-2 border-t border-gray-200 mt-2 [&_a]:text-brand-primary [&_a]:hover:text-brand-primary [&_a]:font-bold">
+                    {faq.a}
                   </div>
-                </summary>
-                <div className="text-body text-[#28398c] pb-8 pt-2 border-t border-gray-200 mt-2">
-                  {faq.a}
-                </div>
-              </details>
-            ))}
+                </details>
+              ))}
+            </div>
           </div>
         </LayoutContainer>
       </section>
@@ -312,4 +317,3 @@ const StatsAndFAQ = () => {
 };
 
 export default StatsAndFAQ;
-

@@ -27,6 +27,13 @@ const AllDevicesPage = () => {
     SMART: "/Navtelecom/sample2.PNG",
     SIGNAL: "/Navtelecom/sample3.PNG",
   };
+  const startModelImages: Record<string, string> = {
+    "S-2010": "/Navtelecom/start s-2010_1800x1350.png",
+    "S-2011": "/Navtelecom/start s-2011_1800x1350.png",
+    "S-2013": "/Navtelecom/start s-2013_1800x1350.png",
+    "S-4011": "/Navtelecom/start s-4011_1800x1350.png",
+    "S-4013": "/Navtelecom/start s-4013_1800x1350.png",
+  };
 
   const [selectedDevices, setSelectedDevices] = useState<Device[]>(() => {
     if (typeof window === "undefined") return [];
@@ -620,7 +627,12 @@ const AllDevicesPage = () => {
                       </h3>
                       <div className="w-full aspect-[4/3] mb-4 bg-[#EFEFEF] rounded-2xl flex items-center justify-center relative overflow-hidden">
                         <Image
-                          src={seriesImages[device.series]}
+                          src={
+                            device.series === "START" &&
+                            startModelImages[device.name]
+                              ? startModelImages[device.name]
+                              : seriesImages[device.series]
+                          }
                           alt={`${device.series} series device`}
                           fill
                           className="object-contain object-bottom"

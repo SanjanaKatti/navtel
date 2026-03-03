@@ -135,3 +135,31 @@ a[class*="hover:bg-[#003d74]"]:hover {
   background-color: #28398c !important;
   border-color: #28398c !important;
 }
+
+button[class*="bg-brand-primary"],
+button[class*="bg-brand-navy"],
+a[class*="bg-brand-primary"],
+a[class*="bg-brand-navy"],
+button[class*="bg-[#004A8C]"],
+a[class*="bg-[#004A8C]"],
+button[class*="bg-[#00529B]"],
+a[class*="bg-[#00529B]"] {
+  text-transform: uppercase !important;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease !important;
+}
+
+button[class*="bg-brand-primary"]:hover,
+button[class*="bg-brand-navy"]:hover,
+a[class*="bg-brand-primary"]:hover,
+a[class*="bg-brand-navy"]:hover,
+button[class*="bg-[#004A8C]"]:hover,
+a[class*="bg-[#004A8C]"]:hover,
+button[class*="bg-[#00529B]"]:hover,
+a[class*="bg-[#00529B]"]:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(40, 57, 140, 0.22);
+}

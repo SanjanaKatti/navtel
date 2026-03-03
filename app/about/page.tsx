@@ -138,8 +138,6 @@ const isTargetCountry = (geo: MapGeo) => {
 };
 
 const AboutPage = () => {
-  type PinStyle = "needle-ball" | "pulse";
-  const [pinStyle, setPinStyle] = useState<PinStyle>("needle-ball");
   const [hoverPin, setHoverPin] = useState<{
     key: string;
     name: string;
@@ -215,24 +213,6 @@ const AboutPage = () => {
                 Supporting businesses and fleets across the globe with reliable
                 telematics infrastructure.
               </p>
-              <div className="mt-6 flex flex-wrap justify-center gap-2">
-                {[
-                  { key: "needle-ball", label: "Needle + Ball" },
-                  { key: "pulse", label: "Pulse Dot" },
-                ].map((style) => (
-                  <button
-                    key={style.key}
-                    onClick={() => setPinStyle(style.key as PinStyle)}
-                    className={`px-4 py-2 text-xs font-bold rounded-full border transition-colors ${
-                      pinStyle === style.key
-                        ? "bg-brand-navy text-white border-brand-navy"
-                        : "bg-white text-brand-navy border-gray-200 hover:border-brand-navy"
-                    }`}
-                  >
-                    {style.label}
-                  </button>
-                ))}
-              </div>
             </div>
 
             <div className="relative bg-brand-light-3 rounded-[3rem] p-4 lg:p-12 border border-gray-100 shadow-inner overflow-visible">
@@ -289,6 +269,13 @@ const AboutPage = () => {
                               String(countryName).length * 6.9 + 12,
                               74,
                             );
+                            const sweepDuration = 2.4;
+                            const normalizedLongitude = Math.min(
+                              1,
+                              Math.max(0, (longitude + 180) / 360),
+                            );
+                            const pulseDelay =
+                              normalizedLongitude * (sweepDuration - 0.2);
 
                             return (
                               <Marker
@@ -306,59 +293,67 @@ const AboutPage = () => {
                                 onMouseLeave={() => setHoverPin(null)}
                               >
                                 <g className="cursor-pointer">
-                                  {pinStyle === "needle-ball" ? (
-                                    <>
-                                      <line
-                                        x1="0"
-                                        y1="-1"
-                                        x2="0"
-                                        y2="8"
-                                        stroke="#28398c"
-                                        strokeWidth="1.5"
-                                        strokeLinecap="round"
-                                      />
-                                      <circle
-                                        cx="0"
-                                        cy="-3.5"
-                                        r="3.8"
-                                        fill="#28398c"
-                                        stroke="#ffffff"
-                                        strokeWidth="1.1"
-                                      />
-                                    </>
-                                  ) : (
-                                    <>
-                                      <circle
-                                        cx="0"
-                                        cy="-2"
-                                        r="4"
-                                        fill="#28398c"
-                                      />
-                                      <circle
-                                        cx="0"
-                                        cy="-2"
-                                        r="4"
-                                        fill="none"
-                                        stroke="#28398c"
-                                        strokeWidth="1.5"
-                                      >
-                                        <animate
-                                          attributeName="r"
-                                          from="4"
-                                          to="9"
-                                          dur="1.4s"
-                                          repeatCount="indefinite"
-                                        />
-                                        <animate
-                                          attributeName="opacity"
-                                          from="0.7"
-                                          to="0"
-                                          dur="1.4s"
-                                          repeatCount="indefinite"
-                                        />
-                                      </circle>
-                                    </>
-                                  )}
+                                  <circle
+                                    cx="0"
+                                    cy="-2"
+                                    r="3.6"
+                                    fill="#28398c"
+                                  />
+                                  <circle
+                                    cx="0"
+                                    cy="-2"
+                                    r="3.6"
+                                    fill="none"
+                                    stroke="#7fb6df"
+                                    strokeWidth="1.5"
+                                  >
+                                    <animate
+                                      attributeName="r"
+                                      from="3.6"
+                                      to="9"
+                                      dur={`${sweepDuration}s`}
+                                      begin={`${pulseDelay}s`}
+                                      values="3.6; 9; 3.6"
+                                      keyTimes="0; 0.2; 1"
+                                      repeatCount="indefinite"
+                                    />
+                                    <animate
+                                      attributeName="opacity"
+                                      dur={`${sweepDuration}s`}
+                                      begin={`${pulseDelay}s`}
+                                      values="0; 0.45; 0"
+                                      keyTimes="0; 0.1; 0.28"
+                                      repeatCount="indefinite"
+                                    />
+                                  </circle>
+                                  <circle
+                                    cx="0"
+                                    cy="-2"
+                                    r="3.6"
+                                    fill="none"
+                                    stroke="#9ac9ea"
+                                    strokeWidth="1.2"
+                                    opacity="0.22"
+                                  >
+                                    <animate
+                                      attributeName="r"
+                                      from="3.6"
+                                      to="7.5"
+                                      dur={`${sweepDuration}s`}
+                                      begin={`${pulseDelay + 0.1}s`}
+                                      values="3.6; 7.5; 3.6"
+                                      keyTimes="0; 0.18; 1"
+                                      repeatCount="indefinite"
+                                    />
+                                    <animate
+                                      attributeName="opacity"
+                                      dur={`${sweepDuration}s`}
+                                      begin={`${pulseDelay + 0.1}s`}
+                                      values="0; 0.32; 0"
+                                      keyTimes="0; 0.08; 0.24"
+                                      repeatCount="indefinite"
+                                    />
+                                  </circle>
                                 </g>
                               </Marker>
                             );

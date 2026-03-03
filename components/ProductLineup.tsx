@@ -12,7 +12,8 @@ const products = [
     subtitle: "COST-EFFECTIVE, ULTRA-COMPACT",
     description: "For essential GPS tracking and entry-level fleet management.",
     features: ["4G Connectivity", "Plug & Play", "Small Form Factor"],
-    image: "/Navtelecom/start_device.png",
+    imageMobile: "/Navtelecom/start_1600x1200.png",
+    imageDesktop: "/Navtelecom/start_2400x1800.png",
     href: "/products/tracking-devices/start-series",
   },
   {
@@ -22,7 +23,8 @@ const products = [
     description:
       "Supports CAN, BLE, RS-485. Ideal for fuel monitoring and sensor integration.",
     features: ["CAN Bus Support", "Bluetooth 4.0", "Fuel Monitoring"],
-    image: "/Navtelecom/smart_device.png",
+    imageMobile: "/Navtelecom/smart_1600x1200.png",
+    imageDesktop: "/Navtelecom/smart_2400x1800.png",
     href: "/products/tracking-devices/smart-series",
   },
   {
@@ -32,7 +34,8 @@ const products = [
     description:
       "Extended GNSS, fuel control, diagnostics, voice communication with drivers.",
     features: ["High Precision GNSS", "Voice Comm", "Advanced I/O"],
-    image: "/Navtelecom/signal_device.png",
+    imageMobile: "/Navtelecom/signal_1600x1200.png",
+    imageDesktop: "/Navtelecom/signal_2400x1800.png",
     href: "/products/tracking-devices/signal-series",
   },
 ];
@@ -84,19 +87,28 @@ const ProductLineup = () => {
                       {product.label}
                     </span>
                   </div>
-                  <div className="px-6 py-4">
+                  <div className="px-1 sm:px-2 md:px-3 py-1.5 sm:py-2">
                     <div className="relative w-full aspect-[4/3]">
                       <Image
-                        src={product.image}
+                        src={product.imageMobile}
                         alt={product.label}
                         fill
-                        sizes="(min-width: 1024px) 28vw, (min-width: 640px) 44vw, 90vw"
-                        className={`object-contain object-center ${
+                        sizes="(max-width: 1023px) 90vw, 1px"
+                        className={`object-contain object-center md:hidden p-0 sm:p-0.5 ${
                           product.label === "START"
                             ? "scale-[1.32]"
-                            : product.label === "SMART"
-                              ? "scale-[1.42]"
-                              : "scale-[1.36]"
+                            : "scale-[1.2]"
+                        }`}
+                      />
+                      <Image
+                        src={product.imageDesktop}
+                        alt={product.label}
+                        fill
+                        sizes="(min-width: 1280px) 26vw, (min-width: 1024px) 30vw, 1px"
+                        className={`hidden md:block object-contain object-center p-0.5 md:p-1 ${
+                          product.label === "START"
+                            ? "scale-[1.36]"
+                            : "scale-[1.24]"
                         }`}
                       />
                     </div>

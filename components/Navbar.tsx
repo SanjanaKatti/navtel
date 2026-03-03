@@ -167,47 +167,12 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Support Dropdown */}
-            <div className="relative group">
-              <button className="flex items-center text-gray-700 hover:text-brand-primary font-medium transition-colors py-8 whitespace-nowrap text-sm lg:text-base">
-                SUPPORT
-                <svg
-                  className="ml-1 w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-
-              {/* Support Dropdown Menu - right-aligned so it doesn't get cut off */}
-              <div className="absolute right-0 top-full w-64 bg-white border border-gray-200 shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 rounded-xl">
-                <Link
-                  href="/support/knowledge-base"
-                  className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
-                >
-                  Knowledge Base
-                </Link>
-                <Link
-                  href="/support/telegram-bot"
-                  className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
-                >
-                  Telegram Support Bot
-                </Link>
-                <Link
-                  href="/support/warranty"
-                  className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
-                >
-                  Warranty
-                </Link>
-              </div>
-            </div>
+            <Link
+              href="/support"
+              className="text-gray-700 hover:text-brand-primary font-medium transition-colors whitespace-nowrap text-sm lg:text-base"
+            >
+              SUPPORT
+            </Link>
 
             <Link
               href="/contact"
@@ -298,7 +263,7 @@ const Navbar = () => {
                 Software Solutions
               </Link>
               <Link
-                href="/support/knowledge-base"
+                href="/support"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand-primary"
               >
