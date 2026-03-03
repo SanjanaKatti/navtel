@@ -46,7 +46,7 @@ const StartSeriesPage = () => {
     {
       name: "S-2010",
       connectivity: "2g" as const,
-      image: "/Navtelecom/sample1.PNG",
+      image: "/Navtelecom/start s-2010_1800x1350.png",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -58,7 +58,7 @@ const StartSeriesPage = () => {
     {
       name: "S-2011",
       connectivity: "2g" as const,
-      image: "/Navtelecom/sample1.PNG",
+      image: "/Navtelecom/start s-2011_1800x1350.png",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -71,7 +71,7 @@ const StartSeriesPage = () => {
     {
       name: "S-2013",
       connectivity: "2g" as const,
-      image: "/Navtelecom/sample1.PNG",
+      image: "/Navtelecom/start s-2013_1800x1350.png",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -86,7 +86,7 @@ const StartSeriesPage = () => {
     {
       name: "S-4011",
       connectivity: "4g" as const,
-      image: "/Navtelecom/sample1.PNG",
+      image: "/Navtelecom/start s-4011_1800x1350.png",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -99,7 +99,7 @@ const StartSeriesPage = () => {
     {
       name: "S-4013",
       connectivity: "4g" as const,
-      image: "/Navtelecom/sample1.PNG",
+      image: "/Navtelecom/start s-4013_1800x1350.png",
       specs: [
         "Single SIM",
         "Engine Hours",
@@ -118,10 +118,10 @@ const StartSeriesPage = () => {
       : devices.filter((device) => device.connectivity === filter);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased text-brand-navy">
+    <div className="min-h-screen bg-[#EFEFEF] font-sans antialiased text-brand-navy">
       <Navbar />
 
-      <main className="pt-20">
+      <main className="pt-20 bg-[#EFEFEF]">
         {/* HERO SECTION */}
         <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-center bg-[#EFEFEF]">
           {/* Hero image - larger, device aligned to top */}
@@ -181,7 +181,7 @@ const StartSeriesPage = () => {
         </section>
 
         {/* KEY FEATURES */}
-        <section className="py-16 md:py-20 bg-white shadow-2xl relative z-10 -mt-8">
+        <section className="py-16 md:py-20 bg-[#EFEFEF] relative z-10 -mt-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-h1 mb-3">
@@ -290,7 +290,7 @@ const StartSeriesPage = () => {
         </section>
 
         {/* EXPLORE THE LINEUP (Screenshot UI with Rounding) */}
-        <section ref={lineupRef} className="py-16 md:py-20 bg-white">
+        <section ref={lineupRef} className="py-16 md:py-20 bg-[#EFEFEF]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-h1 text-center mb-10">Explore the Lineup</h2>
 
@@ -314,7 +314,7 @@ const StartSeriesPage = () => {
                     : "bg-white text-brand-navy border-gray-200 hover:border-brand-navy"
                 }`}
               >
-                2G Devices
+                2G DEVICES
               </button>
               <button
                 onClick={() => setFilter("4g")}
@@ -324,7 +324,7 @@ const StartSeriesPage = () => {
                     : "bg-white text-brand-navy border-gray-200 hover:border-brand-navy"
                 }`}
               >
-                4G Devices
+                4G DEVICES
               </button>
             </div>
 
@@ -432,7 +432,7 @@ const StartSeriesPage = () => {
         </section>
 
         {/* WHY START STANDS OUT */}
-        <section className="py-12 md:py-16 bg-white">
+        <section className="py-12 md:py-16 bg-[#EFEFEF]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-h1 text-center mb-10">
               Why <span className="text-brand-primary">START</span> Stands Out
