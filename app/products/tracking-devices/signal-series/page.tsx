@@ -144,7 +144,7 @@ const SignalSeriesPage = () => {
 
   const signalFaqs = [
     {
-      question: "Where can I download the Configurator?",
+      question: "Where can I download th Configurator?",
       answer:
         "You can download the latest version of NTC Configurator here: Get the latest version (https://www.navtelecom.ru/en/downloads/software). Note: Available for Windows OS only.",
     },
