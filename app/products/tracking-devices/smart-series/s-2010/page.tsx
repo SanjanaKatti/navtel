@@ -2,12 +2,11 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Image from "next/image";
-import DeviceFeatures from "@/components/product/DeviceFeatures";
+import Product3DVisual from "@/components/product/Product3DVisual";
 import TechnicalSpecs from "@/components/product/TechnicalSpecs";
 import ProductCenter from "@/components/product/ProductCenter";
 import ProductFAQ from "@/components/product/ProductFAQ";
-import { Cpu, Bluetooth, ArrowsIn, GlobeSimple, ArrowsLeftRight } from "phosphor-react";
+import { Bluetooth, GlobeSimple } from "phosphor-react";
 
 const SmartS2010Page = () => {
   return (
@@ -17,17 +16,6 @@ const SmartS2010Page = () => {
       <main className="pt-20">
         {/* Hero Section */}
         <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-center bg-[#EFEFEF]">
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="relative w-full h-full">
-              <Image
-                src="/Navtelecom/smart_device.png"
-                alt="SMART-2410 device"
-                fill
-                className="object-contain object-center scale-100 2xl:object-cover 2xl:object-center"
-                priority
-              />
-            </div>
-          </div>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
             <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center py-12 md:py-20">
               {/* Left Info */}
@@ -55,8 +43,14 @@ const SmartS2010Page = () => {
                 </button>
               </div>
 
-              {/* Middle spacer column (background image already covers the section) */}
-              <div className="ml-0 lg:ml-10" />
+              {/* Middle 3D Product Viewer */}
+              <div className="ml-0 lg:ml-10 h-[clamp(16rem,44vw,32rem)] w-full">
+                <Product3DVisual
+                  alt="SMART-2410 device"
+                  baseImage="/Navtelecom/smart_device.png"
+                  maxTiltDeg={10}
+                />
+              </div>
 
               {/* Right Big Text */}
               <div className="lg:text-right">

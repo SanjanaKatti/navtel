@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
@@ -53,6 +53,7 @@ const highlightedCountryCodes = new Set([
   "PRY",
   "PER",
   "PHL",
+  "RUS",
   "SAU",
   "SEN",
   "SRB",
@@ -101,6 +102,7 @@ const highlightedCountryNames = new Set([
   "PARAGUAY",
   "PERU",
   "PHILIPPINES",
+  "RUSSIA",
   "SAUDI ARABIA",
   "SENEGAL",
   "SERBIA",
@@ -138,6 +140,13 @@ const isTargetCountry = (geo: MapGeo) => {
 };
 
 const AboutPage = () => {
+  type PinInfo = {
+    key: string;
+    name: string;
+    longitude: number;
+    latitude: number;
+    tooltipWidth: number;
+  };
   const [hoverPin, setHoverPin] = useState<{
     key: string;
     name: string;
@@ -145,6 +154,30 @@ const AboutPage = () => {
     latitude: number;
     tooltipWidth: number;
   } | null>(null);
+  const [autoPin, setAutoPin] = useState<PinInfo | null>(null);
+  const markerPoolRef = useRef<PinInfo[]>([]);
+  const activePin = hoverPin || autoPin;
+
+  useEffect(() => {
+    const pickNext = () => {
+      const pool = markerPoolRef.current;
+      if (hoverPin || pool.length === 0) return;
+      setAutoPin((prev) => {
+        if (pool.length === 1) return pool[0];
+        let next = pool[Math.floor(Math.random() * pool.length)];
+        let guard = 0;
+        while (prev && next.key === prev.key && guard < 8) {
+          next = pool[Math.floor(Math.random() * pool.length)];
+          guard += 1;
+        }
+        return next;
+      });
+    };
+
+    pickNext();
+    const interval = setInterval(pickNext, 1100);
+    return () => clearInterval(interval);
+  }, [hoverPin]);
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-brand-navy overflow-x-hidden">
@@ -168,10 +201,10 @@ const AboutPage = () => {
               </div>
               <div className="lg:pl-20 border-l-4 border-brand-navy/20 hover:border-brand-navy transition-colors duration-500 py-8">
                 <p className="text-body-lg">
-                  We manufacture such GPS tracking equipment that ensures stable
-                  and efficient solutions for our customers. Our devices provide
-                  consistent performance, minimizing maintenance needs and
-                  support efforts.
+                  We design and manufacture professional telematics hardware for
+                  system integrators and fleet operators worldwide. Our devices
+                  are built for long-term deployment, deep vehicle data access,
+                  and stable performance in demanding environments.
                 </p>
               </div>
             </div>
@@ -180,9 +213,11 @@ const AboutPage = () => {
             <div className="grid lg:grid-cols-2 gap-0 items-center">
               <div className="order-2 lg:order-1 lg:pr-20 lg:text-right border-r-4 border-brand-navy/20 hover:border-brand-navy transition-colors duration-500 py-10">
                 <p className="text-body-lg">
-                  We deliver reliable and user-friendly telematics solutions,
-                  allowing integrators to create efficient tracking systems with
-                  minimal maintenance costs.
+                  To provide integration-ready telematics devices that reduce
+                  project risk, simplify deployment, and ensure predictable
+                  operation over years -- not months. We focus on engineering
+                  quality, stable architecture, and real technical support for
+                  complex fleet projects.
                 </p>
               </div>
               <div className="order-1 lg:order-2 pl-12 lg:pl-20 text-right lg:text-left relative">
@@ -204,14 +239,15 @@ const AboutPage = () => {
           <LayoutContainer>
             <div className="text-center mb-16">
               <p className="text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.2em] mb-4 md:mb-6 md:whitespace-nowrap">
-                GLOBAL REACH
+                WORLDWIDE DEPLOYMENT
               </p>
               <h2 className="text-h1 mb-6">
-                Our Global <span className="text-brand-navy">Presence</span>
+                Global Reach.{" "}
+                <span className="text-brand-navy">Proven Deployment.</span>
               </h2>
               <p className="text-body-lg max-w-2xl mx-auto">
-                Supporting businesses and fleets across the globe with reliable
-                telematics infrastructure.
+                3M+ devices operating in diverse climates and markets. Long-term
+                partnerships with system integrators worldwide.
               </p>
             </div>
 
@@ -232,6 +268,33 @@ const AboutPage = () => {
                     {({ geographies }: { geographies: MapGeo[] }) => {
                       const markerGeographies =
                         geographies.filter(isTargetCountry);
+                      const markerPool: PinInfo[] = markerGeographies.map(
+                        (geo) => {
+                          const markerKey = `marker-${geo.rsmKey}`;
+                          const code =
+                            geo.properties.ISO_A3 ||
+                            geo.properties.iso_a3 ||
+                            geo.properties.ISO3;
+                          const countryName =
+                            geo.properties.NAME_LONG ||
+                            geo.properties.name ||
+                            geo.properties.NAME ||
+                            code;
+                          const [longitude, latitude] = geoCentroid(geo);
+                          const tooltipWidth = Math.max(
+                            String(countryName).length * 6.9 + 12,
+                            74,
+                          );
+                          return {
+                            key: markerKey,
+                            name: String(countryName).toUpperCase(),
+                            longitude,
+                            latitude,
+                            tooltipWidth,
+                          };
+                        },
+                      );
+                      markerPoolRef.current = markerPool;
 
                       return (
                         <>
@@ -253,29 +316,22 @@ const AboutPage = () => {
                             );
                           })}
 
-                          {markerGeographies.map((geo) => {
-                            const markerKey = `marker-${geo.rsmKey}`;
-                            const code =
-                              geo.properties.ISO_A3 ||
-                              geo.properties.iso_a3 ||
-                              geo.properties.ISO3;
-                            const countryName =
-                              geo.properties.NAME_LONG ||
-                              geo.properties.name ||
-                              geo.properties.NAME ||
-                              code;
-                            const [longitude, latitude] = geoCentroid(geo);
-                            const tooltipWidth = Math.max(
-                              String(countryName).length * 6.9 + 12,
-                              74,
-                            );
-                            const sweepDuration = 2.4;
+                          {markerPool.map((pinInfo) => {
+                            const {
+                              key: markerKey,
+                              name: countryName,
+                              longitude,
+                              latitude,
+                              tooltipWidth,
+                            } = pinInfo;
+                            const sweepDuration = 3.1;
+                            const propagationWindow = 3.2;
                             const normalizedLongitude = Math.min(
                               1,
                               Math.max(0, (longitude + 180) / 360),
                             );
                             const pulseDelay =
-                              normalizedLongitude * (sweepDuration - 0.2);
+                              normalizedLongitude * propagationWindow;
 
                             return (
                               <Marker
@@ -284,7 +340,7 @@ const AboutPage = () => {
                                 onMouseEnter={() =>
                                   setHoverPin({
                                     key: markerKey,
-                                    name: String(countryName).toUpperCase(),
+                                    name: countryName,
                                     longitude,
                                     latitude,
                                     tooltipWidth,
@@ -314,7 +370,7 @@ const AboutPage = () => {
                                       dur={`${sweepDuration}s`}
                                       begin={`${pulseDelay}s`}
                                       values="3.6; 9; 3.6"
-                                      keyTimes="0; 0.2; 1"
+                                      keyTimes="0; 0.24; 1"
                                       repeatCount="indefinite"
                                     />
                                     <animate
@@ -322,7 +378,7 @@ const AboutPage = () => {
                                       dur={`${sweepDuration}s`}
                                       begin={`${pulseDelay}s`}
                                       values="0; 0.45; 0"
-                                      keyTimes="0; 0.1; 0.28"
+                                      keyTimes="0; 0.14; 0.34"
                                       repeatCount="indefinite"
                                     />
                                   </circle>
@@ -340,17 +396,17 @@ const AboutPage = () => {
                                       from="3.6"
                                       to="7.5"
                                       dur={`${sweepDuration}s`}
-                                      begin={`${pulseDelay + 0.1}s`}
+                                      begin={`${pulseDelay + 0.22}s`}
                                       values="3.6; 7.5; 3.6"
-                                      keyTimes="0; 0.18; 1"
+                                      keyTimes="0; 0.22; 1"
                                       repeatCount="indefinite"
                                     />
                                     <animate
                                       attributeName="opacity"
                                       dur={`${sweepDuration}s`}
-                                      begin={`${pulseDelay + 0.1}s`}
+                                      begin={`${pulseDelay + 0.22}s`}
                                       values="0; 0.32; 0"
-                                      keyTimes="0; 0.08; 0.24"
+                                      keyTimes="0; 0.12; 0.3"
                                       repeatCount="indefinite"
                                     />
                                   </circle>
@@ -358,20 +414,20 @@ const AboutPage = () => {
                               </Marker>
                             );
                           })}
-                          {hoverPin && (
+                          {activePin && (
                             <Marker
                               coordinates={[
-                                hoverPin.longitude,
-                                hoverPin.latitude,
+                                activePin.longitude,
+                                activePin.latitude,
                               ]}
                             >
                               <g pointerEvents="none">
                                 <rect
-                                  x={-hoverPin.tooltipWidth / 2}
+                                  x={-activePin.tooltipWidth / 2}
                                   y="-30"
                                   rx="6"
                                   ry="6"
-                                  width={hoverPin.tooltipWidth}
+                                  width={activePin.tooltipWidth}
                                   height="20"
                                   fill="#002D49"
                                   opacity="0.95"
@@ -383,7 +439,7 @@ const AboutPage = () => {
                                   dominantBaseline="middle"
                                   className="fill-white text-[9px] font-bold tracking-wide"
                                 >
-                                  {hoverPin.name}
+                                  {activePin.name}
                                 </text>
                               </g>
                             </Marker>
@@ -398,19 +454,21 @@ const AboutPage = () => {
           </LayoutContainer>
         </section>
 
-        {/* Focus Section */}
+        {/* What We Build Section */}
         <section className="py-12 bg-white border-t border-gray-50">
           <LayoutContainer>
             <div className="text-center mb-20">
-              <h2 className="text-h1 mb-4">Our Focus</h2>
+              <h2 className="text-h1 mb-4">What We Build</h2>
               <div className="w-20 h-1.5 bg-brand-navy mx-auto rounded-full"></div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 {
-                  title: "Hardware production",
-                  desc: "high-precision tracking with stable connectivity",
+                  title: "Hardware Production",
+                  desc: "Long-term hardware roadmap and controlled firmware evolution.",
+                  cardClass:
+                    "bg-[#223B65] border-[#2D4A78] hover:bg-[#284675]",
                   icon: (
                     <svg
                       className="w-8 h-8"
@@ -428,8 +486,10 @@ const AboutPage = () => {
                   ),
                 },
                 {
-                  title: "Integration support",
-                  desc: "we help partners tailor solutions to their needs",
+                  title: "Integration Assistance",
+                  desc: "Engineering-level support for complex telematics projects.",
+                  cardClass:
+                    "bg-[#2E3668] border-[#3C467B] hover:bg-[#343E73]",
                   icon: (
                     <svg
                       className="w-8 h-8"
@@ -447,8 +507,10 @@ const AboutPage = () => {
                   ),
                 },
                 {
-                  title: "Software solutions",
-                  desc: "a range of tools for configuration and management",
+                  title: "Software Tools",
+                  desc: "Configuration, diagnostics and fleet management platforms.",
+                  cardClass:
+                    "bg-[#204D67] border-[#2C607C] hover:bg-[#255877]",
                   icon: (
                     <svg
                       className="w-8 h-8"
@@ -466,8 +528,10 @@ const AboutPage = () => {
                   ),
                 },
                 {
-                  title: "Technical support",
-                  desc: "fast and competent issue resolution",
+                  title: "After-Sales Support",
+                  desc: "Structured, responsive and technically competent assistance.",
+                  cardClass:
+                    "bg-[#473B6B] border-[#5B4C82] hover:bg-[#524276]",
                   icon: (
                     <svg
                       className="w-8 h-8"
@@ -487,53 +551,73 @@ const AboutPage = () => {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="group p-8 bg-[#F8FAFC] rounded-2xl border border-gray-100 hover:bg-white hover:shadow-xl hover:border-brand-navy transition-all duration-300"
+                  className={`group p-8 rounded-2xl border transition-all duration-300 hover:shadow-xl ${item.cardClass}`}
                 >
-                  <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center text-brand-navy mb-6 group-hover:bg-brand-navy group-hover:text-white transition-colors">
+                  <div className="w-16 h-16 bg-white/12 border border-white/20 rounded-xl shadow-sm flex items-center justify-center text-[#9FD2FF] mb-6 group-hover:bg-white/20 group-hover:text-white transition-colors">
                     {item.icon}
                   </div>
-                  <h3 className="text-h3 mb-3 group-hover:text-brand-navy transition-colors min-h-[50px]">
+                  <h3 className="text-h3 mb-3 text-white transition-colors min-h-[50px]">
                     {item.title}
                   </h3>
-                  <p className="text-body-lg">{item.desc}</p>
+                  <p className="text-body-lg text-[#D8E4F5]">{item.desc}</p>
                 </div>
               ))}
             </div>
           </LayoutContainer>
         </section>
 
-        {/* Why Choose Us Highlight */}
+        {/* Why Choose Navtelecom */}
         <section className="py-24 bg-brand-light-3">
           <LayoutContainer>
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-h1 mb-8">
-                  Why Choose
-                  <br />
+                  Why Choose{" "}
                   <span className="text-brand-navy whitespace-nowrap">
                     Navtelecom?
                   </span>
                 </h2>
                 <p className="text-body-lg max-w-xl">
-                  With over a decade of expertise, we provide the hardware and
-                  support your fleet needs to scale globally with reliability
-                  you can trust.
+                  Because serious telematics projects require predictable
+                  hardware, deep integration, and direct engineering support. We
+                  build devices designed for long-term deployment, controlled
+                  firmware evolution, and real-world fleet stability.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-4">
                 {[
-                  { value: "15+", label: "YEARS EXPERIENCE" },
-                  { value: "3M+", label: "DEVICES SOLD" },
-                  { value: "10+", label: "YEAR LIFETIME" },
-                  { value: "3-Year", label: "WARRANTY (+1YR BAT)" },
-                ].map((stat, idx) => (
+                  {
+                    label: "Engineering-Level Support",
+                    desc: "Direct access to product engineers. Fast, competent responses without intermediaries.",
+                    cardClass:
+                      "bg-[#223B65] border-[#2D4A78] hover:bg-[#284675]",
+                  },
+                  {
+                    label: "Integration-Ready Architecture",
+                    desc: "CAN, RS-485, BLE and flexible I/O. Built for complex fleet and industrial projects.",
+                    cardClass:
+                      "bg-[#2E3668] border-[#3C467B] hover:bg-[#343E73]",
+                  },
+                  {
+                    label: "Stable Hardware Platform",
+                    desc: "No sudden redesigns or disruptive firmware changes. Scale with confidence.",
+                    cardClass:
+                      "bg-[#204D67] border-[#2C607C] hover:bg-[#255877]",
+                  },
+                  {
+                    label: "Long-Term Reliability",
+                    desc: "36-month warranty and 10+ year lifecycle proven in real deployments.",
+                    cardClass:
+                      "bg-[#473B6B] border-[#5B4C82] hover:bg-[#524276]",
+                  },
+                ].map((item, idx) => (
                   <div
                     key={idx}
-                    className="bg-white p-10 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center"
+                    className={`p-6 md:p-7 rounded-[1.5rem] shadow-sm border transition-colors duration-300 ${item.cardClass}`}
                   >
-                    <p className="text-h1 text-brand-navy mb-4">{stat.value}</p>
-                    <p className="text-label">{stat.label}</p>
+                    <p className="text-h3 mb-2 text-white">{item.label}</p>
+                    <p className="text-body-sm text-[#D8E4F5]">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -541,7 +625,7 @@ const AboutPage = () => {
           </LayoutContainer>
         </section>
 
-        {/* Social Media Section */}
+        {/* Connect With Us Section */}
         <section className="py-24 bg-white border-t border-gray-50">
           <LayoutContainer>
             <div className="text-center">
@@ -549,11 +633,11 @@ const AboutPage = () => {
                 CONNECT WITH US
               </p>
               <h2 className="text-h1 mb-8">
-                Social <span className="text-brand-navy">Media</span>
+                Stay <span className="text-brand-navy">Updated</span>
               </h2>
               <p className="text-body-lg max-w-xl mx-auto mb-12">
-                Follow us for the latest news, product updates, and industry
-                insights.
+                Product releases, firmware updates, CAN decoding files and real
+                project insights -- directly from our engineering team.
               </p>
               <div className="flex items-center justify-center gap-8">
                 <a

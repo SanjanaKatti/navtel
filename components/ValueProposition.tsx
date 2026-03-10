@@ -3,13 +3,8 @@ import LayoutContainer from "./LayoutContainer";
 
 const ValueProposition = () => {
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/Navtelecom/homepage_sample.jpeg')" }}
-      />
-      <div className="absolute inset-0 bg-white/72" />
-      <LayoutContainer className="text-center relative z-10">
+    <section className="py-16 md:py-24 bg-[#EFEFEF]">
+      <LayoutContainer className="text-center">
         <p className="text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.2em] mb-4 md:mb-6 md:whitespace-nowrap">
           POWERED BY NAVTELECOM
         </p>
@@ -19,10 +14,9 @@ const ValueProposition = () => {
           </span>
           <span className="block md:whitespace-nowrap">
             <span
-              className="font-bold bg-gradient-to-r from-[#002d49] to-[#32bef0] bg-clip-text text-transparent"
+              className="font-bold animated-fleet-text"
               style={{
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                transition: "color 220ms ease-in-out",
               }}
             >
               Reliable tracking for every fleet.

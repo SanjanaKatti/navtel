@@ -7,7 +7,8 @@ import DeviceFeatures from "@/components/product/DeviceFeatures";
 import TechnicalSpecs from "@/components/product/TechnicalSpecs";
 import ProductCenter from "@/components/product/ProductCenter";
 import ProductFAQ from "@/components/product/ProductFAQ";
-import { Cpu, Bluetooth, GlobeSimple, ClockCounterClockwise } from "phosphor-react";
+import Product3DVisual from "@/components/product/Product3DVisual";
+import { Cpu, GlobeSimple, ClockCounterClockwise } from "phosphor-react";
 
 const S4013Page = () => {
   return (
@@ -27,10 +28,12 @@ const S4013Page = () => {
           buttonText="Request Quote"
           onButtonClick={() => console.log("Request Quote Clicked")}
           visual={
-            <div className="w-full max-w-md aspect-[16/10] bg-brand-light-1 rounded-[3rem] flex items-center justify-center relative shadow-inner">
-               <div className="w-4/5 h-3/5 bg-brand-navy rounded-[2rem] shadow-2xl flex items-center justify-center">
-                  <span className="text-brand-primary text-4xl font-black tracking-[0.2em] uppercase">S-4013</span>
-               </div>
+            <div className="w-full max-w-2xl h-[clamp(16rem,40vw,28rem)]">
+              <Product3DVisual
+                alt="S-4013 device"
+                baseImage="/Navtelecom/start s-4013_1800x1350.png"
+                maxTiltDeg={10}
+              />
             </div>
           }
         />

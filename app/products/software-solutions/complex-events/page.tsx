@@ -145,7 +145,7 @@ const ComplexEventsPage = () => {
             </div>
 
             <div className="space-y-6">
-              <div className="grid lg:grid-cols-2 gap-4">
+              <div className="grid lg:grid-cols-2 gap-4 lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1">
                 <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
                   <p className="text-base md:text-lg mb-4 text-white/90">
                     This means you can:
@@ -164,7 +164,7 @@ const ComplexEventsPage = () => {
                 </div>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-4">
+              <div className="grid lg:grid-cols-2 gap-4 lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1">
                 <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
                   <h3 className="text-h2">Interface-Level Control</h3>
                 </div>
@@ -192,7 +192,7 @@ const ComplexEventsPage = () => {
                 </div>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-4">
+              <div className="grid lg:grid-cols-2 gap-4 lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1">
                 <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
                   <p className="text-base md:text-lg mb-4 text-white/90">
                     When defined conditions are met, the device can:
@@ -215,7 +215,7 @@ const ComplexEventsPage = () => {
                 </div>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-4">
+              <div className="grid lg:grid-cols-2 gap-4 lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1">
                 <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
                   <h3 className="text-h2">Working with CAN</h3>
                 </div>
