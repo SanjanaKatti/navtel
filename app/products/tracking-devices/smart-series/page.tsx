@@ -252,6 +252,17 @@ const SmartSeriesPage = () => {
       ? devices
       : devices.filter((device) => device.connectivity === filter);
 
+  const sortedDevices = [...filteredDevices].sort((a, b) => {
+    const connOrder = (c: "2g" | "4g") => (c === "2g" ? 0 : 1);
+    const num = (name: string) => {
+      const match = name.match(/\d+/);
+      return match ? parseInt(match[0] ?? "0", 10) : 0;
+    };
+    const byConn = connOrder(a.connectivity) - connOrder(b.connectivity);
+    if (byConn !== 0) return byConn;
+    return num(a.name) - num(b.name);
+  });
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased text-brand-navy">
       <Navbar />
@@ -454,7 +465,7 @@ const SmartSeriesPage = () => {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredDevices.map((device, idx) => (
+              {sortedDevices.map((device, idx) => (
                 <div
                   key={idx}
                   className={`bg-white flex flex-col border rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden group relative ${
@@ -483,8 +494,8 @@ const SmartSeriesPage = () => {
                     <div className="mb-8 w-full flex justify-between items-center">
                       <div
                         className={`px-4 py-1.5 rounded-full text-caption border ${
-                          device.connectivity === "4g"
-                            ? "bg-brand-primary/10 text-brand-primary border-brand-primary/20"
+                          device.connectivity === "2g"
+                            ? "bg-gray-100 text-gray-500 border-gray-200"
                             : "bg-blue-100 text-blue-800 border-blue-200"
                         }`}
                       >

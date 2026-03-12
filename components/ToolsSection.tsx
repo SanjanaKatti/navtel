@@ -13,24 +13,28 @@ const tools = [
     name: "Can Spy",
     description: "CAN bus Scanning & Decoding Toolchain",
     dark: true,
+    cardClass: "bg-[#2d57a4]",
   },
   {
     number: "04",
     name: "DRC",
     description: "Cloud Device Management & Diagnostics Platform",
     dark: true,
+    cardClass: "bg-[#009ccc]",
   },
   {
     number: "03",
     name: "Complex Events",
     description: "Script-building tool to formulate tracker operation logic",
     dark: true,
+    cardClass: "bg-[#1278be]",
   },
   {
     number: "05",
     name: "NTC Control",
     description: "Mobile app for quick on-side setup",
     dark: true,
+    cardClass: "bg-[#52c3f1]",
   },
 ];
 
@@ -65,15 +69,15 @@ const ToolsSection = () => {
           {tools.slice(1).map((tool, idx) => (
             <div
               key={idx}
-              className="bg-[#1E293B] p-10 flex flex-col justify-between h-[280px] transition-all hover:shadow-lg hover:bg-[#0F172A] border border-gray-800 rounded-2xl group"
+              className={`${tool.cardClass ?? "bg-[#1E293B]"} p-10 flex flex-col justify-between h-[280px] transition-all hover:shadow-lg hover:brightness-110 border border-transparent rounded-2xl group`}
             >
               <div>
-                <span className="text-h3 text-gray-500 block mb-6">
+                <span className="text-h3 text-white/80 block mb-6">
                   {tool.number}
                 </span>
                 <h3 className="text-h3 text-white mb-4">{tool.name}</h3>
               </div>
-              <p className="text-body text-gray-400">{tool.description}</p>
+              <p className="text-body text-white/80">{tool.description}</p>
             </div>
           ))}
         </div>

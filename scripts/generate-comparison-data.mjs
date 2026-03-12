@@ -30,6 +30,15 @@ function normalizeCell(cell) {
   return cell;
 }
 
+function normalizeBluetoothValue(value) {
+  if (value === 4) return "4.0";
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    if (trimmed === "4") return "4.0";
+  }
+  return value;
+}
+
 function main() {
   if (!fs.existsSync(INPUT_PATH)) {
     console.error(
@@ -109,7 +118,10 @@ function main() {
       const deviceKey = String(deviceKeyRaw).trim();
       if (!deviceKey || !deviceData[deviceKey]) continue;
 
-      const value = normalizeCell(row[c]);
+      let value = normalizeCell(row[c]);
+      if (label.trim().toLowerCase() === "bluetooth") {
+        value = normalizeBluetoothValue(value);
+      }
       deviceData[deviceKey].specs[label] = value;
     }
   }

@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -394,9 +394,23 @@ type ComparisonRow =
   | { type: "section"; label: string }
   | { type: "param"; label: string };
 
+const normalizeForDiff = (value: unknown) => {
+  if (value === null || value === undefined) return "-";
+  if (typeof value === "boolean") return value ? "true" : "false";
+  const str = String(value).trim();
+  if (str === "") return "-";
+  return str;
+};
+
 const ComparisonContent = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const [showDifferencesOnly, setShowDifferencesOnly] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   const devicesQuery = searchParams.get("devices");
   const selectedDeviceNames = devicesQuery ? devicesQuery.split(",") : [];
 
@@ -438,6 +452,51 @@ const ComparisonContent = () => {
     specs: Record<string, unknown>;
   }>;
 
+  const visibleRows = useMemo(() => {
+    if (!showDifferencesOnly) return rows;
+
+    const result: ComparisonRow[] = [];
+    let pendingSection: ComparisonRow | null = null;
+    let sectionHeaderEmitted = false;
+
+    const startNewSection = (sectionRow: ComparisonRow) => {
+      pendingSection = sectionRow;
+      sectionHeaderEmitted = false;
+    };
+
+    for (const row of rows) {
+      if (row.type === "section") {
+        startNewSection(row);
+        continue;
+      }
+
+      const param = row.label;
+      const normalizedValues = selectedDevices.map((device) =>
+        normalizeForDiff(device.specs[param]),
+      );
+      const unique = new Set(normalizedValues);
+      const isDifferent = unique.size > 1;
+
+      if (isDifferent) {
+        if (pendingSection && !sectionHeaderEmitted) {
+          result.push(pendingSection);
+          sectionHeaderEmitted = true;
+        }
+        result.push(row);
+      }
+    }
+
+    return result;
+  }, [rows, selectedDevices, showDifferencesOnly]);
+
+  if (!isMounted) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <div className="text-body">Loading…</div>
+      </div>
+    );
+  }
+
   if (selectedDevices.length === 0) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
@@ -474,6 +533,20 @@ const ComparisonContent = () => {
         <div className="w-24"></div> {/* Spacer for centering */}
       </div>
 
+      <div className="flex items-center justify-end mb-4">
+        <label className="inline-flex items-center gap-3 select-none cursor-pointer">
+          <input
+            type="checkbox"
+            checked={showDifferencesOnly}
+            onChange={(e) => setShowDifferencesOnly(e.target.checked)}
+            className="h-4 w-4 accent-[#28398c]"
+          />
+          <span className="text-body-sm font-bold text-brand-navy/70">
+            Show differences only
+          </span>
+        </label>
+      </div>
+
       <div className="bg-white rounded-[3rem] shadow-2xl shadow-brand-navy/5 border border-gray-100 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse table-fixed">
@@ -488,7 +561,13 @@ const ComparisonContent = () => {
                     className="px-4 sm:px-6 lg:px-8 py-6 text-center align-bottom min-w-[180px] sm:min-w-[200px] lg:min-w-[220px] border-l border-gray-100 last:pr-10"
                   >
                     <div className="space-y-4">
-                      <div className="inline-block px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary text-[10px] font-black uppercase tracking-widest">
+                      <div
+                        className={`inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
+                          String(device.connectivity).toLowerCase().includes("2g")
+                            ? "bg-gray-100 text-gray-600 border-gray-200"
+                            : "bg-blue-100 text-blue-800 border-blue-200"
+                        }`}
+                      >
                         {device.connectivity} Network
                       </div>
                       <h3 className="text-h3 text-3xl">{device.name}</h3>
@@ -507,7 +586,7 @@ const ComparisonContent = () => {
               </tr>
             </thead>
             <tbody>
-              {rows.map((row, rIdx) => {
+              {visibleRows.map((row, rIdx) => {
                 if (row.type === "section") {
                   return (
                     <tr

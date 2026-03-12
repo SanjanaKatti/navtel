@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
@@ -12,7 +12,6 @@ import { geoCentroid } from "d3-geo";
 import type { GeometryObject } from "geojson";
 import LayoutContainer from "@/components/LayoutContainer";
 
-const geoUrl = "https://unpkg.com/world-atlas@2.0.2/countries-110m.json";
 type MapGeo = {
   rsmKey: string;
   type: "Feature";
@@ -122,9 +121,9 @@ const highlightedCountryNames = new Set([
 const normalizeCountryName = (value?: string) =>
   (value || "")
     .toUpperCase()
-    .replace(/\(.*?\)/g, "")
-    .replace(/[^A-Z\s]/g, " ")
-    .replace(/\s+/g, " ")
+    .replace(/\(.*?\)|\s-\s.*/g, "") // Remove text in parentheses and after " - "
+    .replace(/[^A-Z\s]/g, " ") // Replace non-alphabetic characters with spaces
+    .replace(/\s+/g, " ") // Replace multiple spaces with a single space
     .trim();
 
 const isTargetCountry = (geo: MapGeo) => {
@@ -139,45 +138,289 @@ const isTargetCountry = (geo: MapGeo) => {
   );
 };
 
+interface MapGeographiesProps {
+  geographies: MapGeo[];
+}
+
+const MapGeographies: React.FC<MapGeographiesProps> = ({ geographies }) => {
+  return (
+    <Geographies geography="/features.json">
+      {({ geographies: renderedGeographies }: { geographies: MapGeo[] }) => (
+        <>
+          {renderedGeographies.map((geo) => {
+            const isHighlighted = isTargetCountry(geo);
+            return (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill={isHighlighted ? "#D8DEE9" : "#E5E7EB"}
+                stroke="none"
+                style={{
+                  default: { outline: "none" },
+                  hover: { outline: "none" },
+                  pressed: { outline: "none" },
+                }}
+              />
+            );
+          })}
+        </>
+      )}
+    </Geographies>
+  );
+};
+
+interface MapMarkersProps {
+  memoizedMarkerPool: PinInfo[];
+  currentPulsingMarkerId: string | null;
+  setHoverPin: React.Dispatch<React.SetStateAction<PinInfo | null>>;
+  activePin: PinInfo | null;
+}
+
+interface PinInfo {
+  key: string;
+  name: string;
+  longitude: number;
+  latitude: number;
+  tooltipWidth: number;
+}
+
+const MapMarkers: React.FC<MapMarkersProps> = ({
+  memoizedMarkerPool,
+  currentPulsingMarkerId,
+  setHoverPin,
+  activePin,
+}) => {
+  const pulseDuration = 3;
+
+  return (
+    <>
+      {memoizedMarkerPool.map((pinInfo) => {
+        const { key: markerKey, name: countryName, longitude, latitude, tooltipWidth } = pinInfo;
+        const isPulsing = currentPulsingMarkerId === markerKey;
+
+        return (
+          <Marker
+            key={markerKey}
+            coordinates={[longitude, latitude]}
+            onMouseEnter={() =>
+              setHoverPin({
+                key: markerKey,
+                name: countryName,
+                longitude,
+                latitude,
+                tooltipWidth,
+              })
+            }
+            onMouseLeave={() => setHoverPin(null)}
+          >
+            <g className="cursor-pointer">
+              <circle cx="0" cy="-2" r="3.6" fill="#28398c" />
+              {isPulsing && (
+                <>
+                  {/* First ripple */}
+                  <circle
+                    cx="0"
+                    cy="-2"
+                    r="3.6"
+                    fill="none"
+                    stroke="#7fb6df"
+                    strokeWidth="1.5"
+                  >
+                    <animate
+                      attributeName="r"
+                      from="3.6"
+                      to="9"
+                      dur={`${pulseDuration}s`}
+                      values="3.6; 9; 3.6"
+                      keyTimes="0; 0.24; 1"
+                      repeatCount="indefinite"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      dur={`${pulseDuration}s`}
+                      values="0; 0.45; 0"
+                      keyTimes="0; 0.14; 0.34"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  {/* Second ripple with delay */}
+                  <circle
+                    cx="0"
+                    cy="-2"
+                    r="3.6"
+                    fill="none"
+                    stroke="#9ac9ea"
+                    strokeWidth="1.2"
+                    opacity="0.22"
+                  >
+                    <animate
+                      attributeName="r"
+                      from="3.6"
+                      to="7.5"
+                      dur={`${pulseDuration}s`}
+                      begin="0.2s"
+                      values="3.6; 7.5; 3.6"
+                      keyTimes="0; 0.22; 1"
+                      repeatCount="indefinite"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      dur={`${pulseDuration}s`}
+                      begin="0.2s"
+                      values="0; 0.32; 0"
+                      keyTimes="0; 0.12; 0.3"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                </>
+              )}
+            </g>
+          </Marker>
+        );
+      })}
+
+      {activePin && (
+        <Marker coordinates={[activePin.longitude, activePin.latitude]}>
+          <g pointerEvents="none">
+            {(() => {
+              const isRussia = activePin.name === "RUSSIA";
+              const rectY = isRussia ? 10 : -30;
+              const textY = isRussia ? 20 : -20;
+
+              return (
+                <>
+                  <rect
+                    x={-activePin.tooltipWidth / 2}
+                    y={rectY}
+                    rx="6"
+                    ry="6"
+                    width={activePin.tooltipWidth}
+                    height="20"
+                    fill="#002D49"
+                    opacity="0.95"
+                  />
+                  <text
+                    x="0"
+                    y={textY}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className="fill-white text-[9px] font-bold tracking-wide"
+                  >
+                    {activePin.name}
+                  </text>
+                </>
+              );
+            })()}
+          </g>
+        </Marker>
+      )}
+    </>
+  );
+};
+
 const AboutPage = () => {
-  type PinInfo = {
-    key: string;
-    name: string;
-    longitude: number;
-    latitude: number;
-    tooltipWidth: number;
-  };
-  const [hoverPin, setHoverPin] = useState<{
-    key: string;
-    name: string;
-    longitude: number;
-    latitude: number;
-    tooltipWidth: number;
-  } | null>(null);
-  const [autoPin, setAutoPin] = useState<PinInfo | null>(null);
+  const [hoverPin, setHoverPin] = useState<PinInfo | null>(null);
   const markerPoolRef = useRef<PinInfo[]>([]);
-  const activePin = hoverPin || autoPin;
+  const [currentPulsingMarkerId, setCurrentPulsingMarkerId] = useState<
+    string | null
+  >(null);
+  const activePin = hoverPin; // Tooltips only appear on hover
+
+  const geoUrl = "https://unpkg.com/world-atlas@2.0.2/countries-110m.json";
+  const [geographies, setGeographies] = useState<MapGeo[] | null>(null);
+  const [loadingGeographies, setLoadingGeographies] = useState(true);
 
   useEffect(() => {
-    const pickNext = () => {
+    fetch(geoUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        setGeographies(data.features);
+        setLoadingGeographies(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching geographies:", error);
+        setLoadingGeographies(false);
+      });
+  }, []);
+
+  const markerGeographies = useMemo(
+    () => geographies?.filter(isTargetCountry) || [],
+    [geographies],
+  );
+
+  const memoizedMarkerPool: PinInfo[] = useMemo(
+    () =>
+      markerGeographies.map((geo) => {
+        const markerKey = `marker-${geo.rsmKey}`;
+        const code =
+          geo.properties.ISO_A3 ||
+          geo.properties.iso_a3 ||
+          geo.properties.ISO3;
+        const countryName =
+          geo.properties.NAME_LONG ||
+          geo.properties.name ||
+          geo.properties.NAME ||
+          code;
+        const [longitude, latitude] = geoCentroid(geo);
+        const tooltipWidth = Math.max(
+          String(countryName).length * 6.9 + 12,
+          74,
+        );
+        return {
+          key: markerKey,
+          name: String(countryName).toUpperCase(),
+          longitude,
+          latitude,
+          tooltipWidth,
+        };
+      }),
+    [markerGeographies],
+  );
+
+
+  useEffect(() => {
+    if (markerPoolRef.current.length === 0) return;
+
+    let pulseTimer: NodeJS.Timeout;
+    let delayTimer: NodeJS.Timeout;
+
+    const startPulse = () => {
       const pool = markerPoolRef.current;
-      if (hoverPin || pool.length === 0) return;
-      setAutoPin((prev) => {
-        if (pool.length === 1) return pool[0];
-        let next = pool[Math.floor(Math.random() * pool.length)];
+      if (pool.length === 0) return; // Pool might become empty dynamically
+
+      let nextMarker: PinInfo;
+      if (pool.length === 1) {
+        nextMarker = pool[0];
+      } else {
+        let candidate = pool[Math.floor(Math.random() * pool.length)];
         let guard = 0;
-        while (prev && next.key === prev.key && guard < 8) {
-          next = pool[Math.floor(Math.random() * pool.length)];
+        // Ensure next marker is different from the current one, up to 8 retries
+        while (
+          currentPulsingMarkerId &&
+          candidate.key === currentPulsingMarkerId &&
+          guard < 8
+        ) {
+          candidate = pool[Math.floor(Math.random() * pool.length)];
           guard += 1;
         }
-        return next;
-      });
+        nextMarker = candidate;
+      }
+
+      setCurrentPulsingMarkerId(nextMarker.key);
+
+      pulseTimer = setTimeout(() => {
+        setCurrentPulsingMarkerId(null);
+        delayTimer = setTimeout(startPulse, 1000); // 1 second delay
+      }, 3000); // Pulse for 3 seconds
     };
 
-    pickNext();
-    const interval = setInterval(pickNext, 1100);
-    return () => clearInterval(interval);
-  }, [hoverPin]);
+    startPulse(); // Initial pulse
+
+    return () => {
+      clearTimeout(pulseTimer);
+      clearTimeout(delayTimer);
+    };
+  }, [currentPulsingMarkerId]);
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-brand-navy overflow-x-hidden">
@@ -264,190 +507,13 @@ const AboutPage = () => {
                     height: "auto",
                   }}
                 >
-                  <Geographies geography={geoUrl}>
-                    {({ geographies }: { geographies: MapGeo[] }) => {
-                      const markerGeographies =
-                        geographies.filter(isTargetCountry);
-                      const markerPool: PinInfo[] = markerGeographies.map(
-                        (geo) => {
-                          const markerKey = `marker-${geo.rsmKey}`;
-                          const code =
-                            geo.properties.ISO_A3 ||
-                            geo.properties.iso_a3 ||
-                            geo.properties.ISO3;
-                          const countryName =
-                            geo.properties.NAME_LONG ||
-                            geo.properties.name ||
-                            geo.properties.NAME ||
-                            code;
-                          const [longitude, latitude] = geoCentroid(geo);
-                          const tooltipWidth = Math.max(
-                            String(countryName).length * 6.9 + 12,
-                            74,
-                          );
-                          return {
-                            key: markerKey,
-                            name: String(countryName).toUpperCase(),
-                            longitude,
-                            latitude,
-                            tooltipWidth,
-                          };
-                        },
-                      );
-                      markerPoolRef.current = markerPool;
-
-                      return (
-                        <>
-                          {geographies.map((geo) => {
-                            const isHighlighted = isTargetCountry(geo);
-
-                            return (
-                              <Geography
-                                key={geo.rsmKey}
-                                geography={geo}
-                                fill={isHighlighted ? "#D8DEE9" : "#E5E7EB"}
-                                stroke="none"
-                                style={{
-                                  default: { outline: "none" },
-                                  hover: { outline: "none" },
-                                  pressed: { outline: "none" },
-                                }}
-                              />
-                            );
-                          })}
-
-                          {markerPool.map((pinInfo) => {
-                            const {
-                              key: markerKey,
-                              name: countryName,
-                              longitude,
-                              latitude,
-                              tooltipWidth,
-                            } = pinInfo;
-                            const sweepDuration = 3.1;
-                            const propagationWindow = 3.2;
-                            const normalizedLongitude = Math.min(
-                              1,
-                              Math.max(0, (longitude + 180) / 360),
-                            );
-                            const pulseDelay =
-                              normalizedLongitude * propagationWindow;
-
-                            return (
-                              <Marker
-                                key={markerKey}
-                                coordinates={[longitude, latitude]}
-                                onMouseEnter={() =>
-                                  setHoverPin({
-                                    key: markerKey,
-                                    name: countryName,
-                                    longitude,
-                                    latitude,
-                                    tooltipWidth,
-                                  })
-                                }
-                                onMouseLeave={() => setHoverPin(null)}
-                              >
-                                <g className="cursor-pointer">
-                                  <circle
-                                    cx="0"
-                                    cy="-2"
-                                    r="3.6"
-                                    fill="#28398c"
-                                  />
-                                  <circle
-                                    cx="0"
-                                    cy="-2"
-                                    r="3.6"
-                                    fill="none"
-                                    stroke="#7fb6df"
-                                    strokeWidth="1.5"
-                                  >
-                                    <animate
-                                      attributeName="r"
-                                      from="3.6"
-                                      to="9"
-                                      dur={`${sweepDuration}s`}
-                                      begin={`${pulseDelay}s`}
-                                      values="3.6; 9; 3.6"
-                                      keyTimes="0; 0.24; 1"
-                                      repeatCount="indefinite"
-                                    />
-                                    <animate
-                                      attributeName="opacity"
-                                      dur={`${sweepDuration}s`}
-                                      begin={`${pulseDelay}s`}
-                                      values="0; 0.45; 0"
-                                      keyTimes="0; 0.14; 0.34"
-                                      repeatCount="indefinite"
-                                    />
-                                  </circle>
-                                  <circle
-                                    cx="0"
-                                    cy="-2"
-                                    r="3.6"
-                                    fill="none"
-                                    stroke="#9ac9ea"
-                                    strokeWidth="1.2"
-                                    opacity="0.22"
-                                  >
-                                    <animate
-                                      attributeName="r"
-                                      from="3.6"
-                                      to="7.5"
-                                      dur={`${sweepDuration}s`}
-                                      begin={`${pulseDelay + 0.22}s`}
-                                      values="3.6; 7.5; 3.6"
-                                      keyTimes="0; 0.22; 1"
-                                      repeatCount="indefinite"
-                                    />
-                                    <animate
-                                      attributeName="opacity"
-                                      dur={`${sweepDuration}s`}
-                                      begin={`${pulseDelay + 0.22}s`}
-                                      values="0; 0.32; 0"
-                                      keyTimes="0; 0.12; 0.3"
-                                      repeatCount="indefinite"
-                                    />
-                                  </circle>
-                                </g>
-                              </Marker>
-                            );
-                          })}
-                          {activePin && (
-                            <Marker
-                              coordinates={[
-                                activePin.longitude,
-                                activePin.latitude,
-                              ]}
-                            >
-                              <g pointerEvents="none">
-                                <rect
-                                  x={-activePin.tooltipWidth / 2}
-                                  y="-30"
-                                  rx="6"
-                                  ry="6"
-                                  width={activePin.tooltipWidth}
-                                  height="20"
-                                  fill="#002D49"
-                                  opacity="0.95"
-                                />
-                                <text
-                                  x="0"
-                                  y="-20"
-                                  textAnchor="middle"
-                                  dominantBaseline="middle"
-                                  className="fill-white text-[9px] font-bold tracking-wide"
-                                >
-                                  {activePin.name}
-                                </text>
-                              </g>
-                            </Marker>
-                          )}
-                        </>
-                      );
-                    }}
-                  </Geographies>
+                  <MapGeographies geographies={geographies || []} />
+                  <MapMarkers
+                    memoizedMarkerPool={memoizedMarkerPool}
+                    currentPulsingMarkerId={currentPulsingMarkerId}
+                    setHoverPin={setHoverPin}
+                    activePin={activePin}
+                  />
                 </ComposableMap>
               </div>
             </div>
@@ -467,8 +533,7 @@ const AboutPage = () => {
                 {
                   title: "Hardware Production",
                   desc: "Long-term hardware roadmap and controlled firmware evolution.",
-                  cardClass:
-                    "bg-[#223B65] border-[#2D4A78] hover:bg-[#284675]",
+                  cardClass: "bg-[#2d57a4] border-[#234785] hover:bg-[#264f95]",
                   icon: (
                     <svg
                       className="w-8 h-8"
@@ -488,8 +553,7 @@ const AboutPage = () => {
                 {
                   title: "Integration Assistance",
                   desc: "Engineering-level support for complex telematics projects.",
-                  cardClass:
-                    "bg-[#2E3668] border-[#3C467B] hover:bg-[#343E73]",
+                  cardClass: "bg-[#009ccc] border-[#007ea5] hover:bg-[#008bb8]",
                   icon: (
                     <svg
                       className="w-8 h-8"
@@ -509,8 +573,7 @@ const AboutPage = () => {
                 {
                   title: "Software Tools",
                   desc: "Configuration, diagnostics and fleet management platforms.",
-                  cardClass:
-                    "bg-[#204D67] border-[#2C607C] hover:bg-[#255877]",
+                  cardClass: "bg-[#1278be] border-[#0e6199] hover:bg-[#106eaf]",
                   icon: (
                     <svg
                       className="w-8 h-8"
@@ -530,8 +593,7 @@ const AboutPage = () => {
                 {
                   title: "After-Sales Support",
                   desc: "Structured, responsive and technically competent assistance.",
-                  cardClass:
-                    "bg-[#473B6B] border-[#5B4C82] hover:bg-[#524276]",
+                  cardClass: "bg-[#52c3f1] border-[#36aedd] hover:bg-[#3db7e8]",
                   icon: (
                     <svg
                       className="w-8 h-8"
@@ -553,7 +615,7 @@ const AboutPage = () => {
                   key={idx}
                   className={`group p-8 rounded-2xl border transition-all duration-300 hover:shadow-xl ${item.cardClass}`}
                 >
-                  <div className="w-16 h-16 bg-white/12 border border-white/20 rounded-xl shadow-sm flex items-center justify-center text-[#9FD2FF] mb-6 group-hover:bg-white/20 group-hover:text-white transition-colors">
+                  <div className="w-16 h-16 bg-white/12 border border-white/20 rounded-xl shadow-sm flex items-center justify-center text-white mb-6 group-hover:bg-white/20 transition-colors">
                     {item.icon}
                   </div>
                   <h3 className="text-h3 mb-3 text-white transition-colors min-h-[50px]">
@@ -591,25 +653,25 @@ const AboutPage = () => {
                     label: "Engineering-Level Support",
                     desc: "Direct access to product engineers. Fast, competent responses without intermediaries.",
                     cardClass:
-                      "bg-[#223B65] border-[#2D4A78] hover:bg-[#284675]",
+                      "bg-[#2d57a4] border-[#234785] hover:bg-[#264f95]",
                   },
                   {
                     label: "Integration-Ready Architecture",
                     desc: "CAN, RS-485, BLE and flexible I/O. Built for complex fleet and industrial projects.",
                     cardClass:
-                      "bg-[#2E3668] border-[#3C467B] hover:bg-[#343E73]",
+                      "bg-[#009ccc] border-[#007ea5] hover:bg-[#008bb8]",
                   },
                   {
                     label: "Stable Hardware Platform",
                     desc: "No sudden redesigns or disruptive firmware changes. Scale with confidence.",
                     cardClass:
-                      "bg-[#204D67] border-[#2C607C] hover:bg-[#255877]",
+                      "bg-[#1278be] border-[#0e6199] hover:bg-[#106eaf]",
                   },
                   {
                     label: "Long-Term Reliability",
                     desc: "36-month warranty and 10+ year lifecycle proven in real deployments.",
                     cardClass:
-                      "bg-[#473B6B] border-[#5B4C82] hover:bg-[#524276]",
+                      "bg-[#52c3f1] border-[#36aedd] hover:bg-[#3db7e8]",
                   },
                 ].map((item, idx) => (
                   <div
@@ -637,7 +699,7 @@ const AboutPage = () => {
               </h2>
               <p className="text-body-lg max-w-xl mx-auto mb-12">
                 Product releases, firmware updates, CAN decoding files and real
-                project insights -- directly from our engineering team.
+                project insights - directly from our engineering team.
               </p>
               <div className="flex items-center justify-center gap-8">
                 <a

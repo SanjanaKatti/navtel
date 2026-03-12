@@ -179,7 +179,7 @@ const AllDevicesPage = () => {
       href: "/products/tracking-devices/smart-series/s-2433",
     },
     {
-      name: "S-2425",
+      name: "S-2421",
       category: "Advanced",
       series: "SMART",
       connectivity: "2G",
@@ -402,6 +402,30 @@ const AllDevicesPage = () => {
     );
   });
 
+  const seriesOrder: Record<Device["series"], number> = {
+    START: 0,
+    SMART: 1,
+    SIGNAL: 2,
+  };
+
+  const sortedDevices = [...filteredDevices].sort((a, b) => {
+    const bySeries = seriesOrder[a.series] - seriesOrder[b.series];
+    if (bySeries !== 0) return bySeries;
+
+    const connOrder = (c: Device["connectivity"]) =>
+      c === "2G" ? 0 : 1; // 2G first, then 4G / 2G
+
+    const byConn = connOrder(a.connectivity) - connOrder(b.connectivity);
+    if (byConn !== 0) return byConn;
+
+    const num = (name: string) => {
+      const match = name.match(/\d+/);
+      return match ? parseInt(match[0] ?? "0", 10) : 0;
+    };
+
+    return num(a.name) - num(b.name);
+  });
+
   const handleCompareToggle = (device: Device) => {
     setSelectedDevices((prev) => {
       if (prev.some((d) => d.name === device.name)) {
@@ -409,6 +433,13 @@ const AllDevicesPage = () => {
       }
       return prev.length < 4 ? [...prev, device] : prev;
     });
+  };
+
+  const handleCompareCancel = () => {
+    setSelectedDevices([]);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("compareDevices");
+    }
   };
 
   useEffect(() => {
@@ -581,14 +612,14 @@ const AllDevicesPage = () => {
                 <p className="text-body-sm font-bold text-gray-400">
                   SHOWING{" "}
                   <span className="text-brand-navy">
-                    {filteredDevices.length}
+                    {sortedDevices.length}
                   </span>{" "}
                   DEVICES
                 </p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {filteredDevices.map((device, idx) => (
+                {sortedDevices.map((device, idx) => (
                   <div
                     key={idx}
                     className="bg-gray-50/50 flex flex-col border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden group relative"
@@ -792,12 +823,23 @@ const AllDevicesPage = () => {
                 </span>
               )}
             </div>
-            <Link
-              href={`/products/compare?devices=${selectedDevices.map((d) => d.name).join(",")}`}
-              className="bg-white text-brand-navy px-6 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition-colors whitespace-nowrap"
-            >
-              Compare Now ({selectedDevices.length})
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link
+                href={`/products/compare?devices=${selectedDevices
+                  .map((d) => d.name)
+                  .join(",")}`}
+                className="bg-white text-brand-navy px-6 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition-colors whitespace-nowrap"
+              >
+                Compare Now ({selectedDevices.length})
+              </Link>
+              <button
+                type="button"
+                onClick={handleCompareCancel}
+                className="px-5 py-2 rounded-full border border-white/70 text-sm font-bold text-white hover:bg-white/10 transition-colors whitespace-nowrap"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       )}

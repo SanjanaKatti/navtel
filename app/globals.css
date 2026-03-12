@@ -93,7 +93,7 @@
 }
 
 .animated-fleet-text {
-  animation: fleetColorBlink 2.4s ease-in-out infinite;
+  animation: fleetColorBlink 7.2s ease-in-out infinite;
 }
 
 body {

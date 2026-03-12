@@ -74,7 +74,7 @@ const AnimatedCounter = ({
 };
 
 const stats = [
-  { value: "20+", label: "Years in Industry" },
+  { value: "20", label: "Years in Industry" },
   { value: "3M", label: "Total Devices" },
   { value: "45+", label: "Countries Deployed" },
   { value: "3K", label: "Customers Worldwide" },
@@ -87,7 +87,7 @@ const partners = [
   { src: "/Navtelecom/logo_4.png", alt: "Partner logo 4" },
   { src: "/Navtelecom/logo_5.png", alt: "Partner logo 5" },
   { src: "/Navtelecom/logo_6.png", alt: "Partner logo 6" },
-  { src: "/Navtelecom/logo_7.", alt: "Partner logo 7" },
+  { src: "/Navtelecom/logo_7.svg", alt: "Partner logo 7" },
   { src: "/Navtelecom/logo_8.png", alt: "Partner logo 8" },
   { src: "/Navtelecom/logo_9.svg", alt: "Partner logo 9" },
 ];
