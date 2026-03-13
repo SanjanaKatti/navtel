@@ -452,15 +452,8 @@ const AllDevicesPage = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative min-h-[clamp(24rem,62vh,42rem)] flex items-start overflow-hidden bg-brand-light-3">
-          <Image
-            src="/Navtelecom/Alldevices2_banner.png"
-            alt="All devices lineup banner"
-            fill
-            priority
-            className="object-cover object-bottom"
-          />
-          <div className="relative z-40 w-full max-w-[1440px] mx-auto px-[clamp(1rem,2.4vw,2.5rem)] pt-6 md:pt-8">
+        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-start overflow-hidden bg-brand-light-3 product-background-image all-devices-hero-background">
+          <div className="absolute inset-0 z-40 w-full max-w-[1440px] mx-auto px-[clamp(1rem,2.4vw,2.5rem)] pt-6 md:pt-8">
             <div className="text-left">
               <p className="text-caption mb-4 text-brand-navy">
                 COMPLETE CATALOG

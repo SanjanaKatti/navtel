@@ -9,8 +9,8 @@ const CanSpyPage = () => {
       <Navbar />
 
       <main className="pt-20">
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center overflow-hidden bg-white product-background-image can-spy-hero-background">
+          <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
             <div className="mb-8">
               <Link
                 href="/products/software-solutions"

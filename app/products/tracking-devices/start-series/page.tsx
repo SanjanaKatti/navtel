@@ -139,20 +139,7 @@ const StartSeriesPage = () => {
 
       <main className="pt-20 bg-[#EFEFEF]">
         {/* HERO SECTION */}
-        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-center bg-[#EFEFEF]">
-          {/* Hero image - larger, device aligned to top */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="relative w-full h-full">
-              <Image
-                src="/Navtelecom/Start_series.png"
-                alt="START Series"
-                fill
-                className="object-contain object-center scale-[1.02] 2xl:object-cover 2xl:object-[center_60%] 2xl:scale-100"
-                sizes="100vw"
-                priority
-              />
-            </div>
-          </div>
+        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-center bg-[#EFEFEF] product-background-image start-series-hero-background">
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
             <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center py-12 md:py-20">
               {/* Left Info */}

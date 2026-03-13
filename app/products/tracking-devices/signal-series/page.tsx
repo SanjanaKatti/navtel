@@ -202,25 +202,24 @@ const SignalSeriesPage = () => {
           <picture className="block w-full">
             <source
               media="(max-width: 639px)"
-              srcSet="/Navtelecom/signl_1080x1350.png"
+              srcSet="/Navtelecom/signal_homepage1 1080x1350.png"
             />
             <source
               media="(min-width: 640px) and (max-width: 1279px)"
-              srcSet="/Navtelecom/signal_2048x1365.png"
+              srcSet="/Navtelecom/signal_homepage1 2048x1365.png"
             />
             <source
               media="(min-width: 1280px) and (max-width: 1919px)"
-              srcSet="/Navtelecom/signal_2560x1440.png"
+              srcSet="/Navtelecom/signal_homepage1 2560x1440.png"
             />
             <source
               media="(min-width: 1920px)"
-              srcSet="/Navtelecom/signal_3840x1646.png"
+              srcSet="/Navtelecom/signal_homepage1 3840x1646.png"
             />
             <img
-              src="/Navtelecom/signal_2048x1365.png"
+              src="/Navtelecom/signal_homepage1 2048x1365.png"
               alt="SIGNAL Series"
               className="w-full h-auto block"
-              loading="eager"
             />
           </picture>
           <div className="absolute inset-0 z-10 max-w-7xl mx-auto left-0 right-0 px-4 sm:px-6 lg:px-8">

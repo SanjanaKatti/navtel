@@ -12,14 +12,7 @@ const TrackingDevicesPage = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative min-h-[clamp(24rem,62vh,42rem)] flex items-center overflow-hidden bg-brand-light-3 pb-12 md:pb-16">
-          <Image
-            src="/Navtelecom/Alldevices_banner.png"
-            alt="Tracking devices lineup"
-            fill
-            priority
-            className="object-cover object-bottom"
-          />
+        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center overflow-hidden bg-brand-light-3 pb-12 md:pb-16 product-background-image tracking-devices-hero-background">
           <div className="relative z-40 w-full max-w-[1440px] mx-auto px-[clamp(1rem,2.4vw,2.5rem)] pt-6 md:pt-8">
             <div className="text-left">
               <p className="text-caption mb-4 text-brand-navy">
