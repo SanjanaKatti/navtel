@@ -1,72 +1,177 @@
+"use client";
 import React from "react";
-import Navbar from "@/components/Navbar";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+const canSpyEnablesItems = [
+  "Real-time CAN bus monitoring",
+  "Raw frame logging",
+  "ID filtering and signal tracking",
+  "Data export for analysis",
+  "Support for custom decoding files",
+];
+
+const builtForEngineeringItems = [
+  "Verifying CAN signal availability",
+  "Testing new vehicle models",
+  "Creating and validating decoding files",
+  "Troubleshooting integration issues",
+  "Analyzing unknown CAN traffic",
+];
+
+const canScriptEnablesItems = [
+  "Receive and transmit CAN messages",
+  "Apply conditional logic",
+  "Use delays and repeat loops",
+  "Execute message sequences with defined results",
+];
+
+const designedForDebuggingItems = [
+  "Send specific CAN frames",
+  "Wait for defined responses",
+  "Repeat communication sequences",
+  "Stop execution based on conditions",
+];
 
 const CanSpyPage = () => {
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-brand-navy">
       <Navbar />
-
       <main className="pt-20">
-        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center overflow-hidden bg-white product-background-image can-spy-hero-background">
-          <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
-            <div className="mb-8">
-              <Link
-                href="/products/software-solutions"
-                className="text-brand-primary hover:text-brand-deep font-medium mb-4 inline-block"
-              >
-                ← Back to Software Solutions
-              </Link>
-            </div>
-            <div className="text-center mb-16">
-              <p className="text-caption mb-4">CAN SPY</p>
-              <h1 className="text-h1 mb-6">
-                CAN Bus Scanning & Decoding Toolchain
-              </h1>
-              <p className="text-body-lg max-w-3xl mx-auto">
-                Advanced tool for scanning, analyzing, and decoding CAN bus data
-                from vehicles.
-              </p>
+        {/* Hero Section */}
+        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center bg-cover bg-center can-spy-hero-background overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10">
+            <div className="grid lg:grid-cols-1 gap-20 items-center">
+              <div className="space-y-8 lg:w-2/5">
+                <div>
+                  <h1 className="text-5xl md:text-6xl font-black text-brand-navy leading-tight mb-4">
+                    Navtelecom CAN SPY
+                  </h1>
+                  <p className="text-sm font-bold text-brand-navy tracking-[0.3em] uppercase">
+                    Integrated CAN Analysis Module
+                  </p>
+                </div>
+
+                <p className="text-xl text-brand-navy leading-relaxed font-medium">
+                  Capture, analyze and validate CAN data directly from the vehicle inside NTC Configurator.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="py-24 bg-[#F8FAFC]">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white p-12 border border-gray-200">
-              <h2 className="text-h2 mb-8">Features</h2>
-              <div className="space-y-6">
-                <div className="p-6 bg-brand-light-3 border border-gray-200">
-                  <h3 className="text-h3 text-brand-primary mb-3">
-                    CAN Bus Scanning
-                  </h3>
-                  <p className="text-body">
-                    Scan and identify CAN bus messages and protocols.
+        {/* What CAN SPY Enables Section */}
+        <section className="pt-20 md:pt-24 pb-20 md:pb-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div className="space-y-6">
+              <div className="grid lg:grid-cols-2 gap-4 lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1">
+                <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
+                  <ul className="space-y-2 text-base md:text-lg text-white/90">
+                    {canSpyEnablesItems.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
+                  <h3 className="text-h2">What CAN SPY Enables</h3>
+                </div>
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-4 lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1">
+                <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
+                  <h3 className="text-h2">Built for Engineering Work</h3>
+                </div>
+                <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
+                  <p className="text-base md:text-lg mb-4 text-white/90">
+                    CAN SPY is not just a viewer.
+                  </p>
+                  <p className="text-base md:text-lg mb-4 text-white/90">
+                    It is a diagnostic and validation tool used for:
+                  </p>
+                  <ul className="space-y-2 text-base md:text-lg text-white/90">
+                    {builtForEngineeringItems.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* CAN Script intro */}
+              <div className="space-y-3 text-center my-12 md:my-16 max-w-3xl mx-auto">
+                <h3 className="text-h2 text-brand-navy">CAN Script</h3>
+                <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                  Advanced CAN Interaction Engine
+                </p>
+                <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                  In addition to monitoring, CAN SPY includes a scripting system for controlled CAN communication.
+                </p>
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-4 lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1">
+                <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
+                  <ul className="space-y-2 text-base md:text-lg text-white/90">
+                    {canScriptEnablesItems.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
+                  <h3 className="text-h2">What CAN Script Enables</h3>
+                </div>
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-4 lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1">
+                <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
+                  <h3 className="text-h2">Designed for Debugging and Automation</h3>
+                </div>
+                <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
+                  <p className="text-base md:text-lg mb-4 text-white/90">
+                    CAN Script allows engineers to:
+                  </p>
+                  <ul className="space-y-2 text-base md:text-lg mb-5 text-white/90">
+                    {designedForDebuggingItems.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-sm md:text-base text-white/90">
+                    It is used for diagnostics, testing and automation of interaction with CAN-based equipment.
                   </p>
                 </div>
-                <div className="p-6 bg-brand-light-3 border border-gray-200">
-                  <h3 className="text-h3 text-brand-primary mb-3">
-                    Data Decoding
-                  </h3>
-                  <p className="text-body">
-                    Decode vehicle-specific data formats and parameters.
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-4 lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1">
+                <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
+                  <p className="text-base md:text-lg text-white/90">
+                    CAN monitoring provides visibility.
+                  </p>
+                  <p className="text-base md:text-lg text-white/90 mt-2">
+                    CAN Script provides interaction.
+                  </p>
+                  <p className="text-base md:text-lg text-white/90 mt-4">
+                    Together, they turn CAN SPY into a complete CAN engineering tool — from passive analysis to controlled communication.
                   </p>
                 </div>
-                <div className="p-6 bg-brand-light-3 border border-gray-200">
-                  <h3 className="text-h3 text-brand-primary mb-3">
-                    Protocol Support
-                  </h3>
-                  <p className="text-body">
-                    Support for multiple vehicle manufacturers and protocols.
-                  </p>
+                <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
+                  <h3 className="text-h2">Why It Matters</h3>
                 </div>
               </div>
             </div>
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   );

@@ -162,6 +162,12 @@ const Navbar = () => {
                     >
                       NTC Control
                     </Link>
+                    <Link
+                      href="/products/software-solutions/eco-driving"
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-primary transition-colors"
+                    >
+                      Eco Driving
+                    </Link>
                   </div>
                 </div>
               </div>

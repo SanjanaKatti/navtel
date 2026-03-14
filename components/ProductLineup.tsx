@@ -12,8 +12,8 @@ const products = [
     subtitle: "COST-EFFECTIVE, ULTRA-COMPACT",
     description: "For essential GPS tracking and entry-level fleet management.",
     features: ["4G Connectivity", "Plug & Play", "Small Form Factor"],
-    imageMobile: "/Navtelecom/start_1600x1200.png",
-    imageDesktop: "/Navtelecom/start_2400x1800.png",
+    imageMobile: "/Navtelecom/start_pl_1600x1200.png",
+    imageDesktop: "/Navtelecom/start_pl_2400x1800.png",
     href: "/products/tracking-devices/start-series",
   },
   {
@@ -23,8 +23,8 @@ const products = [
     description:
       "Supports CAN, BLE, RS-485. Ideal for fuel monitoring and sensor integration.",
     features: ["CAN Bus Support", "Bluetooth 4.0", "Fuel Monitoring"],
-    imageMobile: "/Navtelecom/smart_1600x1200.png",
-    imageDesktop: "/Navtelecom/smart_2400x1800.png",
+    imageMobile: "/Navtelecom/smart_pl_1600x1200.png",
+    imageDesktop: "/Navtelecom/smart_pl_2400x1800.png",
     href: "/products/tracking-devices/smart-series",
   },
   {
@@ -34,8 +34,8 @@ const products = [
     description:
       "Extended GNSS, fuel control, diagnostics, voice communication with drivers.",
     features: ["High Precision GNSS", "Voice Comm", "Advanced I/O"],
-    imageMobile: "/Navtelecom/signal_1600x1200.png",
-    imageDesktop: "/Navtelecom/signal_2400x1800.png",
+    imageMobile: "/Navtelecom/signal_pl_1600x1200.png",
+    imageDesktop: "/Navtelecom/signal_pl_2400x1800.png",
     href: "/products/tracking-devices/signal-series",
   },
 ];
@@ -96,8 +96,8 @@ const ProductLineup = () => {
                         sizes="(max-width: 1023px) 90vw, 1px"
                         className={`object-contain object-center md:hidden p-0 sm:p-0.5 ${
                           product.label === "START"
-                            ? "scale-[1.32]"
-                            : "scale-[1.2]"
+                            ? "scale-[1.6]"
+                            : "scale-[1.45]"
                         }`}
                       />
                       <Image
@@ -107,8 +107,8 @@ const ProductLineup = () => {
                         sizes="(min-width: 1280px) 26vw, (min-width: 1024px) 30vw, 1px"
                         className={`hidden md:block object-contain object-center p-0.5 md:p-1 ${
                           product.label === "START"
-                            ? "scale-[1.36]"
-                            : "scale-[1.24]"
+                            ? "scale-[1.65]"
+                            : "scale-[1.5]"
                         }`}
                       />
                     </div>

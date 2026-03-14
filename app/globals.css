@@ -8,11 +8,11 @@
 
   --navtel-blue-light-1: #c3e0ff;
   --navtel-blue-light-2: #dcedff;
-  --navtel-blue-light-3: #eceef6;
+  --navtel-blue-light-3: #eef6ff;
 
-  --navtel-gray-700: #6a6a6a;
-  --navtel-gray-300: #efefef;
-  --navtel-gray-400: #aaaaaa;
+  --color-neutral-dark-gray: #6a6a6a;
+  --color-neutral-light-gray-1: #efefef;
+  --color-neutral-medium-gray: #aaaaaa;
 
   --background: #ffffff;
   --foreground: var(--navtel-blue-navy);
@@ -31,9 +31,9 @@
   --color-brand-light-2: var(--navtel-blue-light-2);
   --color-brand-light-3: var(--navtel-blue-light-3);
 
-  --color-neutral-700: var(--navtel-gray-700);
-  --color-neutral-300: var(--navtel-gray-300);
-  --color-neutral-400: var(--navtel-gray-400);
+  --color-neutral-dark-gray: var(--color-neutral-dark-gray);
+  --color-neutral-light-gray-1: var(--color-neutral-light-gray-1);
+  --color-neutral-medium-gray: var(--color-neutral-medium-gray);
 
   /* Typography */
   --font-sans:
@@ -130,34 +130,28 @@ button[class*="bg-brand-primary"],
 button[class*="bg-brand-navy"],
 a[class*="bg-brand-primary"],
 a[class*="bg-brand-navy"],
-button[class*="bg-[#004A8C]"],
-a[class*="bg-[#004A8C]"],
-button[class*="bg-[#00529B]"],
-a[class*="bg-[#00529B]"] {
-  background-color: #28398c !important;
-  border-color: #28398c !important;
+button[class*="bg-color-neutral-dark-gray"],
+a[class*="bg-color-neutral-dark-gray"] {
+  background-color: var(--color-neutral-dark-gray) !important;
+  border-color: var(--color-neutral-dark-gray) !important;
 }
 
 button[class*="hover:bg-brand-primary"]:hover,
 a[class*="hover:bg-brand-primary"]:hover,
 button[class*="hover:bg-brand-deep"]:hover,
 a[class*="hover:bg-brand-deep"]:hover,
-button[class*="hover:bg-[#003366]"]:hover,
-a[class*="hover:bg-[#003366]"]:hover,
-button[class*="hover:bg-[#003d74]"]:hover,
-a[class*="hover:bg-[#003d74]"]:hover {
-  background-color: #28398c !important;
-  border-color: #28398c !important;
+button[class*="hover:bg-color-neutral-medium-gray"]:hover,
+a[class*="hover:bg-color-neutral-medium-gray"]:hover {
+  background-color: var(--color-neutral-medium-gray) !important;
+  border-color: var(--color-neutral-medium-gray) !important;
 }
 
 button[class*="bg-brand-primary"],
 button[class*="bg-brand-navy"],
 a[class*="bg-brand-primary"],
 a[class*="bg-brand-navy"],
-button[class*="bg-[#004A8C]"],
-a[class*="bg-[#004A8C]"],
-button[class*="bg-[#00529B]"],
-a[class*="bg-[#00529B]"] {
+button[class*="bg-color-neutral-dark-gray"],
+a[class*="bg-color-neutral-dark-gray"] {
   text-transform: uppercase !important;
   transition:
     transform 220ms ease,
@@ -167,13 +161,11 @@ a[class*="bg-[#00529B]"] {
 }
 
 button[class*="bg-brand-primary"]:hover,
-button[class*="bg-brand-navy"]:hover,
 a[class*="bg-brand-primary"]:hover,
+button[class*="bg-brand-navy"]:hover,
 a[class*="bg-brand-navy"]:hover,
-button[class*="bg-[#004A8C]"]:hover,
-a[class*="bg-[#004A8C]"]:hover,
-button[class*="bg-[#00529B]"]:hover,
-a[class*="bg-[#00529B]"]:hover {
+button[class*="bg-color-neutral-dark-gray"]:hover,
+a[class*="bg-color-neutral-dark-gray"]:hover {
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 12px 24px rgba(40, 57, 140, 0.22);
 }
@@ -184,47 +176,51 @@ a[class*="bg-[#00529B]"]:hover {
   background-repeat: no-repeat;
 }
 
+.transition-background {
+  transition: background-image 1s ease-in-out;
+}
+
 .smart-series-hero-background {
-  background-image: url('/Navtelecom/smart_homepage1 1080x1350.png');
+  background-image: url('/Navtelecom/smart_series 1080x1350.png') !important;
 }
 
 @media (min-width: 768px) {
   .smart-series-hero-background {
-    background-image: url('/Navtelecom/smart_homepage1 2048x1365.png');
+    background-image: url('/Navtelecom/smart_series 2048x1365.png') !important;
   }
 }
 
 @media (min-width: 1024px) {
   .smart-series-hero-background {
-    background-image: url('/Navtelecom/smart_homepage1 2560x1440.png');
+    background-image: url('/Navtelecom/smart_series 2560x1440.png') !important;
   }
 }
 
 @media (min-width: 1280px) {
   .smart-series-hero-background {
-    background-image: url('/Navtelecom/smart_homepage1 3840x1646.png');
+    background-image: url('/Navtelecom/smart_series 3840x1646.png') !important;
   }
 }
 
 .start-series-hero-background {
-  background-image: url('/Navtelecom/start_homepage1 1080x1350.png') !important;
+  background-image: url('/Navtelecom/start_series 1080x1350.png') !important;
 }
 
 @media (min-width: 768px) {
   .start-series-hero-background {
-    background-image: url('/Navtelecom/start_homepage1 2048x1365.png') !important;
+    background-image: url('/Navtelecom/start_series 2048x1365.png') !important;
   }
 }
 
 @media (min-width: 1024px) {
   .start-series-hero-background {
-    background-image: url('/Navtelecom/start_homepage1 2560x1440.png') !important;
+    background-image: url('/Navtelecom/start_series 2560x1440.png') !important;
   }
 }
 
 @media (min-width: 1280px) {
   .start-series-hero-background {
-    background-image: url('/Navtelecom/start_homepage1 3840x1646.png') !important;
+    background-image: url('/Navtelecom/start_series 3840x1646.png') !important;
   }
 }
 
@@ -357,5 +353,71 @@ a[class*="bg-[#00529B]"]:hover {
 @media (min-width: 1280px) {
   .ntc-control-hero-background {
     background-image: url('/Navtelecom/Software/NTC/ntc_homepage1 3840x1646.png') !important;
+  }
+}
+
+.homepage-hero-bg-1 {
+  background-image: url('/Navtelecom/banner1_1080x1350.png') !important;
+}
+
+@media (min-width: 768px) {
+  .homepage-hero-bg-1 {
+    background-image: url('/Navtelecom/banner1_2048x1365.png') !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .homepage-hero-bg-1 {
+    background-image: url('/Navtelecom/banner1_2560x1440.png') !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .homepage-hero-bg-1 {
+    background-image: url('/Navtelecom/banner1_3840x1646.png') !important;
+  }
+}
+
+.homepage-hero-bg-2 {
+  background-image: url('/Navtelecom/smart_series 1080x1350.png') !important;
+}
+
+@media (min-width: 768px) {
+  .homepage-hero-bg-2 {
+    background-image: url('/Navtelecom/smart_series 2048x1365.png') !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .homepage-hero-bg-2 {
+    background-image: url('/Navtelecom/smart_series 2560x1440.png') !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .homepage-hero-bg-2 {
+    background-image: url('/Navtelecom/smart_series 3840x1646.png') !important;
+  }
+}
+
+.homepage-hero-bg-3 {
+  background-image: url('/Navtelecom/start_series 1080x1350.png') !important;
+}
+
+@media (min-width: 768px) {
+  .homepage-hero-bg-3 {
+    background-image: url('/Navtelecom/start_series 2048x1365.png') !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .homepage-hero-bg-3 {
+    background-image: url('/Navtelecom/start_series 2560x1440.png') !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .homepage-hero-bg-3 {
+    background-image: url('/Navtelecom/start_series 3840x1646.png') !important;
   }
 }
