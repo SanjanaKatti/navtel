@@ -355,7 +355,7 @@ const StartSeriesPage = () => {
                             : "bg-blue-100 text-blue-800 border-blue-200"
                         }`}
                       >
-                        {"connectivityLabel" in device ? device.connectivityLabel : `${device.connectivity} Network`}
+                        {device.connectivityLabel}
                       </div>
                     </div>
 

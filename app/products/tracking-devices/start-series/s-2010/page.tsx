@@ -24,7 +24,10 @@ const S2010Page = () => {
       <main className="pt-20">
         {/* Hero Section */}
         <section className="relative min-h-[calc(100dvh-5rem)] overflow-hidden flex items-start lg:items-center bg-[#EFEFEF] product-background-image start-device-hero-background">
-          <div className="absolute inset-0 bg-white/30 lg:bg-transparent z-[1]" aria-hidden />
+          <div
+            className="absolute inset-0 bg-white/30 lg:bg-transparent z-[1]"
+            aria-hidden
+          />
           <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col lg:block">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_1fr] gap-8 lg:gap-12 items-start lg:items-center py-8 sm:py-12 md:py-16 lg:py-20">
               {/* Left Info - stacked at top on mobile/tablet */}
@@ -46,7 +49,9 @@ const S2010Page = () => {
                   </p>
                 </div>
                 <button
-                  onClick={() => featuresRef.current?.scrollIntoView({ behavior: "smooth" })}
+                  onClick={() =>
+                    featuresRef.current?.scrollIntoView({ behavior: "smooth" })
+                  }
                   className="bg-brand-navy text-white px-12 sm:px-16 lg:px-20 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1 w-full sm:w-auto mb-8 sm:mb-12 lg:mb-0"
                 >
                   Explore
@@ -55,76 +60,72 @@ const S2010Page = () => {
 
               {/* Middle column - spacer on desktop only; on mobile/tablet adds breathing room before image area */}
               <div className="hidden lg:block lg:ml-10 w-full h-[clamp(12rem,36vw,28rem)]" />
-              <div className="lg:hidden min-h-[14rem] sm:min-h-[18rem] flex-shrink-0" aria-hidden />
+              <div
+                className="lg:hidden min-h-[14rem] sm:min-h-[18rem] flex-shrink-0"
+                aria-hidden
+              />
 
               {/* Right Big Text - hidden on mobile/tablet to avoid overlap */}
-              <div className="hidden lg:block lg:text-right">
-                <h2 className="text-display mr-10">
-                  <span className="text-brand-primary">2G</span>
-                  <br />
-                  GSM
-                </h2>
-              </div>
             </div>
           </div>
         </section>
 
         {/* Device Features Section */}
         <div ref={featuresRef}>
-        <DeviceFeatures
-          heading="Device"
-          highlightedHeading="Features"
-          description=""
-          features={[
-            {
-              title: "5 Input Lines",
-              sub: "Reliable. Clear control.",
-              desc: "Connect ignition, doors, seat belts and other switches.",
-              icon: <ArrowsLeftRight size={32} weight="light" />,
-            },
-            {
-              title: "BLE Available",
-              sub: "Wireless. Effortless.",
-              desc: "Seamlessly connect BLE sensors to your tracker.",
-              icon: <Bluetooth size={32} weight="light" />,
-            },
-            {
-              title: "Ultra-Compact Design",
-              sub: "Install anywhere. Stay invisible.",
-              desc: "Tiny size allows discreet installation even in tight or unexpected places.",
-              icon: <ArrowsIn size={32} weight="light" />,
-            },
-            {
-              title: "USB Type-C",
-              sub: "Fast setup. Flexible use.",
-              desc: "Configure or switch modes with ease using a modern USB-C connection.",
-              icon: (
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  className="w-8 h-8"
-                >
-                  <rect x="4" y="10" width="16" height="4" rx="2" />
-                  <circle cx="12" cy="12" r="1" fill="currentColor" />
-                </svg>
-              ),
-            },
-            {
-              title: "Engine Hours Calculation",
-              sub: "Smart logic. Clear insights.",
-              desc: "Track engine runtime based on internal algorithms — no external sensors needed.",
-              icon: <ClockCounterClockwise size={32} weight="light" />,
-            },
-            {
-              title: "Remote Control",
-              sub: "Configure anytime. From anywhere.",
-              desc: "Remote setup made easy.",
-              icon: <GlobeSimple size={32} weight="light" />,
-            },
-          ]}
-        />
+          <DeviceFeatures
+            heading="Device"
+            highlightedHeading="Features"
+            description=""
+            features={[
+              {
+                title: "5 Input Lines",
+                sub: "Reliable. Clear control.",
+                desc: "Connect ignition, doors, seat belts and other switches.",
+                icon: <ArrowsLeftRight size={32} weight="light" />,
+              },
+              {
+                title: "BLE Available",
+                sub: "Wireless. Effortless.",
+                desc: "Seamlessly connect BLE sensors to your tracker.",
+                icon: <Bluetooth size={32} weight="light" />,
+              },
+              {
+                title: "Ultra-Compact Design",
+                sub: "Install anywhere. Stay invisible.",
+                desc: "Tiny size allows discreet installation even in tight or unexpected places.",
+                icon: <ArrowsIn size={32} weight="light" />,
+              },
+              {
+                title: "USB Type-C",
+                sub: "Fast setup. Flexible use.",
+                desc: "Configure or switch modes with ease using a modern USB-C connection.",
+                icon: (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className="w-8 h-8"
+                  >
+                    <rect x="4" y="10" width="16" height="4" rx="2" />
+                    <circle cx="12" cy="12" r="1" fill="currentColor" />
+                  </svg>
+                ),
+              },
+              {
+                title: "Engine Hours Calculation",
+                sub: "Smart logic. Clear insights.",
+                desc: "Track engine runtime based on internal algorithms — no external sensors needed.",
+                icon: <ClockCounterClockwise size={32} weight="light" />,
+              },
+              {
+                title: "Remote Control",
+                sub: "Configure anytime. From anywhere.",
+                desc: "Remote setup made easy.",
+                icon: <GlobeSimple size={32} weight="light" />,
+              },
+            ]}
+          />
         </div>
 
         {/* Technical Specifications Section */}
@@ -305,7 +306,8 @@ const S2010Page = () => {
         <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-body text-center">
-              If you have questions about installation, configuration or support for this device, please visit our{" "}
+              If you have questions about installation, configuration or support
+              for this device, please visit our{" "}
               <a
                 href="/support/faq"
                 className="text-brand-primary font-bold hover:underline"
