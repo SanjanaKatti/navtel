@@ -7,6 +7,7 @@ const tools = [
     name: "NTC Configurator",
     description: "Main PC tool for tracker setup",
     dark: false,
+    cardClass: "bg-[#EAF4FF]",
   },
   {
     number: "02",
@@ -55,7 +56,11 @@ const ToolsSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* First tool is large/tall as seen in screenshot */}
-          <div className="row-span-2 bg-[#F1F5F9] p-10 flex flex-col justify-between transition-all hover:shadow-lg border border-gray-200 rounded-2xl group">
+          <div
+            className={`row-span-2 ${tools[0].cardClass ?? "bg-[#F1F5F9]"} p-10 flex flex-col justify-between border border-gray-200 rounded-2xl group relative overflow-hidden transform-gpu motion-safe:animate-[toolCardIn_520ms_ease-out_both] motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl transition-[transform,box-shadow] duration-300`}
+            style={{ animationDelay: "60ms" }}
+          >
+            <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(900px_circle_at_20%_20%,rgba(50,190,240,0.18),transparent_55%)]" />
             <div>
               <span className="text-h3 text-gray-400 block mb-6">
                 {tools[0].number}
@@ -69,8 +74,10 @@ const ToolsSection = () => {
           {tools.slice(1).map((tool, idx) => (
             <div
               key={idx}
-              className={`${tool.cardClass ?? "bg-[#1E293B]"} p-10 flex flex-col justify-between h-[280px] transition-all hover:shadow-lg hover:brightness-110 border border-transparent rounded-2xl group`}
+              className={`${tool.cardClass ?? "bg-[#1E293B]"} p-10 flex flex-col justify-between h-[280px] border border-transparent rounded-2xl group relative overflow-hidden transform-gpu motion-safe:animate-[toolCardIn_520ms_ease-out_both] motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl transition-[transform,box-shadow,filter] duration-300 hover:brightness-110`}
+              style={{ animationDelay: `${120 + idx * 60}ms` }}
             >
+              <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(900px_circle_at_20%_20%,rgba(255,255,255,0.16),transparent_55%)]" />
               <div>
                 <span className="text-h3 text-white/80 block mb-6">
                   {tool.number}

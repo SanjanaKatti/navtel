@@ -1,24 +1,21 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
-import { X } from "phosphor-react";
+import {
+  X,
+  DeviceMobile,
+  UploadSimple,
+  ChartLine,
+  Bluetooth,
+  CheckCircle,
+} from "phosphor-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-const enablesItems = [
-  "Upload configuration files on-site",
-  "Perform basic parameter setup",
-  "Monitor device and sensor status",
-  "Access live telemetry preview",
-  "Connect directly to the device from your phone",
-];
-
-const builtForFieldItems = [
-  "Upload prepared configuration files",
-  "Adjust key parameters",
-  "Check sensor connections",
-  "Verify real-time data",
-];
+import {
+  SoftwareHero,
+  SoftwareKeyFeatures,
+  SoftwareContentBlock,
+  SoftwareCTA,
+} from "@/components/software";
 
 const NTCControlPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,126 +29,119 @@ const NTCControlPage = () => {
     <div className="min-h-screen bg-white font-sans antialiased text-brand-navy">
       <Navbar />
       <main className="pt-20">
-        {/* Hero Section */}
-        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center bg-cover bg-center ntc-control-hero-background overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10">
-            <div className="grid lg:grid-cols-1 gap-20 items-center">
-              <div className="space-y-8 lg:w-2/5">
-                <div>
-                  <h1 className="text-5xl md:text-6xl font-black text-brand-navy leading-tight mb-4">
-                    NTC Control
-                  </h1>
-                  <p className="text-sm font-bold text-brand-navy tracking-[0.3em] uppercase">
-                    Mobile Configuration for Engineers
-                  </p>
-                </div>
+        <SoftwareHero
+          title="NTC Control"
+          subtitle="Mobile Configuration for Engineers"
+          tagline="Configure and validate Navtelecom devices directly from your smartphone."
+          ctaPrimary={{
+            label: "Download for Android",
+            href: "https://play.google.com/store/apps/details?id=ru.navtelecom.ntc.control",
+          }}
+          ctaSecondary={{
+            label: "Contact Sales",
+            onClick: () => setIsModalOpen(true),
+          }}
+          backgroundClass="ntc-control-hero-background"
+          textColor="navy"
+        />
 
-                <p className="text-xl text-brand-navy leading-relaxed font-medium">
-                  Configure and validate Navtelecom devices directly from your smartphone.
-                </p>
+        <SoftwareKeyFeatures
+          heading="Features"
+          features={[
+            {
+              title: "On-Site Configuration",
+              desc: "Upload configuration files and perform basic parameter setup on-site.",
+              icon: <UploadSimple size={32} weight="bold" />,
+            },
+            {
+              title: "Device & Sensor Monitoring",
+              desc: "Monitor device and sensor status in real time.",
+              icon: <Bluetooth size={32} weight="bold" />,
+            },
+            {
+              title: "Live Telemetry",
+              desc: "Access live telemetry preview to see exactly what the server receives.",
+              icon: <ChartLine size={32} weight="bold" />,
+            },
+            {
+              title: "Direct Connection",
+              desc: "Connect directly to the device from your phone.",
+              icon: <DeviceMobile size={32} weight="bold" />,
+            },
+            {
+              title: "Installation Verification",
+              desc: "Validate configuration before completing installation.",
+              icon: <CheckCircle size={32} weight="bold" />,
+            },
+          ]}
+        />
 
-                <div className="flex flex-wrap gap-4 pt-4">
-                  <Link
-                    href="https://play.google.com/store/apps/details?id=ru.navtelecom.ntc.control"
-                    className="bg-[#002D49] text-white px-10 py-5 rounded-2xl font-black text-lg hover:bg-brand-deep transition-all shadow-xl hover:shadow-2xl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Download for Android
-                  </Link>
-                </div>
-              </div>
-            </div>
+        <section className="py-20 md:py-24 bg-[#F8FAFC]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16">
+            <SoftwareContentBlock
+              title="What NTC Control Enables"
+              titleFirst={true}
+              content={{
+                items: [
+                  "Upload configuration files on-site",
+                  "Perform basic parameter setup",
+                  "Monitor device and sensor status",
+                  "Access live telemetry preview",
+                  "Connect directly to the device from your phone",
+                ],
+              }}
+            />
+
+            <SoftwareContentBlock
+              title="Built for Field Installation"
+              content={{
+                paragraphs: [
+                  "NTC Control is designed for engineers working on-site.",
+                  "When using a laptop is not practical, the app allows you to:",
+                ],
+                items: [
+                  "Upload prepared configuration files",
+                  "Adjust key parameters",
+                  "Check sensor connections",
+                  "Verify real-time data",
+                ],
+                highlight: {
+                  line1: "All from your mobile device.",
+                },
+              }}
+            />
+
+            <SoftwareContentBlock
+              title="Why It Matters"
+              titleFirst={true}
+              content={{
+                paragraphs: [
+                  "Correct configuration during installation prevents future support issues.",
+                  "NTC Control helps ensure that every device leaves the installation site fully verified.",
+                ],
+              }}
+            />
           </div>
         </section>
 
-        {/* What NTC Control Enables Section */}
-        <section className="pt-20 md:pt-24 pb-20 md:pb-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-            <div className="space-y-6">
-              <div className="grid lg:grid-cols-2 gap-4 lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1">
-                <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
-                  <ul className="space-y-2 text-base md:text-lg text-white/90">
-                    {enablesItems.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
-                  <h3 className="text-h2">What NTC Control Enables</h3>
-                </div>
-              </div>
-
-              <div className="space-y-3 text-center my-12 md:my-16 max-w-3xl mx-auto">
-                <h3 className="text-h2 text-brand-navy">Live Telemetry in Your Pocket</h3>
-                <p className="text-base md:text-lg text-gray-600 leading-relaxed">
-                  See exactly what the device will send to the server.
-                </p>
-                <p className="text-base md:text-lg text-gray-600 leading-relaxed">
-                  Validate sensor values and configuration results before completing installation.
-                </p>
-                <p className="text-base md:text-lg text-gray-600 leading-relaxed font-medium">
-                  No assumptions.
-                </p>
-                <p className="text-base md:text-lg text-gray-600 leading-relaxed font-medium">
-                  No return visits.
-                </p>
-              </div>
-
-              <div className="grid lg:grid-cols-2 gap-4 lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1">
-                <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
-                  <h3 className="text-h2">Built for Field Installation</h3>
-                </div>
-                <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
-                  <p className="text-base md:text-lg mb-4 text-white/90">
-                    NTC Control is designed for engineers working on-site.
-                  </p>
-                  <p className="text-base md:text-lg mb-4 text-white/90">
-                    When using a laptop is not practical, the app allows you to:
-                  </p>
-                  <ul className="space-y-2 text-base md:text-lg mb-5 text-white/90">
-                    {builtForFieldItems.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="text-sm md:text-base text-white/90">
-                    All from your mobile device.
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid lg:grid-cols-2 gap-4 lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1">
-                <div className="rounded-3xl border border-gray-200 bg-[#1E293B] p-8 md:p-10 text-white">
-                  <p className="text-base md:text-lg text-white/90">
-                    Correct configuration during installation prevents future support issues.
-                  </p>
-                  <p className="text-base md:text-lg text-white/90 mt-4">
-                    NTC Control helps ensure that every device leaves the installation site fully verified.
-                  </p>
-                </div>
-                <div className="rounded-3xl border border-gray-200 bg-brand-light-3 p-8 md:p-10 flex items-center justify-center text-center">
-                  <h3 className="text-h2">Why It Matters</h3>
-                </div>
-              </div>
-
-              <div className="text-center my-12 md:my-16 max-w-3xl mx-auto">
-                <h3 className="text-h2 text-brand-navy leading-tight">
-                  Configure on-site.
-                </h3>
-                <h3 className="text-h2 text-brand-navy leading-tight mt-2">
-                  Validate instantly.
-                </h3>
-                <h3 className="text-h2 text-brand-navy leading-tight mt-2">
-                  Deploy with confidence.
-                </h3>
-              </div>
-            </div>
+        <section className="pt-0 pb-20 md:pb-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16">
+            <SoftwareCTA
+              title="Live Telemetry in Your Pocket"
+              items={[
+                "See exactly what the device will send to the server.",
+                "Validate sensor values and configuration results before completing installation.",
+                "No assumptions.",
+                "No return visits.",
+              ]}
+            />
+            <SoftwareCTA
+              titleLines={[
+                "Configure on-site.",
+                "Validate instantly.",
+                "Deploy with confidence.",
+              ]}
+            />
           </div>
         </section>
       </main>

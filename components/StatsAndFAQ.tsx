@@ -99,12 +99,14 @@ const faqs = [
       <div className="space-y-4">
         <p>You can download the latest version of NTC Configurator here:</p>
         <a
-          href="#"
+          href="https://wiki.navtelecom.ru/programs/ntc_configurator/ntc_configurator_last.exe"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-block text-brand-primary font-bold hover:underline"
         >
           Get the latest version
         </a>
-        <p className="text-sm text-gray-400 italic">
+        <p className="text-sm text-gray-500 italic">
           Note: Available for Windows OS only.
         </p>
       </div>
@@ -121,8 +123,10 @@ const faqs = [
             reboot).
           </p>
           <a
-            href="#"
-            className="text-[#28398c] text-sm font-bold hover:underline"
+            href="https://wiki.navtelecom.ru/en/home/devices/commands"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-primary text-sm font-bold hover:underline"
           >
             Full command list
           </a>
@@ -136,8 +140,10 @@ const faqs = [
             firmware.
           </p>
           <a
-            href="#"
-            className="text-[#28398c] text-sm font-bold hover:underline"
+            href="https://wiki.navtelecom.ru/en/home/devices/diagnostics/remote_configurator"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-primary text-sm font-bold hover:underline"
           >
             How it works
           </a>
@@ -149,8 +155,10 @@ const faqs = [
             and device health monitoring.
           </p>
           <a
-            href="#"
-            className="text-[#28398c] text-sm font-bold hover:underline"
+            href="https://wiki.navtelecom.ru/en/home/drc"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-primary text-sm font-bold hover:underline"
           >
             Learn more
           </a>
@@ -164,52 +172,37 @@ const faqs = [
       <div className="space-y-4">
         <p>You can find the full list of SMS/GPRS commands here:</p>
         <a
-          href="#"
-          className="inline-block text-[#28398c] font-bold hover:underline"
+          href="https://wiki.navtelecom.ru/en/home/devices/commands"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block text-brand-primary font-bold hover:underline"
         >
           Full command list
         </a>
-        <div className="pt-2 border-t border-gray-100">
+        <p className="pt-2 border-t border-gray-100 text-gray-600">
           If you need a complex combined command, please contact Technical
           Support at{" "}
           <a
-            href="mailto:support@navtelecom.in"
-            className="text-[#28398c] hover:underline"
+            href="mailto:support@navtelecom.ru"
+            className="text-brand-primary hover:underline font-medium"
           >
-            support@navtelecom.in
+            support@navtelecom.ru
           </a>
-        </div>
+        </p>
       </div>
     ),
   },
   {
-    q: "Where can I check supported vehicles for CAN decoding?",
+    q: "Still have questions?",
     a: (
-      <div className="space-y-4">
-        <p>
-          The list of supported vehicles and decoding files is available here:
-        </p>
+      <div className="space-y-2">
+        <p>Contact our technical support:</p>
         <a
-          href="#"
-          className="inline-block text-[#28398c] font-bold hover:underline"
+          href="mailto:support@navtelecom.ru"
+          className="inline-block text-brand-primary font-bold hover:underline"
         >
-          Supported vehicles list
+          support@navtelecom.ru
         </a>
-      </div>
-    ),
-  },
-  {
-    q: "How can I integrate Navtelecom devices with my system?",
-    a: (
-      <div className="space-y-4">
-        <p>
-          You can integrate Navtelecom devices with your system using the FLEX
-          protocol.
-        </p>
-        <p>
-          We provide documentation and developer consultations to support
-          integration.
-        </p>
       </div>
     ),
   },

@@ -13,13 +13,13 @@ import {
   X,
 } from "phosphor-react";
 import { useRouter } from "next/navigation";
-import ProductFAQ from "@/components/product/ProductFAQ";
 
 type DeviceConnectivity = "2g" | "4g";
 
 interface Device {
   name: string;
   connectivity: DeviceConnectivity;
+  connectivityLabel: string;
   image: string;
   specs: string[];
 }
@@ -54,162 +54,145 @@ const SmartSeriesPage = () => {
   const devices: Device[] = [
     // 2G Models
     {
-      name: "S-2437",
+      name: "S-2421",
       connectivity: "2g" as const,
+      connectivityLabel: "2G",
       image: "/Navtelecom/sample2.PNG",
       specs: [
-        "Dual SIM",
-        "Eco Driving",
-        "Custom Logic",
-        "RS-485",
-        "1-Wire, MODBUS",
-        "Dual CAN",
+        "3 Universal Inputs",
+        "2 Outputs",
+        "1-Wire",
         "Bluetooth 4.0",
-        "3 Universal IN",
-        "2 OUT",
-        "800 mAh",
-      ],
-    },
-    {
-      name: "S-2435",
-      connectivity: "2g" as const,
-      image: "/Navtelecom/sample2.PNG",
-      specs: [
-        "Dual SIM",
-        "Eco Driving",
-        "Custom Logic",
-        "RS-485, RS-232",
-        "1-Wire, MODBUS",
-        "CAN",
-        "Bluetooth 4.0",
-        "3 Universal IN",
-        "2 OUT",
-        "800 mAh",
-      ],
-    },
-    {
-      name: "S-2433",
-      connectivity: "2g" as const,
-      image: "/Navtelecom/sample2.PNG",
-      specs: [
-        "Single SIM",
-        "Eco Driving",
-        "Custom Logic",
-        "RS-485, RS-232",
-        "1-Wire, MODBUS",
-        "Bluetooth 4.0",
-        "3 Universal IN",
-        "2 OUT",
-        "800 mAh",
+        "Battery 380 mAh",
       ],
     },
     {
       name: "S-2425",
       connectivity: "2g" as const,
+      connectivityLabel: "2G, Dual SIM",
       image: "/Navtelecom/sample2.PNG",
       specs: [
-        "Dual SIM",
-        "Eco Driving",
-        "RS-485, RS-232",
-        "1-Wire",
-        "Bluetooth 4.0",
-        "3 Universal IN",
-        "2 OUT",
-        "380 mAh",
+        "3 Universal Inputs",
+        "2 Outputs",
+        "1-Wire, RS-485, RS-232, BLE",
+        "Battery 380 mAh",
       ],
     },
     {
-      name: "S-2421",
+      name: "S-2433",
       connectivity: "2g" as const,
+      connectivityLabel: "2G",
       image: "/Navtelecom/sample2.PNG",
       specs: [
-        "Single SIM",
-        "Eco Driving",
-        "RS-485",
-        "1-Wire",
+        "3 Universal Inputs",
+        "2 Outputs",
+        "1-Wire, MODBUS RTU",
+        "RS-485, RS-232",
         "Bluetooth 4.0",
-        "3 Universal IN",
-        "2 OUT",
-        "380 mAh",
+        "Battery 800 mAh",
+      ],
+    },
+    {
+      name: "S-2435",
+      connectivity: "2g" as const,
+      connectivityLabel: "2G, Dual SIM",
+      image: "/Navtelecom/sample2.PNG",
+      specs: [
+        "3 Universal Inputs",
+        "2 Outputs",
+        "CAN",
+        "1-Wire, MODBUS RTU",
+        "RS-485, RS-232",
+        "Bluetooth 4.0",
+        "Battery 800 mAh",
+      ],
+    },
+    {
+      name: "S-2437",
+      connectivity: "2g" as const,
+      connectivityLabel: "2G, Dual SIM",
+      image: "/Navtelecom/sample2.PNG",
+      specs: [
+        "3 Universal Inputs",
+        "2 Outputs",
+        "Dual CAN",
+        "1-Wire, MODBUS RTU",
+        "RS-485",
+        "Bluetooth 4.0",
+        "Battery 800 mAh",
       ],
     },
     // 4G Models
     {
-      name: "S-4513",
-      connectivity: "4g" as const,
-      image: "/Navtelecom/sample2.PNG",
-      specs: [
-        "Dual SIM",
-        "Custom Logic",
-        "RS-485",
-        "1-Wire, MODBUS",
-        "Bluetooth 4.0",
-        "4 Digital IN & 1 Analog IN",
-        "2 OUT",
-        "380 mAh",
-      ],
-    },
-    {
       name: "S-4511",
       connectivity: "4g" as const,
+      connectivityLabel: "4G / 2G",
       image: "/Navtelecom/sample2.PNG",
       specs: [
-        "Single SIM",
-        "Custom Logic",
+        "4 Digital Inputs",
+        "1 Analog Input",
+        "2 Outputs",
         "Bluetooth 4.0",
-        "4 Digital IN & 1 Analog IN",
-        "2 OUT",
-        "380 mAh",
+        "Battery 380 mAh",
       ],
     },
     {
-      name: "S-4537",
+      name: "S-4513",
       connectivity: "4g" as const,
+      connectivityLabel: "4G / 2G, Dual SIM",
       image: "/Navtelecom/sample2.PNG",
       specs: [
-        "Dual SIM",
-        "Eco Driving",
-        "Custom Logic",
+        "4 Digital Inputs",
+        "1 Analog Input",
+        "2 Outputs",
+        "1-Wire",
         "RS-485",
-        "1-Wire, MODBUS",
-        "Dual CAN",
         "Bluetooth 4.0",
-        "3 Universal IN",
-        "2 OUT",
-        "800 mAh",
-      ],
-    },
-    {
-      name: "S-4535",
-      connectivity: "4g" as const,
-      image: "/Navtelecom/sample2.PNG",
-      specs: [
-        "Dual SIM",
-        "Eco Driving",
-        "Custom Logic",
-        "RS-485, RS-232",
-        "1-Wire, MODBUS",
-        "CAN",
-        "Bluetooth 4.0",
-        "3 Universal IN",
-        "2 OUT",
-        "800 mAh",
+        "Battery 380 mAh",
       ],
     },
     {
       name: "S-4533",
       connectivity: "4g" as const,
+      connectivityLabel: "4G / 2G, Dual SIM",
       image: "/Navtelecom/sample2.PNG",
       specs: [
-        "Dual SIM",
-        "Eco Driving",
-        "Custom Logic",
+        "3 Universal Inputs",
+        "2 Outputs",
+        "1-Wire, MODBUS RTU",
         "RS-485, RS-232",
-        "1-Wire, MODBUS",
         "Bluetooth 4.0",
-        "3 Universal IN",
-        "2 OUT",
-        "800 mAh",
+        "Battery 800 mAh",
+      ],
+    },
+    {
+      name: "S-4535",
+      connectivity: "4g" as const,
+      connectivityLabel: "4G / 2G, Dual SIM",
+      image: "/Navtelecom/sample2.PNG",
+      specs: [
+        "3 Universal Inputs",
+        "2 Outputs",
+        "CAN",
+        "1-Wire, MODBUS RTU",
+        "RS-485, RS-232",
+        "Bluetooth 4.0",
+        "Battery 800 mAh",
+      ],
+    },
+    {
+      name: "S-4537",
+      connectivity: "4g" as const,
+      connectivityLabel: "4G / 2G, Dual SIM",
+      image: "/Navtelecom/sample2.PNG",
+      specs: [
+        "3 Universal Inputs",
+        "2 Outputs",
+        "Dual CAN",
+        "1-Wire, MODBUS RTU",
+        "RS-485",
+        "Bluetooth 4.0",
+        "Battery 800 mAh",
       ],
     },
   ];
@@ -264,18 +247,18 @@ const SmartSeriesPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased text-brand-navy">
+    <div className="min-h-screen bg-[#EFEFEF] font-sans antialiased text-brand-navy overflow-x-hidden">
       <Navbar />
 
-      <main className="pt-20">
+      <main className="pt-20 bg-[#EFEFEF]">
         {/* HERO SECTION */}
         <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-center bg-[#EFEFEF] product-background-image smart-series-hero-background">
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-            <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center py-12 md:py-20">
-              {/* Left Info */}
-              <div className="space-y-8 ml-0 lg:ml-10">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div className="flex flex-col lg:flex-row lg:items-center h-full py-12 md:py-20">
+              {/* Left Info - constrained to left half on desktop */}
+              <div className="w-full lg:w-1/2 lg:max-w-[50%] space-y-6 sm:space-y-8">
                 <div>
-                  <h1 className="text-h1">
+                  <h1 className="text-h1 break-words">
                     SMART
                     <br />
                     <span className="text-brand-primary">Series</span>
@@ -289,32 +272,20 @@ const SmartSeriesPage = () => {
                 </div>
                 <button
                   onClick={scrollToLineupFromExplore}
-                  className="bg-brand-navy text-white px-20 py-4 rounded-full font-bold text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1"
+                  className="bg-brand-navy text-white px-12 sm:px-16 lg:px-20 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1"
                 >
                   Explore
                 </button>
-              </div>
-
-              {/* Middle spacer column (background image already covers the section) */}
-              <div className="ml-0 lg:ml-10" />
-
-              {/* Right Big Text */}
-              <div className="lg:text-right">
-                <h2 className="text-display mr-10">
-                  <span className="text-brand-primary">NEW</span>
-                  <br />
-                  Models
-                </h2>
               </div>
             </div>
           </div>
         </section>
 
         {/* KEY FEATURES */}
-        <section className="py-16 md:py-20 bg-white shadow-2xl relative z-10 -mt-8">
+        <section className="py-16 md:py-20 bg-[#EFEFEF] relative z-10 -mt-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-h1 mb-3">
+            <div className="text-center mb-12 px-2">
+              <h2 className="text-h1 mb-3 break-words">
                 Technology That{" "}
                 <span className="text-brand-primary">Moves Fleets</span>
               </h2>
@@ -324,7 +295,7 @@ const SmartSeriesPage = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 xl:gap-8">
               {[
                 {
                   title: "RS-485 Ready",
@@ -410,7 +381,7 @@ const SmartSeriesPage = () => {
               ].map((feature, idx) => (
                 <div
                   key={idx}
-                  className="group p-10 md:p-12 bg-white rounded-[3rem] border border-gray-100 hover:shadow-2xl transition-all duration-500 relative overflow-hidden min-h-[16rem] lg:min-h-[17rem]"
+                  className="group p-6 sm:p-10 md:p-12 bg-white rounded-2xl sm:rounded-[3rem] border border-gray-100 hover:shadow-2xl transition-all duration-500 relative overflow-hidden min-h-[14rem] sm:min-h-[16rem] lg:min-h-[17rem]"
                 >
                   <div className="absolute top-8 right-8 text-gray-300 group-hover:text-brand-primary transition-colors duration-500 scale-110">
                     {feature.icon}
@@ -430,18 +401,18 @@ const SmartSeriesPage = () => {
           </div>
         </section>
 
-        {/* EXPLORE THE LINEUP (Screenshot UI with Rounding) */}
-        <section ref={lineupRef} className="py-16 md:py-20 bg-white">
+        {/* EXPLORE THE LINEUP */}
+        <section ref={lineupRef} className="py-16 md:py-20 bg-[#EFEFEF]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-h1 text-center mb-10">Explore the Lineup</h2>
+            <h2 className="text-h1 text-center mb-10 break-words px-2">Explore the Lineup</h2>
 
-            {/* Filter Buttons - Squared from Screenshot */}
-            <div className="flex justify-center gap-4 mb-12">
+            {/* Filter Buttons */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12">
               {["all", "2g", "4g"].map((f) => (
                 <button
                   key={f}
                   onClick={() => setFilter(f as "all" | "2g" | "4g")}
-                  className={`px-10 py-3 font-bold transition-all border-2 rounded-full ${
+                  className={`px-6 sm:px-10 py-2.5 sm:py-3 font-bold text-sm sm:text-base transition-all border-2 rounded-full ${
                     filter === f
                       ? "bg-brand-navy text-white border-brand-navy"
                       : "bg-white text-brand-navy border-gray-200 hover:border-brand-navy"
@@ -452,11 +423,11 @@ const SmartSeriesPage = () => {
               ))}
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {sortedDevices.map((device, idx) => (
                 <div
                   key={idx}
-                  className={`bg-white flex flex-col border rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden group relative ${
+                  className={`bg-white flex flex-col border rounded-2xl sm:rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden group relative min-w-0 ${
                     selectedForCompare.includes(device.name)
                       ? "border-brand-primary ring-2 ring-brand-primary/20"
                       : "border-gray-100"
@@ -477,7 +448,7 @@ const SmartSeriesPage = () => {
                     )}
                   </button>
 
-                  <div className="p-10 pb-0 flex flex-col items-start">
+                  <div className="p-6 sm:p-10 pb-0 flex flex-col items-start min-w-0">
                     {/* Connectivity Highlight */}
                     <div className="mb-8 w-full flex justify-between items-center">
                       <div
@@ -487,7 +458,7 @@ const SmartSeriesPage = () => {
                             : "bg-blue-100 text-blue-800 border-blue-200"
                         }`}
                       >
-                        {device.connectivity} Network
+                        {device.connectivityLabel}
                       </div>
                     </div>
 
@@ -502,7 +473,7 @@ const SmartSeriesPage = () => {
                               fill
                               className="object-contain"
                             />
-                            <span className="absolute left-6 top-6 text-brand-navy text-xl font-black tracking-widest uppercase">
+                            <span className="absolute left-4 sm:left-6 top-4 sm:top-6 text-brand-navy text-lg sm:text-xl font-black tracking-widest uppercase">
                               {device.name}
                             </span>
                           </>
@@ -520,7 +491,7 @@ const SmartSeriesPage = () => {
                     </div>
 
                     {/* Feature list - Left Aligned with Tick */}
-                    <div className="space-y-4 mb-12 w-full">
+                    <div className="space-y-4 mb-8 sm:mb-12 w-full min-w-0">
                       {device.specs.map((spec, sIdx) => (
                         <div
                           key={sIdx}
@@ -541,7 +512,7 @@ const SmartSeriesPage = () => {
                     </div>
                   </div>
 
-                  <div className="p-10 pt-0 mt-auto">
+                  <div className="p-6 sm:p-10 pt-0 mt-auto">
                     <Link
                       href={`/products/tracking-devices/smart-series/${device.name.toLowerCase()}`}
                       className="w-full bg-brand-navy text-white py-5 rounded-full font-black text-sm hover:bg-brand-primary transition-all shadow-xl shadow-brand-navy/10 transform hover:-translate-y-1 active:scale-95 flex items-center justify-center"
@@ -556,14 +527,14 @@ const SmartSeriesPage = () => {
         </section>
 
         {/* WHY SMART STANDS OUT */}
-        <section className="py-12 md:py-16 bg-white">
+        <section className="py-12 md:py-16 bg-[#EFEFEF]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-h1 text-center mb-10">
+            <h2 className="text-h1 text-center mb-10 break-words px-2">
               Why <span className="text-brand-primary">SMART</span> Stands Out
               in GPS Tracking
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 xl:gap-8">
               {[
                 {
                   title: (
@@ -628,7 +599,7 @@ const SmartSeriesPage = () => {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#F8FAFC] p-10 md:p-12 rounded-[3rem] shadow-xl shadow-brand-navy/5 border border-white group hover:-translate-y-2 transition-all duration-500"
+                  className="bg-[#F8FAFC] p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-[3rem] shadow-xl shadow-brand-navy/5 border border-white group hover:-translate-y-2 transition-all duration-500 min-w-0 overflow-hidden"
                 >
                   <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-navy mb-4 group-hover:text-brand-primary transition-colors leading-tight min-h-[80px]">
                     {item.title}
@@ -640,12 +611,25 @@ const SmartSeriesPage = () => {
           </div>
         </section>
 
-        {/* WHY SMART STANDS OUT */}
-        <ProductFAQ faqs={smartFaqs} />
+        {/* FAQ redirect notice */}
+        <section className="py-12 bg-[#EFEFEF]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-body text-center">
+              If you have questions about SMART series devices, configuration or integration, please visit our{" "}
+              <a
+                href="/support/faq"
+                className="text-brand-primary font-bold hover:underline"
+              >
+                FAQ page
+              </a>
+              .
+            </p>
+          </div>
+        </section>
 
         {/* Floating Compare Bar */}
         {selectedForCompare.length > 0 && (
-          <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
+          <div className="fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
             <div className="bg-brand-navy text-white p-4 md:p-6 rounded-[2rem] shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10 backdrop-blur-md">
               <div className="flex flex-col gap-2">
                 <p className="text-sm font-bold">

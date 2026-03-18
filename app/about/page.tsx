@@ -138,34 +138,51 @@ const isTargetCountry = (geo: MapGeo) => {
   );
 };
 
-interface MapGeographiesProps {
-  geographies: MapGeo[];
-}
-
-const MapGeographies: React.FC<MapGeographiesProps> = ({ geographies }) => {
+const MapGeographies: React.FC<{
+  geoUrl: string;
+  onGeographiesReady: (geos: MapGeo[]) => void;
+}> = ({ geoUrl, onGeographiesReady }) => {
   return (
-    <Geographies geography="/features.json">
-      {({ geographies: renderedGeographies }: { geographies: MapGeo[] }) => (
-        <>
-          {renderedGeographies.map((geo) => {
-            const isHighlighted = isTargetCountry(geo);
-            return (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                fill={isHighlighted ? "#D8DEE9" : "#E5E7EB"}
-                stroke="none"
-                style={{
-                  default: { outline: "none" },
-                  hover: { outline: "none" },
-                  pressed: { outline: "none" },
-                }}
-              />
-            );
-          })}
-        </>
+    <Geographies geography={geoUrl}>
+      {({ geographies }: { geographies?: MapGeo[] }) => (
+        <MapGeographiesInner
+          geographies={Array.isArray(geographies) ? geographies : []}
+          onGeographiesReady={onGeographiesReady}
+        />
       )}
     </Geographies>
+  );
+};
+
+const MapGeographiesInner: React.FC<{
+  geographies: MapGeo[];
+  onGeographiesReady: (geos: MapGeo[]) => void;
+}> = ({ geographies, onGeographiesReady }) => {
+  useEffect(() => {
+    onGeographiesReady(geographies);
+  }, [geographies, onGeographiesReady]);
+
+  return (
+    <>
+      {geographies.map((geo) => {
+        const isHighlighted = isTargetCountry(geo);
+        return (
+          <Geography
+            key={geo.rsmKey}
+            geography={geo}
+            fill={isHighlighted ? "#D8DEE9" : "#E5E7EB"}
+            stroke="#CBD5E1"
+            strokeWidth={0.6}
+            style={{
+              default: { outline: "none" },
+              hover: { outline: "none" },
+              pressed: { outline: "none" },
+            }}
+            vectorEffect="non-scaling-stroke"
+          />
+        );
+      })}
+    </>
   );
 };
 
@@ -191,12 +208,20 @@ const MapMarkers: React.FC<MapMarkersProps> = ({
   activePin,
 }) => {
   const pulseDuration = 3;
+  const basePulseDuration = 2.6;
 
   return (
     <>
-      {memoizedMarkerPool.map((pinInfo) => {
-        const { key: markerKey, name: countryName, longitude, latitude, tooltipWidth } = pinInfo;
+      {memoizedMarkerPool.map((pinInfo, idx) => {
+        const {
+          key: markerKey,
+          name: countryName,
+          longitude,
+          latitude,
+          tooltipWidth,
+        } = pinInfo;
         const isPulsing = currentPulsingMarkerId === markerKey;
+        const baseBegin = `${(idx % 10) * 0.18}s`;
 
         return (
           <Marker
@@ -214,7 +239,22 @@ const MapMarkers: React.FC<MapMarkersProps> = ({
             onMouseLeave={() => setHoverPin(null)}
           >
             <g className="cursor-pointer">
-              <circle cx="0" cy="-2" r="3.6" fill="#28398c" />
+              <circle cx="0" cy="-2" r="3.6" fill="#28398c">
+                <animate
+                  attributeName="r"
+                  values="3.6; 4.25; 3.6"
+                  dur={`${basePulseDuration}s`}
+                  begin={baseBegin}
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0.92; 1; 0.92"
+                  dur={`${basePulseDuration}s`}
+                  begin={baseBegin}
+                  repeatCount="indefinite"
+                />
+              </circle>
               {isPulsing && (
                 <>
                   {/* First ripple */}
@@ -321,106 +361,92 @@ const MapMarkers: React.FC<MapMarkersProps> = ({
 const AboutPage = () => {
   const [hoverPin, setHoverPin] = useState<PinInfo | null>(null);
   const markerPoolRef = useRef<PinInfo[]>([]);
-  const [currentPulsingMarkerId, setCurrentPulsingMarkerId] = useState<
+  const renderedGeographiesRef = useRef<MapGeo[]>([]);
+  const [randomPulsingMarkerId, setRandomPulsingMarkerId] = useState<
     string | null
   >(null);
   const activePin = hoverPin; // Tooltips only appear on hover
+  const activeRippleMarkerId = hoverPin?.key ?? randomPulsingMarkerId;
 
   const geoUrl = "https://unpkg.com/world-atlas@2.0.2/countries-110m.json";
-  const [geographies, setGeographies] = useState<MapGeo[] | null>(null);
-  const [loadingGeographies, setLoadingGeographies] = useState(true);
+  const [renderedGeographies, setRenderedGeographies] = useState<MapGeo[]>([]);
 
-  useEffect(() => {
-    fetch(geoUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setGeographies(data.features);
-        setLoadingGeographies(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching geographies:", error);
-        setLoadingGeographies(false);
-      });
-  }, []);
+  const onGeographiesReady = (geos: MapGeo[]) => {
+    if (geos.length === 0) return;
+    // avoid re-setting on every render
+    if (renderedGeographiesRef.current.length === geos.length) return;
+    renderedGeographiesRef.current = geos;
+    setRenderedGeographies(geos);
+  };
 
   const markerGeographies = useMemo(
-    () => geographies?.filter(isTargetCountry) || [],
-    [geographies],
+    () => renderedGeographies.filter(isTargetCountry),
+    [renderedGeographies],
   );
 
   const memoizedMarkerPool: PinInfo[] = useMemo(
     () =>
-      markerGeographies.map((geo) => {
-        const markerKey = `marker-${geo.rsmKey}`;
-        const code =
-          geo.properties.ISO_A3 ||
-          geo.properties.iso_a3 ||
-          geo.properties.ISO3;
-        const countryName =
-          geo.properties.NAME_LONG ||
-          geo.properties.name ||
-          geo.properties.NAME ||
-          code;
-        const [longitude, latitude] = geoCentroid(geo);
-        const tooltipWidth = Math.max(
-          String(countryName).length * 6.9 + 12,
-          74,
-        );
-        return {
-          key: markerKey,
-          name: String(countryName).toUpperCase(),
-          longitude,
-          latitude,
-          tooltipWidth,
-        };
-      }),
+      markerGeographies
+        .map((geo, idx) => {
+          const code =
+            geo.properties.ISO_A3 ||
+            geo.properties.iso_a3 ||
+            geo.properties.ISO3;
+          const countryName =
+            geo.properties.NAME_LONG ||
+            geo.properties.name ||
+            geo.properties.NAME ||
+            code;
+          const markerKey = `marker-${String(code ?? countryName ?? idx)}`;
+          const [longitude, latitude] = geoCentroid(geo);
+          if (!Number.isFinite(longitude) || !Number.isFinite(latitude))
+            return null;
+          const tooltipWidth = Math.max(
+            String(countryName).length * 6.9 + 12,
+            74,
+          );
+          return {
+            key: markerKey,
+            name: String(countryName).toUpperCase(),
+            longitude,
+            latitude,
+            tooltipWidth,
+          };
+        })
+        .filter((v): v is PinInfo => v !== null),
     [markerGeographies],
   );
 
+  useEffect(() => {
+    markerPoolRef.current = memoizedMarkerPool;
+  }, [memoizedMarkerPool]);
 
   useEffect(() => {
     if (markerPoolRef.current.length === 0) return;
 
-    let pulseTimer: NodeJS.Timeout;
-    let delayTimer: NodeJS.Timeout;
-
-    const startPulse = () => {
+    const pickNext = (prev: string | null) => {
       const pool = markerPoolRef.current;
-      if (pool.length === 0) return; // Pool might become empty dynamically
+      if (pool.length === 0) return null;
+      if (pool.length === 1) return pool[0]?.key ?? null;
 
-      let nextMarker: PinInfo;
-      if (pool.length === 1) {
-        nextMarker = pool[0];
-      } else {
-        let candidate = pool[Math.floor(Math.random() * pool.length)];
-        let guard = 0;
-        // Ensure next marker is different from the current one, up to 8 retries
-        while (
-          currentPulsingMarkerId &&
-          candidate.key === currentPulsingMarkerId &&
-          guard < 8
-        ) {
-          candidate = pool[Math.floor(Math.random() * pool.length)];
-          guard += 1;
-        }
-        nextMarker = candidate;
+      let candidate = pool[Math.floor(Math.random() * pool.length)];
+      let guard = 0;
+      while (prev && candidate?.key === prev && guard < 10) {
+        candidate = pool[Math.floor(Math.random() * pool.length)];
+        guard += 1;
       }
-
-      setCurrentPulsingMarkerId(nextMarker.key);
-
-      pulseTimer = setTimeout(() => {
-        setCurrentPulsingMarkerId(null);
-        delayTimer = setTimeout(startPulse, 1000); // 1 second delay
-      }, 3000); // Pulse for 3 seconds
+      return candidate?.key ?? null;
     };
 
-    startPulse(); // Initial pulse
+    // Ensure we have an initial random marker selected
+    setRandomPulsingMarkerId((prev) => prev ?? pickNext(prev));
 
-    return () => {
-      clearTimeout(pulseTimer);
-      clearTimeout(delayTimer);
-    };
-  }, [currentPulsingMarkerId]);
+    const interval = setInterval(() => {
+      setRandomPulsingMarkerId((prev) => pickNext(prev));
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [memoizedMarkerPool.length]);
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-brand-navy overflow-x-hidden">
@@ -507,10 +533,13 @@ const AboutPage = () => {
                     height: "auto",
                   }}
                 >
-                  <MapGeographies geographies={geographies || []} />
+                  <MapGeographies
+                    geoUrl={geoUrl}
+                    onGeographiesReady={onGeographiesReady}
+                  />
                   <MapMarkers
                     memoizedMarkerPool={memoizedMarkerPool}
-                    currentPulsingMarkerId={currentPulsingMarkerId}
+                    currentPulsingMarkerId={activeRippleMarkerId}
                     setHoverPin={setHoverPin}
                     activePin={activePin}
                   />
@@ -703,9 +732,10 @@ const AboutPage = () => {
               </p>
               <div className="flex items-center justify-center gap-8">
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/company/navtelecom"
                   className="flex items-center justify-center w-14 h-14 rounded-full bg-[#F8FAFC] border border-gray-200 text-gray-500 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-300"
                   aria-label="LinkedIn"
+                  target="_blank"
                 >
                   <svg
                     className="w-6 h-6"
@@ -716,9 +746,10 @@ const AboutPage = () => {
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/navtelecom?igsh=OWRkZ3kyOG5mdjZq"
                   className="flex items-center justify-center w-14 h-14 rounded-full bg-[#F8FAFC] border border-gray-200 text-gray-500 hover:bg-[#E4405F] hover:text-white hover:border-[#E4405F] transition-all duration-300"
                   aria-label="Instagram"
+                  target="_blank"
                 >
                   <svg
                     className="w-6 h-6"

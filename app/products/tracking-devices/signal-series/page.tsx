@@ -13,13 +13,13 @@ import {
   X,
 } from "phosphor-react";
 import { useRouter } from "next/navigation";
-import ProductFAQ from "@/components/product/ProductFAQ";
 
 type DeviceConnectivity = "2g" | "4g";
 
 interface Device {
   name: string;
   connectivity: DeviceConnectivity;
+  connectivityLabel: string;
   image: string;
   specs: string[];
 }
@@ -54,90 +54,78 @@ const SignalSeriesPage = () => {
   const devices: Device[] = [
     // 2G Models
     {
-      name: "S-2653",
-      connectivity: "2g",
-      image: "/Navtelecom/sample3.PNG",
-      specs: [
-        "Dual SIM",
-        "Eco Driving",
-        "Voice communication",
-        "Custom Logic",
-        "RS-485",
-        "1-Wire, MODBUS",
-        "Dual CAN",
-        "Bluetooth 4.0",
-        "6 Universal IN",
-        "4 OUT",
-        "800 mAh",
-      ],
-    },
-    {
       name: "S-2613",
       connectivity: "2g",
+      connectivityLabel: "2G",
       image: "/Navtelecom/sample3.PNG",
       specs: [
-        "Single SIM",
-        "Voice communication",
+        "4 Digital Inputs",
+        "1 Analog Input",
+        "4 Outputs",
         "RS-485",
         "Bluetooth 4.0",
-        "4 Digital IN & 1 Analog IN",
-        "4 OUT",
-        "800 mAh",
+        "Battery 800 mAh",
       ],
     },
     {
       name: "S-2651",
       connectivity: "2g",
+      connectivityLabel: "2G, Dual SIM",
       image: "/Navtelecom/sample3.PNG",
       specs: [
-        "Dual SIM",
-        "Eco Driving",
-        "Voice communication",
-        "Custom Logic",
-        "RS-485, RS-232",
-        "1-Wire, MODBUS",
+        "6 Universal Inputs",
+        "4 Outputs",
         "CAN",
+        "1-Wire, MODBUS RTU",
+        "RS-485, RS-232",
         "Bluetooth 4.0",
-        "6 Universal IN",
-        "4 OUT",
-        "800 mAh",
+        "Battery 800 mAh",
+      ],
+    },
+    {
+      name: "S-2653",
+      connectivity: "2g",
+      connectivityLabel: "2G, Dual SIM",
+      image: "/Navtelecom/sample3.PNG",
+      specs: [
+        "6 Universal Inputs",
+        "4 Outputs",
+        "Dual CAN",
+        "1-Wire, MODBUS RTU",
+        "RS-485",
+        "Bluetooth 4.0",
+        "Battery 800 mAh",
       ],
     },
     // 4G Models
     {
-      name: "S-4753",
+      name: "S-4751",
       connectivity: "4g",
+      connectivityLabel: "4G / 2G, Dual SIM",
       image: "/Navtelecom/sample3.PNG",
       specs: [
-        "Dual SIM",
-        "Eco Driving",
-        "Voice communication",
-        "Custom Logic",
-        "RS-485",
-        "1-Wire, MODBUS",
-        "Dual CAN",
+        "6 Universal Inputs",
+        "4 Outputs",
+        "CAN",
+        "1-Wire, MODBUS RTU",
+        "RS-485, RS-232",
         "Bluetooth 4.0",
-        "6 Universal IN",
-        "4 OUT",
-        "800 mAh",
+        "Battery 800 mAh",
       ],
     },
     {
-      name: "S-4751",
+      name: "S-4753",
       connectivity: "4g",
+      connectivityLabel: "4G / 2G, Dual SIM",
       image: "/Navtelecom/sample3.PNG",
       specs: [
-        "Dual SIM",
-        "Eco Driving",
-        "Voice communication",
-        "Custom Logic",
-        "RS-485, RS-232",
-        "1-Wire, MODBUS",
-        "CAN",
+        "6 Universal Inputs",
+        "4 Outputs",
+        "Dual CAN",
+        "1-Wire, MODBUS RTU",
+        "RS-485",
         "Bluetooth 4.0",
-        "6 Universal IN",
-        "4 OUT",
-        "800 mAh",
+        "Battery 800 mAh",
       ],
     },
   ];
@@ -430,7 +418,7 @@ const SignalSeriesPage = () => {
                             : "bg-blue-100 text-blue-800 border-blue-200"
                         }`}
                       >
-                        {device.connectivity} Network
+                        {device.connectivityLabel}
                       </div>
                     </div>
 
@@ -583,8 +571,21 @@ const SignalSeriesPage = () => {
           </div>
         </section>
 
-        {/* WHY SMART STANDS OUT */}
-        <ProductFAQ faqs={signalFaqs} />
+        {/* FAQ redirect notice */}
+        <section className="py-12 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-body text-center">
+              For detailed answers about SIGNAL devices, commands and installation, please visit our{" "}
+              <a
+                href="/support/faq"
+                className="text-brand-primary font-bold hover:underline"
+              >
+                FAQ page
+              </a>
+              .
+            </p>
+          </div>
+        </section>
 
         {/* Floating Compare Bar */}
         {selectedForCompare.length > 0 && (

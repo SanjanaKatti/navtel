@@ -46,68 +46,69 @@ const StartSeriesPage = () => {
     {
       name: "S-2010",
       connectivity: "2g" as const,
+      connectivityLabel: "2G",
       image: "/Navtelecom/start s-2010_1800x1350.png",
       specs: [
-        "Single SIM",
-        "Engine Hours",
+        "4 Digital Inputs",
+        "1 Analog Input",
+        "1 Output",
         "Bluetooth 4.0",
-        "4 Digital IN & 1 Analog IN",
-        "1 OUT",
+        "No battery",
       ],
     },
     {
       name: "S-2011",
       connectivity: "2g" as const,
+      connectivityLabel: "2G",
       image: "/Navtelecom/start s-2011_1800x1350.png",
       specs: [
-        "Single SIM",
-        "Engine Hours",
+        "4 Digital Inputs",
+        "1 Analog Input",
+        "1 Output",
         "Bluetooth 4.0",
-        "4 Digital IN & 1 Analog IN",
-        "1 OUT",
-        "130 mAh Battery",
+        "Battery 130 mAh",
       ],
     },
     {
       name: "S-2013",
       connectivity: "2g" as const,
+      connectivityLabel: "2G",
       image: "/Navtelecom/start s-2013_1800x1350.png",
       specs: [
-        "Single SIM",
-        "Engine Hours",
+        "2 Digital Inputs",
+        "1 Analog Input",
+        "1 Output",
         "RS-485",
         "Bluetooth 4.0",
-        "2 Digital IN & 1 Analog IN",
-        "1 OUT",
-        "130 mAh Battery",
+        "Battery 130 mAh",
       ],
     },
     // 4G Models
     {
       name: "S-4011",
       connectivity: "4g" as const,
+      connectivityLabel: "4G / 2G",
       image: "/Navtelecom/start s-4011_1800x1350.png",
       specs: [
-        "Single SIM",
-        "Engine Hours",
+        "4 Digital Inputs",
+        "1 Analog Input",
+        "1 Output",
         "Bluetooth 4.0",
-        "4 Digital IN & 1 Analog IN",
-        "1 OUT",
-        "130 mAh Battery",
+        "Battery 130 mAh",
       ],
     },
     {
       name: "S-4013",
       connectivity: "4g" as const,
+      connectivityLabel: "4G / 2G",
       image: "/Navtelecom/start s-4013_1800x1350.png",
       specs: [
-        "Single SIM",
-        "Engine Hours",
+        "2 Digital Inputs",
+        "1 Analog Input",
+        "1 Output",
         "RS-485",
         "Bluetooth 4.0",
-        "2 Digital IN & 1 Analog IN",
-        "1 OUT",
-        "130 mAh Battery",
+        "Battery 130 mAh",
       ],
     },
   ];
@@ -134,18 +135,18 @@ const StartSeriesPage = () => {
           .sort(sortByConnectivityAndName);
 
   return (
-    <div className="min-h-screen bg-[#EFEFEF] font-sans antialiased text-brand-navy">
+    <div className="min-h-screen bg-[#EFEFEF] font-sans antialiased text-brand-navy overflow-x-hidden">
       <Navbar />
 
       <main className="pt-20 bg-[#EFEFEF]">
         {/* HERO SECTION */}
         <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-center bg-[#EFEFEF] product-background-image start-series-hero-background">
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-            <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center py-12 md:py-20">
-              {/* Left Info */}
-              <div className="space-y-8 ml-0 lg:ml-10">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div className="flex flex-col lg:flex-row lg:items-center h-full py-12 md:py-20">
+              {/* Left Info - constrained to left half on desktop */}
+              <div className="w-full lg:w-1/2 lg:max-w-[50%] space-y-6 sm:space-y-8">
                 <div>
-                  <h1 className="text-h1">
+                  <h1 className="text-h1 break-words">
                     START
                     <br />
                     <span className="text-brand-primary">Series</span>
@@ -162,22 +163,10 @@ const StartSeriesPage = () => {
                 </div>
                 <button
                   onClick={scrollToLineupFromExplore}
-                  className="bg-brand-navy text-white px-20 py-4 rounded-full font-bold text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1"
+                  className="bg-brand-navy text-white px-12 sm:px-16 lg:px-20 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1"
                 >
                   Explore
                 </button>
-              </div>
-
-              {/* Middle spacer column (background image already covers the section) */}
-              <div className="ml-0 lg:ml-10" />
-
-              {/* Right Big Text */}
-              <div className="lg:text-right">
-                <h2 className="text-display mr-10">
-                  <span className="text-brand-primary">Basic</span>
-                  <br />
-                  Models
-                </h2>
               </div>
             </div>
           </div>
@@ -186,8 +175,8 @@ const StartSeriesPage = () => {
         {/* KEY FEATURES */}
         <section className="py-16 md:py-20 bg-[#EFEFEF] relative z-10 -mt-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-h1 mb-3">
+            <div className="text-center mb-12 px-2">
+              <h2 className="text-h1 mb-3 break-words">
                 Track your fleet.{" "}
                 <span className="text-brand-primary">Monitor your fuel.</span>
               </h2>
@@ -197,7 +186,7 @@ const StartSeriesPage = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 xl:gap-8">
               {[
                 {
                   title: "RS-485 Ready",
@@ -272,7 +261,7 @@ const StartSeriesPage = () => {
               ].map((feature, idx) => (
                 <div
                   key={idx}
-                  className="group p-10 md:p-12 bg-white rounded-[3rem] border border-gray-100 hover:shadow-2xl transition-all duration-500 relative overflow-hidden min-h-[16rem] lg:min-h-[17rem]"
+                  className="group p-6 sm:p-10 md:p-12 bg-white rounded-2xl sm:rounded-[3rem] border border-gray-100 hover:shadow-2xl transition-all duration-500 relative overflow-hidden min-h-[14rem] sm:min-h-[16rem] lg:min-h-[17rem]"
                 >
                   <div className="absolute top-8 right-8 text-gray-300 group-hover:text-brand-primary transition-colors duration-500 scale-110">
                     {feature.icon}
@@ -295,13 +284,13 @@ const StartSeriesPage = () => {
         {/* EXPLORE THE LINEUP (Screenshot UI with Rounding) */}
         <section ref={lineupRef} className="py-16 md:py-20 bg-[#EFEFEF]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-h1 text-center mb-10">Explore the Lineup</h2>
+            <h2 className="text-h1 text-center mb-10 break-words px-2">Explore the Lineup</h2>
 
             {/* Filter Buttons - Squared from Screenshot */}
-            <div className="flex justify-center gap-4 mb-12">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12">
               <button
                 onClick={() => setFilter("all")}
-                className={`px-10 py-3 font-bold transition-all border-2 rounded-full ${
+                className={`px-6 sm:px-10 py-2.5 sm:py-3 font-bold text-sm sm:text-base transition-all border-2 rounded-full ${
                   filter === "all"
                     ? "bg-brand-navy text-white border-brand-navy"
                     : "bg-white text-brand-navy border-gray-200 hover:border-brand-navy"
@@ -311,7 +300,7 @@ const StartSeriesPage = () => {
               </button>
               <button
                 onClick={() => setFilter("2g")}
-                className={`px-10 py-3 font-bold transition-all border-2 rounded-full ${
+                className={`px-6 sm:px-10 py-2.5 sm:py-3 font-bold text-sm sm:text-base transition-all border-2 rounded-full ${
                   filter === "2g"
                     ? "bg-brand-navy text-white border-brand-navy"
                     : "bg-white text-brand-navy border-gray-200 hover:border-brand-navy"
@@ -321,7 +310,7 @@ const StartSeriesPage = () => {
               </button>
               <button
                 onClick={() => setFilter("4g")}
-                className={`px-10 py-3 font-bold transition-all border-2 rounded-full ${
+                className={`px-6 sm:px-10 py-2.5 sm:py-3 font-bold text-sm sm:text-base transition-all border-2 rounded-full ${
                   filter === "4g"
                     ? "bg-brand-navy text-white border-brand-navy"
                     : "bg-white text-brand-navy border-gray-200 hover:border-brand-navy"
@@ -331,11 +320,11 @@ const StartSeriesPage = () => {
               </button>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {filteredDevices.map((device, idx) => (
                 <div
                   key={idx}
-                  className={`bg-white flex flex-col border rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden group relative ${
+                  className={`bg-white flex flex-col border rounded-2xl sm:rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden group relative min-w-0 ${
                     selectedForCompare.includes(device.name)
                       ? "border-brand-primary ring-2 ring-brand-primary/20"
                       : "border-gray-100"
@@ -356,7 +345,7 @@ const StartSeriesPage = () => {
                     )}
                   </button>
 
-                  <div className="p-10 pb-0 flex flex-col items-start">
+                  <div className="p-6 sm:p-10 pb-0 flex flex-col items-start min-w-0">
                     {/* Connectivity Highlight */}
                     <div className="mb-8 w-full flex justify-between items-center">
                       <div
@@ -366,7 +355,7 @@ const StartSeriesPage = () => {
                             : "bg-blue-100 text-blue-800 border-blue-200"
                         }`}
                       >
-                        {device.connectivity} Network
+                        {"connectivityLabel" in device ? device.connectivityLabel : `${device.connectivity} Network`}
                       </div>
                     </div>
 
@@ -381,7 +370,7 @@ const StartSeriesPage = () => {
                               fill
                               className="object-contain"
                             />
-                            <span className="absolute left-6 top-6 text-brand-navy text-xl font-black tracking-widest uppercase">
+                            <span className="absolute left-4 sm:left-6 top-4 sm:top-6 text-brand-navy text-lg sm:text-xl font-black tracking-widest uppercase">
                               {device.name}
                             </span>
                           </>
@@ -399,7 +388,7 @@ const StartSeriesPage = () => {
                     </div>
 
                     {/* Feature list - Left Aligned with Tick */}
-                    <div className="space-y-4 mb-12 w-full">
+                    <div className="space-y-4 mb-8 sm:mb-12 w-full min-w-0">
                       {device.specs.map((spec, sIdx) => (
                         <div
                           key={sIdx}
@@ -420,7 +409,7 @@ const StartSeriesPage = () => {
                     </div>
                   </div>
 
-                  <div className="p-10 pt-0 mt-auto">
+                  <div className="p-6 sm:p-10 pt-0 mt-auto">
                     <Link
                       href={`/products/tracking-devices/start-series/${device.name.toLowerCase()}`}
                       className="w-full bg-brand-navy text-white py-5 rounded-full font-black text-sm hover:bg-brand-primary transition-all shadow-xl shadow-brand-navy/10 transform hover:-translate-y-1 active:scale-95 flex items-center justify-center"
@@ -437,11 +426,11 @@ const StartSeriesPage = () => {
         {/* WHY START STANDS OUT */}
         <section className="py-12 md:py-16 bg-[#EFEFEF]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-h1 text-center mb-10">
+            <h2 className="text-h1 text-center mb-10 break-words px-2">
               Why <span className="text-brand-primary">START</span> Stands Out
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 xl:gap-8">
               {[
                 {
                   title: (
@@ -506,7 +495,7 @@ const StartSeriesPage = () => {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#F8FAFC] p-10 md:p-12 rounded-[3rem] shadow-xl shadow-brand-navy/5 border border-white group hover:-translate-y-2 transition-all duration-500"
+                  className="bg-[#F8FAFC] p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-[3rem] shadow-xl shadow-brand-navy/5 border border-white group hover:-translate-y-2 transition-all duration-500 min-w-0 overflow-hidden"
                 >
                   <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-navy mb-4 group-hover:text-brand-primary transition-colors leading-tight min-h-[80px]">
                     {item.title}
@@ -521,7 +510,7 @@ const StartSeriesPage = () => {
 
       {/* Floating Compare Bar */}
       {selectedForCompare.length > 0 && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
+        <div className="fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
           <div className="bg-brand-navy text-white p-4 md:p-6 rounded-[2rem] shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10 backdrop-blur-md">
             <div className="flex flex-col gap-2">
               <p className="text-sm font-bold">

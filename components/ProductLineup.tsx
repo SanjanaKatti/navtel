@@ -49,20 +49,20 @@ const ProductLineup = () => {
   };
 
   return (
-    <section className="py-24 bg-[#F8FAFC]">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[#F8FAFC]">
       <LayoutContainer>
-        <div className="text-center mb-20">
-          <p className="text-base md:text-lg font-bold uppercase tracking-[0.2em] text-[#004A8C] mb-2 md:mb-3">
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20 px-2 sm:px-0">
+          <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.2em] text-[#004A8C] mb-2 md:mb-3">
             DISCOVER OUR LINEUP
           </p>
-          <h2 className="text-h1">Device Series for Every Fleet</h2>
+          <h2 className="text-h1 px-2 sm:px-0">Device Series for Every Fleet</h2>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
           {products.map((product, idx) => (
             <div
               key={idx}
-              className="group relative bg-white px-10 pt-10 pb-12 flex flex-col transition-all duration-300 hover:shadow-lg border border-gray-200 rounded-3xl"
+              className="group relative bg-white px-6 sm:px-8 lg:px-10 pt-8 sm:pt-10 pb-10 sm:pb-12 flex flex-col transition-all duration-300 hover:shadow-lg border border-gray-200 rounded-2xl sm:rounded-3xl"
             >
               {/* Heading */}
               <div className="min-h-[80px] flex flex-col justify-start">
@@ -122,16 +122,16 @@ const ProductLineup = () => {
               </p>
 
               {/* Actions – keep existing buttons */}
-              <div className="mt-auto pt-4 border-t border-gray-200 flex flex-col gap-4">
+              <div className="mt-auto pt-4 border-t border-gray-200 flex flex-col gap-3 sm:gap-4">
                 <Link
                   href={product.href}
-                  className="w-full bg-[#004A8C] text-white py-4 px-8 font-bold rounded-full hover:bg-[#003366] transition-colors shadow-lg shadow-blue-900/20 flex items-center justify-center uppercase tracking-wider text-sm"
+                  className="w-full bg-[#004A8C] text-white py-3 sm:py-4 px-6 sm:px-8 font-bold rounded-full hover:bg-[#003366] transition-colors shadow-lg shadow-blue-900/20 flex items-center justify-center uppercase tracking-wider text-xs sm:text-sm"
                 >
                   View Specifications
                 </Link>
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="w-full bg-[#004A8C] text-white py-4 px-8 font-bold rounded-full hover:bg-[#003366] transition-colors shadow-lg shadow-blue-900/20 uppercase tracking-wider text-sm"
+                  className="w-full bg-[#004A8C] text-white py-3 sm:py-4 px-6 sm:px-8 font-bold rounded-full hover:bg-[#003366] transition-colors shadow-lg shadow-blue-900/20 uppercase tracking-wider text-xs sm:text-sm"
                 >
                   Contact Us
                 </button>
@@ -187,7 +187,7 @@ const ProductLineup = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-label ml-1">Mobile Number</label>
                   <input

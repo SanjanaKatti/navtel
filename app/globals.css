@@ -96,6 +96,17 @@
   animation: fleetColorBlink 7.2s ease-in-out infinite;
 }
 
+@keyframes toolCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -132,8 +143,8 @@ a[class*="bg-brand-primary"],
 a[class*="bg-brand-navy"],
 button[class*="bg-color-neutral-dark-gray"],
 a[class*="bg-color-neutral-dark-gray"] {
-  background-color: var(--color-neutral-dark-gray) !important;
-  border-color: var(--color-neutral-dark-gray) !important;
+  background-color: #004a8c !important;
+  border-color: #004a8c !important;
 }
 
 button[class*="hover:bg-brand-primary"]:hover,
@@ -142,8 +153,8 @@ button[class*="hover:bg-brand-deep"]:hover,
 a[class*="hover:bg-brand-deep"]:hover,
 button[class*="hover:bg-color-neutral-medium-gray"]:hover,
 a[class*="hover:bg-color-neutral-medium-gray"]:hover {
-  background-color: var(--color-neutral-medium-gray) !important;
-  border-color: var(--color-neutral-medium-gray) !important;
+  background-color: #003d74 !important;
+  border-color: #003d74 !important;
 }
 
 button[class*="bg-brand-primary"],
@@ -181,243 +192,383 @@ a[class*="bg-color-neutral-dark-gray"]:hover {
 }
 
 .smart-series-hero-background {
-  background-image: url('/Navtelecom/smart_series 1080x1350.png') !important;
+  background-image: url("/Navtelecom/smart_series 1080x1350.png") !important;
 }
 
 @media (min-width: 768px) {
   .smart-series-hero-background {
-    background-image: url('/Navtelecom/smart_series 2048x1365.png') !important;
+    background-image: url("/Navtelecom/smart_series 2048x1365.png") !important;
   }
 }
 
 @media (min-width: 1024px) {
   .smart-series-hero-background {
-    background-image: url('/Navtelecom/smart_series 2560x1440.png') !important;
+    background-image: url("/Navtelecom/smart_series 2560x1440.png") !important;
   }
 }
 
 @media (min-width: 1280px) {
   .smart-series-hero-background {
-    background-image: url('/Navtelecom/smart_series 3840x1646.png') !important;
+    background-image: url("/Navtelecom/smart_series 3840x1646.png") !important;
   }
 }
 
 .start-series-hero-background {
-  background-image: url('/Navtelecom/start_series 1080x1350.png') !important;
+  background-image: url("/Navtelecom/start_series 1080x1350.png") !important;
 }
 
 @media (min-width: 768px) {
   .start-series-hero-background {
-    background-image: url('/Navtelecom/start_series 2048x1365.png') !important;
+    background-image: url("/Navtelecom/start_series 2048x1365.png") !important;
   }
 }
 
 @media (min-width: 1024px) {
   .start-series-hero-background {
-    background-image: url('/Navtelecom/start_series 2560x1440.png') !important;
+    background-image: url("/Navtelecom/start_series 2560x1440.png") !important;
   }
 }
 
 @media (min-width: 1280px) {
   .start-series-hero-background {
-    background-image: url('/Navtelecom/start_series 3840x1646.png') !important;
+    background-image: url("/Navtelecom/start_series 3840x1646.png") !important;
+  }
+}
+
+.start-device-hero-background {
+  background-image: url("/Navtelecom/start_device 1080x1350.png") !important;
+  background-position: bottom center !important;
+}
+
+@media (min-width: 768px) {
+  .start-device-hero-background {
+    background-image: url("/Navtelecom/start_device 2048x1365.png") !important;
+    background-position: bottom right !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .start-device-hero-background {
+    background-image: url("/Navtelecom/start_device 2560x1440.png") !important;
+    background-position: center !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .start-device-hero-background {
+    background-image: url("/Navtelecom/start_device 3840x1646.png") !important;
+    background-position: center !important;
+  }
+}
+
+.smart-device-hero-background {
+  background-image: url("/Navtelecom/smart_device 1080x1350.png") !important;
+}
+
+@media (min-width: 768px) {
+  .smart-device-hero-background {
+    background-image: url("/Navtelecom/smart_device 2048x1365.png") !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .smart-device-hero-background {
+    background-image: url("/Navtelecom/smart_device 2560x1440.png") !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .smart-device-hero-background {
+    background-image: url("/Navtelecom/smart_device 3840x1646.png") !important;
+  }
+}
+
+.signal-device-hero-background {
+  background-image: url("/Navtelecom/signal_device 1080x1350.png") !important;
+}
+
+@media (min-width: 768px) {
+  .signal-device-hero-background {
+    background-image: url("/Navtelecom/signal_device 2048x1365.png") !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .signal-device-hero-background {
+    background-image: url("/Navtelecom/signal_device 2560x1440.png") !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .signal-device-hero-background {
+    background-image: url("/Navtelecom/signal_device 3840x1646.png") !important;
   }
 }
 
 .all-devices-hero-background {
-  background-image: url('/Navtelecom/all devices_homepage1 1080x1350.png') !important;
+  background-image: url("/Navtelecom/all devices_homepage1 1080x1350.png") !important;
 }
 
 @media (min-width: 768px) {
   .all-devices-hero-background {
-    background-image: url('/Navtelecom/all devices_homepage1 2048x1365.png') !important;
+    background-image: url("/Navtelecom/all devices_homepage1 2048x1365.png") !important;
   }
 }
 
 @media (min-width: 1024px) {
   .all-devices-hero-background {
-    background-image: url('/Navtelecom/all devices_homepage1 2560x1440.png') !important;
+    background-image: url("/Navtelecom/all devices_homepage1 2560x1440.png") !important;
   }
 }
 
 @media (min-width: 1280px) {
   .all-devices-hero-background {
-    background-image: url('/Navtelecom/all devices_homepage1 3840x1646.png') !important;
+    background-image: url("/Navtelecom/all devices_homepage1 3840x1646.png") !important;
   }
 }
 
 .tracking-devices-hero-background {
-  background-image: url('/Navtelecom/all devices2_homepage1 1080x1350.png') !important;
+  background-image: url("/Navtelecom/all devices2_homepage1 1080x1350.png") !important;
+  background-position: 70% center !important;
 }
 
 @media (min-width: 768px) {
   .tracking-devices-hero-background {
-    background-image: url('/Navtelecom/all devices2_homepage1 2048x1365.png') !important;
+    background-image: url("/Navtelecom/all devices2_homepage1 2048x1365.png") !important;
+    background-position: right center !important;
   }
 }
 
 @media (min-width: 1024px) {
   .tracking-devices-hero-background {
-    background-image: url('/Navtelecom/all devices2_homepage1 2560x1440.png') !important;
+    background-image: url("/Navtelecom/all devices2_homepage1 2560x1440.png") !important;
+    background-position: right center !important;
   }
 }
 
 @media (min-width: 1280px) {
   .tracking-devices-hero-background {
-    background-image: url('/Navtelecom/all devices2_homepage1 3840x1646.png') !important;
+    background-image: url("/Navtelecom/all devices2_homepage1 3840x1646.png") !important;
+    background-position: right center !important;
   }
 }
 
 .can-spy-hero-background {
-  background-image: url('/Navtelecom/Software/CAN/can_homepage1 1080x1350.png') !important;
+  background-image: url("/Navtelecom/Software/CAN/can_homepage1 1080x1350.png") !important;
 }
 
 @media (min-width: 768px) {
   .can-spy-hero-background {
-    background-image: url('/Navtelecom/Software/CAN/can_homepage1 2048x1365.png') !important;
+    background-image: url("/Navtelecom/Software/CAN/can_homepage1 2048x1365.png") !important;
   }
 }
 
 @media (min-width: 1024px) {
   .can-spy-hero-background {
-    background-image: url('/Navtelecom/Software/CAN/can_homepage1 2560x1440.png') !important;
+    background-image: url("/Navtelecom/Software/CAN/can_homepage1 2560x1440.png") !important;
   }
 }
 
 @media (min-width: 1280px) {
   .can-spy-hero-background {
-    background-image: url('/Navtelecom/Software/CAN/can_homepage1 3840x1646.png') !important;
+    background-image: url("/Navtelecom/Software/CAN/can_homepage1 3840x1646.png") !important;
   }
 }
 
 .cfg-hero-background {
-  background-image: url('/Navtelecom/Software/CFG/cfg_homepage1 1080x1350.png') !important;
+  background-image: url("/Navtelecom/Software/CFG/cfg_homepage1 1080x1350.png") !important;
 }
 
 @media (min-width: 768px) {
   .cfg-hero-background {
-    background-image: url('/Navtelecom/Software/CFG/cfg_homepage1 2048x1365.png') !important;
+    background-image: url("/Navtelecom/Software/CFG/cfg_homepage1 2048x1365.png") !important;
   }
 }
 
 @media (min-width: 1024px) {
   .cfg-hero-background {
-    background-image: url('/Navtelecom/Software/CFG/cfg_homepage1 2560x1440.png') !important;
+    background-image: url("/Navtelecom/Software/CFG/cfg_homepage1 2560x1440.png") !important;
   }
 }
 
 @media (min-width: 1280px) {
   .cfg-hero-background {
-    background-image: url('/Navtelecom/Software/CFG/cfg_homepage1 3840x1646.png') !important;
+    background-image: url("/Navtelecom/Software/CFG/cfg_homepage1 3840x1646.png") !important;
   }
 }
 
 .drc-hero-background {
-  background-image: url('/Navtelecom/Software/DRC/drc_homepage1 1080x1350.png') !important;
+  background-image: url("/Navtelecom/Software/DRC/drc_homepage1 1080x1350.png") !important;
 }
 
 @media (min-width: 768px) {
   .drc-hero-background {
-    background-image: url('/Navtelecom/Software/DRC/drc_homepage1 2048x1365.png') !important;
+    background-image: url("/Navtelecom/Software/DRC/drc_homepage1 2048x1365.png") !important;
   }
 }
 
 @media (min-width: 1024px) {
   .drc-hero-background {
-    background-image: url('/Navtelecom/Software/DRC/drc_homepage1 2560x1440.png') !important;
+    background-image: url("/Navtelecom/Software/DRC/drc_homepage1 2560x1440.png") !important;
   }
 }
 
 @media (min-width: 1280px) {
   .drc-hero-background {
-    background-image: url('/Navtelecom/Software/DRC/drc_homepage1 3840x1646.png') !important;
+    background-image: url("/Navtelecom/Software/DRC/drc_homepage1 3840x1646.png") !important;
   }
 }
 
 .ntc-control-hero-background {
-  background-image: url('/Navtelecom/Software/NTC/ntc_homepage1 1080x1350.png') !important;
+  background-image: url("/Navtelecom/Software/NTC/ntc_homepage1 1080x1350.png") !important;
 }
 
 @media (min-width: 768px) {
   .ntc-control-hero-background {
-    background-image: url('/Navtelecom/Software/NTC/ntc_homepage1 2048x1365.png') !important;
+    background-image: url("/Navtelecom/Software/NTC/ntc_homepage1 2048x1365.png") !important;
   }
 }
 
 @media (min-width: 1024px) {
   .ntc-control-hero-background {
-    background-image: url('/Navtelecom/Software/NTC/ntc_homepage1 2560x1440.png') !important;
+    background-image: url("/Navtelecom/Software/NTC/ntc_homepage1 2560x1440.png") !important;
   }
 }
 
 @media (min-width: 1280px) {
   .ntc-control-hero-background {
-    background-image: url('/Navtelecom/Software/NTC/ntc_homepage1 3840x1646.png') !important;
+    background-image: url("/Navtelecom/Software/NTC/ntc_homepage1 3840x1646.png") !important;
+  }
+}
+
+.complex-events-hero-background {
+  background-image: url("/Navtelecom/banner1_1080x1350.png") !important;
+}
+
+@media (min-width: 768px) {
+  .complex-events-hero-background {
+    background-image: url("/Navtelecom/banner1_2048x1365.png") !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .complex-events-hero-background {
+    background-image: url("/Navtelecom/banner1_2560x1440.png") !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .complex-events-hero-background {
+    background-image: url("/Navtelecom/banner1_3840x1646.png") !important;
   }
 }
 
 .homepage-hero-bg-1 {
-  background-image: url('/Navtelecom/banner1_1080x1350.png') !important;
+  background-image: url("/Navtelecom/banner1_1080x1350.png") !important;
 }
 
 @media (min-width: 768px) {
   .homepage-hero-bg-1 {
-    background-image: url('/Navtelecom/banner1_2048x1365.png') !important;
+    background-image: url("/Navtelecom/banner1_2048x1365.png") !important;
   }
 }
 
 @media (min-width: 1024px) {
   .homepage-hero-bg-1 {
-    background-image: url('/Navtelecom/banner1_2560x1440.png') !important;
+    background-image: url("/Navtelecom/banner1_2560x1440.png") !important;
   }
 }
 
 @media (min-width: 1280px) {
   .homepage-hero-bg-1 {
-    background-image: url('/Navtelecom/banner1_3840x1646.png') !important;
+    background-image: url("/Navtelecom/banner1_3840x1646.png") !important;
   }
 }
 
 .homepage-hero-bg-2 {
-  background-image: url('/Navtelecom/smart_series 1080x1350.png') !important;
+  background-image: url("/Navtelecom/smart_homepage1 1080x1350.png") !important;
 }
 
 @media (min-width: 768px) {
   .homepage-hero-bg-2 {
-    background-image: url('/Navtelecom/smart_series 2048x1365.png') !important;
+    background-image: url("/Navtelecom/smart_homepage1 2048x1365.png") !important;
   }
 }
 
 @media (min-width: 1024px) {
   .homepage-hero-bg-2 {
-    background-image: url('/Navtelecom/smart_series 2560x1440.png') !important;
+    background-image: url("/Navtelecom/smart_homepage1 2560x1440.png") !important;
   }
 }
 
 @media (min-width: 1280px) {
   .homepage-hero-bg-2 {
-    background-image: url('/Navtelecom/smart_series 3840x1646.png') !important;
+    background-image: url("/Navtelecom/smart_homepage1 3840x1646.png") !important;
   }
 }
 
 .homepage-hero-bg-3 {
-  background-image: url('/Navtelecom/start_series 1080x1350.png') !important;
+  background-image: url("/Navtelecom/start_homepage1 1080x1350.png") !important;
 }
 
 @media (min-width: 768px) {
   .homepage-hero-bg-3 {
-    background-image: url('/Navtelecom/start_series 2048x1365.png') !important;
+    background-image: url("/Navtelecom/start_homepage1 2048x1365.png") !important;
   }
 }
 
 @media (min-width: 1024px) {
   .homepage-hero-bg-3 {
-    background-image: url('/Navtelecom/start_series 2560x1440.png') !important;
+    background-image: url("/Navtelecom/start_homepage1 2560x1440.png") !important;
   }
 }
 
 @media (min-width: 1280px) {
   .homepage-hero-bg-3 {
-    background-image: url('/Navtelecom/start_series 3840x1646.png') !important;
+    background-image: url("/Navtelecom/start_homepage1 3840x1646.png") !important;
+  }
+}
+
+.warranty-hero-background {
+  background-image: url("/Navtelecom/warranty_homepage1 1080x1350.png") !important;
+}
+
+@media (min-width: 768px) {
+  .warranty-hero-background {
+    background-image: url("/Navtelecom/warranty_homepage1 2048x1365.png") !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .warranty-hero-background {
+    background-image: url("/Navtelecom/warranty_homepage1 2560x1440.png") !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .warranty-hero-background {
+    background-image: url("/Navtelecom/warranty_homepage1 3840x1646.png") !important;
+  }
+}
+
+.software-solutions-hero-background {
+  background-image: url("/Navtelecom/software-solutions_homepage1 1080x1350.png") !important;
+}
+
+@media (min-width: 768px) {
+  .software-solutions-hero-background {
+    background-image: url("/Navtelecom/software-solutions_homepage1 2048x1365.png") !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .software-solutions-hero-background {
+    background-image: url("/Navtelecom/software-solutions_homepage1 2560x1440.png") !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .software-solutions-hero-background {
+    background-image: url("/Navtelecom/software-solutions_homepage1 3840x1646.png") !important;
   }
 }

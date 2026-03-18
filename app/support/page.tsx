@@ -23,8 +23,15 @@ const supportCards = [
     title: "Warranty",
     description:
       "Check coverage details, service terms, and claim support for your device models.",
-    href: "#",
+    href: "/support/warranty",
     cta: "View Warranty",
+  },
+  {
+    title: "FAQ",
+    description:
+      "Find quick answers to common questions about devices, configuration, integration and installation.",
+    href: "/support/faq",
+    cta: "Open FAQ",
   },
 ];
 

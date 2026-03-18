@@ -16,17 +16,20 @@ interface ProductCard {
 interface ProductCenterProps {
   heading: string;
   products: ProductCard[];
+  description?: string;
 }
 
-const ProductCenter: React.FC<ProductCenterProps> = ({ heading, products }) => {
+const ProductCenter: React.FC<ProductCenterProps> = ({
+  heading,
+  products,
+  description = "Resources and tools for implementation",
+}) => {
   return (
     <section className="pt-12 pb-8 md:pt-12 md:pb-20 bg-white">
       <LayoutContainer>
         <div className="text-center mb-12">
           <h2 className="text-h1 mb-3">{heading}</h2>
-          <p className="text-lg max-w-2xl mx-auto">
-            Resources and tools for implementation
-          </p>
+          {description && <p className="text-lg max-w-2xl mx-auto">{description}</p>}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

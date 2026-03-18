@@ -1,12 +1,11 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Product3DVisual from "@/components/product/Product3DVisual";
 import DeviceFeatures from "@/components/product/DeviceFeatures";
 import TechnicalSpecs from "@/components/product/TechnicalSpecs";
 import ProductCenter from "@/components/product/ProductCenter";
-import ProductFAQ from "@/components/product/ProductFAQ";
 import {
   Bluetooth,
   ArrowsIn,
@@ -16,19 +15,22 @@ import {
 } from "phosphor-react";
 
 const S2010Page = () => {
+  const featuresRef = useRef<HTMLDivElement>(null);
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased overflow-x-hidden">
       <Navbar />
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-center bg-[#EFEFEF]">
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-            <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center py-12 md:py-20">
-              {/* Left Info */}
-              <div className="space-y-8 ml-0 lg:ml-10">
+        <section className="relative min-h-[calc(100dvh-5rem)] overflow-hidden flex items-start lg:items-center bg-[#EFEFEF] product-background-image start-device-hero-background">
+          <div className="absolute inset-0 bg-white/30 lg:bg-transparent z-[1]" aria-hidden />
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col lg:block">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_1fr] gap-8 lg:gap-12 items-start lg:items-center py-8 sm:py-12 md:py-16 lg:py-20">
+              {/* Left Info - stacked at top on mobile/tablet */}
+              <div className="w-full max-w-lg flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0 lg:ml-10 space-y-5 sm:space-y-8">
                 <div>
-                  <h1 className="text-h1">
+                  <h1 className="text-h1 break-words">
                     S-2010
                     <br />
                     <span className="text-brand-primary">START</span>
@@ -43,22 +45,20 @@ const S2010Page = () => {
                     and transport automation.
                   </p>
                 </div>
-                <button className="bg-brand-navy text-white px-20 py-4 rounded-full font-bold text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1">
+                <button
+                  onClick={() => featuresRef.current?.scrollIntoView({ behavior: "smooth" })}
+                  className="bg-brand-navy text-white px-12 sm:px-16 lg:px-20 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1 w-full sm:w-auto mb-8 sm:mb-12 lg:mb-0"
+                >
                   Explore
                 </button>
               </div>
 
-              {/* Middle 3D Product Viewer */}
-              <div className="ml-0 lg:ml-10 h-[clamp(16rem,44vw,32rem)] w-full">
-                <Product3DVisual
-                  alt="S-2010 device"
-                  baseImage="/Navtelecom/start_device.png"
-                  maxTiltDeg={10}
-                />
-              </div>
+              {/* Middle column - spacer on desktop only; on mobile/tablet adds breathing room before image area */}
+              <div className="hidden lg:block lg:ml-10 w-full h-[clamp(12rem,36vw,28rem)]" />
+              <div className="lg:hidden min-h-[14rem] sm:min-h-[18rem] flex-shrink-0" aria-hidden />
 
-              {/* Right Big Text */}
-              <div className="lg:text-right">
+              {/* Right Big Text - hidden on mobile/tablet to avoid overlap */}
+              <div className="hidden lg:block lg:text-right">
                 <h2 className="text-display mr-10">
                   <span className="text-brand-primary">2G</span>
                   <br />
@@ -70,6 +70,7 @@ const S2010Page = () => {
         </section>
 
         {/* Device Features Section */}
+        <div ref={featuresRef}>
         <DeviceFeatures
           heading="Device"
           highlightedHeading="Features"
@@ -124,6 +125,7 @@ const S2010Page = () => {
             },
           ]}
         />
+        </div>
 
         {/* Technical Specifications Section */}
         <TechnicalSpecs
@@ -145,7 +147,7 @@ const S2010Page = () => {
                 },
                 {
                   label: "USB Interface",
-                  value: "Type-C (configuration, data, diagnostics)",
+                  value: "USB Type-C (configuration, data, diagnostics)",
                 },
                 {
                   label: "Supported Antennas",
@@ -184,8 +186,11 @@ const S2010Page = () => {
                 },
                 { label: "Max. Current Consumption (12 V)", value: "200 mA" },
                 { label: "Overvoltage Protection", value: "up to 200 V" },
-                { label: "Backup Battery", value: false },
-                { label: "EEPROM Data Retention", value: "5 days" },
+                { label: "Backup Battery", value: "not available" },
+                {
+                  label: "EEPROM Data Retention (power-off)",
+                  value: "5 days",
+                },
               ],
             },
             {
@@ -203,7 +208,7 @@ const S2010Page = () => {
                     "Hot start < 1 s, Warm start < 22 s, Cold start < 29 s",
                 },
                 {
-                  label: "Accuracy",
+                  label: "Accuracy (CEP, static, –130 dBm)",
                   value: "2.5 m (horizontal), 5 m (vertical)",
                 },
                 { label: "Update Rate", value: "1 Hz" },
@@ -217,26 +222,29 @@ const S2010Page = () => {
                 {
                   label: "2G Bands",
                   value:
-                    "Class 4 (2W) in GSM 850/900, Class 1 (1W) in DCS 1800/1900",
+                    "Class 4 (2 W) in GSM 850 and EGSM 900, Class 1 (1 W) in DCS 1800 and PCS 1900",
                 },
                 { label: "Data Support", value: "SMS (Text / Data)" },
                 { label: "SIM Slots", value: "1" },
-                { label: "SIM Type", value: "Nano-SIM" },
+                {
+                  label: "SIM Type",
+                  value: "Slot 1: External, nano-SIM",
+                },
               ],
             },
             {
               groupName: "Memory & Storage",
-              items: [
-                { label: "Internal Memory", value: "4 MB Flash" },
-                { label: "Data Storage", value: "up to 25,000 records" },
-              ],
+              items: [{ label: "Data Storage", value: "up to 25,000 records" }],
             },
             {
               groupName: "Environmental",
               items: [
                 { label: "Operating Temperature", value: "–40 °C to +85 °C" },
                 { label: "Storage Temperature", value: "–40 °C to +85 °C" },
-                { label: "Humidity", value: "up to 95% non-condensing" },
+                {
+                  label: "Humidity",
+                  value: "up to 95% (at +35 °C, non-condensing)",
+                },
               ],
             },
             {
@@ -244,7 +252,10 @@ const S2010Page = () => {
               items: [
                 { label: "Ingress Protection", value: "IP54" },
                 { label: "Shock Resistance", value: "up to 24 g" },
-                { label: "Dimensions", value: "65.5 × 38.4 × 14.3 mm" },
+                {
+                  label: "Dimensions",
+                  value: "65.5 × 38.4 × 14.3 mm (L × W × H)",
+                },
                 { label: "Weight", value: "31 g" },
                 { label: "Indicators (LEDs)", value: "SYS, GSM, GNSS" },
               ],
@@ -290,36 +301,21 @@ const S2010Page = () => {
           ]}
         />
 
-        {/* FAQ Section */}
-        <ProductFAQ
-          faqs={[
-            {
-              question: "Where can I download the Configurator?",
-              answer:
-                "You can download the latest version of our PC and Android Configurator from the Product Center section above.",
-            },
-            {
-              question: "How can I manage devices remotely?",
-              answer:
-                "Devices can be managed remotely via SMS commands or through our specialized NTC Control software.",
-            },
-            {
-              question: "Where can I find SMS/GPRS commands?",
-              answer:
-                "Detailed lists of all supported commands are available in the device manual within our Knowledge Base.",
-            },
-            {
-              question: "Which device should I choose — 2G or 4G?",
-              answer:
-                "2G is cost-effective for basic tracking. 4G provides faster data transfer and is better for future-proofing in regions where 2G is being phased out.",
-            },
-            {
-              question: "How long is the warranty on Navtelecom devices?",
-              answer:
-                "We offer a 36-month manufacturer warranty on all tracking equipment.",
-            },
-          ]}
-        />
+        {/* FAQ redirect notice */}
+        <section className="py-12 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-body text-center">
+              If you have questions about installation, configuration or support for this device, please visit our{" "}
+              <a
+                href="/support/faq"
+                className="text-brand-primary font-bold hover:underline"
+              >
+                FAQ page
+              </a>
+              .
+            </p>
+          </div>
+        </section>
       </main>
 
       <Footer />

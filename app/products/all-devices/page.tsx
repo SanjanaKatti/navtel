@@ -19,6 +19,13 @@ interface Device {
   antennas: "Internal" | "External";
   battery: string;
   href: string;
+  /** Card display: connectivity, inputs+outputs, interfaces, battery */
+  cardDisplay?: {
+    connectivity: string;
+    inputsOutputs: string;
+    interfaces: string;
+    battery: string;
+  };
 }
 
 const AllDevicesPage = () => {
@@ -78,6 +85,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "—",
       href: "/products/tracking-devices/start-series/s-2010",
+      cardDisplay: {
+        connectivity: "2G",
+        inputsOutputs: "4 Digital Inputs & 1 Analog Input, 1 Output",
+        interfaces: "BLE",
+        battery: "No battery",
+      },
     },
     {
       name: "S-2011",
@@ -92,6 +105,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "130 mAh",
       href: "/products/tracking-devices/start-series/s-2011",
+      cardDisplay: {
+        connectivity: "2G",
+        inputsOutputs: "4 Digital Inputs & 1 Analog Input, 1 Output",
+        interfaces: "BLE",
+        battery: "Battery 130 mAh",
+      },
     },
     {
       name: "S-2013",
@@ -106,6 +125,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "130 mAh",
       href: "/products/tracking-devices/start-series/s-2013",
+      cardDisplay: {
+        connectivity: "2G",
+        inputsOutputs: "2 Digital Inputs & 1 Analog Input, 1 Output",
+        interfaces: "RS-485, BLE",
+        battery: "Battery 130 mAh",
+      },
     },
     {
       name: "S-4011",
@@ -120,6 +145,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "130 mAh",
       href: "/products/tracking-devices/start-series/s-4011",
+      cardDisplay: {
+        connectivity: "4G / 2G",
+        inputsOutputs: "4 Digital Inputs & 1 Analog Input, 1 Output",
+        interfaces: "BLE",
+        battery: "Battery 130 mAh",
+      },
     },
     {
       name: "S-4013",
@@ -134,6 +165,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "130 mAh",
       href: "/products/tracking-devices/start-series/s-4013",
+      cardDisplay: {
+        connectivity: "4G / 2G",
+        inputsOutputs: "2 Digital Inputs & 1 Analog Input, 1 Output",
+        interfaces: "RS-485, BLE",
+        battery: "Battery 130 mAh",
+      },
     },
     // SMART Series (Advanced)
     {
@@ -149,6 +186,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "800 mAh",
       href: "/products/tracking-devices/smart-series/s-2437",
+      cardDisplay: {
+        connectivity: "2G",
+        inputsOutputs: "3 Universal Inputs, 2 Outputs",
+        interfaces: "Dual CAN, 1-Wire, RS-485, MODBUS RTU, BLE",
+        battery: "Battery 800 mAh",
+      },
     },
     {
       name: "S-2435",
@@ -163,6 +206,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "800 mAh",
       href: "/products/tracking-devices/smart-series/s-2435",
+      cardDisplay: {
+        connectivity: "2G",
+        inputsOutputs: "3 Universal Inputs, 2 Outputs",
+        interfaces: "CAN, 1-Wire, RS-485, RS-232, MODBUS RTU, BLE",
+        battery: "Battery 800 mAh",
+      },
     },
     {
       name: "S-2433",
@@ -177,6 +226,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "800 mAh",
       href: "/products/tracking-devices/smart-series/s-2433",
+      cardDisplay: {
+        connectivity: "2G",
+        inputsOutputs: "3 Universal Inputs, 2 Outputs",
+        interfaces: "1-Wire, RS-485, RS-232, MODBUS RTU, BLE",
+        battery: "Battery 800 mAh",
+      },
     },
     {
       name: "S-2421",
@@ -190,7 +245,13 @@ const AllDevicesPage = () => {
       outputs: "2 OUT",
       antennas: "Internal",
       battery: "380 mAh",
-      href: "/products/tracking-devices/smart-series/s-2425",
+      href: "/products/tracking-devices/smart-series/s-2421",
+      cardDisplay: {
+        connectivity: "2G",
+        inputsOutputs: "3 Universal Inputs, 2 Outputs",
+        interfaces: "1-Wire, BLE",
+        battery: "Battery 380 mAh",
+      },
     },
     {
       name: "S-2425",
@@ -198,13 +259,19 @@ const AllDevicesPage = () => {
       series: "SMART",
       connectivity: "2G",
       sim: "Single SIM",
-      interfaces: ["RS-485", "1-Wire"],
+      interfaces: ["RS-485", "RS-232", "1-Wire"],
       bluetooth: "Bluetooth 4.0",
       inputs: "3 Universal IN",
       outputs: "2 OUT",
       antennas: "Internal",
       battery: "380 mAh",
-      href: "/products/tracking-devices/smart-series/s-2421",
+      href: "/products/tracking-devices/smart-series/s-2425",
+      cardDisplay: {
+        connectivity: "2G",
+        inputsOutputs: "3 Universal Inputs, 2 Outputs",
+        interfaces: "1-Wire, RS-485, RS-232, BLE",
+        battery: "Battery 380 mAh",
+      },
     },
     {
       name: "S-4513",
@@ -219,6 +286,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "380 mAh",
       href: "/products/tracking-devices/smart-series/s-4513",
+      cardDisplay: {
+        connectivity: "4G / 2G, Dual SIM",
+        inputsOutputs: "4 Digital Inputs & 1 Analog Input, 2 Outputs",
+        interfaces: "1-Wire, RS-485, BLE",
+        battery: "Battery 380 mAh",
+      },
     },
     {
       name: "S-4511",
@@ -233,6 +306,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "380 mAh",
       href: "/products/tracking-devices/smart-series/s-4511",
+      cardDisplay: {
+        connectivity: "4G / 2G",
+        inputsOutputs: "4 Digital Inputs & 1 Analog Input, 2 Outputs",
+        interfaces: "BLE",
+        battery: "Battery 380 mAh",
+      },
     },
     {
       name: "S-4537",
@@ -247,6 +326,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "800 mAh",
       href: "/products/tracking-devices/smart-series/s-4537",
+      cardDisplay: {
+        connectivity: "4G / 2G, Dual SIM",
+        inputsOutputs: "3 Universal Inputs, 2 Outputs",
+        interfaces: "Dual CAN, 1-Wire, RS-485, MODBUS RTU, BLE",
+        battery: "Battery 800 mAh",
+      },
     },
     {
       name: "S-4535",
@@ -261,6 +346,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "800 mAh",
       href: "/products/tracking-devices/smart-series/s-4535",
+      cardDisplay: {
+        connectivity: "4G / 2G, Dual SIM",
+        inputsOutputs: "3 Universal Inputs, 2 Outputs",
+        interfaces: "CAN, 1-Wire, RS-485, RS-232, MODBUS RTU, BLE",
+        battery: "Battery 800 mAh",
+      },
     },
     {
       name: "S-4533",
@@ -275,6 +366,12 @@ const AllDevicesPage = () => {
       antennas: "Internal",
       battery: "800 mAh",
       href: "/products/tracking-devices/smart-series/s-4533",
+      cardDisplay: {
+        connectivity: "4G / 2G, Dual SIM",
+        inputsOutputs: "3 Universal Inputs, 2 Outputs",
+        interfaces: "1-Wire, RS-485, RS-232, MODBUS RTU, BLE",
+        battery: "Battery 800 mAh",
+      },
     },
     // SIGNAL Series (Professional)
     {
@@ -290,6 +387,12 @@ const AllDevicesPage = () => {
       antennas: "External",
       battery: "800 mAh",
       href: "/products/tracking-devices/signal-series/s-2653",
+      cardDisplay: {
+        connectivity: "2G",
+        inputsOutputs: "6 Universal Inputs, 4 Outputs",
+        interfaces: "Dual CAN, 1-Wire, RS-485, MODBUS RTU, BLE",
+        battery: "Battery 800 mAh",
+      },
     },
     {
       name: "S-2613",
@@ -304,6 +407,12 @@ const AllDevicesPage = () => {
       antennas: "External",
       battery: "800 mAh",
       href: "/products/tracking-devices/signal-series/s-2613",
+      cardDisplay: {
+        connectivity: "2G",
+        inputsOutputs: "4 Digital Inputs & 1 Analog Input, 4 Outputs",
+        interfaces: "RS-485, BLE",
+        battery: "Battery 800 mAh",
+      },
     },
     {
       name: "S-2651",
@@ -318,6 +427,12 @@ const AllDevicesPage = () => {
       antennas: "External",
       battery: "800 mAh",
       href: "/products/tracking-devices/signal-series/s-2651",
+      cardDisplay: {
+        connectivity: "2G",
+        inputsOutputs: "6 Universal Inputs, 4 Outputs",
+        interfaces: "CAN, 1-Wire, RS-485, RS-232, MODBUS RTU, BLE",
+        battery: "Battery 800 mAh",
+      },
     },
     {
       name: "S-4753",
@@ -332,6 +447,12 @@ const AllDevicesPage = () => {
       antennas: "External",
       battery: "800 mAh",
       href: "/products/tracking-devices/signal-series/s-4753",
+      cardDisplay: {
+        connectivity: "4G / 2G, Dual SIM",
+        inputsOutputs: "6 Universal Inputs, 4 Outputs",
+        interfaces: "Dual CAN, 1-Wire, RS-485, MODBUS RTU, BLE",
+        battery: "Battery 800 mAh",
+      },
     },
     {
       name: "S-4751",
@@ -346,6 +467,12 @@ const AllDevicesPage = () => {
       antennas: "External",
       battery: "800 mAh",
       href: "/products/tracking-devices/signal-series/s-4751",
+      cardDisplay: {
+        connectivity: "4G / 2G, Dual SIM",
+        inputsOutputs: "6 Universal Inputs, 4 Outputs",
+        interfaces: "CAN, 1-Wire, RS-485, RS-232, MODBUS RTU, BLE",
+        battery: "Battery 800 mAh",
+      },
     },
   ];
 
@@ -452,14 +579,14 @@ const AllDevicesPage = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-start overflow-hidden bg-brand-light-3 product-background-image all-devices-hero-background">
-          <div className="absolute inset-0 z-40 w-full max-w-[1440px] mx-auto px-[clamp(1rem,2.4vw,2.5rem)] pt-6 md:pt-8">
-            <div className="text-left">
+        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center overflow-hidden bg-brand-light-3 product-background-image all-devices-hero-background">
+          <div className="absolute inset-0 z-40 w-full max-w-[1440px] mx-auto px-[clamp(1rem,2.4vw,2.5rem)] flex items-start lg:items-center pt-4 sm:pt-6 lg:pt-0">
+            <div className="text-left max-w-lg">
               <p className="text-caption mb-4 text-brand-navy">
                 COMPLETE CATALOG
               </p>
               <h1 className="text-h1 mb-6">Explore All Devices</h1>
-              <p className="text-body-lg max-w-3xl text-brand-navy">
+              <p className="text-body-lg text-brand-navy">
                 Filter through our entire range of START, SMART, and SIGNAL
                 series trackers to find the perfect fit for your project.
               </p>
@@ -661,24 +788,32 @@ const AllDevicesPage = () => {
 
                       {/* Specs Summary */}
                       <div className="space-y-4 mb-10 w-full">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-brand-primary"></div>
-                          <span className="text-body-sm text-gray-500">
-                            {device.connectivity}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-brand-primary"></div>
-                          <span className="text-body-sm text-gray-500">
-                            {device.sim}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-brand-primary"></div>
-                          <span className="text-body-sm text-gray-500 line-clamp-1">
-                            {device.inputs}
-                          </span>
-                        </div>
+                        {(
+                          device.cardDisplay
+                            ? [
+                                device.cardDisplay.connectivity,
+                                device.cardDisplay.inputsOutputs,
+                                device.cardDisplay.interfaces,
+                                device.cardDisplay.battery,
+                              ]
+                            : [
+                                device.connectivity,
+                                `${device.inputs}, ${device.outputs}`,
+                                [...device.interfaces, device.bluetooth].filter(
+                                  Boolean,
+                                ).join(", ") || device.bluetooth,
+                                device.battery === "—"
+                                  ? "No battery"
+                                  : `Battery ${device.battery}`,
+                              ]
+                        ).map((line, i) => (
+                          <div key={i} className="flex items-center gap-2">
+                            <div className="w-2 h-2 rounded-full bg-brand-primary flex-shrink-0" />
+                            <span className="text-body-sm text-gray-500 line-clamp-2">
+                              {line}
+                            </span>
+                          </div>
+                        ))}
                       </div>
                     </div>
 

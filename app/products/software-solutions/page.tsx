@@ -61,18 +61,16 @@ const SoftwareSolutionsPage = () => {
       <Navbar />
 
       <main className="pt-20">
-        <section className="h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center py-12 md:py-16 bg-gradient-to-b from-brand-light-3 to-white border-b border-gray-200 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-navy transform rotate-45 translate-x-1/2 -translate-y-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-navy transform -rotate-45 -translate-x-1/2 translate-y-1/2"></div>
-          </div>
+        <section className="h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center py-12 md:py-16 relative overflow-hidden product-background-image bg-cover bg-center software-solutions-hero-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
-              <p className="text-caption text-brand-primary mb-4">
+              <p className="text-xs sm:text-sm md:text-base font-bold text-white mb-4 tracking-[0.2em] uppercase">
                 SOFTWARE SOLUTIONS
               </p>
-              <h1 className="text-h1 mb-6">Professional Software Solutions</h1>
-              <p className="text-body-lg max-w-3xl mx-auto mb-8">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight mb-6 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent">
+                Professional Software Solutions
+              </h1>
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-white/95 max-w-3xl mx-auto mb-8 leading-relaxed">
                 Comprehensive suite of software tools for device configuration,
                 management, and advanced telematics operations.
               </p>

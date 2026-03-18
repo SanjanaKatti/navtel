@@ -39,12 +39,12 @@ const DeviceFeatures: React.FC<DeviceFeaturesProps> = ({
           {features.map((feature, idx) => (
             <div
               key={idx}
-              className="group p-6 md:p-8 bg-[#F8FAFC] rounded-[1.5rem] border border-gray-100 hover:bg-white hover:shadow-xl transition-all duration-500 relative overflow-hidden"
+              className="group p-8 md:p-10 bg-[#F3F4F6] rounded-[1.75rem] border border-gray-100 hover:bg-white hover:shadow-xl transition-all duration-500 overflow-hidden"
             >
-              <div className="absolute top-6 right-6 text-gray-300 group-hover:text-brand-primary transition-colors duration-500 scale-90 md:scale-100">
+              <div className="text-gray-300 group-hover:text-brand-primary transition-colors duration-500 mb-6 flex items-center justify-center">
                 {feature.icon}
               </div>
-              <div className="pt-2">
+              <div className="text-left">
                 <h3 className="text-h3 mb-1">{feature.title}</h3>
                 {feature.sub && (
                   <p className="text-caption text-brand-primary mb-2">

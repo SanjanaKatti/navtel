@@ -1,141 +1,361 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ProductHero from "@/components/product/ProductHero";
 import DeviceFeatures from "@/components/product/DeviceFeatures";
 import TechnicalSpecs from "@/components/product/TechnicalSpecs";
 import ProductCenter from "@/components/product/ProductCenter";
-import ProductFAQ from "@/components/product/ProductFAQ";
-import Product3DVisual from "@/components/product/Product3DVisual";
-import { Cpu, GlobeSimple, ClockCounterClockwise } from "phosphor-react";
+import {
+  Bluetooth,
+  ArrowsIn,
+  ClockCounterClockwise,
+  GlobeSimple,
+  ArrowsLeftRight,
+} from "phosphor-react";
 
 const S4013Page = () => {
+  const featuresRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="min-h-screen bg-white font-sans antialiased">
+    <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased overflow-x-hidden">
       <Navbar />
 
       <main className="pt-20">
         {/* Hero Section */}
-        <ProductHero
-          title="S-4013"
-          subtitle="Start Series"
-          badge="4G LTE GPS TRACKER"
-          description={[
-            "Advanced 4G solution for high-performance fleet monitoring.",
-            "Featuring RS-485 support and integrated battery for mission-critical reliability."
-          ]}
-          buttonText="Request Quote"
-          onButtonClick={() => console.log("Request Quote Clicked")}
-          visual={
-            <div className="w-full max-w-2xl h-[clamp(16rem,40vw,28rem)]">
-              <Product3DVisual
-                alt="S-4013 device"
-                baseImage="/Navtelecom/start s-4013_1800x1350.png"
-                maxTiltDeg={10}
+        <section className="relative min-h-[calc(100dvh-5rem)] overflow-hidden flex items-start lg:items-center bg-[#EFEFEF] product-background-image start-device-hero-background">
+          <div
+            className="absolute inset-0 bg-white/30 lg:bg-transparent z-[1]"
+            aria-hidden
+          />
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col lg:block">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_1fr] gap-8 lg:gap-12 items-start lg:items-center py-8 sm:py-12 md:py-16 lg:py-20">
+              {/* Left Info - stacked at top on mobile/tablet */}
+              <div className="w-full max-w-lg flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0 lg:ml-10 space-y-5 sm:space-y-8">
+                <div>
+                  <h1 className="text-h1 break-words">
+                    S-4013
+                    <br />
+                    <span className="text-brand-primary">START</span>
+                  </h1>
+                </div>
+                <div className="space-y-4 max-w-sm">
+                  <p className="text-body-lg">
+                    Basic GPS tracking for location and fuel monitoring.
+                    Reliable and cost-effective solution for fleet operations
+                    and transport automation.
+                  </p>
+                </div>
+                <button
+                  onClick={() =>
+                    featuresRef.current?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  className="bg-brand-navy text-white px-12 sm:px-16 lg:px-20 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1 w-full sm:w-auto mb-8 sm:mb-12 lg:mb-0"
+                >
+                  Explore
+                </button>
+              </div>
+
+              {/* Middle column - spacer on desktop only; on mobile/tablet adds breathing room before image area */}
+              <div className="hidden lg:block lg:ml-10 w-full h-[clamp(12rem,36vw,28rem)]" />
+              <div
+                className="lg:hidden min-h-[14rem] sm:min-h-[18rem] flex-shrink-0"
+                aria-hidden
               />
+
+              {/* Right Big Text - hidden on mobile/tablet to avoid overlap */}
+              <div className="hidden lg:block lg:text-right">
+                <h2 className="text-display mr-10">
+                  <span className="text-brand-primary">4G</span>
+                  <br />
+                  LTE
+                </h2>
+              </div>
             </div>
-          }
-        />
+          </div>
+        </section>
 
         {/* Device Features Section */}
-        <DeviceFeatures
-          heading="High-Speed Tracking."
-          highlightedHeading="Globally."
-          description="The S-4013 combines high-speed 4G connectivity with advanced sensor support."
-          features={[
-            {
-              title: "4G LTE Support",
-              sub: "Fast. Reliable. Global.",
-              desc: "Ensure stable data transmission even in low-coverage areas with modern 4G technology.",
-              icon: <GlobeSimple size={32} weight="light" />
-            },
-            {
-              title: "RS-485 Interface",
-              sub: "Professional. Precise.",
-              desc: "Connect multiple fuel level sensors and digital accessories for complete fleet transparency.",
-              icon: <Cpu size={32} weight="light" />
-            },
-            {
-              title: "Internal Battery",
-              sub: "Always. Active.",
-              desc: "The 130 mAh backup battery keeps the device tracking even if the main power is disconnected.",
-              icon: <ClockCounterClockwise size={32} weight="light" />
-            },
-            {
-              title: "USB Type-C",
-              sub: "Universal. Quick.",
-              desc: "Configure the device in seconds with the industry-standard USB-C port.",
-              icon: (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
-                  <rect x="4" y="10" width="16" height="4" rx="2" />
-                  <circle cx="12" cy="12" r="1" fill="currentColor" />
-                </svg>
-              )
-            }
-          ]}
-        />
+        <div ref={featuresRef}>
+          <DeviceFeatures
+            heading="Device"
+            highlightedHeading="Features"
+            description=""
+            features={[
+              {
+                title: "3 Input Lines",
+                sub: "Reliable. Clear control.",
+                desc: "Connect ignition, doors, seat belts and other switches.",
+                icon: <ArrowsLeftRight size={32} weight="light" />,
+              },
+              {
+                title: "BLE Available",
+                sub: "Wireless. Effortless.",
+                desc: "Seamlessly connect BLE sensors to your tracker.",
+                icon: <Bluetooth size={32} weight="light" />,
+              },
+              {
+                title: "Ultra-Compact Design",
+                sub: "Install anywhere. Stay invisible.",
+                desc: "Tiny size allows discreet installation even in tight or unexpected places.",
+                icon: <ArrowsIn size={32} weight="light" />,
+              },
+              {
+                title: "USB Type-C",
+                sub: "Fast setup. Flexible use.",
+                desc: "Configure or switch modes with ease using a modern USB-C connection.",
+                icon: (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className="w-8 h-8"
+                  >
+                    <rect x="4" y="10" width="16" height="4" rx="2" />
+                    <circle cx="12" cy="12" r="1" fill="currentColor" />
+                  </svg>
+                ),
+              },
+              {
+                title: "Engine Hours Calculation",
+                sub: "Smart logic. Clear insights.",
+                desc: "Track engine runtime based on internal algorithms — no external sensors needed.",
+                icon: <ClockCounterClockwise size={32} weight="light" />,
+              },
+              {
+                title: "Remote Control",
+                sub: "Configure anytime. From anywhere.",
+                desc: "Remote setup made easy.",
+                icon: <GlobeSimple size={32} weight="light" />,
+              },
+            ]}
+          />
+        </div>
 
         {/* Technical Specifications Section */}
         <TechnicalSpecs
           groups={[
             {
-              groupName: "Main Characteristics",
+              groupName: "Interfaces",
               items: [
-                { label: "Network", value: "4G LTE / 3G / 2G" },
-                { label: "Navigation", value: "GPS/GLONASS/Galileo/BDS" },
-                { label: "SIM Support", value: "Single Nano-SIM" },
-                { label: "Bluetooth", value: "4.0 LE" }
-              ]
+                {
+                  label: "Digital Inputs",
+                  value: "2 (with overvoltage protection up to 200 V)",
+                },
+                {
+                  label: "Analog Inputs",
+                  value: "1 (configurable as Digital, range 0–31 V)",
+                },
+                {
+                  label: "Digital Outputs",
+                  value: "1 (up to 48 V / 500 mA, open collector type)",
+                },
+                { label: "RS-485 Interface", value: true },
+                {
+                  label: "USB Interface",
+                  value: "USB Type-C (configuration, data, diagnostics)",
+                },
+                {
+                  label: "Supported Antennas",
+                  value: "Internal GNSS / Cellular",
+                },
+                { label: "3-Axis Accelerometer", value: true },
+              ],
             },
             {
-              groupName: "Inputs & Outputs",
+              groupName: "Bluetooth",
               items: [
-                { label: "Digital Inputs", value: "2" },
-                { label: "Analog Inputs", value: "1" },
-                { label: "Digital Outputs", value: "1" },
-                { label: "RS-485", value: "Supported (LLS/RFID/etc.)" }
-              ]
-            }
+                {
+                  label: "Version",
+                  value: "4.0 + LE (up to 4 BLE sensors supported)",
+                },
+                {
+                  label: "Supported Peripherals",
+                  value:
+                    "Fuel Level, Temperature & Humidity, Axle Load, Tilt Angle",
+                },
+                {
+                  label: "All Sensor Parameters",
+                  value:
+                    "Battery Voltage, Signal Strength, Pressure, Illumination, etc.",
+                },
+              ],
+            },
+            {
+              groupName: "Power",
+              items: [
+                { label: "Input Voltage Range", value: "9.5 – 47 V DC" },
+                { label: "Average Current Consumption (12 V)", value: "75 mA" },
+                {
+                  label: "Current Consumption (12 V, GNSS & GSM off)",
+                  value: "25 mA",
+                },
+                { label: "Max. Current Consumption (12 V)", value: "200 mA" },
+                { label: "Overvoltage Protection", value: "up to 200 V" },
+                {
+                  label: "Backup Battery",
+                  value: "Li-Po, 3.7 V, 130 mAh",
+                },
+                {
+                  label: "EEPROM Data Retention (power-off)",
+                  value: "5 days",
+                },
+              ],
+            },
+            {
+              groupName: "GNSS",
+              items: [
+                {
+                  label: "Supported Systems",
+                  value: "GPS / GLONASS / BeiDou / QZSS",
+                },
+                { label: "Channels", value: "99 acquisition, 33 tracking" },
+                {
+                  label: "Sensitivity",
+                  value: "–167 dBm (tracking), –149 dBm (cold start)",
+                },
+                {
+                  label: "Time to First Fix",
+                  value:
+                    "Hot start < 1 s, Warm start < 22 s, Cold start < 29 s",
+                },
+                {
+                  label: "Accuracy (CEP, static, –130 dBm)",
+                  value: "2.5 m (horizontal), 5 m (vertical)",
+                },
+                { label: "Update Rate", value: "1 Hz" },
+              ],
+            },
+            {
+              groupName: "Cellular",
+              items: [
+                { label: "Network", value: "GSM / GPRS / EDGE / LTE" },
+                { label: "Max Data Rate (2G)", value: "85.6 kbps" },
+                {
+                  label: "2G Bands",
+                  value:
+                    "Class 4 (2 W) in GSM 850 / EGSM 900, Class 1 (1 W) in DCS 1800 / PCS 1900",
+                },
+                {
+                  label: "EDGE Power Class",
+                  value:
+                    "E2 (27 dBm ±3 dB) @ EGSM 900, E1 (26 dBm +3 / –4 dB) @ DCS 1800",
+                },
+                {
+                  label: "LTE Power Class",
+                  value: "3 (23 dBm ±2.7 dB)",
+                },
+                { label: "Data Support", value: "SMS (Text / Data)" },
+                { label: "SIM Slots", value: "1" },
+                {
+                  label: "SIM Type",
+                  value: "Slot 1: External, nano-SIM",
+                },
+              ],
+            },
+            {
+              groupName: "Memory & Storage",
+              items: [{ label: "Data Storage", value: "up to 25,000 records" }],
+            },
+            {
+              groupName: "Environmental",
+              items: [
+                {
+                  label: "Operating Temperature (with internal battery)",
+                  value: "–20 °C to +60 °C",
+                },
+                {
+                  label: "Operating Temperature (without internal battery)",
+                  value: "–40 °C to +85 °C",
+                },
+                {
+                  label: "Storage Temperature (with internal battery)",
+                  value: "0 °C to +40 °C",
+                },
+                {
+                  label: "Storage Temperature (without internal battery)",
+                  value: "–40 °C to +85 °C",
+                },
+                {
+                  label: "Charging Temperature (internal battery)",
+                  value: "0 °C to +50 °C",
+                },
+                {
+                  label: "Humidity",
+                  value: "up to 95% (at +35 °C, non-condensing)",
+                },
+              ],
+            },
+            {
+              groupName: "Physical Specification",
+              items: [
+                { label: "Ingress Protection", value: "IP54" },
+                { label: "Shock Resistance", value: "up to 24 g" },
+                {
+                  label: "Dimensions",
+                  value: "65.5 × 38.4 × 14.3 mm (L × W × H)",
+                },
+                { label: "Weight", value: "31 g" },
+                { label: "Indicators (LEDs)", value: "SYS, GSM, GNSS" },
+              ],
+            },
           ]}
         />
 
-        {/* Product Center Section (Related Products) */}
+        {/* Product Center Section */}
         <ProductCenter
-          heading="Explore the Series"
+          heading="Product Center"
           products={[
             {
-              name: "S-4011",
-              series: "Start Series",
+              name: "Brochures",
+              series:
+                "Download product brochures with key features and benefits.",
               connectivity: "4g",
-              specs: ["Single SIM", "Engine Hours", "130 mAh Battery"],
-              buttonText: "Learn more",
-              href: "/products/tracking-devices/start-series/s-4011"
+              specs: [],
+              buttonText: "Download",
             },
             {
-              name: "S-2013",
-              series: "Start Series",
-              connectivity: "2g",
-              specs: ["RS-485", "Bluetooth 4.0", "130 mAh Battery"],
-              buttonText: "Learn more",
-              href: "/products/tracking-devices/start-series/s-2013"
-            }
+              name: "Knowledge Base",
+              series: "Explore pages with full manuals, and guides.",
+              connectivity: "4g",
+              specs: [],
+              buttonText: "Explore",
+            },
+            {
+              name: "PC Configurator",
+              series:
+                "Configure, update, and manage devices from your desktop.",
+              connectivity: "4g",
+              specs: [],
+              buttonText: "Download",
+            },
+            {
+              name: "Android Configurator",
+              series:
+                "Set up and control devices on the go with our mobile app.",
+              connectivity: "4g",
+              specs: [],
+              buttonText: "Download",
+            },
           ]}
         />
 
-        {/* FAQ Section */}
-        <ProductFAQ
-          faqs={[
-            {
-              question: "Does the S-4013 support remote configuration?",
-              answer: "Yes, it can be fully configured remotely via SMS or GPRS/LTE commands."
-            },
-            {
-              question: "What is the warranty period?",
-              answer: "All Navtelecom devices come with a standard 36-month manufacturer warranty."
-            }
-          ]}
-        />
+        {/* FAQ redirect notice */}
+        <section className="py-12 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-body text-center">
+              For more detailed answers about S-4013 and other Navtelecom
+              devices, please visit our{" "}
+              <a
+                href="/support/faq"
+                className="text-brand-primary font-bold hover:underline"
+              >
+                FAQ page
+              </a>
+              .
+            </p>
+          </div>
+        </section>
       </main>
 
       <Footer />

@@ -199,6 +199,14 @@
     {
       "type": "param",
       "label": "IP Protection"
+    },
+    {
+      "type": "section",
+      "label": "Certification"
+    },
+    {
+      "type": "param",
+      "label": "Certification"
     }
   ],
   "deviceData": {
@@ -246,7 +254,8 @@
         "microSD Card Support": "-",
         "Dimensions": "65.5 × 38.4 × 14.3 mm",
         "Weight": "31 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-2011": {
@@ -293,7 +302,8 @@
         "microSD Card Support": "-",
         "Dimensions": "65.5 × 38.4 × 14.3 mm",
         "Weight": "31 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-4011": {
@@ -340,7 +350,8 @@
         "microSD Card Support": "-",
         "Dimensions": "65.5 × 38.4 × 14.3 mm",
         "Weight": "31 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-2013": {
@@ -387,7 +398,8 @@
         "microSD Card Support": "-",
         "Dimensions": "65.5 × 38.4 × 14.3 mm",
         "Weight": "35 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-4013": {
@@ -434,7 +446,8 @@
         "microSD Card Support": "-",
         "Dimensions": "65.5 × 38.4 × 14.3 mm",
         "Weight": "35 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-2421": {
@@ -481,7 +494,8 @@
         "microSD Card Support": "-",
         "Dimensions": "102 × 57 × 22 mm",
         "Weight": "90 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-2425": {
@@ -528,7 +542,8 @@
         "microSD Card Support": "-",
         "Dimensions": "102 × 57 × 22 mm",
         "Weight": "90 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-4511": {
@@ -575,7 +590,8 @@
         "microSD Card Support": "-",
         "Dimensions": "102 × 57 × 22 mm",
         "Weight": "90 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-4513": {
@@ -622,7 +638,8 @@
         "microSD Card Support": "-",
         "Dimensions": "102 × 57 × 22 mm",
         "Weight": "90 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-2433": {
@@ -669,7 +686,8 @@
         "microSD Card Support": "-",
         "Dimensions": "102 × 57 × 22 mm",
         "Weight": "90 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC, CE"
       }
     },
     "S-4533": {
@@ -716,7 +734,8 @@
         "microSD Card Support": "-",
         "Dimensions": "102 × 57 × 22 mm",
         "Weight": "90 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-2435": {
@@ -763,7 +782,8 @@
         "microSD Card Support": "-",
         "Dimensions": "102 × 57 × 22 mm",
         "Weight": "97 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC, CE"
       }
     },
     "S-4535": {
@@ -810,7 +830,8 @@
         "microSD Card Support": "-",
         "Dimensions": "102 × 57 × 22 mm",
         "Weight": "97 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-2437": {
@@ -857,7 +878,8 @@
         "microSD Card Support": "-",
         "Dimensions": "102 × 57 × 22 mm",
         "Weight": "97 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-4537": {
@@ -904,7 +926,8 @@
         "microSD Card Support": "-",
         "Dimensions": "102 × 57 × 22 mm",
         "Weight": "97 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC, CE"
       }
     },
     "S-2651": {
@@ -951,7 +974,8 @@
         "microSD Card Support": true,
         "Dimensions": "105 × 78 × 20.5 mm",
         "Weight": "98 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC"
       }
     },
     "S-4751": {
@@ -998,7 +1022,8 @@
         "microSD Card Support": true,
         "Dimensions": "105 × 78 × 20.5 mm",
         "Weight": "98 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, CE"
       }
     },
     "S-2653": {
@@ -1045,7 +1070,8 @@
         "microSD Card Support": true,
         "Dimensions": "105 × 78 × 20.5 mm",
         "Weight": "98 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     },
     "S-4753": {
@@ -1092,7 +1118,8 @@
         "microSD Card Support": true,
         "Dimensions": "105 × 78 × 20.5 mm",
         "Weight": "98 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC, CE"
       }
     },
     "S-2613": {
@@ -1139,7 +1166,8 @@
         "microSD Card Support": "-",
         "Dimensions": "105 × 78 × 20.5 mm",
         "Weight": "98 g",
-        "IP Protection": "IP 54"
+        "IP Protection": "IP 54",
+        "Certification": "EAC, WPC"
       }
     }
   }

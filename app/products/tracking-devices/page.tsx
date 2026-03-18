@@ -7,39 +7,32 @@ import ProductLineup from "@/components/ProductLineup";
 
 const TrackingDevicesPage = () => {
   return (
-    <div className="min-h-screen bg-white font-sans antialiased text-brand-navy">
+    <div className="min-h-screen bg-white font-sans antialiased text-brand-navy overflow-x-hidden">
       <Navbar />
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center overflow-hidden bg-brand-light-3 pb-12 md:pb-16 product-background-image tracking-devices-hero-background">
-          <div className="relative z-40 w-full max-w-[1440px] mx-auto px-[clamp(1rem,2.4vw,2.5rem)] pt-6 md:pt-8">
-            <div className="text-left">
-              <p className="text-caption mb-4 text-brand-navy">
+        <section className="relative min-h-[360px] sm:min-h-[min(100dvh,500px)] md:min-h-[min(100dvh,600px)] lg:h-[calc(100vh-5rem)] lg:min-h-[calc(100dvh-5rem)] flex items-start overflow-hidden bg-brand-light-3 product-background-image tracking-devices-hero-background">
+          <div className="absolute inset-0 bg-white/40 z-10" aria-hidden />
+          <div className="relative z-40 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 lg:pt-12 pb-10 sm:pb-16 lg:pb-20">
+            <div className="w-full max-w-full sm:max-w-xl lg:max-w-lg xl:max-w-xl flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0">
+              <p className="text-caption mb-2 sm:mb-4 text-brand-navy">
                 TRACKING DEVICES
               </p>
-              <h1 className="text-h1 mb-6">
+              <h1 className="text-h1 mb-3 sm:mb-6 text-brand-navy break-words">
                 Professional GPS Tracking Solutions
               </h1>
-              <p className="text-body-lg max-w-3xl text-brand-navy">
+              <p className="text-body sm:text-body-lg max-w-full sm:max-w-md text-brand-navy mb-5 sm:mb-8">
                 Comprehensive range of telematics devices designed for fleet
                 management, asset tracking, and vehicle monitoring.
               </p>
-            </div>
-          </div>
-        </section>
-
-        {/* All Devices Link */}
-        <section className="py-12 bg-white border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
               <Link
                 href="/products/all-devices"
-                className="inline-flex items-center gap-3 bg-[#00529B] text-white px-8 py-4 font-bold hover:bg-[#003d74] transition-colors border-2 border-[#00529B] rounded-full"
+                className="inline-flex items-center gap-2 sm:gap-3 bg-[#00529B] text-white px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold hover:bg-[#003d74] transition-colors border-2 border-[#00529B] rounded-full"
               >
                 <span>View All Devices</span>
                 <svg
-                  className="w-5 h-5"
+                  className="w-4 h-4 sm:w-5 sm:h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
