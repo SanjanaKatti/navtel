@@ -18,6 +18,7 @@ interface SoftwareHeroProps {
   backgroundClass?: string;
   textColor?: "white" | "navy";
   breadcrumb?: { label: string; href: string };
+  center?: boolean;
 }
 
 const SoftwareHero: React.FC<SoftwareHeroProps> = ({
@@ -29,6 +30,7 @@ const SoftwareHero: React.FC<SoftwareHeroProps> = ({
   backgroundClass = "",
   textColor = "white",
   breadcrumb,
+  center = false,
 }) => {
   const isWhite = textColor === "white";
   const textCls = isWhite ? "text-white" : "text-brand-navy";
@@ -41,8 +43,8 @@ const SoftwareHero: React.FC<SoftwareHeroProps> = ({
       className={`relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center overflow-hidden ${bgCls}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 w-full">
-        <div className="grid lg:grid-cols-1 gap-20 items-center">
-          <div className="space-y-8 lg:w-2/5">
+        <div className={`grid lg:grid-cols-1 gap-20 items-center ${center ? "justify-items-center" : ""}`}>
+          <div className={`space-y-8 ${center ? "lg:w-full max-w-3xl mx-auto text-center" : "lg:w-2/5"}`}>
             {breadcrumb && (
               <Link
                 href={breadcrumb.href}
@@ -69,7 +71,7 @@ const SoftwareHero: React.FC<SoftwareHeroProps> = ({
             </p>
 
             {(ctaPrimary || ctaSecondary) && (
-              <div className="flex flex-wrap gap-4 pt-4">
+              <div className={`flex flex-wrap gap-4 pt-4 ${center ? "justify-center" : ""}`}>
                 {ctaPrimary &&
                   (ctaPrimary.href ? (
                     <Link

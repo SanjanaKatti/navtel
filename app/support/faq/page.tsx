@@ -279,9 +279,9 @@ const FAQPage = () => {
 
       <main className="pt-20">
         {/* Hero */}
-        <section className="py-16 md:py-20 bg-brand-light-3 border-b border-gray-200">
+        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center overflow-hidden product-background-image faq-hero-background">
           <LayoutContainer>
-            <div className="max-w-3xl mx-auto text-center">
+            <div className="max-w-3xl mx-auto text-center z-10">
               <p className="text-base md:text-lg font-bold uppercase tracking-[0.2em] text-[#28398c] mb-4">
                 FAQ
               </p>

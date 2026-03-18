@@ -25,7 +25,9 @@ const EcoDrivingPage = () => {
           title="Eco Driving"
           subtitle="Understand how vehicles are really driven"
           tagline="Eco Driving analyzes driving behavior using motion sensors and vehicle telemetry. The system detects aggressive driving patterns and inefficient driving habits that affect fuel consumption, vehicle wear and road safety. By analyzing real driving behavior, fleet operators gain better visibility into how vehicles are actually used in daily operations."
+          backgroundClass="eco-driving-hero-background"
           textColor="navy"
+          center
         />
 
         <SoftwareKeyFeatures

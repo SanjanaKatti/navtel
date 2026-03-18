@@ -465,23 +465,27 @@ a[class*="bg-color-neutral-dark-gray"]:hover {
 
 .homepage-hero-bg-1 {
   background-image: url("/Navtelecom/banner1_1080x1350.png") !important;
+  background-position: right center !important;
 }
 
 @media (min-width: 768px) {
   .homepage-hero-bg-1 {
     background-image: url("/Navtelecom/banner1_2048x1365.png") !important;
+    background-position: right center !important;
   }
 }
 
 @media (min-width: 1024px) {
   .homepage-hero-bg-1 {
     background-image: url("/Navtelecom/banner1_2560x1440.png") !important;
+    background-position: right center !important;
   }
 }
 
 @media (min-width: 1280px) {
   .homepage-hero-bg-1 {
     background-image: url("/Navtelecom/banner1_3840x1646.png") !important;
+    background-position: right center !important;
   }
 }
 
@@ -570,5 +574,71 @@ a[class*="bg-color-neutral-dark-gray"]:hover {
 @media (min-width: 1280px) {
   .software-solutions-hero-background {
     background-image: url("/Navtelecom/software-solutions_homepage1 3840x1646.png") !important;
+  }
+}
+
+.faq-hero-background {
+  background-image: url("/Navtelecom/FAQ_homepage1 1080x1350.png") !important;
+}
+
+@media (min-width: 768px) {
+  .faq-hero-background {
+    background-image: url("/Navtelecom/FAQ_homepage1 2048x1365.png") !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .faq-hero-background {
+    background-image: url("/Navtelecom/FAQ_homepage1 2560x1440.png") !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .faq-hero-background {
+    background-image: url("/Navtelecom/FAQ_homepage1 3840x1646.png") !important;
+  }
+}
+
+.eco-driving-hero-background {
+  background-image: url("/Navtelecom/ecodriving_homepage1 1080x1350.png") !important;
+}
+
+@media (min-width: 768px) {
+  .eco-driving-hero-background {
+    background-image: url("/Navtelecom/ecodriving_homepage1 2048x1365.png") !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .eco-driving-hero-background {
+    background-image: url("/Navtelecom/ecodriving_homepage1 2560x1440.png") !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .eco-driving-hero-background {
+    background-image: url("/Navtelecom/ecodriving_homepage1 3840x1646.png") !important;
+  }
+}
+
+.knowledge-base-hero-background {
+  background-image: url("/Navtelecom/wiki_homepage1 1080x1350.png") !important;
+}
+
+@media (min-width: 768px) {
+  .knowledge-base-hero-background {
+    background-image: url("/Navtelecom/wiki_homepage1 2048x1365.png") !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .knowledge-base-hero-background {
+    background-image: url("/Navtelecom/wiki_homepage1 2560x1440.png") !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .knowledge-base-hero-background {
+    background-image: url("/Navtelecom/wiki_homepage1 3840x1646.png") !important;
   }
 }

@@ -9,7 +9,7 @@ const supportCards = [
     title: "Knowledge Base",
     description:
       "Browse setup guides, commands, integration docs, and troubleshooting articles.",
-    href: "#",
+    href: "/support/knowledge-base",
     cta: "Open Knowledge Base",
   },
   {
@@ -58,7 +58,7 @@ export default function SupportPage() {
 
         <section className="py-16 md:py-20 bg-[#F8FAFC]">
           <LayoutContainer>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 xl:gap-8">
               {supportCards.map((card) => (
                 <div
                   key={card.title}
