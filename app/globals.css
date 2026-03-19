@@ -136,6 +136,15 @@ body {
   height: 100%;
 }
 
+/* Hide scrollbar while keeping scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Global button color unification */
 button[class*="bg-brand-primary"],
 button[class*="bg-brand-navy"],
@@ -557,24 +566,9 @@ a[class*="bg-color-neutral-dark-gray"]:hover {
 
 .software-solutions-hero-background {
   background-image: url("/Navtelecom/software-solutions_homepage1 1080x1350.png") !important;
-}
-
-@media (min-width: 768px) {
-  .software-solutions-hero-background {
-    background-image: url("/Navtelecom/software-solutions_homepage1 2048x1365.png") !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .software-solutions-hero-background {
-    background-image: url("/Navtelecom/software-solutions_homepage1 2560x1440.png") !important;
-  }
-}
-
-@media (min-width: 1280px) {
-  .software-solutions-hero-background {
-    background-image: url("/Navtelecom/software-solutions_homepage1 3840x1646.png") !important;
-  }
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .faq-hero-background {

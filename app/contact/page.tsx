@@ -92,7 +92,7 @@ const ContactPage = () => {
 
             <button
               type="submit"
-              className="mt-4 w-full rounded-2xl bg-brand-navy py-5 text-base font-black uppercase text-white shadow-xl shadow-brand-navy/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-primary active:scale-95"
+              className="mt-4 w-full rounded-full bg-brand-navy py-5 text-base font-black uppercase text-white shadow-xl shadow-brand-navy/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-primary active:scale-95"
             >
               SEND MESSAGE
             </button>

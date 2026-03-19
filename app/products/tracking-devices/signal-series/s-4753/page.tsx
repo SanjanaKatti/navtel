@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import DeviceFeatures from "@/components/product/DeviceFeatures";
@@ -7,10 +7,12 @@ import TechnicalSpecs from "@/components/product/TechnicalSpecs";
 import ProductCenter from "@/components/product/ProductCenter";
 import { Bluetooth, GlobeSimple, Cpu, Code } from "phosphor-react";
 
-const S4753Page = () => (
-  <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased overflow-x-hidden">
-    <Navbar />
-    <main className="pt-20">
+const S4753Page = () => {
+  const featuresRef = useRef<HTMLDivElement>(null);
+  return (
+    <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased overflow-x-hidden">
+      <Navbar />
+      <main className="pt-20">
       <section className="relative min-h-[calc(100dvh-5rem)] overflow-hidden flex items-start lg:items-center bg-[#EFEFEF] product-background-image signal-device-hero-background">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full w-full">
           <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-start lg:items-center py-8 sm:py-12 md:py-20">
@@ -28,9 +30,14 @@ const S4753Page = () => (
                   fleets, and industrial automation.
                 </p>
               </div>
-              <button className="bg-brand-navy text-white px-20 py-4 rounded-full font-bold text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1">
-                Explore
-              </button>
+                <button
+                  onClick={() =>
+                    featuresRef.current?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  className="bg-brand-navy text-white px-20 py-4 rounded-full font-bold text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1"
+                >
+                  Explore
+                </button>
             </div>
             <div className="ml-0 lg:ml-10 w-full h-[clamp(12rem,36vw,28rem)]" />
             <div className="lg:text-right">
@@ -43,7 +50,8 @@ const S4753Page = () => (
           </div>
         </div>
       </section>
-      <DeviceFeatures
+      <div ref={featuresRef}>
+        <DeviceFeatures
         heading="Device"
         highlightedHeading="Features"
         description=""
@@ -326,9 +334,13 @@ const S4753Page = () => (
           </p>
         </div>
       </section>
+      </div>
     </main>
-    <Footer />
+    <>
+      <Footer />
+    </>
   </div>
-);
+  );
+}
 
 export default S4753Page;

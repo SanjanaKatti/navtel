@@ -14,6 +14,7 @@ import {
   SoftwareKeyFeatures,
   SoftwareContentBlock,
   SoftwareCTA,
+  SoftwareSidePanelContent,
 } from "@/components/software";
 
 const EcoDrivingPage = () => {
@@ -28,10 +29,15 @@ const EcoDrivingPage = () => {
           backgroundClass="eco-driving-hero-background"
           textColor="navy"
           center
+          breadcrumb={{
+            label: "Software Solutions",
+            href: "/products/software-solutions",
+          }}
         />
 
         <SoftwareKeyFeatures
           heading="Features"
+          scrollable
           features={[
             {
               title: "Real-Time Detection",
@@ -62,57 +68,53 @@ const EcoDrivingPage = () => {
         />
 
         <section className="py-20 md:py-24 bg-[#F8FAFC]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16">
-            <SoftwareContentBlock
-              title="Detect driving behavior in real time"
-              titleFirst={true}
-              content={{
-                items: [
-                  "Acceleration events",
-                  "Braking events",
-                  "Aggressive maneuvers",
-                  "Inefficient driving patterns",
-                ],
-              }}
-            />
-
-            <SoftwareContentBlock
-              title="How It Works"
-              content={{
-                paragraphs: [
-                  "Eco Driving algorithms analyze motion data from the internal accelerometer together with vehicle telemetry such as speed and engine state.",
-                  "When driving behavior exceeds predefined thresholds, the system records a driving event.",
-                  "These events can then be used by fleet management platforms to evaluate driver performance and analyze driving patterns.",
-                ],
-              }}
-            />
-
-            <SoftwareContentBlock
-              title="Built for Fleet Operations"
-              content={{
-                paragraphs: [
-                  "Eco Driving is used in fleets where driving behavior directly affects operating costs and safety.",
-                  "Typical applications include:",
-                ],
-                items: [
-                  "Logistics fleets",
-                  "Construction and mining equipment",
-                  "Public transport fleets",
-                  "Delivery and service vehicles",
-                ],
-              }}
-            />
-
-            <SoftwareContentBlock
-              title="Why It Matters"
-              titleFirst={true}
-              content={{
-                paragraphs: [
-                  "Driving style has a direct impact on fuel consumption, vehicle wear and accident risk.",
-                  "Eco Driving helps fleet operators detect unsafe behavior early and improve driver discipline across the fleet.",
-                  "The result is safer operations, lower maintenance costs and more efficient vehicle usage.",
-                ],
-              }}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SoftwareSidePanelContent
+              sections={[
+                {
+                  title: "Detect driving behavior in real time",
+                  content: (
+                    <ul className="space-y-2 text-body text-gray-600 list-disc list-inside">
+                      <li>Acceleration events</li>
+                      <li>Braking events</li>
+                      <li>Aggressive maneuvers</li>
+                      <li>Inefficient driving patterns</li>
+                    </ul>
+                  ),
+                },
+                {
+                  title: "How It Works",
+                  content: (
+                    <p className="text-body text-gray-600">
+                      Eco Driving algorithms analyze motion data from the internal accelerometer together with vehicle telemetry such as speed and engine state. When driving behavior exceeds predefined thresholds, the system records a driving event. These events can then be used by fleet management platforms to evaluate driver performance and analyze driving patterns.
+                    </p>
+                  ),
+                },
+                {
+                  title: "Built for Fleet Operations",
+                  content: (
+                    <>
+                      <p className="text-body text-gray-600 mb-4">
+                        Eco Driving is used in fleets where driving behavior directly affects operating costs and safety. Typical applications include:
+                      </p>
+                      <ul className="space-y-2 text-body text-gray-600 list-disc list-inside">
+                        <li>Logistics fleets</li>
+                        <li>Construction and mining equipment</li>
+                        <li>Public transport fleets</li>
+                        <li>Delivery and service vehicles</li>
+                      </ul>
+                    </>
+                  ),
+                },
+                {
+                  title: "Why It Matters",
+                  content: (
+                    <p className="text-body text-gray-600">
+                      Driving style has a direct impact on fuel consumption, vehicle wear and accident risk. Eco Driving helps fleet operators detect unsafe behavior early and improve driver discipline across the fleet. The result is safer operations, lower maintenance costs and more efficient vehicle usage.
+                    </p>
+                  ),
+                },
+              ]}
             />
           </div>
         </section>
@@ -128,11 +130,7 @@ const EcoDrivingPage = () => {
               subtitle="Eco Driving functionality depends on the device model. Please refer to individual device specifications for feature availability."
             />
             <SoftwareCTA
-              titleLines={[
-                "Understand how vehicles are driven.",
-                "Improve safety.",
-                "Reduce operating costs.",
-              ]}
+              title="Understand how vehicles are driven. Improve safety. Reduce operating costs."
             />
           </div>
         </section>

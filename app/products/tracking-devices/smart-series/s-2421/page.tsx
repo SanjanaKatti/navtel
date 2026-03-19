@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import DeviceFeatures from "@/components/product/DeviceFeatures";
@@ -13,10 +13,12 @@ import {
   ArrowRight,
 } from "phosphor-react";
 
-const S2421Page = () => (
-  <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased overflow-x-hidden">
-    <Navbar />
-    <main className="pt-20">
+const S2421Page = () => {
+  const featuresRef = useRef<HTMLDivElement>(null);
+  return (
+    <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased overflow-x-hidden">
+      <Navbar />
+      <main className="pt-20">
       <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-center bg-[#EFEFEF] product-background-image smart-device-hero-background">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center py-12 md:py-20">
@@ -34,9 +36,12 @@ const S2421Page = () => (
                   industrial automation.
                 </p>
               </div>
-              <button className="bg-brand-navy text-white px-20 py-4 rounded-full font-bold text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1">
-                Explore
-              </button>
+                <button
+                  onClick={() => featuresRef.current?.scrollIntoView({ behavior: "smooth" })}
+                  className="bg-brand-navy text-white px-20 py-4 rounded-full font-bold text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1"
+                >
+                  Explore
+                </button>
             </div>
             <div className="ml-0 lg:ml-10 w-full h-[clamp(12rem,36vw,28rem)]" />
             <div className="lg:text-right">
@@ -49,7 +54,8 @@ const S2421Page = () => (
           </div>
         </div>
       </section>
-      <DeviceFeatures
+      <div ref={featuresRef}>
+        <DeviceFeatures
         heading="Device"
         highlightedHeading="Features"
         description=""
@@ -287,9 +293,13 @@ const S2421Page = () => (
           </p>
         </div>
       </section>
+      </div>
     </main>
-    <Footer />
+    <>
+      <Footer />
+    </>
   </div>
-);
+  );
+}
 
 export default S2421Page;

@@ -13,6 +13,7 @@ import {
   SoftwareKeyFeatures,
   SoftwareContentBlock,
   SoftwareCTA,
+  SoftwareSidePanelContent,
 } from "@/components/software";
 
 const NTCConfiguratorPage = () => {
@@ -34,10 +35,15 @@ const NTCConfiguratorPage = () => {
           }}
           backgroundClass="cfg-hero-background"
           textColor="navy"
+          breadcrumb={{
+            label: "Software Solutions",
+            href: "/products/software-solutions",
+          }}
         />
 
         <SoftwareKeyFeatures
           heading="Features"
+          scrollable
           features={[
             {
               title: "Advanced Configuration",
@@ -63,63 +69,71 @@ const NTCConfiguratorPage = () => {
         />
 
         <section className="py-20 md:py-24 bg-[#F8FAFC]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16">
-            <SoftwareContentBlock
-              title="Engineering Tools"
-              titleFirst
-              content={{
-                paragraphs: [
-                  "NTC Configurator includes a set of tools designed for diagnostics, testing and integration of telematics devices.",
-                ],
-                items: [
-                  "CAN Spy for monitoring CAN bus traffic",
-                  "Complex Events configuration",
-                  "Device communication diagnostics",
-                  "Configuration file management",
-                  "Sensor testing and validation",
-                  "Firmware update tools",
-                ],
-              }}
-            />
-            <SoftwareContentBlock
-              title="Supported Interfaces"
-              content={{
-                paragraphs: [
-                  "NTC Configurator allows configuration and diagnostics of all device interfaces.",
-                ],
-                items: [
-                  "CAN bus",
-                  "RS-485",
-                  "RS-232",
-                  "Bluetooth sensors",
-                  "Digital inputs and outputs",
-                  "Analog inputs",
-                ],
-              }}
-            />
-            <SoftwareContentBlock
-              title="Typical Use Cases"
-              titleFirst
-              content={{
-                paragraphs: [
-                  "NTC Configurator is used by engineers and system integrators during device installation and integration. Typical scenarios include:",
-                ],
-                items: [
-                  "Device configuration during installation",
-                  "Sensor integration and testing",
-                  "CAN data verification",
-                  "Troubleshooting device behavior",
-                  "Firmware updates and diagnostics",
-                ],
-              }}
-            />
-            <SoftwareContentBlock
-              title="Why It Matters"
-              content={{
-                paragraphs: [
-                  "Reliable configuration is critical for telematics deployments. NTC Configurator gives engineers full visibility and control over device behavior, helping prevent configuration errors and reduce support issues in production fleets.",
-                ],
-              }}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SoftwareSidePanelContent
+              sections={[
+                {
+                  title: "Engineering Tools",
+                  content: (
+                    <>
+                      <p className="text-body text-gray-600 mb-4">
+                        NTC Configurator includes a set of tools designed for diagnostics, testing and integration of telematics devices.
+                      </p>
+                      <ul className="space-y-2 text-body text-gray-600 list-disc list-inside">
+                        <li>CAN Spy for monitoring CAN bus traffic</li>
+                        <li>Complex Events configuration</li>
+                        <li>Device communication diagnostics</li>
+                        <li>Configuration file management</li>
+                        <li>Sensor testing and validation</li>
+                        <li>Firmware update tools</li>
+                      </ul>
+                    </>
+                  ),
+                },
+                {
+                  title: "Supported Interfaces",
+                  content: (
+                    <>
+                      <p className="text-body text-gray-600 mb-4">
+                        NTC Configurator allows configuration and diagnostics of all device interfaces.
+                      </p>
+                      <ul className="space-y-2 text-body text-gray-600 list-disc list-inside">
+                        <li>CAN bus</li>
+                        <li>RS-485</li>
+                        <li>RS-232</li>
+                        <li>Bluetooth sensors</li>
+                        <li>Digital inputs and outputs</li>
+                        <li>Analog inputs</li>
+                      </ul>
+                    </>
+                  ),
+                },
+                {
+                  title: "Typical Use Cases",
+                  content: (
+                    <>
+                      <p className="text-body text-gray-600 mb-4">
+                        NTC Configurator is used by engineers and system integrators during device installation and integration. Typical scenarios include:
+                      </p>
+                      <ul className="space-y-2 text-body text-gray-600 list-disc list-inside">
+                        <li>Device configuration during installation</li>
+                        <li>Sensor integration and testing</li>
+                        <li>CAN data verification</li>
+                        <li>Troubleshooting device behavior</li>
+                        <li>Firmware updates and diagnostics</li>
+                      </ul>
+                    </>
+                  ),
+                },
+                {
+                  title: "Why It Matters",
+                  content: (
+                    <p className="text-body text-gray-600">
+                      Reliable configuration is critical for telematics deployments. NTC Configurator gives engineers full visibility and control over device behavior, helping prevent configuration errors and reduce support issues in production fleets.
+                    </p>
+                  ),
+                },
+              ]}
             />
           </div>
         </section>

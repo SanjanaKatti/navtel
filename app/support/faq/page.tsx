@@ -29,13 +29,13 @@ const generalFaqs = [
         <div>
           <p className="font-bold text-brand-navy mb-1">SMS Commands</p>
           <p className="mb-1">
-            Send direct commands to the device (e.g. APN, server, status, reboot).
+            Send direct commands to the device (e.g. APN, server, status,
+            reboot).
           </p>
           <a
             href="https://wiki.navtelecom.ru/en/home/devices/commands"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm"
           >
             Full command list
           </a>
@@ -45,13 +45,13 @@ const generalFaqs = [
             Remote connection via NTC Configurator
           </p>
           <p className="mb-1">
-            Connect to an online device via Internet, read/write config, update firmware.
+            Connect to an online device via Internet, read/write config, update
+            firmware.
           </p>
           <a
             href="https://wiki.navtelecom.ru/en/home/devices/diagnostics/remote_configurator"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm"
           >
             How it works
           </a>
@@ -59,14 +59,13 @@ const generalFaqs = [
         <div>
           <p className="font-bold text-brand-navy mb-1">DRC Cloud Service</p>
           <p className="mb-1">
-            Cloud-based platform for remote updates, config sync, diagnostics, and device health
-            monitoring.
+            Cloud-based platform for remote updates, config sync, diagnostics,
+            and device health monitoring.
           </p>
           <a
             href="https://wiki.navtelecom.ru/en/home/drc"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm"
           >
             Learn more
           </a>
@@ -87,7 +86,8 @@ const generalFaqs = [
           Full command list
         </a>
         <p>
-          If you need a complex combined command, please contact Technical Support at{" "}
+          If you need a complex combined command, please contact Technical
+          Support at{" "}
           <a href="mailto:support@navtelecom.ru">support@navtelecom.ru</a>.
         </p>
       </div>
@@ -101,8 +101,9 @@ const integrationFaqs = [
     a: (
       <div className="space-y-3">
         <p>
-          Navtelecom devices support integration using the FLEX protocol. We provide protocol
-          documentation, integration examples, and developer support.
+          Navtelecom devices support integration using the FLEX protocol. We
+          provide protocol documentation, integration examples, and developer
+          support.
         </p>
         <a
           href="https://wiki.navtelecom.ru/en/home/developers"
@@ -118,7 +119,9 @@ const integrationFaqs = [
     q: "Where can I check supported vehicles for CAN decoding?",
     a: (
       <div className="space-y-3">
-        <p>The list of supported vehicles and decoding files is available here:</p>
+        <p>
+          The list of supported vehicles and decoding files is available here:
+        </p>
         <a
           href="https://drc.navtelecom.ru/public-can-decoding-files"
           target="_blank"
@@ -137,13 +140,14 @@ const installationFaqs = [
     a: (
       <div className="space-y-3">
         <p>
-          For reliable GNSS reception, the tracker should be installed with the label side facing
-          upward. The side with the SYS / GPS / GSM indicators and labels must face upward, as the
-          GNSS antenna is located in the upper part of the device.
+          For reliable GNSS reception, the tracker should be installed with the
+          label side facing upward. The side with the SYS / GPS / GSM indicators
+          and labels must face upward, as the GNSS antenna is located in the
+          upper part of the device.
         </p>
         <p>
-          Incorrect device orientation may reduce satellite signal quality and affect positioning
-          accuracy.
+          Incorrect device orientation may reduce satellite signal quality and
+          affect positioning accuracy.
         </p>
       </div>
     ),
@@ -153,18 +157,19 @@ const installationFaqs = [
     a: (
       <div className="space-y-3">
         <p>
-          After installation, open Telemetry Data in NTC Configurator and check GSM signal level,
-          GNSS satellites and coordinates, CAN data (if CAN is connected), and data from connected
-          sensors.
+          After installation, open Telemetry Data in NTC Configurator and check
+          GSM signal level, GNSS satellites and coordinates, CAN data (if CAN is
+          connected), and data from connected sensors.
         </p>
         <p>
-          If the parameters are updating, the device is installed and configured correctly. If some
-          parameters are not available, open Protocol Settings in the configuration and check
-          whether the required parameters are enabled for transmission to the server.
+          If the parameters are updating, the device is installed and configured
+          correctly. If some parameters are not available, open Protocol
+          Settings in the configuration and check whether the required
+          parameters are enabled for transmission to the server.
         </p>
         <p>
-          If the parameters are enabled but still not updating, check wiring, installation
-          position, and device configuration.
+          If the parameters are enabled but still not updating, check wiring,
+          installation position, and device configuration.
         </p>
       </div>
     ),
@@ -177,15 +182,19 @@ const hardwareFaqs = [
     a: (
       <div className="space-y-3">
         <p>
-          For better Bluetooth communication with BLE sensors, make sure the front side of the
-          device is not blocked by metal surfaces. The Bluetooth antenna is located on the front
-          side of the device, near the indicator area.
+          For better Bluetooth communication with BLE sensors, make sure the
+          front side of the device is not blocked by metal surfaces. The
+          Bluetooth antenna is located on the front side of the device, near the
+          indicator area.
         </p>
         <p>For optimal signal strength:</p>
         <ul className="list-disc list-inside space-y-1">
           <li>Avoid placing the front side against metal surfaces.</li>
           <li>Keep some space between the device and large wiring bundles.</li>
-          <li>Install the device so the front side faces the area where BLE sensors are located.</li>
+          <li>
+            Install the device so the front side faces the area where BLE
+            sensors are located.
+          </li>
         </ul>
       </div>
     ),
@@ -195,15 +204,16 @@ const hardwareFaqs = [
     a: (
       <div className="space-y-3">
         <p>
-          Trackers with external antennas are recommended in installations where the device is
-          placed in areas with weak signal reception, such as metal compartments, heavy machinery or
-          vehicles with metal body shielding.
+          Trackers with external antennas are recommended in installations where
+          the device is placed in areas with weak signal reception, such as
+          metal compartments, heavy machinery or vehicles with metal body
+          shielding.
         </p>
         <p>
-          External antennas allow the installer to place the antenna in a position with better
-          signal reception, improving communication reliability and positioning accuracy.
-          Navtelecom devices with external antennas support connection of external GSM and GNSS
-          antennas.
+          External antennas allow the installer to place the antenna in a
+          position with better signal reception, improving communication
+          reliability and positioning accuracy. Navtelecom devices with external
+          antennas support connection of external GSM and GNSS antennas.
         </p>
       </div>
     ),
@@ -213,15 +223,20 @@ const hardwareFaqs = [
     a: (
       <div className="space-y-3">
         <p>
-          Navtelecom trackers support an input voltage range of 9.5–47 V, which allows installation
-          in most vehicles including passenger cars, trucks and industrial equipment.
+          Navtelecom trackers support an input voltage range of 9.5–47 V, which
+          allows installation in most vehicles including passenger cars, trucks
+          and industrial equipment.
         </p>
         <p>
-          In electric vehicles, trackers should be connected to the low-voltage auxiliary system
-          (typically 12 V or 24 V), which powers the vehicle electronics. Telematics devices must
-          not be connected to the high-voltage traction circuit.
+          In electric vehicles, trackers should be connected to the low-voltage
+          auxiliary system (typically 12 V or 24 V), which powers the vehicle
+          electronics. Telematics devices must not be connected to the
+          high-voltage traction circuit.
         </p>
-        <p>Always connect the tracker to the vehicle&apos;s low-voltage power line.</p>
+        <p>
+          Always connect the tracker to the vehicle&apos;s low-voltage power
+          line.
+        </p>
       </div>
     ),
   },
@@ -232,8 +247,8 @@ const warrantyFaqs = [
     q: "How long is the warranty on Navtelecom devices?",
     a: (
       <p>
-        All Navtelecom devices are covered by a 3-year warranty. The backup battery and the RTC
-        battery (clock battery) are covered for 1 year.
+        All Navtelecom devices are covered by a 3-year warranty. The backup
+        battery and the RTC battery (clock battery) are covered for 1 year.
       </p>
     ),
   },
@@ -245,14 +260,16 @@ const technologyFaqs = [
     a: (
       <div className="space-y-3">
         <p>
-          GPS is a satellite navigation system developed by the United States. GNSS (Global
-          Navigation Satellite System) is a general term that describes all satellite navigation
-          systems such as GPS, GLONASS, Galileo, BeiDou, QZSS and NavIC.
+          GPS is a satellite navigation system developed by the United States.
+          GNSS (Global Navigation Satellite System) is a general term that
+          describes all satellite navigation systems such as GPS, GLONASS,
+          Galileo, BeiDou, QZSS and NavIC.
         </p>
         <p>
-          Modern GNSS receivers can use signals from multiple satellite systems simultaneously.
-          Navtelecom devices use multi-GNSS receivers, allowing them to receive signals from several
-          constellations and improve positioning accuracy and reliability.
+          Modern GNSS receivers can use signals from multiple satellite systems
+          simultaneously. Navtelecom devices use multi-GNSS receivers, allowing
+          them to receive signals from several constellations and improve
+          positioning accuracy and reliability.
         </p>
       </div>
     ),
@@ -262,11 +279,15 @@ const technologyFaqs = [
     a: (
       <div className="space-y-3">
         <p>
-          Under normal conditions, GNSS positioning accuracy is typically 2–5 meters. Accuracy may
-          vary depending on satellite visibility, urban buildings or tunnels, device installation
-          position and antenna placement.
+          Under normal conditions, GNSS positioning accuracy is typically 2–5
+          meters. Accuracy may vary depending on satellite visibility, urban
+          buildings or tunnels, device installation position and antenna
+          placement.
         </p>
-        <p>Correct device installation significantly improves positioning accuracy.</p>
+        <p>
+          Correct device installation significantly improves positioning
+          accuracy.
+        </p>
       </div>
     ),
   },
@@ -279,7 +300,7 @@ const FAQPage = () => {
 
       <main className="pt-20">
         {/* Hero */}
-        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center overflow-hidden product-background-image faq-hero-background">
+        <section className="relative h-60 md:h-80 lg:h-96 flex items-center overflow-hidden product-background-image faq-hero-background">
           <LayoutContainer>
             <div className="max-w-3xl mx-auto text-center z-10">
               <p className="text-base md:text-lg font-bold uppercase tracking-[0.2em] text-[#28398c] mb-4">
@@ -287,8 +308,8 @@ const FAQPage = () => {
               </p>
               <h1 className="text-h1 mb-5">Frequently Asked Questions</h1>
               <p className="text-body-lg">
-                Find answers to the most common questions about Navtelecom devices, configuration,
-                integration and support.
+                Find answers to the most common questions about Navtelecom
+                devices, configuration, integration and support.
               </p>
             </div>
           </LayoutContainer>
@@ -562,4 +583,3 @@ const FAQPage = () => {
 };
 
 export default FAQPage;
-

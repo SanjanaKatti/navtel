@@ -14,6 +14,7 @@ import {
   SoftwareKeyFeatures,
   SoftwareContentBlock,
   SoftwareCTA,
+  SoftwareSidePanelContent,
 } from "@/components/software";
 
 const DRCPage = () => {
@@ -31,10 +32,15 @@ const DRCPage = () => {
           }}
           backgroundClass="drc-hero-background"
           textColor="white"
+          breadcrumb={{
+            label: "Software Solutions",
+            href: "/products/software-solutions",
+          }}
         />
 
         <SoftwareKeyFeatures
           heading="Features"
+          scrollable
           features={[
             {
               title: "Centralized Management",
@@ -65,50 +71,56 @@ const DRCPage = () => {
         />
 
         <section className="py-20 md:py-24 bg-[#F8FAFC]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16">
-            <SoftwareContentBlock
-              title="What DRC Enables"
-              titleFirst={true}
-              content={{
-                items: [
-                  "Centralized management of hundreds or thousands of devices",
-                  "Bulk configuration and command execution",
-                  "Firmware updates across device groups",
-                  "CAN decoding and configuration file deployment in one action",
-                  "Full action history and configuration tracking",
-                ],
-              }}
-            />
-
-            <SoftwareContentBlock
-              title="How It Works"
-              content={{
-                paragraphs: [
-                  "All operations are performed through a single web-based interface built for large-scale telematics deployments.",
-                ],
-                items: [
-                  "No device-by-device work.",
-                  "No repetitive manual tasks.",
-                  "No configuration inconsistency.",
-                ],
-              }}
-            />
-
-            <SoftwareContentBlock
-              title="Why It Matters"
-              titleFirst={true}
-              content={{
-                paragraphs: [
-                  "DRC transforms device management from manual routine into a scalable operational process.",
-                  "For system integrators this means:",
-                ],
-                items: [
-                  "Consistent configuration across all devices",
-                  "Faster project rollouts",
-                  "Fewer on-site interventions",
-                  "Predictable fleet performance as deployments grow",
-                ],
-              }}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SoftwareSidePanelContent
+              sections={[
+                {
+                  title: "What DRC Enables",
+                  content: (
+                    <ul className="space-y-2 text-body text-gray-600 list-disc list-inside">
+                      <li>Centralized management of hundreds or thousands of devices</li>
+                      <li>Bulk configuration and command execution</li>
+                      <li>Firmware updates across device groups</li>
+                      <li>CAN decoding and configuration file deployment in one action</li>
+                      <li>Full action history and configuration tracking</li>
+                    </ul>
+                  ),
+                },
+                {
+                  title: "How It Works",
+                  content: (
+                    <>
+                      <p className="text-body text-gray-600 mb-4">
+                        All operations are performed through a single web-based interface built for large-scale telematics deployments.
+                      </p>
+                      <ul className="space-y-2 text-body text-gray-600 list-disc list-inside">
+                        <li>No device-by-device work.</li>
+                        <li>No repetitive manual tasks.</li>
+                        <li>No configuration inconsistency.</li>
+                      </ul>
+                    </>
+                  ),
+                },
+                {
+                  title: "Why It Matters",
+                  content: (
+                    <>
+                      <p className="text-body text-gray-600 mb-4">
+                        DRC transforms device management from manual routine into a scalable operational process.
+                      </p>
+                      <p className="text-body text-gray-600 mb-4">
+                        For system integrators this means:
+                      </p>
+                      <ul className="space-y-2 text-body text-gray-600 list-disc list-inside">
+                        <li>Consistent configuration across all devices</li>
+                        <li>Faster project rollouts</li>
+                        <li>Fewer on-site interventions</li>
+                        <li>Predictable fleet performance as deployments grow</li>
+                      </ul>
+                    </>
+                  ),
+                },
+              ]}
             />
           </div>
         </section>
@@ -120,10 +132,7 @@ const DRCPage = () => {
               subtitle="From pilot projects to thousands of active devices — DRC keeps your fleet under control."
             />
             <SoftwareCTA
-              titleLines={[
-                "Telematics does not scale by adding more people.",
-                "It scales by managing devices in bulk.",
-              ]}
+              title="Telematics does not scale by adding more people. It scales by managing devices in bulk."
             />
           </div>
         </section>

@@ -677,8 +677,8 @@ const SmartSeriesPage = () => {
           </div>
         )}
 
-        <Footer />
       </main>
+      <Footer />
     </div>
   );
 };

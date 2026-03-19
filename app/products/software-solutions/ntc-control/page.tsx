@@ -15,6 +15,7 @@ import {
   SoftwareKeyFeatures,
   SoftwareContentBlock,
   SoftwareCTA,
+  SoftwareSidePanelContent,
 } from "@/components/software";
 
 const NTCControlPage = () => {
@@ -43,10 +44,15 @@ const NTCControlPage = () => {
           }}
           backgroundClass="ntc-control-hero-background"
           textColor="navy"
+          breadcrumb={{
+            label: "Software Solutions",
+            href: "/products/software-solutions",
+          }}
         />
 
         <SoftwareKeyFeatures
           heading="Features"
+          scrollable
           features={[
             {
               title: "On-Site Configuration",
@@ -77,49 +83,51 @@ const NTCControlPage = () => {
         />
 
         <section className="py-20 md:py-24 bg-[#F8FAFC]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16">
-            <SoftwareContentBlock
-              title="What NTC Control Enables"
-              titleFirst={true}
-              content={{
-                items: [
-                  "Upload configuration files on-site",
-                  "Perform basic parameter setup",
-                  "Monitor device and sensor status",
-                  "Access live telemetry preview",
-                  "Connect directly to the device from your phone",
-                ],
-              }}
-            />
-
-            <SoftwareContentBlock
-              title="Built for Field Installation"
-              content={{
-                paragraphs: [
-                  "NTC Control is designed for engineers working on-site.",
-                  "When using a laptop is not practical, the app allows you to:",
-                ],
-                items: [
-                  "Upload prepared configuration files",
-                  "Adjust key parameters",
-                  "Check sensor connections",
-                  "Verify real-time data",
-                ],
-                highlight: {
-                  line1: "All from your mobile device.",
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SoftwareSidePanelContent
+              sections={[
+                {
+                  title: "What NTC Control Enables",
+                  content: (
+                    <ul className="space-y-2 text-body text-gray-600 list-disc list-inside">
+                      <li>Upload configuration files on-site</li>
+                      <li>Perform basic parameter setup</li>
+                      <li>Monitor device and sensor status</li>
+                      <li>Access live telemetry preview</li>
+                      <li>Connect directly to the device from your phone</li>
+                    </ul>
+                  ),
                 },
-              }}
-            />
-
-            <SoftwareContentBlock
-              title="Why It Matters"
-              titleFirst={true}
-              content={{
-                paragraphs: [
-                  "Correct configuration during installation prevents future support issues.",
-                  "NTC Control helps ensure that every device leaves the installation site fully verified.",
-                ],
-              }}
+                {
+                  title: "Built for Field Installation",
+                  content: (
+                    <>
+                      <p className="text-body text-gray-600 mb-4">
+                        NTC Control is designed for engineers working on-site. When using a laptop is not practical, the app allows you to:
+                      </p>
+                      <ul className="space-y-2 text-body text-gray-600 list-disc list-inside mb-4">
+                        <li>Upload prepared configuration files</li>
+                        <li>Adjust key parameters</li>
+                        <li>Check sensor connections</li>
+                        <li>Verify real-time data</li>
+                      </ul>
+                      <div className="mt-6 rounded-2xl bg-brand-navy/10 border border-brand-navy/20 p-4 text-brand-navy">
+                        <p className="text-sm md:text-base text-brand-navy/90">
+                          All from your mobile device.
+                        </p>
+                      </div>
+                    </>
+                  ),
+                },
+                {
+                  title: "Why It Matters",
+                  content: (
+                    <p className="text-body text-gray-600">
+                      Correct configuration during installation prevents future support issues. NTC Control helps ensure that every device leaves the installation site fully verified.
+                    </p>
+                  ),
+                },
+              ]}
             />
           </div>
         </section>
@@ -128,19 +136,10 @@ const NTCControlPage = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16">
             <SoftwareCTA
               title="Live Telemetry in Your Pocket"
-              items={[
-                "See exactly what the device will send to the server.",
-                "Validate sensor values and configuration results before completing installation.",
-                "No assumptions.",
-                "No return visits.",
-              ]}
+              subtitle="See exactly what the device will send to the server. Validate sensor values and configuration results before completing installation. No assumptions. No return visits."
             />
             <SoftwareCTA
-              titleLines={[
-                "Configure on-site.",
-                "Validate instantly.",
-                "Deploy with confidence.",
-              ]}
+              title="Configure on-site. Validate instantly. Deploy with confidence."
             />
           </div>
         </section>

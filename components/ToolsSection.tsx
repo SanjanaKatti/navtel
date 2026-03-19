@@ -44,10 +44,10 @@ const ToolsSection = () => {
     <section className="py-24 bg-white">
       <LayoutContainer>
         <div className="flex flex-col justify-center items-center mb-16 gap-8">
-          <p className="text-base md:text-lg font-bold uppercase tracking-[0.2em] text-gray-400 pt-2">
+          <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.2em] text-[#004A8C] mb-2 md:mb-3">
             DISCOVER OUR TOOLS
           </p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight text-center max-w-none">
+          <h2 className="text-h1 px-2 sm:px-0 text-center">
             Professional Tools for Configuration,
             <br />
             CAN Analysis & Cloud Control

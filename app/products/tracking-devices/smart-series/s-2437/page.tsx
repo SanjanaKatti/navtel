@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import DeviceFeatures from "@/components/product/DeviceFeatures";
@@ -8,6 +8,7 @@ import ProductCenter from "@/components/product/ProductCenter";
 import { Bluetooth, GlobeSimple, Cpu, Code } from "phosphor-react";
 
 const S2437Page = () => {
+  const featuresRef = useRef<HTMLDivElement>(null);
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased overflow-x-hidden">
       <Navbar />
@@ -29,7 +30,12 @@ const S2437Page = () => {
                     transport and industrial automation.
                   </p>
                 </div>
-                <button className="bg-brand-navy text-white px-20 py-4 rounded-full font-bold text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1">
+                <button
+                  onClick={() =>
+                    featuresRef.current?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  className="bg-brand-navy text-white px-20 py-4 rounded-full font-bold text-lg hover:bg-brand-deep transition-all shadow-lg shadow-brand-primary/20 transform hover:-translate-y-1"
+                >
                   Explore
                 </button>
               </div>
@@ -45,7 +51,8 @@ const S2437Page = () => {
           </div>
         </section>
 
-        <DeviceFeatures
+        <div ref={featuresRef}>
+          <DeviceFeatures
           heading="Device"
           highlightedHeading="Features"
           description=""
@@ -323,7 +330,9 @@ const S2437Page = () => {
           </div>
         </section>
       </main>
-      <Footer />
+      <>
+        <Footer />
+      </>
     </div>
   );
 };

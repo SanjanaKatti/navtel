@@ -10,28 +10,28 @@ const supportCards = [
     description:
       "Browse setup guides, commands, integration docs, and troubleshooting articles.",
     href: "/support/knowledge-base",
-    cta: "Open Knowledge Base",
+    cta: "Explore",
   },
   {
     title: "Telegram Support Bot",
     description:
-      "Get quick guided help, diagnostic prompts, and direct support workflows on Telegram.",
-    href: "#",
-    cta: "Open Telegram Bot",
+      "Create support tickets in Telegram and communicate directly with engineers. No automated replies.",
+    href: "https://t.me/NavtelecomSupport_bot",
+    cta: "Create Ticket",
   },
   {
     title: "Warranty",
     description:
-      "Check coverage details, service terms, and claim support for your device models.",
+      "View coverage details, service terms, and submit warranty claims.",
     href: "/support/warranty",
-    cta: "View Warranty",
+    cta: "View Details",
   },
   {
     title: "FAQ",
     description:
-      "Find quick answers to common questions about devices, configuration, integration and installation.",
+      "Find quick answers to common questions about setup, configuration, and integration.",
     href: "/support/faq",
-    cta: "Open FAQ",
+    cta: "Read FAQ",
   },
 ];
 
@@ -49,8 +49,8 @@ export default function SupportPage() {
               </p>
               <h1 className="text-h1 mb-5">How Can We Help You?</h1>
               <p className="text-body-lg">
-                Access product resources, chat assistance, and warranty support
-                from one place.
+                Access product resources, support, and warranty services in one
+                place.
               </p>
             </div>
           </LayoutContainer>
@@ -62,7 +62,7 @@ export default function SupportPage() {
               {supportCards.map((card) => (
                 <div
                   key={card.title}
-                  className="bg-white rounded-[2rem] border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 p-8 flex flex-col"
+                  className="bg-white rounded-[2rem] border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 p-8 flex flex-col text-center"
                 >
                   <h2 className="text-h3 mb-3 text-[#28398c]">{card.title}</h2>
                   <p className="text-body mb-8 flex-1">{card.description}</p>

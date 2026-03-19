@@ -75,8 +75,8 @@ const AnimatedCounter = ({
 
 const stats = [
   { value: "20", label: "Years in Industry" },
-  { value: "3M", label: "Total Devices" },
-  { value: "45+", label: "Countries Deployed" },
+  { value: "3M+", label: "Total Devices" },
+  { value: "45", label: "Countries Deployed" },
   { value: "3K", label: "Customers Worldwide" },
 ];
 
@@ -126,7 +126,7 @@ const faqs = [
             href="https://wiki.navtelecom.ru/en/home/devices/commands"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand-primary text-sm font-bold hover:underline"
+            className="text-brand-primary text-base font-bold hover:underline"
           >
             Full command list
           </a>
@@ -143,7 +143,7 @@ const faqs = [
             href="https://wiki.navtelecom.ru/en/home/devices/diagnostics/remote_configurator"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand-primary text-sm font-bold hover:underline"
+            className="text-brand-primary text-base font-bold hover:underline"
           >
             How it works
           </a>
@@ -158,7 +158,7 @@ const faqs = [
             href="https://wiki.navtelecom.ru/en/home/drc"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand-primary text-sm font-bold hover:underline"
+            className="text-brand-primary text-base font-bold hover:underline"
           >
             Learn more
           </a>
@@ -229,7 +229,7 @@ const StatsAndFAQ = () => {
       {/* Partners Section */}
       <section className="py-24 bg-white">
         <LayoutContainer className="text-center">
-          <h2 className="text-h1 mb-12">OUR PARTNERS</h2>
+          <h2 className="text-h1 px-2 sm:px-0 mb-12">OUR PARTNERS</h2>
           <div className="bg-brand-light-3 p-6 sm:p-8 md:p-10 border border-gray-200 rounded-2xl overflow-hidden">
             <div
               className="flex w-max items-center gap-10 sm:gap-14 md:gap-16"
@@ -258,7 +258,7 @@ const StatsAndFAQ = () => {
       <section className="py-12 bg-white">
         <LayoutContainer className="text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-h1 mb-12 text-center">FAQs</h2>
+            <h2 className="text-h1 px-2 sm:px-0 mb-12 text-center">FAQs</h2>
 
             <div className="space-y-4 text-left">
               {faqs.map((faq, idx) => (

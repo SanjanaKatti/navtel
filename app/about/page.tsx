@@ -484,7 +484,7 @@ const AboutPage = () => {
                 <p className="text-body-lg">
                   To provide integration-ready telematics devices that reduce
                   project risk, simplify deployment, and ensure predictable
-                  operation over years -- not months. We focus on engineering
+                  operation over years - not months. We focus on engineering
                   quality, stable architecture, and real technical support for
                   complex fleet projects.
                 </p>
@@ -777,7 +777,6 @@ const AboutPage = () => {
           </LayoutContainer>
         </section>
       </main>
-
       <Footer />
     </div>
   );

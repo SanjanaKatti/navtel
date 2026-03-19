@@ -637,8 +637,8 @@ const SignalSeriesPage = () => {
           </div>
         )}
 
-        <Footer />
       </main>
+      <Footer />
     </div>
   );
 };

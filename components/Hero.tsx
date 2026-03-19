@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   ShareNetwork,
   Activity,
@@ -37,6 +38,10 @@ const Hero = () => {
         "OFFLINE EXECUTION",
         "FULLY CUSTOMIZABLE",
       ],
+      button: {
+        label: "Learn More",
+        href: "/products/software-solutions/complex-events",
+      },
     },
     {
       id: "smart-s-4513",
@@ -49,6 +54,10 @@ const Hero = () => {
         "BACKUP BATTERY",
         "COMPLEX EVENTS",
       ],
+      button: {
+        label: "Discover",
+        href: "/products/tracking-devices/smart-series/s-4513",
+      },
     },
     {
       id: "start-s-2011",
@@ -61,6 +70,10 @@ const Hero = () => {
         "COST-EFFECTIVE",
         "ENGINE HOURS CALCULATION",
       ],
+      button: {
+        label: "Explore",
+        href: "/products/tracking-devices/start-series/s-2011",
+      },
     },
   ];
 
@@ -117,20 +130,29 @@ const Hero = () => {
     const sizeClass = "h-4 w-4 sm:h-4.5 sm:w-4.5 2xl:h-6 2xl:w-6";
 
     if (slideId === "start-s-2011") {
-      if (feature === "ULTRA-COMPACT") return <ArrowsInSimple weight="regular" className={sizeClass} />;
-      if (feature === "WORKS WITH ANY BLE SENSOR") return <Bluetooth weight="regular" className={sizeClass} />;
-      if (feature === "BACKUP BATTERY") return <BatteryCharging weight="regular" className={sizeClass} />;
-      if (feature === "COST-EFFECTIVE") return <CurrencyDollar weight="regular" className={sizeClass} />;
-      if (feature === "ENGINE HOURS CALCULATION") return <Clock weight="regular" className={sizeClass} />;
+      if (feature === "ULTRA-COMPACT")
+        return <ArrowsInSimple weight="regular" className={sizeClass} />;
+      if (feature === "WORKS WITH ANY BLE SENSOR")
+        return <Bluetooth weight="regular" className={sizeClass} />;
+      if (feature === "BACKUP BATTERY")
+        return <BatteryCharging weight="regular" className={sizeClass} />;
+      if (feature === "COST-EFFECTIVE")
+        return <CurrencyDollar weight="regular" className={sizeClass} />;
+      if (feature === "ENGINE HOURS CALCULATION")
+        return <Clock weight="regular" className={sizeClass} />;
     }
 
     if (slideId === "smart-s-4513") {
-      if (feature === "4G • DUAL SIM") return <SimCard weight="regular" className={sizeClass} />;
+      if (feature === "4G • DUAL SIM")
+        return <SimCard weight="regular" className={sizeClass} />;
       if (feature === "RS-485 • 1-WIRE • MODBUS • BLUETOOTH")
         return <LinkSimple weight="regular" className={sizeClass} />;
-      if (feature === "5 IN / 2 OUT") return <ArrowsLeftRight weight="regular" className={sizeClass} />;
-      if (feature === "BACKUP BATTERY") return <BatteryCharging weight="regular" className={sizeClass} />;
-      if (feature === "COMPLEX EVENTS") return <ShareNetwork weight="regular" className={sizeClass} />;
+      if (feature === "5 IN / 2 OUT")
+        return <ArrowsLeftRight weight="regular" className={sizeClass} />;
+      if (feature === "BACKUP BATTERY")
+        return <BatteryCharging weight="regular" className={sizeClass} />;
+      if (feature === "COMPLEX EVENTS")
+        return <ShareNetwork weight="regular" className={sizeClass} />;
     }
 
     return null;
@@ -180,8 +202,12 @@ const Hero = () => {
                     featureIcons[idx] ??
                     null;
 
-                  const textClass = isComplexEvents ? "text-white" : "text-brand-navy";
-                  const dividerClass = isComplexEvents ? "bg-white/35" : "bg-brand-navy/25";
+                  const textClass = isComplexEvents
+                    ? "text-white"
+                    : "text-brand-navy";
+                  const dividerClass = isComplexEvents
+                    ? "bg-white/35"
+                    : "bg-brand-navy/25";
                   const dividerWidthClass = isComplexEvents
                     ? "w-[52%] 2xl:w-[62%]"
                     : "w-[46%] 2xl:w-[52%]";
@@ -205,6 +231,22 @@ const Hero = () => {
                   );
                 })}
               </div>
+
+              {currentSlide.button && (
+                <div className="mt-8 sm:mt-10 lg:mt-14 2xl:mt-20">
+                  <Link
+                    href={currentSlide.button.href}
+                    className={`inline-flex items-center justify-center w-[30%] rounded-full px-10 py-3 font-bold text-sm shadow-lg transition-all transform hover:-translate-y-1 active:scale-95
+                      ${
+                        currentBackgroundIndex === 0
+                          ? "bg-white text-[#7fc1e5] hover:bg-white/90"
+                          : "bg-[#515254] text-white hover:bg-gray-700"
+                      }`}
+                  >
+                    {currentSlide.button.label}
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
           {/* Carousel Indicators */}

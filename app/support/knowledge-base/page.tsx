@@ -56,10 +56,7 @@ const KnowledgeBasePage = () => {
               </h2>
               <ul className="space-y-4">
                 {features.map((feature, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-center gap-3 group/item"
-                  >
+                  <li key={idx} className="flex items-center gap-3 group/item">
                     <div className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-primary/10 flex items-center justify-center group-hover/item:bg-brand-primary transition-colors duration-300">
                       <Check
                         size={14}
@@ -102,8 +99,8 @@ const KnowledgeBasePage = () => {
               <h2 className="text-h2 mb-6">Why It Matters</h2>
               <p className="text-body-lg">
                 Fast access to accurate documentation reduces support time,
-                simplifies integration and ensures consistent device configuration
-                across projects.
+                simplifies integration and ensures consistent device
+                configuration across projects.
               </p>
               <p className="text-body-lg mt-4">
                 Whether you are installing a single device or managing a fleet,

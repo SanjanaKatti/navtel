@@ -15,7 +15,7 @@ const SoftwareCTA: React.FC<SoftwareCTAProps> = ({
   items = [],
 }) => {
   return (
-    <div className="text-center my-12 md:my-16 max-w-3xl mx-auto">
+    <div className="text-center py-16 md:py-20 bg-brand-light-3 rounded-3xl max-w-4xl mx-auto px-4 my-12 md:my-16">
       {titleLines && titleLines.length > 0 ? (
         <div className="space-y-2">
           {titleLines.map((line, i) => (

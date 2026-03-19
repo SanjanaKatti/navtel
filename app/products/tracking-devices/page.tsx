@@ -13,7 +13,6 @@ const TrackingDevicesPage = () => {
       <main className="pt-20">
         {/* Hero Section */}
         <section className="relative min-h-[360px] sm:min-h-[min(100dvh,500px)] md:min-h-[min(100dvh,600px)] lg:h-[calc(100vh-5rem)] lg:min-h-[calc(100dvh-5rem)] flex items-start overflow-hidden bg-brand-light-3 product-background-image tracking-devices-hero-background">
-          <div className="absolute inset-0 bg-white/40 z-10" aria-hidden />
           <div className="relative z-40 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 lg:pt-12 pb-10 sm:pb-16 lg:pb-20">
             <div className="w-full max-w-full sm:max-w-xl lg:max-w-lg xl:max-w-xl flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0">
               <p className="text-caption mb-2 sm:mb-4 text-brand-navy">

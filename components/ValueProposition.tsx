@@ -5,10 +5,10 @@ const ValueProposition = () => {
   return (
     <section className="py-16 md:py-24 bg-[#EFEFEF]">
       <LayoutContainer className="text-center">
-        <p className="text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.2em] mb-4 md:mb-6 md:whitespace-nowrap">
+        <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.2em] text-[#004A8C] mb-2 md:mb-3">
           POWERED BY NAVTELECOM
         </p>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-brand-navy mb-6 md:mb-8 max-w-6xl mx-auto">
+        <h2 className="text-h1 px-2 sm:px-0 font-bold tracking-tight leading-tight text-brand-navy mb-6 md:mb-8 max-w-6xl mx-auto">
           <span className="block md:whitespace-nowrap">
             Powerful solutions for integrators.
           </span>
