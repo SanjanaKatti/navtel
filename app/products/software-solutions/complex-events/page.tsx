@@ -51,119 +51,119 @@ const ComplexEventsPage = () => {
         />
 
         <section className="py-20 md:py-24 bg-[#F8FAFC]">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <SoftwareSidePanelContent
-                sections={[
-                  {
-                    title: "Integrated Logic Module for NTC Configurator",
-                    content: (
-                      <p className="text-body text-gray-600">
-                        Define device behavior through configurable on-device
-                        algorithms. Complex Events allows you to control device
-                        logic at the interface and signal level.
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SoftwareSidePanelContent
+              sections={[
+                {
+                  title: "Integrated Logic Module for NTC Configurator",
+                  content: (
+                    <p className="text-body text-gray-600">
+                      Define device behavior through configurable on-device
+                      algorithms. Complex Events allows you to control device
+                      logic at the interface and signal level.
+                    </p>
+                  ),
+                },
+                {
+                  title: "What Complex Events Enables",
+                  content: (
+                    <ul className="space-y-2 text-body text-gray-600 list-disc list-inside">
+                      <li>Monitor parameters from any device interface</li>
+                      <li>Use data from RS-232 and RS-485</li>
+                      <li>Work with digital and analog inputs and outputs</li>
+                      <li>Process CAN bus data</li>
+                      <li>React to changes in real time</li>
+                    </ul>
+                  ),
+                },
+                {
+                  title: "Interface-Level Control",
+                  content: (
+                    <>
+                      <p className="text-body text-gray-600 mb-4">
+                        The module allows you to build algorithms based on data
+                        received through:
                       </p>
-                    ),
-                  },
-                  {
-                    title: "What Complex Events Enables",
-                    content: (
-                      <ul className="space-y-2 text-body text-gray-600 list-disc list-inside">
-                        <li>Monitor parameters from any device interface</li>
-                        <li>Use data from RS-232 and RS-485</li>
-                        <li>Work with digital and analog inputs and outputs</li>
-                        <li>Process CAN bus data</li>
-                        <li>React to changes in real time</li>
+                      <ul className="space-y-2 text-body text-gray-600 list-disc list-inside mb-4">
+                        <li>CAN</li>
+                        <li>RS-232</li>
+                        <li>RS-485</li>
+                        <li>Any signals from inputs</li>
+                        <li>Internal device parameters</li>
                       </ul>
-                    ),
-                  },
-                  {
-                    title: "Interface-Level Control",
-                    content: (
-                      <>
-                        <p className="text-body text-gray-600 mb-4">
-                          The module allows you to build algorithms based on
-                          data received through:
+                      <div className="mt-6 rounded-2xl bg-brand-navy/10 border border-brand-navy/20 p-4 text-brand-navy">
+                        <p className="text-sm md:text-base text-brand-navy/90">
+                          Any parameter can become a condition. Any condition
+                          can trigger an action.
                         </p>
-                        <ul className="space-y-2 text-body text-gray-600 list-disc list-inside mb-4">
-                          <li>CAN</li>
-                          <li>RS-232</li>
-                          <li>RS-485</li>
-                          <li>Any signals from inputs</li>
-                          <li>Internal device parameters</li>
-                        </ul>
-                        <div className="mt-6 rounded-2xl bg-brand-navy/10 border border-brand-navy/20 p-4 text-brand-navy">
-                          <p className="text-sm md:text-base text-brand-navy/90">
-                            Any parameter can become a condition. Any condition
-                            can trigger an action.
-                          </p>
-                        </div>
-                      </>
-                    ),
-                  },
-                  {
-                    title: "Device Actions",
-                    content: (
-                      <>
-                        <p className="text-body text-gray-600 mb-4">
-                          When defined conditions are met, the device can:
-                        </p>
-                        <ul className="space-y-2 text-body text-gray-600 list-disc list-inside mb-4">
-                          <li>Activate an output line</li>
-                          <li>Change internal state</li>
-                          <li>Control external equipment</li>
-                          <li>Execute local logic</li>
-                        </ul>
-                        <div className="mt-6 rounded-2xl bg-brand-navy/10 border border-brand-navy/20 p-4 text-brand-navy">
-                          <p className="text-sm md:text-base text-brand-navy/90">
-                            All actions are processed inside the tracker,
-                            without server dependency.
-                          </p>
-                        </div>
-                      </>
-                    ),
-                  },
-                  {
-                    title: "Working with CAN",
-                    content: (
-                      <>
-                        <p className="text-body text-gray-600 mb-4">
-                          Complex Events allows CAN data to be used not only for
-                          transmission to the server, but as part of device
-                          logic. For example:
-                        </p>
-                        <ul className="space-y-2 text-body text-gray-600 list-disc list-inside mb-4">
-                          <li>Trigger actions based on specific CAN signals</li>
-                          <li>React to defined CAN values</li>
-                          <li>Control outputs based on vehicle data</li>
-                        </ul>
-                        <div className="mt-6 rounded-2xl bg-brand-navy/10 border border-brand-navy/20 p-4 text-brand-navy">
-                          <p className="text-sm md:text-base text-brand-navy/90">
-                            This transforms the tracker from a passive data
-                            collector into an active system component.
-                          </p>
-                        </div>
-                      </>
-                    ),
-                  },
-                  {
-                    title: "Why It Matters",
-                    content: (
-                      <p className="text-body text-gray-600">
-                        CAN monitoring provides visibility. CAN Script provides
-                        interaction. Together, they turn CAN SPY into a complete
-                        CAN engineering tool — from passive analysis to
-                        controlled communication.
+                      </div>
+                    </>
+                  ),
+                },
+                {
+                  title: "Device Actions",
+                  content: (
+                    <>
+                      <p className="text-body text-gray-600 mb-4">
+                        When defined conditions are met, the device can:
                       </p>
-                    ),
-                  },
-                ]}
-              />
-            </div>
-          </section>
+                      <ul className="space-y-2 text-body text-gray-600 list-disc list-inside mb-4">
+                        <li>Activate an output line</li>
+                        <li>Change internal state</li>
+                        <li>Control external equipment</li>
+                        <li>Execute local logic</li>
+                      </ul>
+                      <div className="mt-6 rounded-2xl bg-brand-navy/10 border border-brand-navy/20 p-4 text-brand-navy">
+                        <p className="text-sm md:text-base text-brand-navy/90">
+                          All actions are processed inside the tracker, without
+                          server dependency.
+                        </p>
+                      </div>
+                    </>
+                  ),
+                },
+                {
+                  title: "Working with CAN",
+                  content: (
+                    <>
+                      <p className="text-body text-gray-600 mb-4">
+                        Complex Events allows CAN data to be used not only for
+                        transmission to the server, but as part of device logic.
+                        For example:
+                      </p>
+                      <ul className="space-y-2 text-body text-gray-600 list-disc list-inside mb-4">
+                        <li>Trigger actions based on specific CAN signals</li>
+                        <li>React to defined CAN values</li>
+                        <li>Control outputs based on vehicle data</li>
+                      </ul>
+                      <div className="mt-6 rounded-2xl bg-brand-navy/10 border border-brand-navy/20 p-4 text-brand-navy">
+                        <p className="text-sm md:text-base text-brand-navy/90">
+                          This transforms the tracker from a passive data
+                          collector into an active system component.
+                        </p>
+                      </div>
+                    </>
+                  ),
+                },
+                {
+                  title: "Why It Matters",
+                  content: (
+                    <p className="text-body text-gray-600">
+                      CAN monitoring provides visibility. CAN Script provides
+                      interaction. Together, they turn CAN SPY into a complete
+                      CAN engineering tool — from passive analysis to controlled
+                      communication.
+                    </p>
+                  ),
+                },
+              ]}
+            />
+          </div>
+        </section>
 
         <section className="pt-0 pb-20 md:pb-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <SoftwareCTA title="Complex Events empowers you to transform your tracker into a fully customizable solution tailored to your needs." />
+            <SoftwareCTA title="This transforms the tracker from a passive data collector into an active system component." />
           </div>
         </section>
       </main>

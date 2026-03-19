@@ -1,12 +1,6 @@
 "use client";
 import React from "react";
-import {
-  ChartLine,
-  FileText,
-  Wrench,
-  Code,
-  Broadcast,
-} from "phosphor-react";
+import { ChartLine, FileText, Wrench, Code, Broadcast } from "phosphor-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
@@ -87,7 +81,8 @@ const CanSpyPage = () => {
                   content: (
                     <>
                       <p className="text-body text-gray-600 mb-4">
-                        CAN SPY is not just a viewer. It is a diagnostic and validation tool used for:
+                        CAN SPY is not just a viewer. It is a diagnostic and
+                        validation tool used for:
                       </p>
                       <ul className="space-y-2 text-body text-gray-600 list-disc list-inside">
                         <li>Verifying CAN signal availability</li>
@@ -103,7 +98,9 @@ const CanSpyPage = () => {
                   title: "CAN Script",
                   content: (
                     <p className="text-body text-gray-600">
-                      Advanced CAN Interaction Engine. In addition to monitoring, CAN SPY includes a scripting system for controlled CAN communication.
+                      Advanced CAN Interaction Engine. In addition to
+                      monitoring, CAN SPY includes a scripting system for
+                      controlled CAN communication.
                     </p>
                   ),
                 },
@@ -133,7 +130,8 @@ const CanSpyPage = () => {
                       </ul>
                       <div className="mt-6 rounded-2xl bg-brand-navy/10 border border-brand-navy/20 p-4 text-brand-navy">
                         <p className="text-sm md:text-base text-brand-navy/90">
-                          It is used for diagnostics, testing and automation of interaction with CAN-based equipment.
+                          It is used for diagnostics, testing and automation of
+                          interaction with CAN-based equipment.
                         </p>
                       </div>
                     </>
@@ -143,7 +141,10 @@ const CanSpyPage = () => {
                   title: "Why It Matters",
                   content: (
                     <p className="text-body text-gray-600">
-                      CAN monitoring provides visibility. CAN Script provides interaction. Together, they turn CAN SPY into a complete CAN engineering tool — from passive analysis to controlled communication.
+                      CAN monitoring provides visibility. CAN Script provides
+                      interaction. Together, they turn CAN SPY into a complete
+                      CAN engineering tool — from passive analysis to controlled
+                      communication.
                     </p>
                   ),
                 },
@@ -154,9 +155,7 @@ const CanSpyPage = () => {
 
         <section className="pt-0 pb-20 md:pb-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <SoftwareCTA
-              title="From passive analysis to controlled communication — CAN SPY is the complete CAN engineering tool."
-            />
+            <SoftwareCTA title="Together, they turn CAN SPY into a complete CAN engineering tool — from passive analysis to controlled communication." />
           </div>
         </section>
       </main>
