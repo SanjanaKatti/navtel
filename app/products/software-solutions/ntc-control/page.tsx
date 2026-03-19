@@ -139,8 +139,13 @@ const NTCControlPage = () => {
               subtitle="See exactly what the device will send to the server. Validate sensor values and configuration results before completing installation. No assumptions. No return visits."
             />
             <SoftwareCTA
-              title="Configure on-site. Validate instantly. Deploy with confidence."
-            />
+              title={
+                <>
+                  Configure on-site. <br />
+                  Validate instantly. <br />
+                  Deploy with confidence.
+                </>
+              }            />
           </div>
         </section>
       </main>
