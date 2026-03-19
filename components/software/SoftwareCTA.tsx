@@ -2,8 +2,8 @@
 import React from "react";
 
 interface SoftwareCTAProps {
-  title?: string;
-  titleLines?: string[];
+  title?: React.ReactNode;
+  titleLines?: React.ReactNode[];
   subtitle?: string;
   items?: string[];
 }
