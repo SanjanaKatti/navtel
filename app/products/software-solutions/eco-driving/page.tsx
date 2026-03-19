@@ -130,8 +130,13 @@ const EcoDrivingPage = () => {
               subtitle="Eco Driving functionality depends on the device model. Please refer to individual device specifications for feature availability."
             />
             <SoftwareCTA
-              title="Understand how vehicles are driven. Improve safety. Reduce operating costs."
-            />
+              title={
+                <>
+                  Understand how vehicles are driven. <br />
+                  Improve safety. <br />
+                  Reduce operating costs.
+                </>
+              }            />
           </div>
         </section>
       </main>
