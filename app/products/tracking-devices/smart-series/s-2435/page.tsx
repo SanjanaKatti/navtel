@@ -313,9 +313,7 @@ const S2435Page = () => {
         </div>
       </section>
     </main>
-    <>
-      <Footer />
-    </>
+    <Footer />
   </div>
   );
 }
