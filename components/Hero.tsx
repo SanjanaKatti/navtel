@@ -84,7 +84,7 @@ const Hero = () => {
       setCurrentBackgroundIndex(
         (prevIndex) => (prevIndex + 1) % heroBackgrounds.length,
       );
-    }, 3000); // 3 seconds delay
+    }, 5000); // 5 seconds delay
     return () => clearInterval(interval);
   }, [heroBackgrounds.length]);
 
