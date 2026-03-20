@@ -55,9 +55,12 @@ const ContactPage = () => {
         message: data.message,
       });
       reset();
-    } catch {
+    } catch (err) {
       setError("root", {
-        message: "Could not send. Check your connection or try again later.",
+        message:
+          err instanceof Error
+            ? err.message
+            : "Could not send. Try again or email us directly.",
       });
     }
   };
