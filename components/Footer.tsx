@@ -1,36 +1,101 @@
 "use client";
 import React, { useState } from "react";
-import { X } from "phosphor-react";
+import Link from "next/link";
+import { X, EnvelopeSimple, LinkedinLogo, InstagramLogo } from "phosphor-react";
 import Image from "next/image";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import LayoutContainer from "./LayoutContainer";
+import { FieldError } from "@/components/forms/FieldError";
+import {
+  newsletterSchema,
+  type NewsletterFormValues,
+} from "@/lib/validation/form-schemas";
+import {
+  isEmailJsConfigured,
+  sendWebsiteFormEmail,
+} from "@/lib/emailjs/send-website-form";
+
+const footerLinkClass =
+  "text-sm text-white/70 hover:text-brand-primary transition-colors duration-200";
 
 const Footer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    setIsModalOpen(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    clearErrors,
+    formState: { errors, isSubmitting },
+  } = useForm<NewsletterFormValues>({
+    resolver: zodResolver(newsletterSchema),
+    defaultValues: {
+      company: "",
+      fullName: "",
+      email: "",
+      mobile: "",
+      country: "",
+    },
+    mode: "onTouched",
+  });
+
+  const onNewsletterSubmit = async (data: NewsletterFormValues) => {
+    clearErrors("root");
+    if (!isEmailJsConfigured()) {
+      setError("root", {
+        message:
+          "Email is not set up yet. Add EmailJS keys to .env.local (see .env.example).",
+      });
+      return;
+    }
+    try {
+      await sendWebsiteFormEmail({
+        formType: "Newsletter signup",
+        fullName: data.fullName,
+        userEmail: data.email,
+        company: data.company,
+        mobile: data.mobile,
+        country: data.country,
+        message: "",
+      });
+      reset();
+      setIsModalOpen(false);
+    } catch {
+      setError("root", {
+        message: "Could not send. Check your connection or try again later.",
+      });
+    }
   };
 
+  const inputClass = (hasError: boolean) =>
+    `w-full px-5 py-3.5 bg-brand-light-3 border rounded-xl focus:outline-none focus:bg-white transition-all text-body-sm ${
+      hasError
+        ? "border-red-500 focus:border-red-600"
+        : "border-gray-200 focus:border-brand-primary"
+    }`;
+
   return (
-    <>
-      {/* Newsletter Subscription Section */}
-      <section className="bg-[#0F172A] text-white py-16 border-t border-gray-700">
-        <LayoutContainer>
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              SUBSCRIBE TO OUR NEWSLETTER
+    <div className="relative bg-brand-navy text-white border-t border-white/10">
+      {/* Newsletter — kept per product request */}
+      <section className="relative">
+        <LayoutContainer className="relative py-14 sm:py-16 md:py-20">
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-label text-brand-primary mb-3 sm:mb-4">
+              Stay in the loop
+            </p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-white mb-4 sm:mb-5">
+              Subscribe to our Newsletter
             </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            <p className="text-body-sm sm:text-base text-white/75 mb-8 sm:mb-10 max-w-lg mx-auto leading-relaxed">
               Stay updated with the latest news, product updates, and industry
               insights.
             </p>
-          </div>
-          <div className="max-w-md mx-auto text-center">
             <button
+              type="button"
               onClick={() => setIsModalOpen(true)}
-              className="bg-[#32bef0] text-white px-12 py-4 font-black text-lg hover:bg-[#27b0df] transition-all shadow-lg shadow-[#32bef0]/30 transform hover:-translate-y-1 rounded-full"
+              className="inline-flex items-center justify-center bg-brand-primary text-white px-10 sm:px-12 py-3.5 sm:py-4 font-black text-sm sm:text-base tracking-wide rounded-full hover:brightness-110 transition-all shadow-lg shadow-brand-primary/25 hover:shadow-brand-primary/40 hover:-translate-y-0.5 active:scale-[0.98]"
             >
               SUBSCRIBE NOW
             </button>
@@ -38,20 +103,19 @@ const Footer = () => {
         </LayoutContainer>
       </section>
 
-      {/* Newsletter Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          {/* Backdrop */}
           <div
             className="absolute inset-0 bg-brand-navy/80 backdrop-blur-sm transition-opacity"
             onClick={() => setIsModalOpen(false)}
-          ></div>
-
-          {/* Modal Content */}
+            aria-hidden
+          />
           <div className="relative bg-white w-full max-w-lg rounded-[2.5rem] shadow-2xl p-8 md:p-12 overflow-hidden animate-in fade-in zoom-in duration-300">
             <button
+              type="button"
               onClick={() => setIsModalOpen(false)}
               className="absolute top-6 right-6 text-gray-400 hover:text-brand-navy transition-colors"
+              aria-label="Close"
             >
               <X size={24} weight="bold" />
             </button>
@@ -65,187 +129,384 @@ const Footer = () => {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form
+              noValidate
+              onSubmit={handleSubmit(onNewsletterSubmit)}
+              className="space-y-5"
+            >
+              {errors.root?.message ? (
+                <p
+                  role="alert"
+                  className="text-sm text-red-600 text-center px-1"
+                >
+                  {errors.root.message}
+                </p>
+              ) : null}
               <div className="space-y-1.5">
-                <label className="text-label ml-1">Company</label>
+                <label htmlFor="footer-nl-company" className="text-label ml-1">
+                  Company
+                </label>
                 <input
-                  required
+                  id="footer-nl-company"
                   type="text"
+                  autoComplete="organization"
                   placeholder="Your company name"
-                  className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
+                  aria-invalid={!!errors.company}
+                  aria-describedby={
+                    errors.company ? "footer-nl-company-err" : undefined
+                  }
+                  className={inputClass(!!errors.company)}
+                  {...register("company")}
+                />
+                <FieldError
+                  id="footer-nl-company-err"
+                  message={errors.company?.message}
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-label ml-1">Full Name</label>
+                <label htmlFor="footer-nl-name" className="text-label ml-1">
+                  Full Name
+                </label>
                 <input
-                  required
+                  id="footer-nl-name"
                   type="text"
+                  autoComplete="name"
                   placeholder="Your name"
-                  className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
+                  aria-invalid={!!errors.fullName}
+                  aria-describedby={
+                    errors.fullName ? "footer-nl-name-err" : undefined
+                  }
+                  className={inputClass(!!errors.fullName)}
+                  {...register("fullName")}
+                />
+                <FieldError
+                  id="footer-nl-name-err"
+                  message={errors.fullName?.message}
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-label ml-1">Email Address</label>
+                <label htmlFor="footer-nl-email" className="text-label ml-1">
+                  Email Address
+                </label>
                 <input
-                  required
+                  id="footer-nl-email"
                   type="email"
+                  autoComplete="email"
+                  inputMode="email"
                   placeholder="your@email.com"
-                  className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={
+                    errors.email ? "footer-nl-email-err" : undefined
+                  }
+                  className={inputClass(!!errors.email)}
+                  {...register("email")}
+                />
+                <FieldError
+                  id="footer-nl-email-err"
+                  message={errors.email?.message}
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-label ml-1">Mobile Number</label>
+                  <label htmlFor="footer-nl-mobile" className="text-label ml-1">
+                    Mobile Number
+                  </label>
                   <input
-                    required
+                    id="footer-nl-mobile"
                     type="tel"
+                    autoComplete="tel"
                     placeholder="+1..."
-                    className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
+                    aria-invalid={!!errors.mobile}
+                    aria-describedby={
+                      errors.mobile ? "footer-nl-mobile-err" : undefined
+                    }
+                    className={inputClass(!!errors.mobile)}
+                    {...register("mobile")}
+                  />
+                  <FieldError
+                    id="footer-nl-mobile-err"
+                    message={errors.mobile?.message}
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-label ml-1">Country</label>
+                  <label htmlFor="footer-nl-country" className="text-label ml-1">
+                    Country
+                  </label>
                   <input
-                    required
+                    id="footer-nl-country"
                     type="text"
+                    autoComplete="country-name"
                     placeholder="Your country"
-                    className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
+                    aria-invalid={!!errors.country}
+                    aria-describedby={
+                      errors.country ? "footer-nl-country-err" : undefined
+                    }
+                    className={inputClass(!!errors.country)}
+                    {...register("country")}
+                  />
+                  <FieldError
+                    id="footer-nl-country-err"
+                    message={errors.country?.message}
                   />
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 bg-brand-navy text-white rounded-full font-black text-sm hover:bg-brand-primary transition-all transform hover:-translate-y-1 active:scale-95 shadow-lg shadow-brand-navy/20 mt-4"
+                disabled={isSubmitting}
+                className="w-full py-4 bg-brand-navy text-white rounded-full font-black text-sm hover:bg-brand-primary transition-all transform hover:-translate-y-1 active:scale-95 shadow-lg shadow-brand-navy/20 mt-4 disabled:opacity-60 disabled:pointer-events-none"
               >
-                SUBSCRIBE
+                {isSubmitting ? "SENDING…" : "SUBSCRIBE"}
               </button>
             </form>
           </div>
         </div>
       )}
 
-      {/* Footer */}
-      <footer className="bg-[#0F172A] text-white py-16">
-        <LayoutContainer>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-gray-700 pb-16">
-            <div className="space-y-6">
-              <div className="flex items-center gap-2">
-                <div className="relative h-12 w-48 brightness-0 invert">
+      <footer className="relative">
+        <LayoutContainer className="py-14 sm:py-16 lg:py-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 pb-12 lg:pb-16 border-b border-white/10">
+            {/* Brand — mirrors navbar trust, inverted for dark ground */}
+            <div className="lg:col-span-4 space-y-5">
+              <Link href="/" className="inline-block">
+                <div className="relative h-11 w-44 sm:h-12 sm:w-48 brightness-0 invert opacity-95 hover:opacity-100 transition-opacity">
                   <Image
                     src="/Navtelecom/Navtelecom_logo.svg"
-                    alt="Navtelecom Logo"
+                    alt="Navtelecom"
                     fill
-                    className="object-contain"
+                    className="object-contain object-left"
                   />
                 </div>
-              </div>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Leading developer and manufacturer of professional telematics
-                equipment for fleet management, asset tracking, and personal
-                security.
+              </Link>
+              <p className="text-sm text-white/65 leading-relaxed max-w-sm">
+                Developer and manufacturer of professional telematics hardware
+                and software for fleet management, asset tracking, and industrial
+                integration.
               </p>
+              <div className="flex items-center gap-3 pt-1">
+                <a
+                  href="https://www.linkedin.com/company/navtelecom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 hover:border-brand-primary hover:text-brand-primary transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <LinkedinLogo size={22} weight="fill" />
+                </a>
+                <a
+                  href="https://www.instagram.com/navtelecom?igsh=OWRkZ3kyOG5mdjZq"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 hover:border-brand-primary hover:text-brand-primary transition-colors"
+                  aria-label="Instagram"
+                >
+                  <InstagramLogo size={22} weight="regular" />
+                </a>
+              </div>
             </div>
 
-            <div>
-              <h4 className="font-bold text-lg mb-6">Equipment</h4>
-              <ul className="space-y-4 text-gray-400 text-sm">
+            {/* Tracking — aligned with Products dropdown */}
+            <div className="lg:col-span-2">
+              <h3 className="text-label text-brand-primary mb-4 sm:mb-5">
+                Tracking devices
+              </h3>
+              <ul className="space-y-3">
                 <li>
-                  <a
+                  <Link href="/products/tracking-devices" className={footerLinkClass}>
+                    Overview
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/products/tracking-devices/start-series"
-                    className="hover:text-blue-400 transition-colors"
+                    className={footerLinkClass}
                   >
                     START Series
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/products/tracking-devices/smart-series"
-                    className="hover:text-blue-400 transition-colors"
+                    className={footerLinkClass}
                   >
                     SMART Series
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/products/tracking-devices/signal-series"
-                    className="hover:text-blue-400 transition-colors"
+                    className={footerLinkClass}
                   >
                     SIGNAL Series
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-blue-400 transition-colors">
-                    Accessories
-                  </a>
+                  <Link href="/products/all-devices" className={footerLinkClass}>
+                    All devices
+                  </Link>
                 </li>
               </ul>
             </div>
 
-            <div>
-              <h4 className="font-bold text-lg mb-6">Support</h4>
-              <ul className="space-y-4 text-gray-400 text-sm">
+            {/* Software — matches navbar submenu */}
+            <div className="lg:col-span-2">
+              <h3 className="text-label text-brand-primary mb-4 sm:mb-5">
+                Software
+              </h3>
+              <ul className="space-y-3">
                 <li>
-                  <a
+                  <Link
+                    href="/products/software-solutions"
+                    className={footerLinkClass}
+                  >
+                    All solutions
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/products/software-solutions/ntc-configurator"
+                    className={footerLinkClass}
+                  >
+                    NTC Configurator
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/products/software-solutions/can-spy"
+                    className={footerLinkClass}
+                  >
+                    CAN SPY
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/products/software-solutions/drc"
+                    className={footerLinkClass}
+                  >
+                    DRC
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/products/software-solutions/ntc-control"
+                    className={footerLinkClass}
+                  >
+                    NTC Control
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/products/software-solutions/complex-events"
+                    className={footerLinkClass}
+                  >
+                    Complex Events
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/products/software-solutions/eco-driving"
+                    className={footerLinkClass}
+                  >
+                    Eco Driving
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Support + company */}
+            <div className="lg:col-span-2">
+              <h3 className="text-label text-brand-primary mb-4 sm:mb-5">
+                Support &amp; company
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/about" className={footerLinkClass}>
+                    About us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/support" className={footerLinkClass}>
+                    Support
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/support/faq" className={footerLinkClass}>
+                    FAQ
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/support/knowledge-base"
-                    className="hover:text-blue-400 transition-colors"
+                    className={footerLinkClass}
                   >
-                    Knowledge Base
-                  </a>
+                    Knowledge base
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/support/telegram-bot"
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    Telegram Support Bot
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/support/warranty"
-                    className="hover:text-blue-400 transition-colors"
-                  >
+                  <Link href="/support/warranty" className={footerLinkClass}>
                     Warranty
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/contact"
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    Contact Support
-                  </a>
+                  <Link href="/contact" className={footerLinkClass}>
+                    Contact us
+                  </Link>
                 </li>
               </ul>
             </div>
 
-            <div>
-              <h4 className="font-bold text-lg mb-6">Contact</h4>
-              <ul className="space-y-4 text-gray-400 text-sm">
-                <li>support@navtelecom.com</li>
-                <li>9xx</li>
+            {/* Contact */}
+            <div className="lg:col-span-2">
+              <h3 className="text-label text-brand-primary mb-4 sm:mb-5">
+                Contact
+              </h3>
+              <ul className="space-y-4">
+                <li>
+                  <a
+                    href="mailto:support@navtelecom.com"
+                    className="group flex items-start gap-3 text-sm text-white/70 hover:text-brand-primary transition-colors"
+                  >
+                    <EnvelopeSimple
+                      className="mt-0.5 shrink-0 text-brand-primary/90 group-hover:text-brand-primary"
+                      size={20}
+                      weight="duotone"
+                    />
+                    <span className="leading-snug break-all">
+                      support@navtelecom.com
+                    </span>
+                  </a>
+                </li>
               </ul>
+              <p className="mt-6 text-xs text-white/45 leading-relaxed">
+                For integration and technical questions, reach out via email or
+                your regional partner.
+              </p>
             </div>
           </div>
 
-          <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-            <p>© 2026 Navtelecom. All rights reserved.</p>
-            <div className="flex gap-8">
-              <a href="#" className="hover:text-white transition-colors">
-                Privacy Policy
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                Terms of Use
-              </a>
+          <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-white/50">
+            <p>© {new Date().getFullYear()} Navtelecom. All rights reserved.</p>
+            <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
+              <Link
+                href="/contact"
+                className="hover:text-brand-primary transition-colors"
+              >
+                Privacy &amp; data
+              </Link>
+              <Link
+                href="/contact"
+                className="hover:text-brand-primary transition-colors"
+              >
+                Terms of use
+              </Link>
             </div>
           </div>
         </LayoutContainer>
       </footer>
-    </>
+    </div>
   );
 };
 

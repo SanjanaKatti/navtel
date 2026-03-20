@@ -336,34 +336,62 @@ a[class*="bg-color-neutral-dark-gray"]:hover {
   }
 }
 
+/* Portrait mobile art: anchor devices toward bottom so headline/CTA read clearly */
 .tracking-devices-hero-background {
   background-image: url("/Navtelecom/all devices2_homepage1 1080x1350.png") !important;
-  background-position: 70% center !important;
+  background-position: center 92% !important;
+  background-size: cover !important;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 480px) and (max-width: 767px) {
   .tracking-devices-hero-background {
-    background-image: url("/Navtelecom/all devices2_homepage1 2048x1365.png") !important;
-    background-position: right center !important;
+    background-position: center 88% !important;
   }
 }
 
+/* Tablet: wider art; keep focal point centered until desktop split layout */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tracking-devices-hero-background {
+    background-image: url("/Navtelecom/all devices2_homepage1 2048x1365.png") !important;
+    background-position: center 62% !important;
+  }
+}
+
+/* Desktop: crop so product art sits in the right half (was overlapping copy at ~56–58%) */
 @media (min-width: 1024px) {
   .tracking-devices-hero-background {
     background-image: url("/Navtelecom/all devices2_homepage1 2560x1440.png") !important;
-    background-position: right center !important;
+    background-position: 38% center !important;
   }
 }
 
 @media (min-width: 1280px) {
   .tracking-devices-hero-background {
     background-image: url("/Navtelecom/all devices2_homepage1 3840x1646.png") !important;
-    background-position: right center !important;
+    background-position: 36% center !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .tracking-devices-hero-background {
+    background-position: 34% center !important;
   }
 }
 
 .can-spy-hero-background {
   background-image: url("/Navtelecom/Software/CAN/can_homepage1 1080x1350.png") !important;
+}
+
+/* Software product heroes: anchor artwork for small viewports; lg+ stays default (bg-center) */
+@media (max-width: 1023px) {
+  .can-spy-hero-background,
+  .cfg-hero-background,
+  .drc-hero-background,
+  .ntc-control-hero-background,
+  .complex-events-hero-background,
+  .eco-driving-hero-background {
+    background-position: center 86% !important;
+  }
 }
 
 @media (min-width: 768px) {

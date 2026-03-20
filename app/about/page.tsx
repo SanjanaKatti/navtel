@@ -365,6 +365,11 @@ const AboutPage = () => {
   const [randomPulsingMarkerId, setRandomPulsingMarkerId] = useState<
     string | null
   >(null);
+  const [mapConfig, setMapConfig] = useState({
+    width: 1000,
+    height: 500,
+    scale: 200,
+  });
   const activePin = hoverPin; // Tooltips only appear on hover
   const activeRippleMarkerId = hoverPin?.key ?? randomPulsingMarkerId;
 
@@ -448,18 +453,39 @@ const AboutPage = () => {
     return () => clearInterval(interval);
   }, [memoizedMarkerPool.length]);
 
+  useEffect(() => {
+    const updateMap = () => {
+      if (typeof window === "undefined") return;
+      const vw = window.innerWidth;
+      if (vw < 480) {
+        setMapConfig({ width: 720, height: 380, scale: 88 });
+      } else if (vw < 640) {
+        setMapConfig({ width: 780, height: 400, scale: 105 });
+      } else if (vw < 768) {
+        setMapConfig({ width: 820, height: 420, scale: 125 });
+      } else if (vw < 1024) {
+        setMapConfig({ width: 900, height: 460, scale: 165 });
+      } else {
+        setMapConfig({ width: 1000, height: 500, scale: 200 });
+      }
+    };
+    updateMap();
+    window.addEventListener("resize", updateMap);
+    return () => window.removeEventListener("resize", updateMap);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-brand-navy overflow-x-hidden">
       <Navbar />
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center bg-brand-light-3 overflow-hidden">
-          <LayoutContainer className="relative">
+        <section className="relative flex items-center bg-brand-light-3 overflow-hidden py-12 sm:py-16 md:py-20 lg:min-h-[calc(100dvh-5rem)] lg:h-[calc(100vh-5rem)] lg:py-0">
+          <LayoutContainer className="relative w-full">
             {/* About Us: Title Left, Text Right */}
-            <div className="grid lg:grid-cols-2 gap-0 items-center mb-40">
-              <div className="relative pr-12 lg:pr-20">
-                <p className="text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.2em] mb-4 md:mb-6 md:whitespace-nowrap">
+            <div className="grid lg:grid-cols-2 gap-0 items-center mb-10 sm:mb-14 md:mb-20 lg:mb-28 xl:mb-40">
+              <div className="relative pr-0 sm:pr-6 md:pr-10 lg:pr-20">
+                <p className="text-sm sm:text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-3 sm:mb-4 md:mb-6 sm:whitespace-nowrap">
                   WHO WE ARE
                 </p>
                 <h1 className="text-display leading-none">
@@ -468,7 +494,7 @@ const AboutPage = () => {
                   <span className="text-brand-navy">Us</span>
                 </h1>
               </div>
-              <div className="lg:pl-20 border-l-4 border-brand-navy/20 hover:border-brand-navy transition-colors duration-500 py-8">
+              <div className="mt-8 sm:mt-10 lg:mt-0 border-t-4 border-brand-navy/20 pt-8 sm:pt-10 lg:border-t-0 lg:border-l-4 lg:pl-8 xl:pl-20 lg:pt-0 hover:border-brand-navy transition-colors duration-500">
                 <p className="text-body-lg">
                   We design and manufacture professional telematics hardware for
                   system integrators and fleet operators worldwide. Our devices
@@ -480,7 +506,7 @@ const AboutPage = () => {
 
             {/* Mission: Title Right, Text Left */}
             <div className="grid lg:grid-cols-2 gap-0 items-center">
-              <div className="order-2 lg:order-1 lg:pr-20 lg:text-right border-r-4 border-brand-navy/20 hover:border-brand-navy transition-colors duration-500 py-10">
+              <div className="order-2 lg:order-1 mt-8 sm:mt-10 lg:mt-0 lg:pr-12 xl:pr-20 text-left lg:text-right border-b-4 pb-8 sm:pb-10 mb-2 lg:mb-0 lg:pb-10 lg:border-b-0 lg:border-r-4 border-brand-navy/20 hover:border-brand-navy transition-colors duration-500">
                 <p className="text-body-lg">
                   To provide integration-ready telematics devices that reduce
                   project risk, simplify deployment, and ensure predictable
@@ -489,8 +515,8 @@ const AboutPage = () => {
                   complex fleet projects.
                 </p>
               </div>
-              <div className="order-1 lg:order-2 pl-12 lg:pl-20 text-right lg:text-left relative">
-                <p className="text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.2em] mb-4 md:mb-6 md:whitespace-nowrap">
+              <div className="order-1 lg:order-2 pl-0 sm:pl-2 md:pl-6 lg:pl-12 xl:pl-20 text-left relative">
+                <p className="text-sm sm:text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-3 sm:mb-4 md:mb-6 sm:whitespace-nowrap">
                   OUR GOAL
                 </p>
                 <h2 className="text-display leading-none text-brand-navy">
@@ -504,33 +530,37 @@ const AboutPage = () => {
         </section>
 
         {/* Global Presence Section */}
-        <section className="pt-24 pb-12 bg-white overflow-hidden">
+        <section className="pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-8 sm:pb-10 md:pb-12 bg-white overflow-hidden">
           <LayoutContainer>
-            <div className="text-center mb-16">
-              <p className="text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.2em] mb-4 md:mb-6 md:whitespace-nowrap">
+            <div className="text-center mb-10 sm:mb-12 md:mb-16 px-1">
+              <p className="text-sm sm:text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-3 sm:mb-4 md:mb-6 sm:whitespace-nowrap">
                 WORLDWIDE DEPLOYMENT
               </p>
-              <h2 className="text-h1 mb-6">
+              <h2 className="text-h1 mb-4 sm:mb-6 px-1">
                 Global Reach.{" "}
-                <span className="text-brand-navy">Proven Deployment.</span>
+                <span className="text-brand-navy block sm:inline mt-1 sm:mt-0">
+                  Proven Deployment.
+                </span>
               </h2>
-              <p className="text-body-lg max-w-2xl mx-auto">
+              <p className="text-body-lg max-w-2xl mx-auto text-pretty">
                 3M+ devices operating in diverse climates and markets. Long-term
                 partnerships with system integrators worldwide.
               </p>
             </div>
 
-            <div className="relative bg-brand-light-3 rounded-[3rem] p-4 lg:p-12 border border-gray-100 shadow-inner overflow-visible">
-              <div className="w-full">
+            <div className="relative bg-brand-light-3 rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] lg:rounded-[3rem] p-3 sm:p-4 md:p-6 lg:p-12 border border-gray-100 shadow-inner overflow-hidden">
+              <div className="w-full min-w-0 [&_svg]:max-w-full [&_svg]:h-auto">
                 <ComposableMap
                   projectionConfig={{
-                    scale: 200,
+                    scale: mapConfig.scale,
                   }}
-                  width={1000}
-                  height={500}
+                  width={mapConfig.width}
+                  height={mapConfig.height}
                   style={{
                     width: "100%",
                     height: "auto",
+                    maxWidth: "100%",
+                    display: "block",
                   }}
                 >
                   <MapGeographies
@@ -550,14 +580,14 @@ const AboutPage = () => {
         </section>
 
         {/* What We Build Section */}
-        <section className="py-12 bg-white border-t border-gray-50">
+        <section className="py-10 sm:py-12 md:py-14 bg-white border-t border-gray-50">
           <LayoutContainer>
-            <div className="text-center mb-20">
-              <h2 className="text-h1 mb-4">What We Build</h2>
+            <div className="text-center mb-12 sm:mb-16 md:mb-20 px-1">
+              <h2 className="text-h1 mb-3 sm:mb-4">What We Build</h2>
               <div className="w-20 h-1.5 bg-brand-navy mx-auto rounded-full"></div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 md:gap-8">
               {[
                 {
                   title: "Hardware Production",
@@ -642,12 +672,12 @@ const AboutPage = () => {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className={`group p-8 rounded-2xl border transition-all duration-300 hover:shadow-xl ${item.cardClass}`}
+                  className={`group p-6 sm:p-7 md:p-8 rounded-2xl border transition-all duration-300 hover:shadow-xl ${item.cardClass}`}
                 >
-                  <div className="w-16 h-16 bg-white/12 border border-white/20 rounded-xl shadow-sm flex items-center justify-center text-white mb-6 group-hover:bg-white/20 transition-colors">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white/12 border border-white/20 rounded-xl shadow-sm flex items-center justify-center text-white mb-4 sm:mb-6 group-hover:bg-white/20 transition-colors shrink-0">
                     {item.icon}
                   </div>
-                  <h3 className="text-h3 mb-3 text-white transition-colors min-h-[50px]">
+                  <h3 className="text-h3 mb-2 sm:mb-3 text-white transition-colors min-h-0 sm:min-h-[50px]">
                     {item.title}
                   </h3>
                   <p className="text-body-lg text-[#D8E4F5]">{item.desc}</p>
@@ -658,17 +688,17 @@ const AboutPage = () => {
         </section>
 
         {/* Why Choose Navtelecom */}
-        <section className="py-24 bg-brand-light-3">
+        <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-brand-light-3">
           <LayoutContainer>
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-h1 mb-8">
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center">
+              <div className="text-center lg:text-left">
+                <h2 className="text-h1 mb-6 sm:mb-8 px-1">
                   Why Choose{" "}
-                  <span className="text-brand-navy whitespace-nowrap">
+                  <span className="text-brand-navy whitespace-normal sm:whitespace-nowrap">
                     Navtelecom?
                   </span>
                 </h2>
-                <p className="text-body-lg max-w-xl">
+                <p className="text-body-lg max-w-xl mx-auto lg:mx-0 text-pretty">
                   Because serious telematics projects require predictable
                   hardware, deep integration, and direct engineering support. We
                   build devices designed for long-term deployment, controlled
@@ -717,20 +747,20 @@ const AboutPage = () => {
         </section>
 
         {/* Connect With Us Section */}
-        <section className="py-24 bg-white border-t border-gray-50">
+        <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white border-t border-gray-50">
           <LayoutContainer>
-            <div className="text-center">
-              <p className="text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.2em] mb-4 md:mb-6 md:whitespace-nowrap">
+            <div className="text-center px-1">
+              <p className="text-sm sm:text-base md:text-lg font-bold text-brand-navy uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-3 sm:mb-4 md:mb-6 sm:whitespace-nowrap">
                 CONNECT WITH US
               </p>
-              <h2 className="text-h1 mb-8">
+              <h2 className="text-h1 mb-6 sm:mb-8">
                 Stay <span className="text-brand-navy">Updated</span>
               </h2>
-              <p className="text-body-lg max-w-xl mx-auto mb-12">
+              <p className="text-body-lg max-w-xl mx-auto mb-8 sm:mb-10 md:mb-12 text-pretty">
                 Product releases, firmware updates, CAN decoding files and real
                 project insights - directly from our engineering team.
               </p>
-              <div className="flex items-center justify-center gap-8">
+              <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
                 <a
                   href="https://www.linkedin.com/company/navtelecom"
                   className="flex items-center justify-center w-14 h-14 rounded-full bg-[#F8FAFC] border border-gray-200 text-gray-500 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-300"

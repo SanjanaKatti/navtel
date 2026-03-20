@@ -3,7 +3,18 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { X } from "phosphor-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import LayoutContainer from "./LayoutContainer";
+import { FieldError } from "@/components/forms/FieldError";
+import {
+  salesInquirySchema,
+  type SalesInquiryFormValues,
+} from "@/lib/validation/form-schemas";
+import {
+  isEmailJsConfigured,
+  sendWebsiteFormEmail,
+} from "@/lib/emailjs/send-website-form";
 
 const products = [
   {
@@ -43,10 +54,59 @@ const products = [
 const ProductLineup = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsModalOpen(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    clearErrors,
+    formState: { errors, isSubmitting },
+  } = useForm<SalesInquiryFormValues>({
+    resolver: zodResolver(salesInquirySchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      mobile: "",
+      country: "",
+      message: "",
+    },
+    mode: "onTouched",
+  });
+
+  const onSalesSubmit = async (data: SalesInquiryFormValues) => {
+    clearErrors("root");
+    if (!isEmailJsConfigured()) {
+      setError("root", {
+        message:
+          "Email is not set up yet. Add EmailJS keys to .env.local (see .env.example).",
+      });
+      return;
+    }
+    try {
+      await sendWebsiteFormEmail({
+        formType: "Sales inquiry (product lineup)",
+        fullName: data.fullName,
+        userEmail: data.email,
+        company: "—",
+        mobile: data.mobile,
+        country: data.country,
+        message: data.message,
+      });
+      reset();
+      setIsModalOpen(false);
+    } catch {
+      setError("root", {
+        message: "Could not send. Check your connection or try again later.",
+      });
+    }
   };
+
+  const inputClass = (hasError: boolean) =>
+    `w-full px-5 py-3.5 bg-brand-light-3 border rounded-xl focus:outline-none focus:bg-white transition-all text-body-sm ${
+      hasError
+        ? "border-red-500 focus:border-red-600"
+        : "border-gray-200 focus:border-brand-primary"
+    }`;
 
   return (
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[#F8FAFC]">
@@ -166,63 +226,136 @@ const ProductLineup = () => {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form
+              noValidate
+              onSubmit={handleSubmit(onSalesSubmit)}
+              className="space-y-5"
+            >
+              {errors.root?.message ? (
+                <p
+                  role="alert"
+                  className="text-sm text-red-600 text-center px-1"
+                >
+                  {errors.root.message}
+                </p>
+              ) : null}
               <div className="space-y-1.5">
-                <label className="text-label ml-1">Full Name</label>
+                <label htmlFor="pl-sales-name" className="text-label ml-1">
+                  Full Name
+                </label>
                 <input
-                  required
+                  id="pl-sales-name"
                   type="text"
+                  autoComplete="name"
                   placeholder="Your name"
-                  className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
+                  aria-invalid={!!errors.fullName}
+                  aria-describedby={
+                    errors.fullName ? "pl-sales-name-err" : undefined
+                  }
+                  className={inputClass(!!errors.fullName)}
+                  {...register("fullName")}
+                />
+                <FieldError
+                  id="pl-sales-name-err"
+                  message={errors.fullName?.message}
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-label ml-1">Email Address</label>
+                <label htmlFor="pl-sales-email" className="text-label ml-1">
+                  Email Address
+                </label>
                 <input
-                  required
+                  id="pl-sales-email"
                   type="email"
+                  autoComplete="email"
+                  inputMode="email"
                   placeholder="your@email.com"
-                  className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={
+                    errors.email ? "pl-sales-email-err" : undefined
+                  }
+                  className={inputClass(!!errors.email)}
+                  {...register("email")}
+                />
+                <FieldError
+                  id="pl-sales-email-err"
+                  message={errors.email?.message}
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-label ml-1">Mobile Number</label>
+                  <label htmlFor="pl-sales-mobile" className="text-label ml-1">
+                    Mobile Number
+                  </label>
                   <input
-                    required
+                    id="pl-sales-mobile"
                     type="tel"
+                    autoComplete="tel"
                     placeholder="+1..."
-                    className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
+                    aria-invalid={!!errors.mobile}
+                    aria-describedby={
+                      errors.mobile ? "pl-sales-mobile-err" : undefined
+                    }
+                    className={inputClass(!!errors.mobile)}
+                    {...register("mobile")}
+                  />
+                  <FieldError
+                    id="pl-sales-mobile-err"
+                    message={errors.mobile?.message}
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-label ml-1">Country</label>
+                  <label htmlFor="pl-sales-country" className="text-label ml-1">
+                    Country
+                  </label>
                   <input
-                    required
+                    id="pl-sales-country"
                     type="text"
+                    autoComplete="country-name"
                     placeholder="Your country"
-                    className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
+                    aria-invalid={!!errors.country}
+                    aria-describedby={
+                      errors.country ? "pl-sales-country-err" : undefined
+                    }
+                    className={inputClass(!!errors.country)}
+                    {...register("country")}
+                  />
+                  <FieldError
+                    id="pl-sales-country-err"
+                    message={errors.country?.message}
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-label ml-1">Message</label>
+                <label htmlFor="pl-sales-message" className="text-label ml-1">
+                  Message
+                </label>
                 <textarea
-                  required
+                  id="pl-sales-message"
                   rows={3}
                   placeholder="How can we help you?"
-                  className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm resize-none"
-                ></textarea>
+                  aria-invalid={!!errors.message}
+                  aria-describedby={
+                    errors.message ? "pl-sales-message-err" : undefined
+                  }
+                  className={`${inputClass(!!errors.message)} resize-none`}
+                  {...register("message")}
+                />
+                <FieldError
+                  id="pl-sales-message-err"
+                  message={errors.message?.message}
+                />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 bg-brand-navy text-white rounded-full font-black text-sm hover:bg-brand-primary transition-all transform hover:-translate-y-1 active:scale-95 shadow-lg shadow-brand-navy/20 mt-4"
+                disabled={isSubmitting}
+                className="w-full py-4 bg-brand-navy text-white rounded-full font-black text-sm hover:bg-brand-primary transition-all transform hover:-translate-y-1 active:scale-95 shadow-lg shadow-brand-navy/20 mt-4 disabled:opacity-60 disabled:pointer-events-none"
               >
-                SEND MESSAGE
+                {isSubmitting ? "SENDING…" : "SEND MESSAGE"}
               </button>
             </form>
           </div>

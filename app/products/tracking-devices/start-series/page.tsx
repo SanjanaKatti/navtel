@@ -186,7 +186,8 @@ const StartSeriesPage = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 xl:gap-8">
+            <div className="overflow-x-auto lg:overflow-visible overscroll-x-contain snap-x snap-mandatory lg:snap-none pb-3 [scrollbar-width:thin] [scrollbar-color:rgba(0,45,73,0.25)_transparent]">
+              <div className="flex flex-row lg:grid lg:grid-cols-3 gap-4 sm:gap-6 xl:gap-8 w-max lg:w-full min-w-0 pr-4 sm:pr-6 lg:pr-0">
               {[
                 {
                   title: "RS-485 Ready",
@@ -261,7 +262,7 @@ const StartSeriesPage = () => {
               ].map((feature, idx) => (
                 <div
                   key={idx}
-                  className="group p-6 sm:p-10 md:p-12 bg-white rounded-2xl sm:rounded-[3rem] border border-gray-100 hover:shadow-2xl transition-all duration-500 relative overflow-hidden min-h-[14rem] sm:min-h-[16rem] lg:min-h-[17rem]"
+                  className="group flex-none snap-start w-[min(20rem,88vw)] sm:w-[min(22rem,85vw)] md:w-[min(24rem,72vw)] lg:w-auto lg:min-w-0 lg:snap-none p-6 sm:p-10 md:p-12 bg-white rounded-2xl sm:rounded-[3rem] border border-gray-100 hover:shadow-2xl transition-all duration-500 relative overflow-hidden min-h-[14rem] sm:min-h-[16rem] lg:min-h-[17rem]"
                 >
                   <div className="absolute top-8 right-8 text-gray-300 group-hover:text-brand-primary transition-colors duration-500 scale-110">
                     {feature.icon}
@@ -277,6 +278,7 @@ const StartSeriesPage = () => {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
           </div>
         </section>
@@ -430,7 +432,8 @@ const StartSeriesPage = () => {
               Why <span className="text-brand-primary">START</span> Stands Out
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 xl:gap-8">
+            <div className="overflow-x-auto lg:overflow-visible overscroll-x-contain snap-x snap-mandatory lg:snap-none pb-3 [scrollbar-width:thin] [scrollbar-color:rgba(0,45,73,0.25)_transparent]">
+              <div className="flex flex-row lg:grid lg:grid-cols-3 gap-4 sm:gap-6 xl:gap-8 w-max lg:w-full min-w-0 pr-4 sm:pr-6 lg:pr-0">
               {[
                 {
                   title: (
@@ -495,7 +498,7 @@ const StartSeriesPage = () => {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#F8FAFC] p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-[3rem] shadow-xl shadow-brand-navy/5 border border-white group hover:-translate-y-2 transition-all duration-500 min-w-0 overflow-hidden"
+                  className="flex-none snap-start w-[min(20rem,88vw)] sm:w-[min(22rem,85vw)] md:w-[min(24rem,72vw)] lg:w-auto lg:min-w-0 lg:snap-none bg-[#F8FAFC] p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-[3rem] shadow-xl shadow-brand-navy/5 border border-white group hover:-translate-y-2 transition-all duration-500 overflow-hidden"
                 >
                   <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-navy mb-4 group-hover:text-brand-primary transition-colors leading-tight min-h-[80px]">
                     {item.title}
@@ -503,6 +506,7 @@ const StartSeriesPage = () => {
                   <p className="text-body">{item.desc}</p>
                 </div>
               ))}
+              </div>
             </div>
           </div>
         </section>
