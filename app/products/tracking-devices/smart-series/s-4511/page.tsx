@@ -279,6 +279,7 @@ const S4511Page = () => {
             connectivity: "4g",
             specs: [],
             buttonText: "Explore",
+            href: "https://wiki.navtelecom.ru/en/home/devices/s4511",
           },
           {
             name: "PC Configurator",

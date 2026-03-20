@@ -303,6 +303,7 @@ const S4753Page = () => {
             connectivity: "4g",
             specs: [],
             buttonText: "Explore",
+            href: "https://wiki.navtelecom.ru/en/home/devices/s4753",
           },
           {
             name: "PC Configurator",

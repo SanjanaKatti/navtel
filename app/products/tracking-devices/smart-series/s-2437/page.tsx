@@ -294,6 +294,7 @@ const S2437Page = () => {
               connectivity: "2g",
               specs: [],
               buttonText: "Explore",
+              href: "https://wiki.navtelecom.ru/en/home/devices/s2437",
             },
             {
               name: "PC Configurator",

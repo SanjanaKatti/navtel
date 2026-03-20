@@ -277,6 +277,7 @@ const S2433Page = () => {
             connectivity: "2g",
             specs: [],
             buttonText: "Explore",
+            href: "https://wiki.navtelecom.ru/en/home/devices/s2433",
           },
           {
             name: "PC Configurator",

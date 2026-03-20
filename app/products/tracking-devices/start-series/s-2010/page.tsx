@@ -282,6 +282,7 @@ const S2010Page = () => {
               connectivity: "2g",
               specs: [],
               buttonText: "Explore",
+              href: "https://wiki.navtelecom.ru/en/home/devices/s2010",
             },
             {
               name: "PC Configurator",

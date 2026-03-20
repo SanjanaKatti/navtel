@@ -279,6 +279,7 @@ const S2425Page = () => {
             connectivity: "2g",
             specs: [],
             buttonText: "Explore",
+            href: "https://wiki.navtelecom.ru/en/home/devices/s2425",
           },
           {
             name: "PC Configurator",

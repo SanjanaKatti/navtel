@@ -1,7 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import {
-  X,
   DeviceMobile,
   UploadSimple,
   ChartLine,
@@ -13,19 +12,11 @@ import Footer from "@/components/Footer";
 import {
   SoftwareHero,
   SoftwareKeyFeatures,
-  SoftwareContentBlock,
   SoftwareCTA,
   SoftwareSidePanelContent,
 } from "@/components/software";
 
 const NTCControlPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsModalOpen(false);
-  };
-
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-brand-navy">
       <Navbar />
@@ -37,10 +28,6 @@ const NTCControlPage = () => {
           ctaPrimary={{
             label: "Download for Android",
             href: "https://play.google.com/store/apps/details?id=ru.navtelecom.ntc.control",
-          }}
-          ctaSecondary={{
-            label: "Contact Sales",
-            onClick: () => setIsModalOpen(true),
           }}
           backgroundClass="ntc-control-hero-background"
           textColor="navy"
@@ -145,98 +132,12 @@ const NTCControlPage = () => {
                   Validate instantly. <br />
                   Deploy with confidence.
                 </>
-              }            />
+              }
+            />
           </div>
         </section>
       </main>
 
-      {/* Contact Sales Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div
-            className="absolute inset-0 bg-brand-navy/80 backdrop-blur-sm transition-opacity"
-            onClick={() => setIsModalOpen(false)}
-          ></div>
-
-          <div className="relative bg-white w-full max-w-lg rounded-[2.5rem] shadow-2xl p-8 md:p-12 overflow-hidden animate-in fade-in zoom-in duration-300">
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-6 right-6 text-gray-400 hover:text-brand-navy transition-colors"
-            >
-              <X size={24} weight="bold" />
-            </button>
-
-            <div className="text-center mb-10">
-              <h2 className="text-h2 mb-3">
-                Contact <span className="text-brand-primary">Sales</span>
-              </h2>
-              <p className="text-body-sm">
-                Our team will get back to you shortly.
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="space-y-1.5">
-                <label className="text-label ml-1">Full Name</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="Your name"
-                  className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-label ml-1">Email Address</label>
-                <input
-                  required
-                  type="email"
-                  placeholder="your@email.com"
-                  className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-label ml-1">Mobile Number</label>
-                  <input
-                    required
-                    type="tel"
-                    placeholder="+1..."
-                    className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-label ml-1">Country</label>
-                  <input
-                    required
-                    type="text"
-                    placeholder="Your country"
-                    className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-label ml-1">Message</label>
-                <textarea
-                  required
-                  rows={3}
-                  placeholder="How can we help you?"
-                  className="w-full px-5 py-3.5 bg-brand-light-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-primary focus:bg-white transition-all text-body-sm resize-none"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-4 bg-brand-navy text-white rounded-full font-black text-sm hover:bg-brand-primary transition-all transform hover:-translate-y-1 active:scale-95 shadow-lg shadow-brand-navy/20 mt-4"
-              >
-                SEND MESSAGE
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
       <Footer />
     </div>
   );

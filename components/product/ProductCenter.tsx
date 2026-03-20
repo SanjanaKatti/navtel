@@ -55,12 +55,23 @@ const ProductCenter: React.FC<ProductCenterProps> = ({
               {/* CTA anchored to bottom of card */}
               <div className="mt-auto w-full">
                 {product.href ? (
-                  <Link
-                    href={product.href}
-                    className="w-full py-5 rounded-full font-black text-sm transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-brand-navy/10 bg-brand-navy text-white hover:bg-brand-primary flex items-center justify-center uppercase tracking-widest"
-                  >
-                    {product.buttonText}
-                  </Link>
+                  /^https?:\/\//i.test(product.href) ? (
+                    <a
+                      href={product.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-5 rounded-full font-black text-sm transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-brand-navy/10 bg-brand-navy text-white hover:bg-brand-primary flex items-center justify-center uppercase tracking-widest"
+                    >
+                      {product.buttonText}
+                    </a>
+                  ) : (
+                    <Link
+                      href={product.href}
+                      className="w-full py-5 rounded-full font-black text-sm transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-brand-navy/10 bg-brand-navy text-white hover:bg-brand-primary flex items-center justify-center uppercase tracking-widest"
+                    >
+                      {product.buttonText}
+                    </Link>
+                  )
                 ) : (
                   <button
                     onClick={product.onButtonClick}

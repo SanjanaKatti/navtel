@@ -321,6 +321,7 @@ const S2013Page = () => {
               connectivity: "2g",
               specs: [],
               buttonText: "Explore",
+              href: "https://wiki.navtelecom.ru/en/home/devices/s2013",
             },
             {
               name: "PC Configurator",

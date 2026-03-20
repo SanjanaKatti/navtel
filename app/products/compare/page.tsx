@@ -200,7 +200,7 @@ const deviceData = {
   },
   "S-2437": {
     name: "S-2437",
-    series: "Signal Series",
+    series: "Smart Series",
     connectivity: "2G",
     specs: {
       "SIM Support": "Dual SIM",
@@ -219,7 +219,7 @@ const deviceData = {
   },
   "S-2435": {
     name: "S-2435",
-    series: "Signal Series",
+    series: "Smart Series",
     connectivity: "2G",
     specs: {
       "SIM Support": "Dual SIM",
@@ -238,7 +238,7 @@ const deviceData = {
   },
   "S-2433": {
     name: "S-2433",
-    series: "Signal Series",
+    series: "Smart Series",
     connectivity: "2G",
     specs: {
       "SIM Support": "Single SIM",
@@ -257,7 +257,7 @@ const deviceData = {
   },
   "S-2425": {
     name: "S-2425",
-    series: "Signal Series",
+    series: "Smart Series",
     connectivity: "2G",
     specs: {
       "SIM Support": "Dual SIM",
@@ -276,7 +276,7 @@ const deviceData = {
   },
   "S-2423": {
     name: "S-2423",
-    series: "Signal Series",
+    series: "Smart Series",
     connectivity: "2G",
     specs: {
       "SIM Support": "Dual SIM",
@@ -402,6 +402,58 @@ const normalizeForDiff = (value: unknown) => {
   return str;
 };
 
+/** Badge label before " Network" — from fallbacks or merged specs (Network Type). */
+const resolveConnectivityLabel = (
+  fallbackConnectivity: string | undefined,
+  excelConnectivity: string | undefined,
+  mergedSpecs: Record<string, unknown>,
+): string => {
+  const fromFallback = fallbackConnectivity?.trim();
+  if (fromFallback) return fromFallback;
+  const fromExcel = excelConnectivity?.trim();
+  if (fromExcel) return fromExcel;
+  const networkType = mergedSpecs["Network Type"];
+  if (networkType == null || networkType === "") return "";
+  const raw = String(networkType).trim();
+  if (raw === "2G") return "2G";
+  if (raw.includes("4G")) return "4G";
+  return raw;
+};
+
+const normalizeModelKey = (deviceName: string) =>
+  deviceName.trim().toUpperCase().replace(/\s+/g, "");
+
+/**
+ * Series label for the comparison header — derived from model ranges used on the site
+ * (S-24xx / S-45xx = Smart, S-26xx / S-47xx = Signal, S-20xx / S-40xx = Start).
+ */
+const seriesLabelFromModel = (deviceName: string): string | null => {
+  const m = normalizeModelKey(deviceName);
+  if (/^S-20\d{2}$/.test(m) || /^S-40\d{2}$/.test(m)) return "Start Series";
+  if (/^S-24\d{2}$/.test(m) || /^S-45\d{2}$/.test(m)) return "Smart Series";
+  if (/^S-26\d{2}$/.test(m) || /^S-47\d{2}$/.test(m)) return "Signal Series";
+  return null;
+};
+
+/**
+ * Product detail URL for a tracker model (matches app route folders).
+ */
+const trackingDeviceDetailHref = (deviceName: string) => {
+  const m = normalizeModelKey(deviceName);
+  const slug = m.toLowerCase();
+
+  const segment =
+    /^S-20\d{2}$/.test(m) || /^S-40\d{2}$/.test(m)
+      ? "start-series"
+      : /^S-24\d{2}$/.test(m) || /^S-45\d{2}$/.test(m)
+        ? "smart-series"
+        : /^S-26\d{2}$/.test(m) || /^S-47\d{2}$/.test(m)
+          ? "signal-series"
+          : "start-series";
+
+  return `/products/tracking-devices/${segment}/${slug}`;
+};
+
 const ComparisonContent = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -433,16 +485,25 @@ const ComparisonContent = () => {
 
       if (!fallback && !excel) return null;
 
+      const mergedSpecs = {
+        ...(fallback?.specs ?? {}),
+        ...(excel?.specs ?? {}),
+      } as Record<string, unknown>;
+
+      const series =
+        seriesLabelFromModel(name) ??
+        ((excel?.series ?? fallback?.series ?? "") as string);
+      const connectivity = resolveConnectivityLabel(
+        fallback?.connectivity,
+        excel?.connectivity,
+        mergedSpecs,
+      );
+
       return {
         name: name,
-        series: (fallback?.series ?? excel?.series ?? "") as string,
-        connectivity: (fallback?.connectivity ??
-          excel?.connectivity ??
-          "") as string,
-        specs: {
-          ...(fallback?.specs ?? {}),
-          ...(excel?.specs ?? {}),
-        } as Record<string, unknown>,
+        series,
+        connectivity,
+        specs: mergedSpecs,
       };
     })
     .filter(Boolean) as Array<{
@@ -575,7 +636,7 @@ const ComparisonContent = () => {
                         {device.series}
                       </p>
                       <Link
-                        href={`/products/tracking-devices/start-series/${device.name.toLowerCase()}`}
+                        href={trackingDeviceDetailHref(device.name)}
                         className="inline-block text-xs font-black text-brand-navy hover:text-brand-primary transition-colors underline underline-offset-4"
                       >
                         View Details

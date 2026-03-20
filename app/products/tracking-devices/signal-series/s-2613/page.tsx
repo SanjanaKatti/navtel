@@ -289,6 +289,7 @@ const S2613Page = () => {
             connectivity: "2g",
             specs: [],
             buttonText: "Explore",
+            href: "https://wiki.navtelecom.ru/en/home/devices/s2613",
           },
           {
             name: "PC Configurator",

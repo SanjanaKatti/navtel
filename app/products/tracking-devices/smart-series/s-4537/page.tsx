@@ -292,6 +292,7 @@ const S4537Page = () => {
             connectivity: "4g",
             specs: [],
             buttonText: "Explore",
+            href: "https://wiki.navtelecom.ru/en/home/devices/s4537",
           },
           {
             name: "PC Configurator",

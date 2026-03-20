@@ -293,6 +293,7 @@ const S2653Page = () => {
             connectivity: "2g",
             specs: [],
             buttonText: "Explore",
+            href: "https://wiki.navtelecom.ru/en/home/devices/s2653",
           },
           {
             name: "PC Configurator",

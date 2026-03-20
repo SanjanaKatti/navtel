@@ -320,6 +320,7 @@ const S4011Page = () => {
               connectivity: "4g",
               specs: [],
               buttonText: "Explore",
+              href: "https://wiki.navtelecom.ru/en/home/devices/s4011",
             },
             {
               name: "PC Configurator",
