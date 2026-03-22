@@ -153,7 +153,6 @@ const Footer = () => {
                   id="footer-nl-company"
                   type="text"
                   autoComplete="organization"
-                  placeholder="Your company name"
                   aria-invalid={!!errors.company}
                   aria-describedby={
                     errors.company ? "footer-nl-company-err" : undefined
@@ -175,7 +174,6 @@ const Footer = () => {
                   id="footer-nl-name"
                   type="text"
                   autoComplete="name"
-                  placeholder="Your name"
                   aria-invalid={!!errors.fullName}
                   aria-describedby={
                     errors.fullName ? "footer-nl-name-err" : undefined
@@ -198,7 +196,6 @@ const Footer = () => {
                   type="email"
                   autoComplete="email"
                   inputMode="email"
-                  placeholder="your@email.com"
                   aria-invalid={!!errors.email}
                   aria-describedby={
                     errors.email ? "footer-nl-email-err" : undefined
@@ -221,7 +218,6 @@ const Footer = () => {
                     id="footer-nl-mobile"
                     type="tel"
                     autoComplete="tel"
-                    placeholder="+1..."
                     aria-invalid={!!errors.mobile}
                     aria-describedby={
                       errors.mobile ? "footer-nl-mobile-err" : undefined
@@ -242,7 +238,6 @@ const Footer = () => {
                     id="footer-nl-country"
                     type="text"
                     autoComplete="country-name"
-                    placeholder="Your country"
                     aria-invalid={!!errors.country}
                     aria-describedby={
                       errors.country ? "footer-nl-country-err" : undefined

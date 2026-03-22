@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import LayoutContainer from "./LayoutContainer";
 import Image from "next/image";
 
@@ -192,20 +193,6 @@ const faqs = [
       </div>
     ),
   },
-  {
-    q: "Still have questions?",
-    a: (
-      <div className="space-y-2">
-        <p>Contact our technical support:</p>
-        <a
-          href="mailto:support@navtelecom.ru"
-          className="inline-block text-brand-primary font-bold hover:underline"
-        >
-          support@navtelecom.ru
-        </a>
-      </div>
-    ),
-  },
 ];
 
 const StatsAndFAQ = () => {
@@ -291,6 +278,21 @@ const StatsAndFAQ = () => {
                   </div>
                 </details>
               ))}
+              <div className="flex flex-col items-center text-center border-t border-gray-200 pt-12 pb-8 mt-4">
+                <h3 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
+                  Still have questions?
+                </h3>
+                <p className="text-base text-gray-600 max-w-xl">
+                  Browse our full{" "}
+                  <Link
+                    href="/support/faq"
+                    className="text-brand-primary font-bold hover:underline"
+                  >
+                    FAQ page
+                  </Link>{" "}
+                  for more answers on setup, configuration, and integration.
+                </p>
+              </div>
             </div>
           </div>
         </LayoutContainer>

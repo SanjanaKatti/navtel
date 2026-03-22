@@ -13,8 +13,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Navtelecom",
-  description: "GPS Trackers for fleet management – Reliable tracking from Navtelecom",
+  title: {
+    default: "Navtelecom | GPS Tracking & Telematics Solutions",
+    template: "%s | Navtelecom",
+  },
+  description:
+    "GPS Trackers for fleet management – Reliable tracking from Navtelecom",
+  keywords: [
+    "GPS tracking",
+    "telematics",
+    "fleet management",
+    "vehicle tracking",
+    "asset tracking",
+    "Navtelecom",
+  ],
   icons: {
     icon: "/favicon_navtel.png",
   },

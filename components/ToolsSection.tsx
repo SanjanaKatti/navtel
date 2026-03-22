@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import LayoutContainer from "./LayoutContainer";
 
 const tools = [
@@ -8,6 +9,7 @@ const tools = [
     description: "Main PC tool for tracker setup",
     dark: false,
     cardClass: "bg-[#EAF4FF]",
+    href: "/products/software-solutions/ntc-configurator",
   },
   {
     number: "02",
@@ -15,6 +17,7 @@ const tools = [
     description: "CAN bus Scanning & Decoding Toolchain",
     dark: true,
     cardClass: "bg-[#2d57a4]",
+    href: "/products/software-solutions/can-spy",
   },
   {
     number: "04",
@@ -22,6 +25,7 @@ const tools = [
     description: "Cloud Device Management & Diagnostics Platform",
     dark: true,
     cardClass: "bg-[#009ccc]",
+    href: "/products/software-solutions/drc",
   },
   {
     number: "03",
@@ -29,6 +33,7 @@ const tools = [
     description: "Script-building tool to formulate tracker operation logic",
     dark: true,
     cardClass: "bg-[#1278be]",
+    href: "/products/software-solutions/complex-events",
   },
   {
     number: "05",
@@ -36,6 +41,7 @@ const tools = [
     description: "Mobile app for quick on-side setup",
     dark: true,
     cardClass: "bg-[#52c3f1]",
+    href: "/products/software-solutions/ntc-control",
   },
 ];
 
@@ -56,8 +62,9 @@ const ToolsSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* First tool is large/tall as seen in screenshot */}
-          <div
-            className={`row-span-2 ${tools[0].cardClass ?? "bg-[#F1F5F9]"} p-10 flex flex-col justify-between border border-gray-200 rounded-2xl group relative overflow-hidden transform-gpu motion-safe:animate-[toolCardIn_520ms_ease-out_both] motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl transition-[transform,box-shadow] duration-300`}
+          <Link
+            href={tools[0].href}
+            className={`row-span-2 ${tools[0].cardClass ?? "bg-[#F1F5F9]"} p-10 flex flex-col justify-between border border-gray-200 rounded-2xl group relative overflow-hidden transform-gpu motion-safe:animate-[toolCardIn_520ms_ease-out_both] motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl transition-[transform,box-shadow] duration-300 block`}
             style={{ animationDelay: "60ms" }}
           >
             <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(900px_circle_at_20%_20%,rgba(50,190,240,0.18),transparent_55%)]" />
@@ -68,13 +75,14 @@ const ToolsSection = () => {
               <h3 className="text-h3 mb-4">{tools[0].name}</h3>
             </div>
             <p className="text-body">{tools[0].description}</p>
-          </div>
+          </Link>
 
           {/* Other tools */}
           {tools.slice(1).map((tool, idx) => (
-            <div
+            <Link
               key={idx}
-              className={`${tool.cardClass ?? "bg-[#1E293B]"} p-10 flex flex-col justify-between h-[280px] border border-transparent rounded-2xl group relative overflow-hidden transform-gpu motion-safe:animate-[toolCardIn_520ms_ease-out_both] motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl transition-[transform,box-shadow,filter] duration-300 hover:brightness-110`}
+              href={tool.href}
+              className={`${tool.cardClass ?? "bg-[#1E293B]"} p-10 flex flex-col justify-between h-[280px] border border-transparent rounded-2xl group relative overflow-hidden transform-gpu motion-safe:animate-[toolCardIn_520ms_ease-out_both] motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl transition-[transform,box-shadow,filter] duration-300 hover:brightness-110 block`}
               style={{ animationDelay: `${120 + idx * 60}ms` }}
             >
               <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(900px_circle_at_20%_20%,rgba(255,255,255,0.16),transparent_55%)]" />
@@ -85,7 +93,7 @@ const ToolsSection = () => {
                 <h3 className="text-h3 text-white mb-4">{tool.name}</h3>
               </div>
               <p className="text-body text-white/80">{tool.description}</p>
-            </div>
+            </Link>
           ))}
         </div>
       </LayoutContainer>

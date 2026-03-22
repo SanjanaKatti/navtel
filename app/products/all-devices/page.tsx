@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import Image from "next/image";
@@ -53,6 +53,7 @@ const AllDevicesPage = () => {
     }
   });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const scrollPositionRef = useRef<number | null>(null);
 
   // Old style quick filters
   const [quickSeries, setQuickSeries] = useState<string>("all");
@@ -239,7 +240,7 @@ const AllDevicesPage = () => {
       series: "SMART",
       connectivity: "2G",
       sim: "Dual SIM",
-      interfaces: ["RS-485", "RS-232", "1-Wire"],
+      interfaces: ["1-Wire"],
       bluetooth: "Bluetooth 4.0",
       inputs: "3 Universal IN",
       outputs: "2 OUT",
@@ -492,13 +493,37 @@ const AllDevicesPage = () => {
     battery: ["—", "130 mAh", "380 mAh", "800 mAh"],
   };
 
+  const saveScrollAnd = (fn: () => void) => {
+    scrollPositionRef.current = window.scrollY;
+    fn();
+  };
+
   const toggleFilter = (key: keyof typeof filters, value: string) => {
-    setFilters((prev) => ({
-      ...prev,
-      [key]: prev[key].includes(value)
-        ? prev[key].filter((v) => v !== value)
-        : [...prev[key], value],
-    }));
+    saveScrollAnd(() => {
+      setFilters((prev) => ({
+        ...prev,
+        [key]: prev[key].includes(value)
+          ? prev[key].filter((v) => v !== value)
+          : [...prev[key], value],
+      }));
+    });
+  };
+
+  const resetFilters = () => {
+    saveScrollAnd(() => {
+      setFilters({
+        category: [],
+        sim: [],
+        interfaces: [],
+        bluetooth: [],
+        inputs: [],
+        outputs: [],
+        antennas: [],
+        battery: [],
+      });
+      setQuickSeries("all");
+      setQuickNetwork("all");
+    });
   };
 
   const filteredDevices = allDevices.filter((device) => {
@@ -517,7 +542,7 @@ const AllDevicesPage = () => {
         filters.category.includes(device.category)) &&
       (filters.sim.length === 0 || filters.sim.includes(device.sim)) &&
       (filters.interfaces.length === 0 ||
-        filters.interfaces.some((i) => device.interfaces.includes(i))) &&
+        filters.interfaces.every((i) => device.interfaces.includes(i))) &&
       (filters.bluetooth.length === 0 ||
         filters.bluetooth.includes(device.bluetooth)) &&
       (filters.inputs.length === 0 || filters.inputs.includes(device.inputs)) &&
@@ -573,6 +598,16 @@ const AllDevicesPage = () => {
     localStorage.setItem("compareDevices", JSON.stringify(selectedDevices));
   }, [selectedDevices]);
 
+  useLayoutEffect(() => {
+    const saved = scrollPositionRef.current;
+    if (saved !== null) {
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo(0, Math.min(saved, Math.max(0, maxScroll)));
+      scrollPositionRef.current = null;
+    }
+  }, [filters, quickSeries, quickNetwork]);
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased text-brand-navy">
       <Navbar />
@@ -607,7 +642,7 @@ const AllDevicesPage = () => {
                   {["all", "start", "smart", "signal"].map((s) => (
                     <button
                       key={s}
-                      onClick={() => setQuickSeries(s)}
+                      onClick={() => saveScrollAnd(() => setQuickSeries(s))}
                       className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
                         quickSeries === s
                           ? "bg-brand-navy text-white shadow-md"
@@ -629,7 +664,7 @@ const AllDevicesPage = () => {
                   {["all", "2g", "4g"].map((n) => (
                     <button
                       key={n}
-                      onClick={() => setQuickNetwork(n)}
+                      onClick={() => saveScrollAnd(() => setQuickNetwork(n))}
                       className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
                         quickNetwork === n
                           ? "bg-brand-navy text-white shadow-md"
@@ -660,20 +695,7 @@ const AllDevicesPage = () => {
                     Filters
                   </h2>
                   <button
-                    onClick={() => {
-                      setFilters({
-                        category: [],
-                        sim: [],
-                        interfaces: [],
-                        bluetooth: [],
-                        inputs: [],
-                        outputs: [],
-                        antennas: [],
-                        battery: [],
-                      });
-                      setQuickSeries("all");
-                      setQuickNetwork("all");
-                    }}
+                    onClick={resetFilters}
                     className="text-xs font-bold text-gray-400 hover:text-brand-primary transition-colors"
                   >
                     RESET
@@ -739,9 +761,9 @@ const AllDevicesPage = () => {
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {sortedDevices.map((device, idx) => (
+                {sortedDevices.map((device) => (
                   <div
-                    key={idx}
+                    key={device.name}
                     className="bg-gray-50/50 flex flex-col border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden group relative"
                   >
                     <div className="p-10 pb-0 flex flex-col items-start">
@@ -840,20 +862,7 @@ const AllDevicesPage = () => {
                     No devices match your selected filters.
                   </p>
                   <button
-                    onClick={() => {
-                      setFilters({
-                        category: [],
-                        sim: [],
-                        interfaces: [],
-                        bluetooth: [],
-                        inputs: [],
-                        outputs: [],
-                        antennas: [],
-                        battery: [],
-                      });
-                      setQuickSeries("all");
-                      setQuickNetwork("all");
-                    }}
+                    onClick={resetFilters}
                     className="mt-6 text-brand-primary font-bold hover:underline"
                   >
                     Clear all filters

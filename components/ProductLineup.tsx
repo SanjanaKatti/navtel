@@ -250,7 +250,6 @@ const ProductLineup = () => {
                   id="pl-sales-name"
                   type="text"
                   autoComplete="name"
-                  placeholder="Your name"
                   aria-invalid={!!errors.fullName}
                   aria-describedby={
                     errors.fullName ? "pl-sales-name-err" : undefined
@@ -273,7 +272,6 @@ const ProductLineup = () => {
                   type="email"
                   autoComplete="email"
                   inputMode="email"
-                  placeholder="your@email.com"
                   aria-invalid={!!errors.email}
                   aria-describedby={
                     errors.email ? "pl-sales-email-err" : undefined
@@ -296,7 +294,6 @@ const ProductLineup = () => {
                     id="pl-sales-mobile"
                     type="tel"
                     autoComplete="tel"
-                    placeholder="+1..."
                     aria-invalid={!!errors.mobile}
                     aria-describedby={
                       errors.mobile ? "pl-sales-mobile-err" : undefined
@@ -317,7 +314,6 @@ const ProductLineup = () => {
                     id="pl-sales-country"
                     type="text"
                     autoComplete="country-name"
-                    placeholder="Your country"
                     aria-invalid={!!errors.country}
                     aria-describedby={
                       errors.country ? "pl-sales-country-err" : undefined
@@ -339,7 +335,6 @@ const ProductLineup = () => {
                 <textarea
                   id="pl-sales-message"
                   rows={3}
-                  placeholder="How can we help you?"
                   aria-invalid={!!errors.message}
                   aria-describedby={
                     errors.message ? "pl-sales-message-err" : undefined

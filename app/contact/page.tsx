@@ -105,7 +105,6 @@ const ContactPage = () => {
                   type="text"
                   id="name"
                   autoComplete="name"
-                  placeholder="Your full name"
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? "name-err" : undefined}
                   className={inputClass(!!errors.name)}
@@ -122,7 +121,6 @@ const ContactPage = () => {
                   id="email"
                   autoComplete="email"
                   inputMode="email"
-                  placeholder="your@email.com"
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? "email-err" : undefined}
                   className={inputClass(!!errors.email)}
@@ -141,7 +139,6 @@ const ContactPage = () => {
                   type="text"
                   id="company"
                   autoComplete="organization"
-                  placeholder="Company name"
                   aria-invalid={!!errors.company}
                   aria-describedby={
                     errors.company ? "company-err" : undefined
@@ -162,7 +159,6 @@ const ContactPage = () => {
                   type="tel"
                   id="mobile"
                   autoComplete="tel"
-                  placeholder="+1 (555) 000-0000"
                   aria-invalid={!!errors.mobile}
                   aria-describedby={
                     errors.mobile ? "mobile-err" : undefined
@@ -182,7 +178,6 @@ const ContactPage = () => {
                 type="text"
                 id="country"
                 autoComplete="country-name"
-                placeholder="Your country"
                 aria-invalid={!!errors.country}
                 aria-describedby={
                   errors.country ? "country-err" : undefined
@@ -200,7 +195,6 @@ const ContactPage = () => {
               <textarea
                 id="message"
                 rows={4}
-                placeholder="How can we help you?"
                 aria-invalid={!!errors.message}
                 aria-describedby={
                   errors.message ? "message-err" : undefined

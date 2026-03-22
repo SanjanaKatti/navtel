@@ -13,6 +13,13 @@ const supportCards = [
     cta: "Explore",
   },
   {
+    title: "FAQ",
+    description:
+      "Find quick answers to common questions about setup, configuration, and integration.",
+    href: "/support/faq",
+    cta: "Read FAQ",
+  },
+  {
     title: "Telegram Support Bot",
     description:
       "Create support tickets in Telegram and communicate directly with engineers. No automated replies.",
@@ -25,13 +32,6 @@ const supportCards = [
       "View coverage details, service terms, and submit warranty claims.",
     href: "/support/warranty",
     cta: "View Details",
-  },
-  {
-    title: "FAQ",
-    description:
-      "Find quick answers to common questions about setup, configuration, and integration.",
-    href: "/support/faq",
-    cta: "Read FAQ",
   },
 ];
 

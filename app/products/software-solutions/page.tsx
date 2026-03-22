@@ -85,18 +85,20 @@ const SoftwareSolutionsPage = () => {
                 <Link
                   key={idx}
                   href={item.href}
-                  className="bg-white rounded-[2rem] border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 p-8 flex flex-col relative"
+                  className="bg-white rounded-[2rem] border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 p-8 flex flex-col"
                 >
-                  <div className="absolute top-8 right-8 transition-opacity">
+                  <div className="flex items-start justify-between gap-4 min-h-14 mb-3 flex-shrink-0">
+                    <h2 className="text-h3 text-[#28398c] min-w-0 flex-1 pr-2">
+                      {item.name}
+                    </h2>
                     {item.icon && (
                       <img
                         src={item.icon}
                         alt={`${item.name} icon`}
-                        className="w-10 h-10 object-contain"
+                        className="w-12 h-12 object-contain flex-shrink-0"
                       />
                     )}
                   </div>
-                  <h2 className="text-h3 mb-3 text-[#28398c]">{item.name}</h2>
                   <p className="text-body mb-8 flex-1">{item.description}</p>
                   <div className="inline-flex items-center justify-center bg-brand-navy text-white rounded-full px-8 py-3 font-bold text-sm hover:bg-brand-primary transition-all">
                     Learn More
