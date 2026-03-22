@@ -274,6 +274,8 @@ const S2010Page = () => {
               connectivity: "2g",
               specs: [],
               buttonText: "Download",
+              href: "/brochures/START-s-2010.pdf",
+              downloadFileName: "START-s-2010.pdf",
             },
             {
               name: "Knowledge Base",
@@ -290,6 +292,7 @@ const S2010Page = () => {
               connectivity: "2g",
               specs: [],
               buttonText: "Download",
+              href: "https://wiki.navtelecom.ru/programs/ntc_configurator/ntc_configurator_last.exe",
             },
             {
               name: "Android Configurator",
@@ -298,6 +301,7 @@ const S2010Page = () => {
               connectivity: "2g",
               specs: [],
               buttonText: "Download",
+              href: "https://play.google.com/store/apps/details?id=ru.navtelecom.ntc.control",
             },
           ]}
         />

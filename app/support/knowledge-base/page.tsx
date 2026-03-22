@@ -21,8 +21,8 @@ const KnowledgeBasePage = () => {
 
       <main className="pt-20">
         {/* Hero */}
-        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center overflow-hidden product-background-image knowledge-base-hero-background">
-          <LayoutContainer>
+        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center max-lg:items-start overflow-hidden product-background-image knowledge-base-hero-background">
+          <LayoutContainer className="max-lg:pt-8">
             <div className="max-w-xl text-left z-10">
               <p className="text-base md:text-lg font-bold uppercase tracking-[0.2em] text-[#28398c] mb-4">
                 KNOWLEDGE BASE

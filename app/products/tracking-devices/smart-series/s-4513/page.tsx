@@ -298,6 +298,7 @@ const S4513Page = () => {
             connectivity: "4g",
             specs: [],
             buttonText: "Download",
+            href: "https://wiki.navtelecom.ru/programs/ntc_configurator/ntc_configurator_last.exe",
           },
           {
             name: "Android Configurator",
@@ -305,6 +306,7 @@ const S4513Page = () => {
             connectivity: "4g",
             specs: [],
             buttonText: "Download",
+            href: "https://play.google.com/store/apps/details?id=ru.navtelecom.ntc.control",
           },
         ]}
       />

@@ -489,13 +489,19 @@ const Footer = () => {
             <p>© {new Date().getFullYear()} Navtelecom. All rights reserved.</p>
             <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
               <Link
-                href="/contact"
+                href="/privacy"
                 className="hover:text-brand-primary transition-colors"
               >
                 Privacy &amp; data
               </Link>
               <Link
-                href="/contact"
+                href="/cookie-policy"
+                className="hover:text-brand-primary transition-colors"
+              >
+                Cookie policy
+              </Link>
+              <Link
+                href="/terms-of-use"
                 className="hover:text-brand-primary transition-colors"
               >
                 Terms of use

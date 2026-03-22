@@ -382,23 +382,17 @@ a[class*="bg-color-neutral-dark-gray"]:hover {
   background-image: url("/Navtelecom/Software/CAN/can_homepage1 1080x1350.png") !important;
 }
 
-/* Software product heroes: anchor artwork for small viewports; lg+ stays default (bg-center) */
+/* Software product heroes + knowledge base: mobile - image covers whole screen, text at top */
 @media (max-width: 1023px) {
   .can-spy-hero-background,
   .cfg-hero-background,
   .drc-hero-background,
   .ntc-control-hero-background,
   .complex-events-hero-background,
-  .eco-driving-hero-background {
-    /* Mobile: show the whole hero artwork (no cropping) */
-    background-size: contain !important;
-    background-position: center top !important;
-  }
-}
-
-/* Mobile: keep artwork anchored to the top */
-@media (max-width: 1023px) {
-  .eco-driving-hero-background {
+  .eco-driving-hero-background,
+  .knowledge-base-hero-background {
+    /* Mobile: hero image covers full screen, positioned so top is visible for text overlay */
+    background-size: cover !important;
     background-position: center top !important;
   }
 }

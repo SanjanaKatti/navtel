@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 import LayoutContainer from "../LayoutContainer";
 
 interface ProductCard {
@@ -11,6 +10,8 @@ interface ProductCard {
   buttonText: string;
   onButtonClick?: () => void;
   href?: string;
+  /** When set, adds download attribute for direct file download (works best with same-origin URLs) */
+  downloadFileName?: string;
 }
 
 interface ProductCenterProps {
@@ -60,17 +61,19 @@ const ProductCenter: React.FC<ProductCenterProps> = ({
                       href={product.href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      {...(product.downloadFileName && { download: product.downloadFileName })}
                       className="w-full py-5 rounded-full font-black text-sm transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-brand-navy/10 bg-brand-navy text-white hover:bg-brand-primary flex items-center justify-center uppercase tracking-widest"
                     >
                       {product.buttonText}
                     </a>
                   ) : (
-                    <Link
+                    <a
                       href={product.href}
+                      {...(product.downloadFileName && { download: product.downloadFileName })}
                       className="w-full py-5 rounded-full font-black text-sm transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-brand-navy/10 bg-brand-navy text-white hover:bg-brand-primary flex items-center justify-center uppercase tracking-widest"
                     >
                       {product.buttonText}
-                    </Link>
+                    </a>
                   )
                 ) : (
                   <button

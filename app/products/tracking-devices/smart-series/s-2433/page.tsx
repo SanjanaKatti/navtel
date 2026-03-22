@@ -278,6 +278,7 @@ const S2433Page = () => {
             connectivity: "2g",
             specs: [],
             buttonText: "Download",
+            href: "https://wiki.navtelecom.ru/programs/ntc_configurator/ntc_configurator_last.exe",
           },
           {
             name: "Android Configurator",
@@ -285,6 +286,7 @@ const S2433Page = () => {
             connectivity: "2g",
             specs: [],
             buttonText: "Download",
+            href: "https://play.google.com/store/apps/details?id=ru.navtelecom.ntc.control",
           },
         ]}
       />

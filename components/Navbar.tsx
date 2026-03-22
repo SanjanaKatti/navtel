@@ -247,13 +247,9 @@ const Navbar = () => {
               >
                 ABOUT US
               </Link>
-              <Link
-                href="/products"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand-primary"
-              >
+              <span className="px-3 py-2 text-sm font-medium text-gray-700 cursor-default">
                 PRODUCTS
-              </Link>
+              </span>
               <Link
                 href="/products/tracking-devices"
                 onClick={() => setIsMobileMenuOpen(false)}

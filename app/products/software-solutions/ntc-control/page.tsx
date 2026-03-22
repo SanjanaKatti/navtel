@@ -35,6 +35,7 @@ const NTCControlPage = () => {
             label: "Software Solutions",
             href: "/products/software-solutions",
           }}
+          ctaMobileAlign="left"
         />
 
         <SoftwareKeyFeatures
