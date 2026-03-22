@@ -608,9 +608,9 @@ a[class*="bg-color-neutral-dark-gray"]:hover {
 
 @media (max-width: 1023px) {
   .software-solutions-hero-background {
-    /* Mobile: show the whole hero artwork (no cropping) */
-    background-size: contain !important;
-    background-position: center top !important;
+    /* Mobile: background covers entire width of screen */
+    background-size: cover !important;
+    background-position: center center !important;
   }
 }
 
