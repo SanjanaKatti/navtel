@@ -26,6 +26,7 @@ const DRCPage = () => {
           title="DRC"
           subtitle="Mass Device Management Made Simple"
           tagline="Control, update and manage hundreds or thousands of devices from a single web interface."
+          ctaMobileAlign="left"
           ctaPrimary={{
             label: "Log In",
             href: "https://drc.navtelecom.ru/login",

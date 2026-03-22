@@ -33,9 +33,7 @@ const SoftwareKeyFeatures: React.FC<SoftwareKeyFeaturesProps> = ({
     const el = scrollRef.current;
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 0);
-    setCanScrollRight(
-      el.scrollLeft < el.scrollWidth - el.clientWidth - 1,
-    );
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
   };
 
   useEffect(() => {
@@ -88,7 +86,7 @@ const SoftwareKeyFeatures: React.FC<SoftwareKeyFeaturesProps> = ({
   );
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
+    <section className="pb-12 sm:py-16 md:py-20 lg:py-24 bg-white">
       <LayoutContainer>
         <div className="text-center mb-8 sm:mb-10 lg:mb-12 px-1">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black text-brand-navy mb-3">
@@ -110,10 +108,7 @@ const SoftwareKeyFeatures: React.FC<SoftwareKeyFeaturesProps> = ({
                   key={`m-${idx}`}
                   className={`${cardBase} flex-none snap-start w-[min(20rem,88vw)] sm:w-[min(22rem,85vw)] md:w-[min(24rem,72vw)] min-h-[13rem] sm:min-h-[14rem]`}
                 >
-                  {renderCardInner(
-                    feature,
-                    "text-xl sm:text-2xl md:text-2xl",
-                  )}
+                  {renderCardInner(feature, "text-xl sm:text-2xl md:text-2xl")}
                 </div>
               ))}
             </div>
@@ -180,7 +175,10 @@ const SoftwareKeyFeatures: React.FC<SoftwareKeyFeaturesProps> = ({
               className={`grid md:grid-cols-2 ${features.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-3"} gap-6`}
             >
               {features.map((feature, idx) => (
-                <div key={idx} className={`${cardBase} min-h-[16rem] lg:min-h-[17rem]`}>
+                <div
+                  key={idx}
+                  className={`${cardBase} min-h-[16rem] lg:min-h-[17rem]`}
+                >
                   {renderCardInner(
                     feature,
                     "text-2xl md:text-3xl",

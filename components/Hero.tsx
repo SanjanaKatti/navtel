@@ -233,19 +233,36 @@ const Hero = () => {
               </div>
 
               {currentSlide.button && (
-                <div className="mt-8 sm:mt-10 lg:mt-14 2xl:mt-20">
-                  <Link
-                    href={currentSlide.button.href}
-                    className={`inline-flex items-center justify-center w-[30%] rounded-full px-10 py-3 font-bold text-sm shadow-lg transition-all transform hover:-translate-y-1 active:scale-95
-                      ${
-                        currentBackgroundIndex === 0
-                          ? "bg-white text-[#7fc1e5] hover:bg-white/90"
-                          : "bg-[#515254] text-white hover:bg-gray-700"
-                      }`}
-                  >
-                    {currentSlide.button.label}
-                  </Link>
-                </div>
+                <>
+                  {/* Mobile: button in top right, just above the white curved shape */}
+                  <div className="absolute right-4 top-[14%] z-20 md:hidden">
+                    <Link
+                      href={currentSlide.button.href}
+                      className={`inline-flex items-center justify-center rounded-full px-8 py-2.5 font-bold text-sm shadow-lg transition-all transform hover:-translate-y-1 active:scale-95
+                        ${
+                          currentBackgroundIndex === 0
+                            ? "bg-white text-[#7fc1e5] hover:bg-white/90"
+                            : "bg-[#515254] text-white hover:bg-gray-700"
+                        }`}
+                    >
+                      {currentSlide.button.label}
+                    </Link>
+                  </div>
+                  {/* Desktop: button in normal flow */}
+                  <div className="hidden md:block mt-8 sm:mt-10 lg:mt-14 2xl:mt-20">
+                    <Link
+                      href={currentSlide.button.href}
+                      className={`inline-flex items-center justify-center w-[30%] rounded-full px-10 py-3 font-bold text-sm shadow-lg transition-all transform hover:-translate-y-1 active:scale-95
+                        ${
+                          currentBackgroundIndex === 0
+                            ? "bg-white text-[#7fc1e5] hover:bg-white/90"
+                            : "bg-[#515254] text-white hover:bg-gray-700"
+                        }`}
+                    >
+                      {currentSlide.button.label}
+                    </Link>
+                  </div>
+                </>
               )}
             </div>
           </div>
