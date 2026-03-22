@@ -23,8 +23,10 @@ jobs:
             git config --global --add safe.directory "$DEPLOY_PATH"
             git fetch origin
             git reset --hard origin/main
+            rm -rf .next node_modules/.cache
             npm install
             npm run build
             chown -R navtelecom-iot:navtelecom-iot . || true
-            pm2 restart navtel || pm2 start "npm run start -- --port 3000" --name navtel
+            pm2 delete navtel 2>/dev/null || true
+            pm2 start "npm run start -- --port 3000" --name navtel
             pm2 save
