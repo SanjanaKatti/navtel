@@ -11,10 +11,12 @@ import {
   salesInquirySchema,
   type SalesInquiryFormValues,
 } from "@/lib/validation/form-schemas";
+import { SuccessPopup } from "@/components/forms/SuccessPopup";
 import {
-  isEmailJsConfigured,
-  sendWebsiteFormEmail,
-} from "@/lib/emailjs/send-website-form";
+  isFormspreeConfigured,
+  submitToFormspree,
+  submitToTempCapture,
+} from "@/lib/formspree/send-form";
 
 const products = [
   {
@@ -53,6 +55,7 @@ const products = [
 
 const ProductLineup = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const {
     register,
@@ -75,25 +78,24 @@ const ProductLineup = () => {
 
   const onSalesSubmit = async (data: SalesInquiryFormValues) => {
     clearErrors("root");
-    if (!isEmailJsConfigured()) {
-      setError("root", {
-        message:
-          "Email is not set up yet. Add EmailJS keys to .env.local (see .env.example).",
-      });
-      return;
-    }
+    const payload = {
+      formType: "Sales inquiry (product lineup)",
+      fullName: data.fullName,
+      userEmail: data.email,
+      company: "—",
+      mobile: data.mobile,
+      country: data.country,
+      message: data.message,
+    };
     try {
-      await sendWebsiteFormEmail({
-        formType: "Sales inquiry (product lineup)",
-        fullName: data.fullName,
-        userEmail: data.email,
-        company: "—",
-        mobile: data.mobile,
-        country: data.country,
-        message: data.message,
-      });
+      if (isFormspreeConfigured()) {
+        await submitToFormspree("salesInquiry", payload);
+      } else {
+        await submitToTempCapture(payload);
+      }
       reset();
       setIsModalOpen(false);
+      setShowSuccessPopup(true);
     } catch (err) {
       setError("root", {
         message:
@@ -118,7 +120,9 @@ const ProductLineup = () => {
           <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.2em] text-[#004A8C] mb-2 md:mb-3">
             DISCOVER OUR LINEUP
           </p>
-          <h2 className="text-h1 px-2 sm:px-0">Device Series for Every Fleet</h2>
+          <h2 className="text-h1 px-2 sm:px-0">
+            Device Series for Every Fleet
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
@@ -359,6 +363,11 @@ const ProductLineup = () => {
           </div>
         </div>
       )}
+
+      <SuccessPopup
+        isOpen={showSuccessPopup}
+        onClose={() => setShowSuccessPopup(false)}
+      />
     </section>
   );
 };

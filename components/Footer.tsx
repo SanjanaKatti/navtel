@@ -11,16 +11,19 @@ import {
   newsletterSchema,
   type NewsletterFormValues,
 } from "@/lib/validation/form-schemas";
+import { SuccessPopup } from "@/components/forms/SuccessPopup";
 import {
-  isEmailJsConfigured,
-  sendWebsiteFormEmail,
-} from "@/lib/emailjs/send-website-form";
+  isFormspreeConfigured,
+  submitToFormspree,
+  submitToTempCapture,
+} from "@/lib/formspree/send-form";
 
 const footerLinkClass =
   "text-sm text-white/70 hover:text-brand-primary transition-colors duration-200";
 
 const Footer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const {
     register,
@@ -43,25 +46,24 @@ const Footer = () => {
 
   const onNewsletterSubmit = async (data: NewsletterFormValues) => {
     clearErrors("root");
-    if (!isEmailJsConfigured()) {
-      setError("root", {
-        message:
-          "Email is not set up yet. Add EmailJS keys to .env.local (see .env.example).",
-      });
-      return;
-    }
+    const payload = {
+      formType: "Newsletter signup",
+      fullName: data.fullName,
+      userEmail: data.email,
+      company: data.company,
+      mobile: data.mobile,
+      country: data.country,
+      message: "",
+    };
     try {
-      await sendWebsiteFormEmail({
-        formType: "Newsletter signup",
-        fullName: data.fullName,
-        userEmail: data.email,
-        company: data.company,
-        mobile: data.mobile,
-        country: data.country,
-        message: "",
-      });
+      if (isFormspreeConfigured()) {
+        await submitToFormspree("newsletter", payload);
+      } else {
+        await submitToTempCapture(payload);
+      }
       reset();
       setIsModalOpen(false);
+      setShowSuccessPopup(true);
     } catch (err) {
       setError("root", {
         message:
@@ -231,7 +233,10 @@ const Footer = () => {
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label htmlFor="footer-nl-country" className="text-label ml-1">
+                  <label
+                    htmlFor="footer-nl-country"
+                    className="text-label ml-1"
+                  >
                     Country
                   </label>
                   <input
@@ -281,8 +286,8 @@ const Footer = () => {
               </Link>
               <p className="text-sm text-white/65 leading-relaxed max-w-sm">
                 Developer and manufacturer of professional telematics hardware
-                and software for fleet management, asset tracking, and industrial
-                integration.
+                and software for fleet management, asset tracking, and
+                industrial integration.
               </p>
               <div className="flex items-center gap-3 pt-1">
                 <a
@@ -313,7 +318,10 @@ const Footer = () => {
               </h3>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/products/tracking-devices" className={footerLinkClass}>
+                  <Link
+                    href="/products/tracking-devices"
+                    className={footerLinkClass}
+                  >
                     Overview
                   </Link>
                 </li>
@@ -342,7 +350,10 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products/all-devices" className={footerLinkClass}>
+                  <Link
+                    href="/products/all-devices"
+                    className={footerLinkClass}
+                  >
                     All devices
                   </Link>
                 </li>
@@ -464,7 +475,7 @@ const Footer = () => {
               <ul className="space-y-4">
                 <li>
                   <a
-                    href="mailto:support@navtelecom.com"
+                    href="mailto:sales@navtelecom-iot.com"
                     className="group flex items-start gap-3 text-sm text-white/70 hover:text-brand-primary transition-colors"
                   >
                     <EnvelopeSimple
@@ -472,8 +483,25 @@ const Footer = () => {
                       size={20}
                       weight="duotone"
                     />
-                    <span className="leading-snug break-all">
-                      support@navtelecom.com
+                    <span className="leading-snug">
+                      <span className="block text-white/90 font-medium">Sales Department</span>
+                      <span className="break-all">sales@navtelecom-iot.com</span>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:support@navtelecom.ru"
+                    className="group flex items-start gap-3 text-sm text-white/70 hover:text-brand-primary transition-colors"
+                  >
+                    <EnvelopeSimple
+                      className="mt-0.5 shrink-0 text-brand-primary/90 group-hover:text-brand-primary"
+                      size={20}
+                      weight="duotone"
+                    />
+                    <span className="leading-snug">
+                      <span className="block text-white/90 font-medium">Support</span>
+                      <span className="break-all">support@navtelecom.ru</span>
                     </span>
                   </a>
                 </li>
@@ -510,6 +538,11 @@ const Footer = () => {
           </div>
         </LayoutContainer>
       </footer>
+
+      <SuccessPopup
+        isOpen={showSuccessPopup}
+        onClose={() => setShowSuccessPopup(false)}
+      />
     </div>
   );
 };

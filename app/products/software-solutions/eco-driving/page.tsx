@@ -22,7 +22,6 @@ const EcoDrivingPage = () => {
           tagline="Analyze driving behavior using motion sensors and vehicle telemetry. Detect aggressive driving and inefficiencies that impact fuel, wear, and safety."
           backgroundClass="eco-driving-hero-background"
           textColor="navy"
-          center
           breadcrumb={{
             label: "Software Solutions",
             href: "/products/software-solutions",

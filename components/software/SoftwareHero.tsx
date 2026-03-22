@@ -58,13 +58,14 @@ const SoftwareHero: React.FC<SoftwareHeroProps> = ({
     ? "max-lg:drop-shadow-[0_1px_10px_rgba(0,45,73,0.4)]"
     : "max-lg:drop-shadow-[0_0_16px_rgba(255,255,255,0.9)]";
 
+  const sectionAlign = center ? "items-center" : "items-start";
   return (
     <section
-      className={`relative flex items-center overflow-hidden ${bgCls} py-10 sm:py-14 md:py-16 ${mobileHeroItemsAlign} ${mobileHeroPaddingY} max-lg:min-h-[calc(100dvh-5rem)] lg:min-h-[calc(100dvh-5rem)] lg:h-[calc(100vh-5rem)] lg:py-0`}
+      className={`relative flex ${sectionAlign} overflow-hidden ${bgCls} py-10 sm:py-14 md:py-16 ${mobileHeroItemsAlign} ${mobileHeroPaddingY} max-lg:min-h-[calc(100dvh-5rem)] lg:min-h-[calc(100dvh-5rem)] lg:h-[calc(100vh-5rem)] lg:py-0`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full lg:py-16 xl:py-24">
         <div
-          className={`grid lg:grid-cols-1 gap-10 sm:gap-14 lg:gap-20 items-center max-lg:items-start ${center ? "justify-items-center" : ""}`}
+          className={`grid lg:grid-cols-1 gap-10 sm:gap-14 lg:gap-20 ${center ? "items-center justify-items-center" : "items-start justify-items-start"}`}
         >
           <div
             className={`space-y-5 sm:space-y-6 md:space-y-8 lg:space-y-8 ${

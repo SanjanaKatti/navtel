@@ -239,7 +239,7 @@ const AllDevicesPage = () => {
       category: "Advanced",
       series: "SMART",
       connectivity: "2G",
-      sim: "Dual SIM",
+      sim: "Single SIM",
       interfaces: ["1-Wire"],
       bluetooth: "Bluetooth 4.0",
       inputs: "3 Universal IN",
@@ -564,8 +564,7 @@ const AllDevicesPage = () => {
     const bySeries = seriesOrder[a.series] - seriesOrder[b.series];
     if (bySeries !== 0) return bySeries;
 
-    const connOrder = (c: Device["connectivity"]) =>
-      c === "2G" ? 0 : 1; // 2G first, then 4G / 2G
+    const connOrder = (c: Device["connectivity"]) => (c === "2G" ? 0 : 1); // 2G first, then 4G / 2G
 
     const byConn = connOrder(a.connectivity) - connOrder(b.connectivity);
     if (byConn !== 0) return byConn;
@@ -810,24 +809,23 @@ const AllDevicesPage = () => {
 
                       {/* Specs Summary */}
                       <div className="space-y-4 mb-10 w-full">
-                        {(
-                          device.cardDisplay
-                            ? [
-                                device.cardDisplay.connectivity,
-                                device.cardDisplay.inputsOutputs,
-                                device.cardDisplay.interfaces,
-                                device.cardDisplay.battery,
-                              ]
-                            : [
-                                device.connectivity,
-                                `${device.inputs}, ${device.outputs}`,
-                                [...device.interfaces, device.bluetooth].filter(
-                                  Boolean,
-                                ).join(", ") || device.bluetooth,
-                                device.battery === "—"
-                                  ? "No battery"
-                                  : `Battery ${device.battery}`,
-                              ]
+                        {(device.cardDisplay
+                          ? [
+                              device.cardDisplay.connectivity,
+                              device.cardDisplay.inputsOutputs,
+                              device.cardDisplay.interfaces,
+                              device.cardDisplay.battery,
+                            ]
+                          : [
+                              device.connectivity,
+                              `${device.inputs}, ${device.outputs}`,
+                              [...device.interfaces, device.bluetooth]
+                                .filter(Boolean)
+                                .join(", ") || device.bluetooth,
+                              device.battery === "—"
+                                ? "No battery"
+                                : `Battery ${device.battery}`,
+                            ]
                         ).map((line, i) => (
                           <div key={i} className="flex items-center gap-2">
                             <div className="w-2 h-2 rounded-full bg-brand-primary flex-shrink-0" />

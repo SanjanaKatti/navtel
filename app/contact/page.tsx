@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Navbar from "@/components/Navbar";
@@ -10,11 +10,14 @@ import {
   type ContactPageFormValues,
 } from "@/lib/validation/form-schemas";
 import {
-  isEmailJsConfigured,
-  sendWebsiteFormEmail,
-} from "@/lib/emailjs/send-website-form";
+  isFormspreeConfigured,
+  submitToFormspree,
+  submitToTempCapture,
+} from "@/lib/formspree/send-form";
+import { SuccessPopup } from "@/components/forms/SuccessPopup";
 
 const ContactPage = () => {
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const {
     register,
     handleSubmit,
@@ -37,24 +40,23 @@ const ContactPage = () => {
 
   const onSubmit = async (data: ContactPageFormValues) => {
     clearErrors("root");
-    if (!isEmailJsConfigured()) {
-      setError("root", {
-        message:
-          "Email is not set up yet. Add EmailJS keys to .env.local (see .env.example).",
-      });
-      return;
-    }
+    const payload = {
+      formType: "Contact page",
+      fullName: data.name,
+      userEmail: data.email,
+      company: data.company,
+      mobile: data.mobile,
+      country: data.country,
+      message: data.message,
+    };
     try {
-      await sendWebsiteFormEmail({
-        formType: "Contact page",
-        fullName: data.name,
-        userEmail: data.email,
-        company: data.company,
-        mobile: data.mobile,
-        country: data.country,
-        message: data.message,
-      });
+      if (isFormspreeConfigured()) {
+        await submitToFormspree("contact", payload);
+      } else {
+        await submitToTempCapture(payload);
+      }
       reset();
+      setShowSuccessPopup(true);
     } catch (err) {
       setError("root", {
         message:
@@ -140,9 +142,7 @@ const ContactPage = () => {
                   id="company"
                   autoComplete="organization"
                   aria-invalid={!!errors.company}
-                  aria-describedby={
-                    errors.company ? "company-err" : undefined
-                  }
+                  aria-describedby={errors.company ? "company-err" : undefined}
                   className={inputClass(!!errors.company)}
                   {...register("company")}
                 />
@@ -160,9 +160,7 @@ const ContactPage = () => {
                   id="mobile"
                   autoComplete="tel"
                   aria-invalid={!!errors.mobile}
-                  aria-describedby={
-                    errors.mobile ? "mobile-err" : undefined
-                  }
+                  aria-describedby={errors.mobile ? "mobile-err" : undefined}
                   className={inputClass(!!errors.mobile)}
                   {...register("mobile")}
                 />
@@ -179,9 +177,7 @@ const ContactPage = () => {
                 id="country"
                 autoComplete="country-name"
                 aria-invalid={!!errors.country}
-                aria-describedby={
-                  errors.country ? "country-err" : undefined
-                }
+                aria-describedby={errors.country ? "country-err" : undefined}
                 className={inputClass(!!errors.country)}
                 {...register("country")}
               />
@@ -196,9 +192,7 @@ const ContactPage = () => {
                 id="message"
                 rows={4}
                 aria-invalid={!!errors.message}
-                aria-describedby={
-                  errors.message ? "message-err" : undefined
-                }
+                aria-describedby={errors.message ? "message-err" : undefined}
                 className={`${inputClass(!!errors.message)} resize-none`}
                 {...register("message")}
               />
@@ -217,6 +211,11 @@ const ContactPage = () => {
       </main>
 
       <Footer />
+
+      <SuccessPopup
+        isOpen={showSuccessPopup}
+        onClose={() => setShowSuccessPopup(false)}
+      />
     </div>
   );
 };

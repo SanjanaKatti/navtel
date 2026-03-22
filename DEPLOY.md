@@ -38,24 +38,17 @@ ssh-keygen -t ed25519 -C "github-deploy" -f ~/.ssh/navtel_deploy -N ""
 - CloudPanel Node site: `/home/navtelecom-iot/htdocs/navtelecom-iot.com`
 - Manual deploy: `/var/www/navtel`
 
-### 4. Ensure `.env.local` exists on the server
+### 4. Configure Formspree (no .env needed)
 
-The server needs EmailJS keys. SSH in and create:
+Forms use [Formspree](https://formspree.io) — free tier, 50 submissions/month. No API keys or `.env.local` required.
 
-```bash
-cd $DEPLOY_PATH  # your actual path
-nano .env.local
-```
+1. Sign up at https://formspree.io
+2. Create 3 forms: Contact, Newsletter, Sales Inquiry
+3. For each form, set the recipient email (where submissions are sent)
+4. Copy each form ID from the endpoint URL (e.g. from `https://formspree.io/f/xyzk8abd` use `xyzk8abd`)
+5. Edit `lib/formspree-config.ts` and paste the form IDs
 
-Add:
-
-```
-NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=...
-NEXT_PUBLIC_EMAILJS_SERVICE_ID=...
-NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=...
-```
-
-`.env.local` is gitignored, so it won’t be overwritten by `git pull`.
+You can remove `.env.local` if it only contained EmailJS keys — forms no longer need it.
 
 ### 5. PM2 process name
 
