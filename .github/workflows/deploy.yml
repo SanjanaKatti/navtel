@@ -18,10 +18,10 @@ jobs:
           port: 22
           script: |
             set -e
-            cd ${{ secrets.DEPLOY_PATH }}
+            cd ${{ secrets.DEPLOY_PATH }} || { echo "ERROR: DEPLOY_PATH does not exist"; exit 1; }
             git fetch origin
             git reset --hard origin/main
-            npm ci
+            npm install
             npm run build
             pm2 restart navtel || pm2 start "npm run start -- --port 3000" --name navtel
             pm2 save
