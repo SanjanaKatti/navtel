@@ -25,5 +25,6 @@ jobs:
             git reset --hard origin/main
             npm install
             npm run build
+            chown -R navtelecom-iot:navtelecom-iot . || true
             pm2 restart navtel || pm2 start "npm run start -- --port 3000" --name navtel
             pm2 save
