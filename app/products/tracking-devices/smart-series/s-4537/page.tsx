@@ -278,6 +278,7 @@ const S4537Page = () => {
             connectivity: "4g",
             specs: [],
             buttonText: "Download",
+            href: "https://drive.google.com/uc?export=download&id=1Qpcet3z2HykdX_K2KG0V7CGgLqUhx9pt",
           },
           {
             name: "Knowledge Base",

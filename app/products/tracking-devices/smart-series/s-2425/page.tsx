@@ -265,6 +265,7 @@ const S2425Page = () => {
             connectivity: "2g",
             specs: [],
             buttonText: "Download",
+            href: "https://drive.google.com/uc?export=download&id=15S05VeYzxJjh-2JCD0TQloCpS3knxEkw",
           },
           {
             name: "Knowledge Base",

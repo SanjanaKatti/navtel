@@ -306,6 +306,7 @@ const S2013Page = () => {
               connectivity: "2g",
               specs: [],
               buttonText: "Download",
+              href: "https://drive.google.com/uc?export=download&id=1nTZRxND-qWPxjG7Yyz4AYHFUir4_VOyH",
             },
             {
               name: "Knowledge Base",

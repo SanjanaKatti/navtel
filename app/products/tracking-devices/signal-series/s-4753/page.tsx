@@ -289,6 +289,7 @@ const S4753Page = () => {
             connectivity: "4g",
             specs: [],
             buttonText: "Download",
+            href: "https://drive.google.com/uc?export=download&id=1wB3hr_AvQl9hJNSi6i-mxVY-DY6NHLxT",
           },
           {
             name: "Knowledge Base",

@@ -274,8 +274,7 @@ const S2010Page = () => {
               connectivity: "2g",
               specs: [],
               buttonText: "Download",
-              href: "/brochures/START-s-2010.pdf",
-              downloadFileName: "START-s-2010.pdf",
+              href: "https://drive.google.com/uc?export=download&id=1_bxosHKkqUoWHBZKvpe_DGlCrxLlVGhS",
             },
             {
               name: "Knowledge Base",

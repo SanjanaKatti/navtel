@@ -60,7 +60,7 @@ const SoftwareSolutionsPage = () => {
     <div className="min-h-screen bg-white font-sans antialiased text-brand-navy">
       <Navbar />
 
-      <main className="pt-20">
+      <main className="pt-20 overflow-x-hidden">
         <section className="relative min-h-[65dvh] md:h-80 lg:h-96 flex items-center max-lg:items-start overflow-hidden software-solutions-hero-background">
           <LayoutContainer>
             <div className="text-center max-w-3xl mx-auto z-10 max-lg:pt-24">
