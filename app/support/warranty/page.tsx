@@ -23,15 +23,17 @@ export default function WarrantyPage() {
         <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-start overflow-hidden product-background-image bg-cover bg-center warranty-hero-background">
           <div className="absolute inset-0 bg-white/30 z-[1]" aria-hidden />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-16 z-10 w-full relative text-left">
-            <div className="space-y-6 max-w-xl">
+            <div className="space-y-6 max-w-xl lg:max-w-md">
               <p className="text-sm font-bold tracking-[0.3em] uppercase text-brand-navy">
-                NAVTELECOM
+                RELIABLE COVERAGE FOR NAVTELECOM DEVICES
               </p>
               <h1 className="text-5xl md:text-6xl font-black leading-tight text-brand-navy">
-                Limited
-                <br />
-                Warranty
+                Limited Warranty
               </h1>
+              <p className="text-body-lg text-brand-navy">
+                Advanced warranty terms, clear coverage conditions, and a
+                straightforward service process for all Navtelecom devices.
+              </p>
             </div>
           </div>
         </section>

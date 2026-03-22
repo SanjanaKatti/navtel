@@ -63,14 +63,6 @@ const S2011Page = () => {
                 aria-hidden
               />
 
-              {/* Right Big Text - hidden on mobile/tablet to avoid overlap */}
-              <div className="hidden lg:block lg:text-right">
-                <h2 className="text-display mr-10">
-                  <span className="text-brand-primary">2G</span>
-                  <br />
-                  GSM
-                </h2>
-              </div>
             </div>
           </div>
         </section>

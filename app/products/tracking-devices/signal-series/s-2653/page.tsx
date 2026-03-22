@@ -15,7 +15,7 @@ const S2653Page = () => {
       <main className="pt-20">
       <section className="relative min-h-[calc(100dvh-5rem)] overflow-hidden flex items-start lg:items-center bg-[#EFEFEF] product-background-image signal-device-hero-background">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full w-full">
-          <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-start lg:items-center py-8 sm:py-12 md:py-20">
+          <div className="grid lg:grid-cols-[1fr_1.5fr] gap-12 items-start lg:items-center py-8 sm:py-12 md:py-20">
             <div className="space-y-8 ml-0 lg:ml-10">
               <div>
                 <h1 className="text-h1">
@@ -40,13 +40,6 @@ const S2653Page = () => {
                 </button>
             </div>
             <div className="ml-0 lg:ml-10 w-full h-[clamp(12rem,36vw,28rem)]" />
-            <div className="lg:text-right">
-              <h2 className="text-display mr-10">
-                <span className="text-brand-primary">2G</span>
-                <br />
-                GSM
-              </h2>
-            </div>
           </div>
         </div>
       </section>

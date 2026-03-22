@@ -65,7 +65,6 @@ const S2010Page = () => {
                 aria-hidden
               />
 
-              {/* Right Big Text - hidden on mobile/tablet to avoid overlap */}
             </div>
           </div>
         </section>
