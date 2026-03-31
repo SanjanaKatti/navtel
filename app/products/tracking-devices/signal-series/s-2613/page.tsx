@@ -59,7 +59,7 @@ const S2613Page = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                className="w-8 h-8"
+                className="w-10 h-10"
               >
                 <rect x="4" y="6" width="16" height="12" rx="2" />
                 <circle cx="8" cy="10" r="0.5" fill="currentColor" />
@@ -72,7 +72,7 @@ const S2613Page = () => {
             title: "BLE Available",
             sub: "Wireless. Effortless.",
             desc: "Seamlessly connect any BLE sensors to your tracker.",
-            icon: <Bluetooth size={32} weight="light" />,
+            icon: <Bluetooth size={40} weight="light" />,
           },
           {
             title: "5 Input Lines",
@@ -84,7 +84,7 @@ const S2613Page = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                className="w-8 h-8"
+                className="w-10 h-10"
               >
                 <rect x="4" y="8" width="14" height="8" rx="1" />
                 <path d="M18 12h2" strokeLinecap="round" />
@@ -101,7 +101,7 @@ const S2613Page = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                className="w-8 h-8"
+                className="w-10 h-10"
               >
                 <path d="M6 12h12" strokeLinecap="round" />
                 <path d="M2 12h2" strokeLinecap="round" />
@@ -113,13 +113,13 @@ const S2613Page = () => {
             title: "Custom Algorithm",
             sub: "Smart triggers. Smarter fleets.",
             desc: "Create your own logic inside the device.",
-            icon: <Code size={32} weight="light" />,
+            icon: <Code size={40} weight="light" />,
           },
           {
             title: "Two-Way Communication",
             sub: "Stay connected. Act faster.",
             desc: "Exchange instructions with drivers instantly.",
-            icon: <GlobeSimple size={32} weight="light" />,
+            icon: <GlobeSimple size={40} weight="light" />,
           },
         ]}
       />

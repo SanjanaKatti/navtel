@@ -83,7 +83,7 @@ const S2013Page = () => {
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="1.5"
-                    className="w-8 h-8"
+                    className="w-10 h-10"
                   >
                     <rect x="4" y="6" width="16" height="12" rx="2" />
                     <circle cx="8" cy="10" r="0.5" fill="currentColor" />
@@ -96,13 +96,13 @@ const S2013Page = () => {
                 title: "BLE Available",
                 sub: "Wireless. Effortless.",
                 desc: "Seamlessly connect BLE sensors to your tracker.",
-                icon: <Bluetooth size={32} weight="light" />,
+                icon: <Bluetooth size={40} weight="light" />,
               },
               {
                 title: "Ultra-Compact Design",
                 sub: "Install anywhere. Stay invisible.",
                 desc: "Tiny size allows discreet installation even in tight or unexpected places.",
-                icon: <ArrowsIn size={32} weight="light" />,
+                icon: <ArrowsIn size={40} weight="light" />,
               },
               {
                 title: "USB Type-C",
@@ -114,7 +114,7 @@ const S2013Page = () => {
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="1.5"
-                    className="w-8 h-8"
+                    className="w-10 h-10"
                   >
                     <rect x="4" y="10" width="16" height="4" rx="2" />
                     <circle cx="12" cy="12" r="1" fill="currentColor" />
@@ -125,13 +125,13 @@ const S2013Page = () => {
                 title: "Engine Hours Calculation",
                 sub: "Smart logic. Clear insights.",
                 desc: "Track engine runtime based on internal algorithms — no external sensors needed.",
-                icon: <ClockCounterClockwise size={32} weight="light" />,
+                icon: <ClockCounterClockwise size={40} weight="light" />,
               },
               {
                 title: "Remote Control",
                 sub: "Configure anytime. From anywhere.",
                 desc: "Remote setup made easy.",
-                icon: <GlobeSimple size={32} weight="light" />,
+                icon: <GlobeSimple size={40} weight="light" />,
               },
             ]}
           />

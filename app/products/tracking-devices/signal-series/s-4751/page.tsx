@@ -59,7 +59,7 @@ const S4751Page = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                className="w-8 h-8"
+                className="w-10 h-10"
               >
                 <rect x="4" y="6" width="16" height="12" rx="2" />
                 <circle cx="8" cy="10" r="0.5" fill="currentColor" />
@@ -72,7 +72,7 @@ const S4751Page = () => {
             title: "BLE Available",
             sub: "Wireless. Effortless.",
             desc: "Seamlessly connect any BLE sensors to your tracker.",
-            icon: <Bluetooth size={32} weight="light" />,
+            icon: <Bluetooth size={40} weight="light" />,
           },
           {
             title: "1-Wire Sensors & Driver ID",
@@ -84,7 +84,7 @@ const S4751Page = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                className="w-8 h-8"
+                className="w-10 h-10"
               >
                 <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
               </svg>
@@ -94,19 +94,19 @@ const S4751Page = () => {
             title: "CAN Connected",
             sub: "Vehicle data. No delay.",
             desc: "Fuel, RPM, mileage — straight from the bus.",
-            icon: <Cpu size={32} weight="light" />,
+            icon: <Cpu size={40} weight="light" />,
           },
           {
             title: "Custom Algorithm",
             sub: "Smart triggers. Smarter fleets.",
             desc: "Create your own logic inside the device.",
-            icon: <Code size={32} weight="light" />,
+            icon: <Code size={40} weight="light" />,
           },
           {
             title: "Two-Way Communication",
             sub: "Stay connected. Act faster.",
             desc: "Exchange instructions with drivers instantly.",
-            icon: <GlobeSimple size={32} weight="light" />,
+            icon: <GlobeSimple size={40} weight="light" />,
           },
         ]}
       />

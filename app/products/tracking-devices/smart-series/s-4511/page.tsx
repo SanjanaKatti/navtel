@@ -65,7 +65,7 @@ const S4511Page = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                className="w-8 h-8"
+                className="w-10 h-10"
               >
                 <rect x="4" y="8" width="14" height="8" rx="1" />
                 <path d="M18 12h2" strokeLinecap="round" />
@@ -76,31 +76,31 @@ const S4511Page = () => {
             title: "BLE Available",
             sub: "Wireless. Effortless.",
             desc: "Seamlessly connect any BLE sensors to your tracker.",
-            icon: <Bluetooth size={32} weight="light" />,
+            icon: <Bluetooth size={40} weight="light" />,
           },
           {
             title: "Engine Hours Calculation",
             sub: "Smart logic. Clear insights.",
             desc: "Track engine runtime based on internal algorithms — no external sensors needed.",
-            icon: <ClockCounterClockwise size={32} weight="light" />,
+            icon: <ClockCounterClockwise size={40} weight="light" />,
           },
           {
             title: "Eco Driving",
             sub: "Less fuel. Less risk.",
             desc: "Monitor driving style and reduce costs fleet-wide.",
-            icon: <Cpu size={32} weight="light" />,
+            icon: <Cpu size={40} weight="light" />,
           },
           {
             title: "Custom Algorithm",
             sub: "Smart triggers. Smarter fleets.",
             desc: "Create your own logic inside the device.",
-            icon: <Code size={32} weight="light" />,
+            icon: <Code size={40} weight="light" />,
           },
           {
             title: "Remote Control",
             sub: "Configure anytime. From anywhere.",
             desc: "Remote setup made easy.",
-            icon: <GlobeSimple size={32} weight="light" />,
+            icon: <GlobeSimple size={40} weight="light" />,
           },
         ]}
       />

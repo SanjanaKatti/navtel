@@ -62,7 +62,7 @@ const S2423Page = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                className="w-8 h-8"
+                className="w-10 h-10"
               >
                 <rect x="4" y="6" width="16" height="12" rx="2" />
                 <circle cx="8" cy="10" r="0.5" fill="currentColor" />
@@ -75,7 +75,7 @@ const S2423Page = () => {
             title: "BLE Available",
             sub: "Wireless. Effortless.",
             desc: "Seamlessly connect any BLE sensors to your tracker.",
-            icon: <Bluetooth size={32} weight="light" />,
+            icon: <Bluetooth size={40} weight="light" />,
           },
           {
             title: "1-Wire Sensors & Driver ID",
@@ -87,7 +87,7 @@ const S2423Page = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                className="w-8 h-8"
+                className="w-10 h-10"
               >
                 <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
               </svg>
@@ -97,19 +97,19 @@ const S2423Page = () => {
             title: "Eco Driving",
             sub: "Less fuel. Less risk.",
             desc: "Monitor driving style and reduce costs fleet-wide.",
-            icon: <Cpu size={32} weight="light" />,
+            icon: <Cpu size={40} weight="light" />,
           },
           {
             title: "Engine Hours and RPM Calculation",
             sub: "Smart logic. Clear insights.",
             desc: "Track engine runtime based on internal algorithms — no external sensors needed.",
-            icon: <ClockCounterClockwise size={32} weight="light" />,
+            icon: <ClockCounterClockwise size={40} weight="light" />,
           },
           {
             title: "Remote Control",
             sub: "Configure anytime. From anywhere.",
             desc: "Remote setup made easy.",
-            icon: <GlobeSimple size={32} weight="light" />,
+            icon: <GlobeSimple size={40} weight="light" />,
           },
         ]}
       />
