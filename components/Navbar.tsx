@@ -4,11 +4,23 @@ import Link from "next/link";
 import Image from "next/image";
 import LayoutContainer from "./LayoutContainer";
 
-const Navbar = () => {
+type NavbarProps = {
+  /** Matches pale page background; removes bottom border for a seamless top area */
+  variant?: "default" | "soft";
+};
+
+const Navbar = ({ variant = "default" }: NavbarProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const soft = variant === "soft";
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
+    <nav
+      className={
+        soft
+          ? "fixed top-0 left-0 right-0 z-50 bg-brand-light-3"
+          : "fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200"
+      }
+    >
       <LayoutContainer>
         <div className="flex items-center justify-between h-20 min-w-0 gap-4">
           {/* Logo */}
@@ -230,7 +242,13 @@ const Navbar = () => {
       </LayoutContainer>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden border-t border-gray-200 bg-white">
+        <div
+          className={
+            soft
+              ? "lg:hidden border-t border-brand-light-1 bg-brand-light-3"
+              : "lg:hidden border-t border-gray-200 bg-white"
+          }
+        >
           <LayoutContainer className="py-4">
             <div className="flex flex-col gap-1">
               <Link

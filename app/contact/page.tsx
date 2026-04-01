@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { FieldError } from "@/components/forms/FieldError";
 import {
   contactPageSchema,
@@ -75,10 +74,10 @@ const ContactPage = () => {
     }`;
 
   return (
-    <div className="min-h-screen bg-white font-sans antialiased text-brand-navy overflow-x-hidden">
-      <Navbar />
+    <div className="min-h-screen bg-brand-light-3 font-sans antialiased text-brand-navy overflow-x-hidden">
+      <Navbar variant="soft" />
 
-      <main className="flex flex-col items-center justify-center bg-brand-light-3 min-h-[calc(100dvh-5rem)] pb-8">
+      <main className="flex flex-col items-center justify-center min-h-[calc(100dvh-5rem)] pb-8">
         {/* Spacer to push content below fixed Navbar */}
         <div className="pt-20 my-8" />
         <div className="relative z-10 w-full max-w-3xl p-8 md:p-12 bg-white rounded-[3rem] shadow-2xl shadow-brand-navy/10 border border-white">
@@ -209,8 +208,6 @@ const ContactPage = () => {
           </form>
         </div>
       </main>
-
-      <Footer />
 
       <SuccessPopup
         isOpen={showSuccessPopup}

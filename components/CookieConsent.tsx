@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Cookie, X } from "phosphor-react";
 import { useEffect, useState } from "react";
 import {
@@ -11,6 +12,10 @@ import {
 } from "@/lib/cookie-consent";
 
 export function CookieConsent() {
+  const pathname = usePathname();
+  /** Business card pages (/contact/Denis_Shulkov, etc.) — no cookie chrome */
+  const hideOnBusinessContactPages = pathname.startsWith("/contact/");
+
   const [open, setOpen] = useState(false);
   const [stored, setStored] = useState<CookieConsentValue | null>(null);
 
@@ -33,6 +38,10 @@ export function CookieConsent() {
     dispatchCookieConsentChange(value);
     setOpen(false);
   };
+
+  if (hideOnBusinessContactPages) {
+    return null;
+  }
 
   return (
     <>
