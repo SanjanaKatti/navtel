@@ -66,3 +66,51 @@ The workflow runs `pm2 restart navtel`. If your process has a different name, ed
 ## Check deploy status
 
 **GitHub** → repo → **Actions** tab → latest workflow run.
+
+---
+
+## Troubleshooting: `ChunkLoadError`, 500 on `/_next/static/*.js` or `*.css`
+
+The browser loads HTML from one build but the hashed files under `/_next/static/` are missing or the server returns **500** for them. The page looks broken or blank.
+
+**Common causes**
+
+1. **Build failed part-way** (e.g. `ENOTEMPTY` while removing `.next/server/app/contact`) so `next start` still runs with an incomplete `.next` folder.
+2. **App was running during `npm run build`**, so files in `.next` were locked or read while being replaced.
+3. **Stale browser cache** holding old HTML that references deleted chunk names.
+
+**Fix on the server (manual deploy / SSH)**
+
+Run as the user that owns the app (often `navtelecom-iot` or `root`):
+
+```bash
+cd /home/navtelecom-iot/htdocs/navtelecom-iot.com   # your DEPLOY_PATH
+
+pm2 stop navtel
+# free the port if needed
+fuser -k 3000/tcp 2>/dev/null || true
+sleep 2
+
+rm -rf .next node_modules/.cache
+npm install
+npm run build
+
+pm2 delete navtel 2>/dev/null || true
+pm2 start npm --name navtel -- run start -- --port 3000
+pm2 save
+```
+
+If the build still errors with `ENOTEMPTY` on `.next`, ensure no `node` process is using that directory (`pm2 list`, `ps aux | grep node`), then `rm -rf .next` again and rebuild.
+
+**After a successful deploy**
+
+- Hard-refresh the site (or use a private window) so cached HTML is not pointing at old chunk hashes.
+- If you use **nginx** in front of Node, confirm all requests (including `/_next/static/`) are proxied to the Next server, not served from an old folder.
+
+**Node / Next version**
+
+The app targets **Next 16** (see `package.json`). After `git pull`, always run `npm install` so the server’s `node_modules` matches the lockfile. A server stuck on an old Next major can behave oddly.
+
+**PM2 and env vars**
+
+If you change `.env` on the server, restart with: `pm2 restart navtel --update-env`.

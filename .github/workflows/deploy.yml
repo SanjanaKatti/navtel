@@ -23,12 +23,16 @@ jobs:
             git config --global --add safe.directory "$DEPLOY_PATH"
             git fetch origin
             git reset --hard origin/main
+            # Stop the running app before replacing .next (avoids file locks and
+            # serving half-written chunks — fixes ChunkLoadError / 500 on _next/static).
+            pm2 stop navtel 2>/dev/null || true
+            fuser -k 3000/tcp 2>/dev/null || true
+            sleep 2
             rm -rf .next node_modules/.cache
             npm install
             npm run build
             chown -R navtelecom-iot:navtelecom-iot . || true
             pm2 delete navtel 2>/dev/null || true
-            fuser -k 3000/tcp 2>/dev/null || true
-            sleep 2
+            sleep 1
             cd "$DEPLOY_PATH" && pm2 start npm --name navtel -- run start -- --port 3000
             pm2 save
