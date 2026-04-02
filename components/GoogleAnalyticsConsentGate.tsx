@@ -3,10 +3,8 @@
 import Script from "next/script";
 import { Suspense, useSyncExternalStore } from "react";
 import { GoogleAnalyticsPageView } from "@/components/GoogleAnalyticsPageView";
+import { GA_MEASUREMENT_ID } from "@/lib/ga-measurement-id";
 import { getStoredConsent } from "@/lib/cookie-consent";
-
-const GA_MEASUREMENT_ID =
-  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "G-8PTL0CXNY6";
 
 function subscribe(onStoreChange: () => void) {
   window.addEventListener("navtel:cookie-consent", onStoreChange);
@@ -45,6 +43,7 @@ export function GoogleAnalyticsConsentGate() {
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
         strategy="afterInteractive"
       />
+      {/* Mirrors Google’s inline snippet after gtag/js loads */}
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
