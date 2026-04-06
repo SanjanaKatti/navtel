@@ -15,10 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "Navtelecom | GPS Tracking & Telematics Solutions",
-    template: "%s | Navtelecom",
-  },
+  title: "Navtelecom",
   description:
     "GPS Trackers for fleet management – Reliable tracking from Navtelecom",
   keywords: [
