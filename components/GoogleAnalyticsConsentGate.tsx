@@ -1,40 +1,35 @@
 "use client";
 
 import Script from "next/script";
-import { Suspense, useSyncExternalStore } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { GoogleAnalyticsPageView } from "@/components/GoogleAnalyticsPageView";
 import { GA_MEASUREMENT_ID } from "@/lib/ga-measurement-id";
 import { getStoredConsent } from "@/lib/cookie-consent";
 
-function subscribe(onStoreChange: () => void) {
-  window.addEventListener("navtel:cookie-consent", onStoreChange);
-  window.addEventListener("storage", onStoreChange);
-  return () => {
-    window.removeEventListener("navtel:cookie-consent", onStoreChange);
-    window.removeEventListener("storage", onStoreChange);
-  };
-}
-
-function getSnapshot(): boolean {
-  return getStoredConsent() === "accepted";
-}
-
-function getServerSnapshot(): boolean {
-  return false;
-}
-
 /**
  * Loads gtag only after the user accepts analytics cookies (see CookieConsent).
- * Uses useSyncExternalStore so already-accepted consent is picked up on the
- * first client render without waiting for useEffect.
+ *
+ * Consent is applied after mount (useEffect) so the first client render matches
+ * the server (no scripts). Reading localStorage during the first render would
+ * diverge from SSR and can cause hydration failures on production.
  */
 export function GoogleAnalyticsConsentGate() {
-  const allowAnalytics = useSyncExternalStore(
-    subscribe,
-    getSnapshot,
-    getServerSnapshot,
-  );
+  const [allowAnalytics, setAllowAnalytics] = useState(false);
 
+  useEffect(() => {
+    const sync = () => {
+      setAllowAnalytics(getStoredConsent() === "accepted");
+    };
+    sync();
+    window.addEventListener("navtel:cookie-consent", sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      window.removeEventListener("navtel:cookie-consent", sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, []);
+
+  if (!GA_MEASUREMENT_ID) return null;
   if (!allowAnalytics) return null;
 
   return (

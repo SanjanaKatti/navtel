@@ -42,16 +42,9 @@ const AllDevicesPage = () => {
     "S-4013": "/Navtelecom/start s-4013_1800x1350.png",
   };
 
-  const [selectedDevices, setSelectedDevices] = useState<Device[]>(() => {
-    if (typeof window === "undefined") return [];
-    const stored = localStorage.getItem("compareDevices");
-    if (!stored) return [];
-    try {
-      return JSON.parse(stored) as Device[];
-    } catch {
-      return [];
-    }
-  });
+  const [selectedDevices, setSelectedDevices] = useState<Device[]>([]);
+  /** Avoid writing [] to localStorage before we have read the saved compare list (client-only). */
+  const [compareStorageReady, setCompareStorageReady] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const scrollPositionRef = useRef<number | null>(null);
 
@@ -594,8 +587,22 @@ const AllDevicesPage = () => {
   };
 
   useEffect(() => {
+    try {
+      const stored = localStorage.getItem("compareDevices");
+      if (stored) {
+        const parsed = JSON.parse(stored) as Device[];
+        setSelectedDevices(parsed);
+      }
+    } catch {
+      // ignore invalid JSON
+    }
+    setCompareStorageReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!compareStorageReady || typeof window === "undefined") return;
     localStorage.setItem("compareDevices", JSON.stringify(selectedDevices));
-  }, [selectedDevices]);
+  }, [selectedDevices, compareStorageReady]);
 
   useLayoutEffect(() => {
     const saved = scrollPositionRef.current;
