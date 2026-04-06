@@ -17,6 +17,7 @@ interface Product3DVisualProps {
   mode?: ViewerMode;
   className?: string;
   baseImage: string;
+  fallbackSrc?: string;
   shadowImage?: string;
   highlightImage?: string;
   layers?: VisualLayer[];
@@ -76,6 +77,7 @@ const Product3DVisual: React.FC<Product3DVisualProps> = ({
   modelSrc,
   interactive = true,
   maxTiltDeg = 12,
+  fallbackSrc,
 }) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const frameRef = useRef<number | null>(null);
@@ -95,6 +97,10 @@ const Product3DVisual: React.FC<Product3DVisualProps> = ({
     applyPreference();
     mediaQuery.addEventListener("change", applyPreference);
     return () => mediaQuery.removeEventListener("change", applyPreference);
+  }, []);
+
+  useEffect(() => {
+    setIsLoaded(true);
   }, []);
 
   useEffect(() => {
@@ -140,7 +146,7 @@ const Product3DVisual: React.FC<Product3DVisualProps> = ({
   const fallbackImage = (
     <div className="relative h-full w-full">
       <Image
-        src={posterImage || baseImage}
+        src={fallbackSrc || posterImage || baseImage}
         alt={alt}
         fill
         sizes="(min-width: 1280px) 34vw, (min-width: 768px) 44vw, 88vw"
@@ -223,7 +229,6 @@ const Product3DVisual: React.FC<Product3DVisualProps> = ({
               fill
               sizes="(min-width: 1280px) 34vw, (min-width: 768px) 44vw, 88vw"
               className="object-contain object-center pointer-events-none"
-              onLoad={() => setIsLoaded(true)}
               priority
             />
           </div>
