@@ -42,8 +42,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <GoogleAnalyticsConsentGate />
-        <CookieConsent />
+        {/* <GoogleAnalyticsConsentGate /> */}
+        {/* <CookieConsent /> */}
       </body>
     </html>
   );

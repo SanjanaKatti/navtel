@@ -166,7 +166,7 @@ const AllDevicesPage = () => {
         battery: "Battery 130 mAh",
       },
     },
-    // SMART Series (Advanced)
+    // SMART Series (Basic)
     {
       name: "S-2437",
       category: "Advanced",
@@ -229,7 +229,7 @@ const AllDevicesPage = () => {
     },
     {
       name: "S-2421",
-      category: "Advanced",
+      category: "Basic",
       series: "SMART",
       connectivity: "2G",
       sim: "Single SIM",
@@ -249,7 +249,7 @@ const AllDevicesPage = () => {
     },
     {
       name: "S-2425",
-      category: "Advanced",
+      category: "Basic",
       series: "SMART",
       connectivity: "2G",
       sim: "Single SIM",
@@ -263,13 +263,13 @@ const AllDevicesPage = () => {
       cardDisplay: {
         connectivity: "2G",
         inputsOutputs: "3 Universal Inputs, 2 Outputs",
-        interfaces: "1-Wire, RS-485, RS-232, BLE",
+        interfaces: "1-Wire, RS-485, RS-232, MODBUS RTU, BLE",
         battery: "Battery 380 mAh",
       },
     },
     {
       name: "S-4513",
-      category: "Advanced",
+      category: "Basic",
       series: "SMART",
       connectivity: "4G / 2G",
       sim: "Dual SIM",
@@ -289,7 +289,7 @@ const AllDevicesPage = () => {
     },
     {
       name: "S-4511",
-      category: "Advanced",
+      category: "Basic",
       series: "SMART",
       connectivity: "4G / 2G",
       sim: "Single SIM",
@@ -390,7 +390,7 @@ const AllDevicesPage = () => {
     },
     {
       name: "S-2613",
-      category: "Professional",
+      category: "Basic",
       series: "SIGNAL",
       connectivity: "2G",
       sim: "Single SIM",
@@ -486,37 +486,28 @@ const AllDevicesPage = () => {
     battery: ["—", "130 mAh", "380 mAh", "800 mAh"],
   };
 
-  const saveScrollAnd = (fn: () => void) => {
-    scrollPositionRef.current = window.scrollY;
-    fn();
-  };
-
   const toggleFilter = (key: keyof typeof filters, value: string) => {
-    saveScrollAnd(() => {
-      setFilters((prev) => ({
-        ...prev,
-        [key]: prev[key].includes(value)
-          ? prev[key].filter((v) => v !== value)
-          : [...prev[key], value],
-      }));
-    });
+    setFilters((prev) => ({
+      ...prev,
+      [key]: prev[key].includes(value)
+        ? prev[key].filter((v) => v !== value)
+        : [...prev[key], value],
+    }));
   };
 
   const resetFilters = () => {
-    saveScrollAnd(() => {
-      setFilters({
-        category: [],
-        sim: [],
-        interfaces: [],
-        bluetooth: [],
-        inputs: [],
-        outputs: [],
-        antennas: [],
-        battery: [],
-      });
-      setQuickSeries("all");
-      setQuickNetwork("all");
+    setFilters({
+      category: [],
+      sim: [],
+      interfaces: [],
+      bluetooth: [],
+      inputs: [],
+      outputs: [],
+      antennas: [],
+      battery: [],
     });
+    setQuickSeries("all");
+    setQuickNetwork("all");
   };
 
   const filteredDevices = allDevices.filter((device) => {
@@ -604,15 +595,6 @@ const AllDevicesPage = () => {
     localStorage.setItem("compareDevices", JSON.stringify(selectedDevices));
   }, [selectedDevices, compareStorageReady]);
 
-  useLayoutEffect(() => {
-    const saved = scrollPositionRef.current;
-    if (saved !== null) {
-      const maxScroll =
-        document.documentElement.scrollHeight - window.innerHeight;
-      window.scrollTo(0, Math.min(saved, Math.max(0, maxScroll)));
-      scrollPositionRef.current = null;
-    }
-  }, [filters, quickSeries, quickNetwork]);
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased text-brand-navy">
@@ -648,7 +630,7 @@ const AllDevicesPage = () => {
                   {["all", "start", "smart", "signal"].map((s) => (
                     <button
                       key={s}
-                      onClick={() => saveScrollAnd(() => setQuickSeries(s))}
+                      onClick={() => setQuickSeries(s)}
                       className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
                         quickSeries === s
                           ? "bg-brand-navy text-white shadow-md"
@@ -670,7 +652,7 @@ const AllDevicesPage = () => {
                   {["all", "2g", "4g"].map((n) => (
                     <button
                       key={n}
-                      onClick={() => saveScrollAnd(() => setQuickNetwork(n))}
+                      onClick={() => setQuickNetwork(n)}
                       className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
                         quickNetwork === n
                           ? "bg-brand-navy text-white shadow-md"
