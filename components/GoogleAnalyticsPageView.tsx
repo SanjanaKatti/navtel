@@ -34,7 +34,7 @@ export function GoogleAnalyticsPageView() {
 
     if (typeof window !== "undefined" && window.gtag) {
       window.gtag("config", GA_MEASUREMENT_ID, {
-        page_path: path,
+        page_path: path ?? '',
       });
     }
   }, [pathname, searchParams]);
