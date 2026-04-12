@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { CookieConsent } from "@/components/CookieConsent";
 import { GoogleAnalyticsConsentGate } from "@/components/GoogleAnalyticsConsentGate";
 import "./globals.css";
+import { WithChunkLoadProtection } from "@/components/ChunkLoadErrorBoundary";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,7 +42,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <WithChunkLoadProtection>{children}</WithChunkLoadProtection>
         <GoogleAnalyticsConsentGate />
         <CookieConsent />
       </body>
