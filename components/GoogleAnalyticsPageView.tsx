@@ -32,7 +32,7 @@ export function GoogleAnalyticsPageView() {
     const search = searchParams?.toString();
     const path = search ? `${pathname}?${search}` : pathname;
 
-    if (typeof window !== "undefined" && window.gtag) {
+    if (typeof window !== "undefined" && window.gtag && GA_MEASUREMENT_ID) {
       window.gtag("config", GA_MEASUREMENT_ID, {
         page_path: path ?? '',
       });
