@@ -16,7 +16,7 @@ const S2435Page = () => {
         <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-center bg-[#EFEFEF] product-background-image smart-device-hero-background">
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
             <div className="grid lg:grid-cols-[1fr_1.5fr] gap-12 items-center py-12 md:py-20">
-              <div className="space-y-8 ml-0 lg:ml-10">
+              <div className="space-y-8 max-w-md ml-0 lg:pr-10">
                 <div>
                   <h1 className="text-h1">
                     S-2435

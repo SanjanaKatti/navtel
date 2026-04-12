@@ -127,13 +127,12 @@ const S4513Page = () => {
             groupName: "Interfaces",
             items: [
               {
-                label: "Universal Inputs",
-                value: "3 (with overvoltage protection up to 200 V)",
+                label: "Digital Inputs",
+                value: "4 (with overvoltage protection up to 200 V)",
               },
               {
-                label: "Input Modes",
-                value:
-                  "Digital, Impulse, Frequency, Analog, or Tachometer (RPM)",
+                label: "Analog Inputs",
+                value: "1 (configurable as Digital, range 0–31 V)",
               },
               {
                 label: "Digital Outputs",

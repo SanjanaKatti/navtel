@@ -13,7 +13,7 @@ const deviceData = {
     series: "Start Series",
     connectivity: "2G",
     specs: {
-      "SIM Support": "Single SIM",
+      "SIM Type": "Single SIM",
       "Engine Hours": "Engine Hours",
       Bluetooth: "Bluetooth 4.0",
       "Eco Driving": false,
@@ -32,7 +32,7 @@ const deviceData = {
     series: "Start Series",
     connectivity: "2G",
     specs: {
-      "SIM Support": "Single SIM",
+      "SIM Type": "Single SIM",
       "Engine Hours": "Engine Hours",
       Bluetooth: "Bluetooth 4.0",
       "Eco Driving": false,
@@ -51,7 +51,7 @@ const deviceData = {
     series: "Start Series",
     connectivity: "2G",
     specs: {
-      "SIM Support": "Single SIM",
+      "SIM Type": "Single SIM",
       "Engine Hours": "Engine Hours",
       Bluetooth: "Bluetooth 4.0",
       "Eco Driving": true,
@@ -70,7 +70,7 @@ const deviceData = {
     series: "Start Series",
     connectivity: "4G",
     specs: {
-      "SIM Support": "Single SIM",
+      "SIM Type": "Single SIM",
       "Engine Hours": "Engine Hours",
       Bluetooth: "Bluetooth 4.0",
       "Eco Driving": false,
@@ -89,7 +89,7 @@ const deviceData = {
     series: "Start Series",
     connectivity: "4G",
     specs: {
-      "SIM Support": "Single SIM",
+      "SIM Type": "Single SIM",
       "Engine Hours": "Engine Hours",
       Bluetooth: "Bluetooth 4.0",
       "Eco Driving": true,
@@ -127,7 +127,7 @@ const deviceData = {
     series: "Smart Series",
     connectivity: "4G",
     specs: {
-      "SIM Support": "Single SIM",
+      "SIM Type": "Single SIM",
       "Engine Hours": "Engine Hours",
       Bluetooth: "Bluetooth 4.0 (v5.0 compatible)",
       "Eco Driving": false,
@@ -241,7 +241,7 @@ const deviceData = {
     series: "Smart Series",
     connectivity: "2G",
     specs: {
-      "SIM Support": "Single SIM",
+      "SIM Type": "Single SIM",
       "Engine Hours": "Engine Hours",
       Bluetooth: "Bluetooth 4.0",
       "Eco Driving": true,
@@ -317,7 +317,7 @@ const deviceData = {
     series: "Signal Series",
     connectivity: "2G",
     specs: {
-      "SIM Support": "Single SIM",
+      "SIM Type": "Single SIM",
       "Engine Hours": "Engine Hours",
       Bluetooth: "Bluetooth 4.0",
       "Eco Driving": false,
@@ -624,7 +624,9 @@ const ComparisonContent = () => {
                     <div className="space-y-4">
                       <div
                         className={`inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
-                          String(device.connectivity).toLowerCase().includes("2g")
+                          String(device.connectivity)
+                            .toLowerCase()
+                            .includes("2g")
                             ? "bg-gray-100 text-gray-600 border-gray-200"
                             : "bg-blue-100 text-blue-800 border-blue-200"
                         }`}

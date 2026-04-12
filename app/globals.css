@@ -272,23 +272,27 @@ a[class*="bg-color-neutral-dark-gray"]:hover {
 
 .smart-device-hero-background {
   background-image: url("/Navtelecom/smart_device 1080x1350.png") !important;
+  background-position: center right 25% !important; /* Adjust for smaller screens */
 }
 
 @media (min-width: 768px) {
   .smart-device-hero-background {
     background-image: url("/Navtelecom/smart_device 2048x1365.png") !important;
+    background-position: center right 15% !important; /* Adjust for tablet */
   }
 }
 
 @media (min-width: 1024px) {
   .smart-device-hero-background {
     background-image: url("/Navtelecom/smart_device 2560x1440.png") !important;
+    background-position: center right 5% !important; /* Adjust for desktop */
   }
 }
 
 @media (min-width: 1280px) {
   .smart-device-hero-background {
     background-image: url("/Navtelecom/smart_device 3840x1646.png") !important;
+    background-position: center right 0% !important; /* Original or slight adjustment */
   }
 }
 
