@@ -26,17 +26,30 @@ export function GoogleAnalyticsPageView() {
   useEffect(() => {
     if (skipFirst.current) {
       skipFirst.current = false;
+      console.log("[GA] GoogleAnalyticsPageView mounted. Skipping initial page view (handled by gtag config script).");
       return;
     }
 
     const search = searchParams?.toString();
     const path = search ? `${pathname}?${search}` : pathname;
 
-    if (typeof window !== "undefined" && window.gtag && GA_MEASUREMENT_ID) {
-      window.gtag("config", GA_MEASUREMENT_ID, {
-        page_path: path ?? '',
-      });
+    if (typeof window === "undefined") {
+      console.warn("[GA] Page view skipped: window is undefined (SSR context).");
+      return;
     }
+    if (!window.gtag) {
+      console.warn("[GA] Page view skipped: window.gtag is not defined. The gtag script may not have loaded yet.");
+      return;
+    }
+    if (!GA_MEASUREMENT_ID) {
+      console.warn("[GA] Page view skipped: GA_MEASUREMENT_ID is undefined.");
+      return;
+    }
+
+    console.log("[GA] Sending page_view for path:", path);
+    window.gtag("config", GA_MEASUREMENT_ID, {
+      page_path: path ?? '',
+    });
   }, [pathname, searchParams]);
 
   return null;

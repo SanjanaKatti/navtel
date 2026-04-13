@@ -18,7 +18,15 @@ export function GoogleAnalyticsConsentGate() {
 
   useEffect(() => {
     const sync = () => {
-      setAllowAnalytics(getStoredConsent() === "accepted");
+      const consent = getStoredConsent();
+      const allowed = consent === "accepted";
+      console.log(
+        "[GA] Consent sync — localStorage key =",
+        consent ?? "(null — no consent stored yet)",
+        "| allowAnalytics =",
+        allowed,
+      );
+      setAllowAnalytics(allowed);
     };
     sync();
     window.addEventListener("navtel:cookie-consent", sync);
@@ -29,8 +37,16 @@ export function GoogleAnalyticsConsentGate() {
     };
   }, []);
 
-  if (!GA_MEASUREMENT_ID) return null;
-  if (!allowAnalytics) return null;
+  if (!GA_MEASUREMENT_ID) {
+    console.warn("[GA] Blocked: GA_MEASUREMENT_ID is undefined. The env var NEXT_PUBLIC_GA_MEASUREMENT_ID was not set at build time.");
+    return null;
+  }
+  if (!allowAnalytics) {
+    console.log("[GA] Blocked: Cookie consent not accepted. GA scripts will not load until user accepts.");
+    return null;
+  }
+
+  console.log("[GA] Loading GA scripts with Measurement ID:", GA_MEASUREMENT_ID);
 
   return (
     <>
