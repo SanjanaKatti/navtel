@@ -8,11 +8,7 @@ import {
   contactPageSchema,
   type ContactPageFormValues,
 } from "@/lib/validation/form-schemas";
-import {
-  isFormspreeConfigured,
-  submitToFormspree,
-  submitToTempCapture,
-} from "@/lib/formspree/send-form";
+import { submitToBrevo } from "@/lib/formspree/send-form";
 import { SuccessPopup } from "@/components/forms/SuccessPopup";
 
 const ContactPage = () => {
@@ -49,11 +45,7 @@ const ContactPage = () => {
       message: data.message,
     };
     try {
-      if (isFormspreeConfigured()) {
-        await submitToFormspree("contact", payload);
-      } else {
-        await submitToTempCapture(payload);
-      }
+      await submitToBrevo(payload);
       reset();
       setShowSuccessPopup(true);
     } catch (err) {

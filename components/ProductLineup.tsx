@@ -12,11 +12,7 @@ import {
   type SalesInquiryFormValues,
 } from "@/lib/validation/form-schemas";
 import { SuccessPopup } from "@/components/forms/SuccessPopup";
-import {
-  isFormspreeConfigured,
-  submitToFormspree,
-  submitToTempCapture,
-} from "@/lib/formspree/send-form";
+import { submitToBrevo } from "@/lib/formspree/send-form";
 
 const products = [
   {
@@ -88,11 +84,7 @@ const ProductLineup = () => {
       message: data.message,
     };
     try {
-      if (isFormspreeConfigured()) {
-        await submitToFormspree("salesInquiry", payload);
-      } else {
-        await submitToTempCapture(payload);
-      }
+      await submitToBrevo(payload);
       reset();
       setIsModalOpen(false);
       setShowSuccessPopup(true);

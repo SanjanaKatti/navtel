@@ -89,7 +89,7 @@ const SoftwareKeyFeatures: React.FC<SoftwareKeyFeaturesProps> = ({
     <section className="pb-12 sm:py-16 md:py-20 lg:py-24 bg-white max-lg:pt-16">
       <LayoutContainer>
         <div className="text-center mb-8 sm:mb-10 lg:mb-12 px-1">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black text-brand-navy mb-3">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-brand-navy mb-3">
             {heading}
           </h2>
           {description && (

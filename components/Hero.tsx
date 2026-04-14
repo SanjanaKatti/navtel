@@ -177,7 +177,7 @@ const Hero = () => {
               }`}
             >
               <h1
-                className={`leading-[0.95] font-black tracking-tight uppercase ${
+                className={`leading-[0.95] font-extrabold tracking-tight uppercase ${
                   isComplexEvents
                     ? "text-[clamp(1.4rem,4vw,5.2rem)] text-white"
                     : isStart2011

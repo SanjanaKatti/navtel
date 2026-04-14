@@ -86,7 +86,7 @@ const SoftwareHero: React.FC<SoftwareHeroProps> = ({
               className={center ? "max-lg:w-full max-lg:px-1 max-lg:pt-32" : ""}
             >
               <h1
-                className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.08] sm:leading-tight mb-3 sm:mb-4 ${textCls} text-pretty ${shadowTitle}`}
+                className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.08] sm:leading-tight mb-3 sm:mb-4 ${textCls} text-pretty ${shadowTitle}`}
               >
                 {title}
               </h1>

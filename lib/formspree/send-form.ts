@@ -85,3 +85,36 @@ export async function submitToTempCapture(params: FormPayload): Promise<void> {
     );
   }
 }
+
+/**
+ * Submits form data via the /api/send-email route, which calls the Brevo
+ * transactional email API to deliver the submission to your inbox.
+ *
+ * Requires these env vars (add to .env.local):
+ *   BREVO_API_KEY          – your Brevo API key
+ *   BREVO_SENDER_EMAIL     – a verified sender address in your Brevo account
+ *   BREVO_RECIPIENT_EMAIL  – the inbox where you want to receive submissions
+ */
+export async function submitToBrevo(params: FormPayload): Promise<void> {
+  const base = typeof window !== "undefined" ? window.location.origin : "";
+  const res = await fetch(`${base}/api/send-email`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      formType: params.formType,
+      fullName: params.fullName,
+      userEmail: params.userEmail,
+      company: params.company || "—",
+      mobile: params.mobile,
+      country: params.country,
+      message: params.message?.trim() || "—",
+    }),
+  });
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(
+      (data as { error?: string })?.error ||
+        "Could not send. Try again or email us directly.",
+    );
+  }
+}

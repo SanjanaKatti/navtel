@@ -12,11 +12,7 @@ import {
   type NewsletterFormValues,
 } from "@/lib/validation/form-schemas";
 import { SuccessPopup } from "@/components/forms/SuccessPopup";
-import {
-  isFormspreeConfigured,
-  submitToFormspree,
-  submitToTempCapture,
-} from "@/lib/formspree/send-form";
+import { submitToBrevo } from "@/lib/formspree/send-form";
 
 const footerLinkClass =
   "text-sm text-white/70 hover:text-brand-primary transition-colors duration-200";
@@ -56,11 +52,7 @@ const Footer = () => {
       message: "",
     };
     try {
-      if (isFormspreeConfigured()) {
-        await submitToFormspree("newsletter", payload);
-      } else {
-        await submitToTempCapture(payload);
-      }
+      await submitToBrevo(payload);
       reset();
       setIsModalOpen(false);
       setShowSuccessPopup(true);
@@ -90,7 +82,7 @@ const Footer = () => {
             <p className="text-label text-brand-primary mb-3 sm:mb-4">
               Stay in the loop
             </p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-white mb-4 sm:mb-5">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4 sm:mb-5">
               Subscribe to our Newsletter
             </h2>
             <p className="text-body-sm sm:text-base text-white/75 mb-8 sm:mb-10 max-w-lg mx-auto leading-relaxed">
