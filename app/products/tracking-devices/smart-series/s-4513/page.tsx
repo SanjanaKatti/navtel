@@ -44,6 +44,7 @@ const S4513Page = () => {
             </div>
           </div>
         </section>
+        {/* Features */}
         <div ref={featuresRef}>
           <DeviceFeatures
             heading="Device"
