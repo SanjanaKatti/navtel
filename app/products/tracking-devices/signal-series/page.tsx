@@ -184,38 +184,15 @@ const SignalSeriesPage = () => {
     <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased text-brand-navy">
       <Navbar />
 
-      <main className="pt-20">
+      <main className="pt-20 bg-[#EFEFEF]">
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden bg-[#EFEFEF]">
-          <picture className="block w-full">
-            <source
-              media="(max-width: 639px)"
-              srcSet="/Navtelecom/signal_homepage1 1080x1350.png"
-            />
-            <source
-              media="(min-width: 640px) and (max-width: 1279px)"
-              srcSet="/Navtelecom/signal_homepage1 2048x1365.png"
-            />
-            <source
-              media="(min-width: 1280px) and (max-width: 1919px)"
-              srcSet="/Navtelecom/signal_homepage1 2560x1440.png"
-            />
-            <source
-              media="(min-width: 1920px)"
-              srcSet="/Navtelecom/signal_homepage1 3840x1646.png"
-            />
-            <img
-              src="/Navtelecom/signal_homepage1 2048x1365.png"
-              alt="SIGNAL Series"
-              className="w-full h-auto block"
-            />
-          </picture>
-          <div className="absolute inset-0 z-10 max-w-7xl mx-auto left-0 right-0 px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center py-12 md:py-20">
+        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] overflow-hidden flex items-start lg:items-center bg-[#EFEFEF] product-background-image signal-series-hero-background">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full self-stretch flex flex-col justify-start lg:justify-center pt-6 sm:pt-8 lg:pt-0">
+            <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center w-full pb-12 md:pb-20 lg:py-12 xl:py-20">
               {/* Left Info */}
               <div className="space-y-8 ml-0 lg:ml-10">
                 <div>
-                  <h1 className="text-h1">
+                  <h1 className="text-h1 break-words">
                     SIGNAL
                     <br />
                     <span className="text-brand-primary">Series</span>
@@ -235,7 +212,7 @@ const SignalSeriesPage = () => {
                 </button>
               </div>
 
-              {/* Middle spacer column (background image already covers the section) */}
+              {/* Middle spacer column (background image covers the section) */}
               <div className="ml-0 lg:ml-10" />
             </div>
           </div>

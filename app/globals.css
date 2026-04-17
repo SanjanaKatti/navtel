@@ -236,6 +236,28 @@ a[class*="bg-color-neutral-dark-gray"]:hover {
   }
 }
 
+.signal-series-hero-background {
+  background-image: url("/Navtelecom/signal_homepage1 1080x1350.png") !important;
+}
+
+@media (min-width: 768px) {
+  .signal-series-hero-background {
+    background-image: url("/Navtelecom/signal_homepage1 2048x1365.png") !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .signal-series-hero-background {
+    background-image: url("/Navtelecom/signal_homepage1 2560x1440.png") !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .signal-series-hero-background {
+    background-image: url("/Navtelecom/signal_homepage1 3840x1646.png") !important;
+  }
+}
+
 .start-device-hero-background {
   background-image: url("/Navtelecom/start_device 1080x1350.png") !important;
   background-position: bottom center !important;
