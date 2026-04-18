@@ -5,8 +5,16 @@ export async function POST(request: NextRequest) {
   const senderEmail = process.env.BREVO_SENDER_EMAIL;
   const recipientEmail = process.env.BREVO_RECIPIENT_EMAIL;
 
+  // --- DIAGNOSTIC: log which env vars are present (never log the full key)
+  console.log("[NAVTEL_SEND_EMAIL] ENV CHECK", {
+    hasApiKey: Boolean(apiKey),
+    apiKeyPrefix: apiKey ? apiKey.slice(0, 12) + "…" : "MISSING",
+    senderEmail: senderEmail ?? "MISSING",
+    recipientEmail: recipientEmail ?? "MISSING",
+  });
+
   if (!apiKey || !senderEmail || !recipientEmail) {
-    console.error("[NAVTEL_SEND_EMAIL] Missing Brevo env vars");
+    console.error("[NAVTEL_SEND_EMAIL] One or more env vars are missing.");
     return NextResponse.json(
       { error: "Email service is not configured." },
       { status: 500 },
@@ -55,29 +63,61 @@ export async function POST(request: NextRequest) {
     </div>
   `;
 
-  const brevoRes = await fetch("https://api.brevo.com/v3/smtp/email", {
-    method: "POST",
-    headers: {
-      "api-key": apiKey,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      sender: { name: "Navtel Website", email: senderEmail },
-      to: [{ email: recipientEmail, name: "Navtel" }],
-      ...(userEmail ? { replyTo: { email: userEmail, name: fullName } } : {}),
-      subject: `[Navtel] ${formType} from ${fullName}`,
-      htmlContent,
-    }),
+  const brevoPayload = {
+    sender: { name: "Navtel Website", email: senderEmail },
+    to: [{ email: recipientEmail, name: "Navtel" }],
+    ...(userEmail ? { replyTo: { email: userEmail, name: fullName } } : {}),
+    subject: `[Navtel] ${formType} from ${fullName}`,
+    htmlContent,
+  };
+
+  // --- DIAGNOSTIC: log what we're sending to Brevo (minus htmlContent to keep logs short)
+  console.log("[NAVTEL_SEND_EMAIL] Calling Brevo API with payload (no htmlContent):", {
+    sender: brevoPayload.sender,
+    to: brevoPayload.to,
+    replyTo: (brevoPayload as { replyTo?: unknown }).replyTo,
+    subject: brevoPayload.subject,
   });
 
-  if (!brevoRes.ok) {
-    const errText = await brevoRes.text();
-    console.error("[NAVTEL_SEND_EMAIL] Brevo error:", errText);
+  let brevoRes: Response;
+  try {
+    brevoRes = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        "api-key": apiKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(brevoPayload),
+    });
+  } catch (networkErr) {
+    console.error("[NAVTEL_SEND_EMAIL] Network error reaching Brevo:", networkErr);
     return NextResponse.json(
-      { error: "Could not send email. Please try again." },
+      { error: "Could not reach email service. Check server network." },
       { status: 502 },
     );
   }
 
+  // --- DIAGNOSTIC: always log Brevo's HTTP status
+  console.log("[NAVTEL_SEND_EMAIL] Brevo response status:", brevoRes.status);
+
+  if (!brevoRes.ok) {
+    const errText = await brevoRes.text();
+    // Log the full Brevo error in server logs so you can diagnose it
+    console.error(
+      `[NAVTEL_SEND_EMAIL] Brevo rejected the request (HTTP ${brevoRes.status}):`,
+      errText,
+    );
+    // Return the real Brevo error to the browser (visible in Network tab response body)
+    return NextResponse.json(
+      {
+        error: "Could not send email. Please try again.",
+        _brevoStatus: brevoRes.status,
+        _brevoError: errText,
+      },
+      { status: 502 },
+    );
+  }
+
+  console.log("[NAVTEL_SEND_EMAIL] Email sent successfully.");
   return NextResponse.json({ ok: true }, { status: 200 });
 }
