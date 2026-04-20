@@ -29,6 +29,20 @@ const BUILD_ID = computeBuildId();
 
 const nextConfig: NextConfig = {
   generateBuildId: async () => BUILD_ID,
+  async redirects() {
+    return [
+      {
+        source: "/wp-login.php",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/wp-admin/:path*",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
