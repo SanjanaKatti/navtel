@@ -402,6 +402,16 @@ const normalizeForDiff = (value: unknown) => {
   return str;
 };
 
+/** Used to omit the RS-232 comparison row when no selected device supports it. */
+const lacksRs232 = (value: unknown): boolean => {
+  if (value === false) return true;
+  if (value === null || value === undefined) return true;
+  if (value === "-") return true;
+  if (typeof value === "string" && value.trim() === "") return true;
+  if (typeof value === "number" && value <= 0) return true;
+  return false;
+};
+
 /** Badge label before " Network" — from fallbacks or merged specs (Network Type). */
 const resolveConnectivityLabel = (
   fallbackConnectivity: string | undefined,
@@ -476,7 +486,9 @@ const ComparisonContent = () => {
     }
   >;
 
-  const rows = (comparisonData.rows ?? []) as ComparisonRow[];
+  const rows = ((comparisonData.rows ?? []) as ComparisonRow[]).filter(
+    (r) => !(r.type === "param" && r.label === "EPO"),
+  );
 
   const selectedDevices = selectedDeviceNames
     .map((name) => {
@@ -513,8 +525,18 @@ const ComparisonContent = () => {
     specs: Record<string, unknown>;
   }>;
 
+  const rowsForDevices = useMemo(() => {
+    const noDeviceHasRs232 = selectedDevices.every((d) =>
+      lacksRs232(d.specs["RS-232"]),
+    );
+    if (!noDeviceHasRs232) return rows;
+    return rows.filter(
+      (r) => !(r.type === "param" && r.label === "RS-232"),
+    );
+  }, [rows, selectedDevices]);
+
   const visibleRows = useMemo(() => {
-    if (!showDifferencesOnly) return rows;
+    if (!showDifferencesOnly) return rowsForDevices;
 
     const result: ComparisonRow[] = [];
     let pendingSection: ComparisonRow | null = null;
@@ -525,7 +547,7 @@ const ComparisonContent = () => {
       sectionHeaderEmitted = false;
     };
 
-    for (const row of rows) {
+    for (const row of rowsForDevices) {
       if (row.type === "section") {
         startNewSection(row);
         continue;
@@ -548,7 +570,7 @@ const ComparisonContent = () => {
     }
 
     return result;
-  }, [rows, selectedDevices, showDifferencesOnly]);
+  }, [rowsForDevices, selectedDevices, showDifferencesOnly]);
 
   if (!isMounted) {
     return (

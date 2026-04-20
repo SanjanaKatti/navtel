@@ -168,7 +168,7 @@ const S2425Page = () => {
                 value: "25 mA",
               },
               { label: "Max. Current Consumption (12 V)", value: "200 mA" },
-              { label: "Overvoltage Protection", value: "up to 500 V" },
+              { label: "Overvoltage Protection", value: "up to 200 V" },
               { label: "Backup Battery", value: "Li-Po, 3.7 V, 380 mAh" },
               { label: "EEPROM Data Retention (power-off)", value: "5 days" },
             ],

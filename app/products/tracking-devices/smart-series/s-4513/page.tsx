@@ -145,7 +145,6 @@ const S4513Page = () => {
                     value: "Mini-USB (configuration, data, diagnostics)",
                   },
                   { label: "1-Wire Interface", value: true },
-                  { label: "RS-232 Interface", value: true },
                   { label: "RS-485 Interface", value: true },
                   {
                     label: "Supported Antennas",
@@ -186,7 +185,7 @@ const S4513Page = () => {
                     value: "25 mA",
                   },
                   { label: "Max. Current Consumption (12 V)", value: "200 mA" },
-                  { label: "Overvoltage Protection", value: "up to 500 V" },
+                  { label: "Overvoltage Protection", value: "up to 200 V" },
                   { label: "Backup Battery", value: "Li-Po, 3.7 V, 380 mAh" },
                   {
                     label: "EEPROM Data Retention (power-off)",

@@ -199,7 +199,7 @@ const S4011Page = () => {
               items: [
                 {
                   label: "Supported Systems",
-                  value: "GPS / GLONASS / BeiDou / QZSS",
+                  value: "GPS / GLONASS / BeiDou",
                 },
                 { label: "Channels", value: "99 acquisition, 33 tracking" },
                 {

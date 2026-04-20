@@ -650,7 +650,7 @@
       "specs": {
         "Network Type": "2G",
         "SIM Slots": 1,
-        "SIM Type": "Slot 1: External, mini-SIM\r\nSlot 2: Internal, nano-SIM",
+        "SIM Type": "Slot 1: External, mini-SIM",
         "Supported Systems": "GPS / GLONASS / BeiDou",
         "Accuracy": "2.5 m (horizontal), 5 m (vertical)",
         "Update Rate": "1 Hz",
@@ -848,7 +848,7 @@
         "Supported Systems": "GPS / GLONASS / BeiDou",
         "Accuracy": "2.5 m (horizontal), 5 m (vertical)",
         "Update Rate": "1 Hz",
-        "A-GPS": true,
+        "A-GPS": "-",
         "EPO": "-",
         "Digital Inputs": "-",
         "Analog Inputs": "-",
