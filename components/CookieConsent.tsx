@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Cookie, X } from "phosphor-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   type CookieConsentValue,
   dispatchCookieConsentChange,
@@ -18,10 +18,19 @@ export function CookieConsent() {
 
   const [open, setOpen] = useState(false);
   const [stored, setStored] = useState<CookieConsentValue | null>(null);
+  const didAutoOpenRef = useRef(false);
 
   useEffect(() => {
     setStored(getStoredConsent());
   }, [open]);
+
+  useEffect(() => {
+    if (hideOnBusinessContactPages) return;
+    if (getStoredConsent() !== null) return;
+    if (didAutoOpenRef.current) return;
+    setOpen(true);
+    didAutoOpenRef.current = true;
+  }, [hideOnBusinessContactPages, pathname]);
 
   useEffect(() => {
     if (!open) return;
