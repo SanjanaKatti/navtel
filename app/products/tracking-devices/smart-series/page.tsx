@@ -67,19 +67,6 @@ const SmartSeriesPage = () => {
       ],
     },
     {
-      name: "S-2423",
-      connectivity: "2g" as const,
-      connectivityLabel: "2G",
-      image: "/Navtelecom/sample2.PNG",
-      specs: [
-        "3 Universal Inputs",
-        "2 Outputs",
-        "1-Wire, RS-485, RS-232",
-        "Bluetooth 4.0",
-        "Battery 800 mAh",
-      ],
-    },
-    {
       name: "S-2425",
       connectivity: "2g" as const,
       connectivityLabel: "2G, Dual SIM",
