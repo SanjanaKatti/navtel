@@ -13,6 +13,22 @@ export function setStoredConsent(value: CookieConsentValue) {
   localStorage.setItem(COOKIE_CONSENT_KEY, value);
 }
 
+export function subscribeToCookieConsent(listener: () => void) {
+  if (typeof window === "undefined") return () => {};
+
+  const handleStorage = (event: StorageEvent) => {
+    if (event.key === COOKIE_CONSENT_KEY) listener();
+  };
+
+  window.addEventListener("navtel:cookie-consent", listener);
+  window.addEventListener("storage", handleStorage);
+
+  return () => {
+    window.removeEventListener("navtel:cookie-consent", listener);
+    window.removeEventListener("storage", handleStorage);
+  };
+}
+
 export function dispatchCookieConsentChange(value: CookieConsentValue) {
   window.dispatchEvent(
     new CustomEvent("navtel:cookie-consent", { detail: { status: value } }),

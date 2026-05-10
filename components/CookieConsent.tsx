@@ -3,13 +3,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Cookie, X } from "phosphor-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import {
   type CookieConsentValue,
   dispatchCookieConsentChange,
   getStoredConsent,
   setStoredConsent,
+  subscribeToCookieConsent,
 } from "@/lib/cookie-consent";
+
+const getServerConsentSnapshot = (): CookieConsentValue => "declined";
 
 export function CookieConsent() {
   const pathname = usePathname();
@@ -17,35 +20,39 @@ export function CookieConsent() {
   const hideOnBusinessContactPages = pathname.startsWith("/contact/");
 
   const [open, setOpen] = useState(false);
-  const [stored, setStored] = useState<CookieConsentValue | null>(null);
-  const didAutoOpenRef = useRef(false);
+  const [dismissedAutoPrompt, setDismissedAutoPrompt] = useState(false);
+  const stored = useSyncExternalStore(
+    subscribeToCookieConsent,
+    getStoredConsent,
+    getServerConsentSnapshot,
+  );
+  const isNewVisitor = stored === null;
+  const dialogOpen =
+    !hideOnBusinessContactPages &&
+    (open || (isNewVisitor && !dismissedAutoPrompt));
 
   useEffect(() => {
-    setStored(getStoredConsent());
-  }, [open]);
-
-  useEffect(() => {
-    if (hideOnBusinessContactPages) return;
-    if (getStoredConsent() !== null) return;
-    if (didAutoOpenRef.current) return;
-    setOpen(true);
-    didAutoOpenRef.current = true;
-  }, [hideOnBusinessContactPages, pathname]);
-
-  useEffect(() => {
-    if (!open) return;
+    if (!dialogOpen) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        setDismissedAutoPrompt(true);
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
+  }, [dialogOpen]);
 
   const applyConsent = (value: CookieConsentValue) => {
     setStoredConsent(value);
-    setStored(value);
     dispatchCookieConsentChange(value);
     setOpen(false);
+    setDismissedAutoPrompt(true);
+  };
+
+  const closeDialog = () => {
+    setOpen(false);
+    setDismissedAutoPrompt(true);
   };
 
   if (hideOnBusinessContactPages) {
@@ -59,12 +66,12 @@ export function CookieConsent() {
         onClick={() => setOpen(true)}
         className="fixed bottom-5 right-5 z-[100] flex h-12 w-12 items-center justify-center rounded-full bg-brand-navy text-white shadow-lg ring-2 ring-white/20 transition-transform hover:scale-105 hover:bg-brand-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
         aria-label="Cookie preferences"
-        aria-expanded={open}
+        aria-expanded={dialogOpen}
       >
         <Cookie className="h-6 w-6" weight="fill" aria-hidden />
       </button>
 
-      {open && (
+      {dialogOpen && (
         <div
           role="dialog"
           aria-modal="false"
@@ -73,7 +80,7 @@ export function CookieConsent() {
         >
             <button
               type="button"
-              onClick={() => setOpen(false)}
+              onClick={closeDialog}
               className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-brand-navy"
               aria-label="Close"
             >
@@ -101,7 +108,7 @@ export function CookieConsent() {
               <Link
                 href="/cookie-policy"
                 className="font-bold text-brand-primary underline underline-offset-2 hover:text-brand-deep"
-                onClick={() => setOpen(false)}
+                onClick={closeDialog}
               >
                 Cookie Policy
               </Link>

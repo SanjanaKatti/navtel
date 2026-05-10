@@ -265,7 +265,7 @@ const Footer = () => {
         <LayoutContainer className="py-14 sm:py-16 lg:py-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 pb-12 lg:pb-16 border-b border-white/10">
             {/* Brand — mirrors navbar trust, inverted for dark ground */}
-            <div className="lg:col-span-4 space-y-5">
+            <div className="lg:col-span-3 space-y-5">
               <Link href="/" className="inline-block">
                 <div className="relative h-11 w-44 sm:h-12 sm:w-48 brightness-0 invert opacity-95 hover:opacity-100 transition-opacity">
                   <Image
@@ -460,7 +460,7 @@ const Footer = () => {
             </div>
 
             {/* Contact */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-3">
               <h3 className="text-label text-brand-primary mb-4 sm:mb-5">
                 Contact
               </h3>
@@ -477,7 +477,9 @@ const Footer = () => {
                     />
                     <span className="leading-snug">
                       <span className="block text-white/90 font-medium">Sales Department</span>
-                      <span className="break-all">sales@navtelecom-iot.com</span>
+                      <span className="whitespace-nowrap">
+                        sales@navtelecom-iot.com
+                      </span>
                     </span>
                   </a>
                 </li>
@@ -493,7 +495,9 @@ const Footer = () => {
                     />
                     <span className="leading-snug">
                       <span className="block text-white/90 font-medium">Support</span>
-                      <span className="break-all">support@navtelecom.ru</span>
+                      <span className="whitespace-nowrap">
+                        support@navtelecom.ru
+                      </span>
                     </span>
                   </a>
                 </li>

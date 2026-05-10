@@ -74,7 +74,9 @@ const SmartSeriesPage = () => {
       specs: [
         "3 Universal Inputs",
         "2 Outputs",
-        "1-Wire, RS-485, RS-232, BLE",
+        "1-Wire",
+        "RS-485, RS-232",
+        "Bluetooth 4.0",
         "Battery 380 mAh",
       ],
     },
