@@ -616,17 +616,17 @@ const ComparisonContent = () => {
           <table className="w-full border-collapse table-fixed">
             <thead>
               <tr className="border-b border-gray-100">
-                <th className="px-4 sm:px-6 lg:px-8 py-6 text-left bg-gray-50/50 min-w-[180px]">
+                <th className="px-3 sm:px-6 lg:px-8 py-6 text-left bg-gray-50/50 min-w-[140px] sm:min-w-[180px]">
                   <p className="text-label">Parameters</p>
                 </th>
                 {selectedDevices.map((device, idx) => (
                   <th
                     key={idx}
-                    className="px-4 sm:px-6 lg:px-8 py-6 text-center align-bottom min-w-[180px] sm:min-w-[200px] lg:min-w-[220px] border-l border-gray-100 last:pr-10"
+                    className="px-3 sm:px-6 lg:px-8 py-6 text-center align-bottom min-w-[140px] sm:min-w-[200px] lg:min-w-[220px] border-l border-gray-100 last:pr-3 sm:last:pr-6 lg:last:pr-10"
                   >
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       <div
-                        className={`inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
+                        className={`inline-block max-lg:whitespace-nowrap px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
                           String(device.connectivity)
                             .toLowerCase()
                             .includes("2g")
@@ -636,13 +636,15 @@ const ComparisonContent = () => {
                       >
                         {device.connectivity} Network
                       </div>
-                      <h3 className="text-h3 text-3xl">{device.name}</h3>
-                      <p className="text-label text-gray-400">
+                      <h3 className="text-h3 text-xl lg:text-3xl max-lg:whitespace-nowrap">
+                        {device.name}
+                      </h3>
+                      <p className="text-label text-gray-400 max-lg:whitespace-nowrap">
                         {device.series}
                       </p>
                       <Link
                         href={trackingDeviceDetailHref(device.name)}
-                        className="inline-block text-xs font-black text-brand-navy hover:text-brand-primary transition-colors underline underline-offset-4"
+                        className="inline-block max-lg:whitespace-nowrap text-xs font-black text-brand-navy hover:text-brand-primary transition-colors underline underline-offset-4"
                       >
                         View Details
                       </Link>
@@ -675,7 +677,7 @@ const ComparisonContent = () => {
                     key={`param-${rIdx}-${param}`}
                     className="border-b border-gray-100 group hover:bg-gray-50/30 transition-colors"
                   >
-                    <td className="px-4 sm:px-6 lg:px-8 py-5 bg-gray-50/50">
+                    <td className="px-3 sm:px-6 lg:px-8 py-5 bg-gray-50/50">
                       <p className="text-body-sm font-bold text-brand-navy/60">
                         {param}
                       </p>
@@ -692,7 +694,7 @@ const ComparisonContent = () => {
                       return (
                         <td
                           key={`${device.name}-${param}-${dIdx}`}
-                          className="px-4 sm:px-6 lg:px-8 py-5 text-center border-l border-gray-100 last:pr-10"
+                          className="px-3 sm:px-6 lg:px-8 py-5 text-center border-l border-gray-100 last:pr-3 sm:last:pr-6 lg:last:pr-10"
                         >
                           {typeof value === "boolean" ? (
                             value ? (
