@@ -496,28 +496,24 @@ a[class*="bg-color-neutral-dark-gray"]:hover {
 }
 
 .complex-events-hero-background {
-  background-image: url("/Navtelecom/banner1_1080x1350.png") !important;
-  background-position: right center !important;
+  background-image: url("/Navtelecom/Software/CE/CE_homepage1 1080x1350.png") !important;
 }
 
 @media (min-width: 768px) {
   .complex-events-hero-background {
-    background-image: url("/Navtelecom/banner1_2048x1365.png") !important;
-    background-position: right center !important;
+    background-image: url("/Navtelecom/Software/CE/CE_homepage1 2048x1365.png") !important;
   }
 }
 
 @media (min-width: 1024px) {
   .complex-events-hero-background {
-    background-image: url("/Navtelecom/banner1_2560x1440.png") !important;
-    background-position: right center !important;
+    background-image: url("/Navtelecom/Software/CE/CE_homepage1 2560x1440.png") !important;
   }
 }
 
 @media (min-width: 1280px) {
   .complex-events-hero-background {
-    background-image: url("/Navtelecom/banner1_3840x1646.png") !important;
-    background-position: right center !important;
+    background-image: url("/Navtelecom/Software/CE/CE_homepage1 3840x1646.png") !important;
   }
 }
 
@@ -657,24 +653,24 @@ a[class*="bg-color-neutral-dark-gray"]:hover {
 }
 
 .eco-driving-hero-background {
-  background-image: url("/Navtelecom/ecodriving_homepage1 1080x1350.png") !important;
+  background-image: url("/Navtelecom/Software/ECO/ecodriving_homepage1 1080x1350.png") !important;
 }
 
 @media (min-width: 768px) {
   .eco-driving-hero-background {
-    background-image: url("/Navtelecom/ecodriving_homepage1 2048x1365.png") !important;
+    background-image: url("/Navtelecom/Software/ECO/ecodriving_homepage1 2048x1365.png") !important;
   }
 }
 
 @media (min-width: 1024px) {
   .eco-driving-hero-background {
-    background-image: url("/Navtelecom/ecodriving_homepage1 2560x1440.png") !important;
+    background-image: url("/Navtelecom/Software/ECO/ecodriving_homepage1 2560x1440.png") !important;
   }
 }
 
 @media (min-width: 1280px) {
   .eco-driving-hero-background {
-    background-image: url("/Navtelecom/ecodriving_homepage1 3840x1646.png") !important;
+    background-image: url("/Navtelecom/Software/ECO/ecodriving_homepage1 3840x1646.png") !important;
   }
 }
 

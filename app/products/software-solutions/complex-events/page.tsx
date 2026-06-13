@@ -25,7 +25,7 @@ const ComplexEventsPage = () => {
             href: "/products/software-solutions",
           }}
           backgroundClass="complex-events-hero-background"
-          textColor="white"
+          textColor="navy"
         />
 
         <SoftwareKeyFeatures
