@@ -10,12 +10,12 @@ In your repo: **Settings → Secrets and variables → Actions → New repositor
 
 Add these secrets:
 
-| Secret | Value | Example |
-|--------|-------|---------|
-| `DEPLOY_HOST` | VPS IP address | `31.97.228.110` |
-| `DEPLOY_USER` | SSH username | `root` |
-| `DEPLOY_SSH_KEY` | Private SSH key (full contents) | Paste your `id_rsa` or deploy key |
-| `DEPLOY_PATH` | App directory on server | `/home/navtelecom-iot/htdocs/navtelecom-iot.com` |
+| Secret           | Value                           | Example                                          |
+| ---------------- | ------------------------------- | ------------------------------------------------ |
+| `DEPLOY_HOST`    | VPS IP address                  | `31.97.228.110`                                  |
+| `DEPLOY_USER`    | SSH username                    | `root`                                           |
+| `DEPLOY_SSH_KEY` | Private SSH key (full contents) | Paste your `id_rsa` or deploy key                |
+| `DEPLOY_PATH`    | App directory on server         | `/home/navtelecom-iot/htdocs/navtelecom-iot.com` |
 
 ### 2. Create a deploy SSH key (recommended)
 
