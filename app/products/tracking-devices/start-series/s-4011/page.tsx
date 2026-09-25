@@ -159,7 +159,7 @@ const S4011Page = () => {
               items: [
                 {
                   label: "Version",
-                  value: "4.0 + LE (up to 4 BLE sensors supported)",
+                  value: "5.0 + LE (up to 4 BLE sensors supported)",
                 },
                 {
                   label: "Supported Peripherals",

@@ -79,6 +79,22 @@ const S4511Page = () => {
             icon: <Bluetooth size={40} weight="light" />,
           },
           {
+            title: "1-Wire Sensors & Driver ID",
+            sub: "Simple. Accurate. Connected.",
+            desc: "Integrate temperature sensors, iButton driver ID keys, and more via 1-Wire interface.",
+            icon: (
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                className="w-10 h-10"
+              >
+                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+              </svg>
+            ),
+          },
+          {
             title: "Engine Hours Calculation",
             sub: "Smart logic. Clear insights.",
             desc: "Track engine runtime based on internal algorithms — no external sensors needed.",
@@ -125,6 +141,7 @@ const S4511Page = () => {
                 label: "USB Interface",
                 value: "Mini-USB (configuration, data, diagnostics)",
               },
+              { label: "1-Wire Interface", value: true },
               {
                 label: "Supported Antennas",
                 value: "Internal GNSS / Cellular",
@@ -137,7 +154,7 @@ const S4511Page = () => {
             items: [
               {
                 label: "Version",
-                value: "4.0 + LE (up to 4 BLE sensors supported)",
+                value: "5.0 + LE (up to 4 BLE sensors supported)",
               },
               {
                 label: "Supported Peripherals",

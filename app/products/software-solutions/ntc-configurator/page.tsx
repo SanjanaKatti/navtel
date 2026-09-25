@@ -5,6 +5,10 @@ import {
   ArrowsCounterClockwise,
   CloudArrowUp,
   MagnifyingGlass,
+  WindowsLogo,
+  AppleLogo,
+  LinuxLogo,
+  FileText,
 } from "phosphor-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -25,14 +29,33 @@ const NTCConfiguratorPage = () => {
           title="NTC Configurator"
           subtitle="Full Control Over Navtelecom Devices"
           tagline="Advanced setup, live telemetry and remote configuration in one professional tool."
-          ctaPrimary={{
-            label: "Download",
-            href: "https://wiki.navtelecom.ru/programs/ntc_configurator/ntc_configurator_last.exe",
-          }}
-          ctaSecondary={{
-            label: "Release Notes",
-            href: "https://wiki.navtelecom.ru/en/home/ntc_configurator/history",
-          }}
+          ctas={[
+            {
+              kicker: "Download for",
+              label: "Windows",
+              icon: <WindowsLogo weight="bold" />,
+              href: "https://wiki.navtelecom.ru/programs/ntc_configurator/ntc_configurator_last.exe",
+            },
+            {
+              kicker: "Download for",
+              label: "Mac",
+              icon: <AppleLogo weight="bold" />,
+              href: "https://wiki.navtelecom.ru/programs/ntc_configurator/ntc_configurator_last_mac_arm64.dmg",
+            },
+            {
+              kicker: "Download for",
+              label: "Linux",
+              icon: <LinuxLogo weight="bold" />,
+              href: "https://wiki.navtelecom.ru/programs/ntc_configurator/ntc_configurator_last_linux_x64.tar.gz",
+            },
+            {
+              kicker: "View",
+              label: "Release notes",
+              icon: <FileText weight="bold" />,
+              href: "https://wiki.navtelecom.ru/en/home/ntc_configurator/history",
+              variant: "secondary",
+            },
+          ]}
           backgroundClass="cfg-hero-background"
           textColor="navy"
           breadcrumb={{

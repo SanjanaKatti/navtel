@@ -158,7 +158,7 @@ const S4513Page = () => {
                 items: [
                   {
                     label: "Version",
-                    value: "4.0 + LE (up to 4 BLE sensors supported)",
+                    value: "5.0 + LE (up to 4 BLE sensors supported)",
                   },
                   {
                     label: "Supported Peripherals",
@@ -221,7 +221,7 @@ const S4513Page = () => {
               {
                 groupName: "Cellular",
                 items: [
-                  { label: "Network", value: "GSM / GPRS" },
+                  { label: "Network", value: "GSM / GPRS / EDGE / LTE" },
                   { label: "Max Data Rate", value: "85.6 kbps" },
                   {
                     label: "2G Bands",

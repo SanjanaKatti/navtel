@@ -72,7 +72,7 @@ const deviceData = {
     specs: {
       "SIM Type": "Single SIM",
       "Engine Hours": "Engine Hours",
-      Bluetooth: "Bluetooth 4.0",
+      Bluetooth: "Bluetooth 5.0",
       "Eco Driving": false,
       "Communication interface": "UART, Micro USB",
       "Custom Logic": false,
@@ -91,7 +91,7 @@ const deviceData = {
     specs: {
       "SIM Type": "Single SIM",
       "Engine Hours": "Engine Hours",
-      Bluetooth: "Bluetooth 4.0",
+      Bluetooth: "Bluetooth 5.0",
       "Eco Driving": true,
       "Communication interface": "RS-485",
       "Custom Logic": true,
@@ -110,7 +110,7 @@ const deviceData = {
     specs: {
       "SIM Support": "Dual SIM",
       "Engine Hours": "Engine Hours",
-      Bluetooth: "Bluetooth 4.0 (v5.0 compatible)",
+      Bluetooth: "Bluetooth 5.0",
       "Eco Driving": true,
       "Communication interface": "RS-485",
       "Custom Logic": true,
@@ -129,7 +129,7 @@ const deviceData = {
     specs: {
       "SIM Type": "Single SIM",
       "Engine Hours": "Engine Hours",
-      Bluetooth: "Bluetooth 4.0 (v5.0 compatible)",
+      Bluetooth: "Bluetooth 5.0",
       "Eco Driving": false,
       "Communication interface": "RS-485",
       "Custom Logic": false,
@@ -148,7 +148,7 @@ const deviceData = {
     specs: {
       "SIM Support": "Dual SIM",
       "Engine Hours": "Engine Hours",
-      Bluetooth: "Bluetooth 4.0 (v5.0 compatible)",
+      Bluetooth: "Bluetooth 5.0",
       "Eco Driving": true,
       "Communication interface": "RS-485",
       "Custom Logic": true,
@@ -167,7 +167,7 @@ const deviceData = {
     specs: {
       "SIM Support": "Dual SIM",
       "Engine Hours": "Engine Hours",
-      Bluetooth: "Bluetooth 4.0 (v5.0 compatible)",
+      Bluetooth: "Bluetooth 5.0",
       "Eco Driving": true,
       "Communication interface": "RS-485, RS-232",
       "Custom Logic": true,
@@ -186,7 +186,7 @@ const deviceData = {
     specs: {
       "SIM Support": "Dual SIM",
       "Engine Hours": "Engine Hours",
-      Bluetooth: "Bluetooth 4.0 (v5.0 compatible)",
+      Bluetooth: "Bluetooth 5.0",
       "Eco Driving": true,
       "Communication interface": "RS-485, RS-232",
       "Custom Logic": true,
@@ -338,7 +338,7 @@ const deviceData = {
     specs: {
       "SIM Support": "Dual SIM",
       "Engine Hours": "Engine Hours",
-      Bluetooth: "Bluetooth 4.0 (v5.0 compatible)",
+      Bluetooth: "Bluetooth 5.0",
       "Eco Driving": true,
       "Communication interface": "RS-485",
       "Custom Logic": true,
@@ -357,7 +357,7 @@ const deviceData = {
     specs: {
       "SIM Support": "Dual SIM",
       "Engine Hours": "Engine Hours",
-      Bluetooth: "Bluetooth 4.0 (v5.0 compatible)",
+      Bluetooth: "Bluetooth 5.0",
       "Eco Driving": true,
       "Communication interface": "RS-485, RS-232",
       "Custom Logic": true,

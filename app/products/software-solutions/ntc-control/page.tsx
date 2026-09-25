@@ -25,10 +25,16 @@ const NTCControlPage = () => {
           title="NTC Control"
           subtitle="Mobile Configuration for Engineers"
           tagline="Configure and validate Navtelecom devices directly from your smartphone."
-          ctaPrimary={{
-            label: "Download for Android",
-            href: "https://play.google.com/store/apps/details?id=ru.navtelecom.ntc.control",
-          }}
+          ctas={[
+            {
+              label: "Download for Android",
+              href: "https://play.google.com/store/apps/details?id=ru.navtelecom.ntc.control",
+            },
+            {
+              label: "Download for iOS",
+              href: "https://apps.apple.com/ru/app/ntc-control/id6761608898",
+            },
+          ]}
           backgroundClass="ntc-control-hero-background"
           textColor="navy"
           breadcrumb={{
