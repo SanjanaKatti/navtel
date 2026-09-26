@@ -91,6 +91,7 @@ const partners = [
   { src: "/Navtelecom/logo_7.svg", alt: "Partner logo 7" },
   { src: "/Navtelecom/logo_8.png", alt: "Partner logo 8" },
   { src: "/Navtelecom/logo_9.svg", alt: "Partner logo 9" },
+  { src: "/Navtelecom/logo_10.png", alt: "Partner logo 10" },
 ];
 
 const faqs = [
