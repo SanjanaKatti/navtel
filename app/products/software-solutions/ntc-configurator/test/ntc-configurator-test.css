@@ -38,7 +38,7 @@
   margin-bottom: 20px;
   font-size: clamp(42px, 6vw, 78px);
   line-height: 0.98;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.045em;
 }
 
@@ -46,26 +46,29 @@
   margin-bottom: 16px;
   font-size: clamp(28px, 3.4vw, 44px);
   line-height: 1.08;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.03em;
 }
 
 .ntc-page h3 {
   margin-bottom: 10px;
-  font-size: 19px;
+  font-size: 24px;
   line-height: 1.25;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .ntc-page p {
   color: var(--ntc-muted);
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 1.7;
 }
 
 .ntc-shell {
-  width: min(1180px, calc(100% - 68px));
+  width: 100%;
+  max-width: 1920px;
   margin: 0 auto;
+  padding-inline: clamp(1rem, 2.8vw, 4rem);
 }
 
 .ntc-section {
@@ -80,6 +83,7 @@
 .ntc-lead {
   max-width: 700px;
   font-size: 18px !important;
+  font-weight: 500;
 }
 
 .ntc-eyebrow {
@@ -196,14 +200,14 @@
 
 .ntc-platform-copy small {
   color: var(--ntc-muted);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.04em;
 }
 
 .ntc-platform-copy strong {
   color: var(--ntc-text);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -231,8 +235,8 @@
   gap: 7px;
   padding: 10px 4px;
   color: var(--ntc-blue-dark) !important;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .ntc-text-link svg {
@@ -373,7 +377,8 @@
   gap: 11px;
   padding: 16px 0;
   border-bottom: 1px solid var(--ntc-line);
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 1.5;
 }
 
@@ -445,8 +450,8 @@
   background: transparent;
   color: var(--ntc-muted);
   text-align: left;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .ntc-tabs button[aria-selected="true"] {
@@ -479,7 +484,8 @@
   gap: 10px;
   padding: 12px 0;
   border-bottom: 1px solid var(--ntc-line);
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .ntc-tab-panel li::before {
@@ -524,7 +530,7 @@
 
 .ntc-tool-grid p {
   margin-bottom: 0;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .ntc-tool-grid > a > svg {
@@ -584,8 +590,8 @@
   border-radius: 14px;
   background: #fff;
   color: var(--ntc-blue-dark) !important;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   white-space: nowrap;
   transition: transform 0.2s ease;
 }
@@ -650,10 +656,6 @@
 }
 
 @media (max-width: 620px) {
-  .ntc-shell {
-    width: min(100% - 40px, 1180px);
-  }
-
   .ntc-section {
     padding: 64px 0;
   }
