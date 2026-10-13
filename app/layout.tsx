@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Barlow, Geist_Mono } from "next/font/google";
+import { ChatWidget } from "@/components/chatbot/ChatWidget";
 import { CookieConsent } from "@/components/CookieConsent";
 import { GoogleAnalyticsConsentGate } from "@/components/GoogleAnalyticsConsentGate";
 import "./globals.css";
@@ -50,6 +51,7 @@ export default function RootLayout({
         <WithChunkLoadProtection>{children}</WithChunkLoadProtection>
         <GoogleAnalyticsConsentGate />
         <CookieConsent />
+        <ChatWidget />
       </body>
     </html>
   );
