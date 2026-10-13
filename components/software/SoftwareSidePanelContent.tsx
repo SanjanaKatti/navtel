@@ -31,7 +31,7 @@ const SoftwareSidePanelContent: React.FC<SoftwareSidePanelContentProps> = ({
               >
                 <span className="text-lg font-semibold">{section.title}</span>
                 <svg
-                  className={`w-5 h-5 transition-transform ${index === activeSectionIndex ? "rotate-90" : ""}`}
+                  className={`w-5 h-5 transition-transform${index === activeSectionIndex ? " rotate-90" : ""}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

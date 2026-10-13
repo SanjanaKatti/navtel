@@ -3,7 +3,9 @@ import React, { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Check, Minus } from "phosphor-react";
+import { ArrowLeft, Check, Minus } from "lucide-react";
+import "../../../components/series/series-page.css";
+import "./compare-page.css";
 import Link from "next/link";
 import comparisonData from "@/data/comparison.json";
 
@@ -555,22 +557,21 @@ const ComparisonContent = () => {
 
   if (!isMounted) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="text-body">Loading…</div>
+      <div className="cmp-state">
+        <p>Loading…</p>
       </div>
     );
   }
 
   if (selectedDevices.length === 0) {
     return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
-        <h2 className="text-h2 mb-4">No devices selected for comparison</h2>
-        <p className="text-body mb-8">
-          Please go back and select at least one device to compare.
-        </p>
+      <div className="cmp-state">
+        <p className="sp-eyebrow">DEVICE COMPARISON</p>
+        <h2>No devices selected for comparison</h2>
+        <p>Please go back and select at least one device to compare.</p>
         <Link
           href="/products/tracking-devices/start-series"
-          className="bg-brand-navy text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-primary transition-colors"
+          className="sp-button sp-button-primary"
         >
           Back to Lineup
         </Link>
@@ -579,188 +580,150 @@ const ComparisonContent = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="flex items-center justify-between mb-12">
-        <button
-          onClick={() => router.back()}
-          className="flex items-center gap-2 text-brand-navy font-bold hover:text-brand-primary transition-colors group"
-        >
-          <ArrowLeft
-            size={20}
-            className="group-hover:-translate-x-1 transition-transform"
-          />
-          Back to Lineup
-        </button>
-        <h1 className="text-h1">
-          Device <span className="text-brand-primary">Comparison</span>
-        </h1>
-        <div className="w-24"></div> {/* Spacer for centering */}
-      </div>
-
-      <div className="flex items-center justify-end mb-4">
-        <label className="inline-flex items-center gap-3 select-none cursor-pointer">
-          <input
-            type="checkbox"
-            checked={showDifferencesOnly}
-            onChange={(e) => setShowDifferencesOnly(e.target.checked)}
-            className="h-4 w-4 accent-[#28398c]"
-          />
-          <span className="text-body-sm font-bold text-brand-navy/70">
-            Show differences only
-          </span>
-        </label>
-      </div>
-
-      <div className="bg-white rounded-[3rem] shadow-2xl shadow-brand-navy/5 border border-gray-100 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse table-fixed">
-            <thead>
-              <tr className="border-b border-gray-100">
-                <th className="px-3 sm:px-6 lg:px-8 py-6 text-left bg-gray-50/50 min-w-[140px] sm:min-w-[180px]">
-                  <p className="text-label">Parameters</p>
-                </th>
-                {selectedDevices.map((device, idx) => (
-                  <th
-                    key={idx}
-                    className="px-3 sm:px-6 lg:px-8 py-6 text-center align-bottom min-w-[140px] sm:min-w-[200px] lg:min-w-[220px] border-l border-gray-100 last:pr-3 sm:last:pr-6 lg:last:pr-10"
-                  >
-                    <div className="space-y-3 sm:space-y-4">
-                      <div
-                        className={`inline-block max-lg:whitespace-nowrap px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
-                          String(device.connectivity)
-                            .toLowerCase()
-                            .includes("2g")
-                            ? "bg-gray-100 text-gray-600 border-gray-200"
-                            : "bg-blue-100 text-blue-800 border-blue-200"
-                        }`}
-                      >
-                        {device.connectivity} Network
-                      </div>
-                      <h3 className="text-h3 text-xl lg:text-3xl max-lg:whitespace-nowrap">
-                        {device.name}
-                      </h3>
-                      <p className="text-label text-gray-400 max-lg:whitespace-nowrap">
-                        {device.series}
-                      </p>
-                      <Link
-                        href={trackingDeviceDetailHref(device.name)}
-                        className="inline-block max-lg:whitespace-nowrap text-xs font-black text-brand-navy hover:text-brand-primary transition-colors underline underline-offset-4"
-                      >
-                        View Details
-                      </Link>
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {visibleRows.map((row, rIdx) => {
-                if (row.type === "section") {
-                  return (
-                    <tr
-                      key={`section-${rIdx}`}
-                      className="border-b border-gray-100"
-                    >
-                      <td
-                        colSpan={selectedDevices.length + 1}
-                        className="p-6 bg-gray-100"
-                      >
-                        <p className="text-h3 text-brand-navy">{row.label}</p>
-                      </td>
-                    </tr>
-                  );
-                }
-
-                const param = row.label;
-                return (
-                  <tr
-                    key={`param-${rIdx}-${param}`}
-                    className="border-b border-gray-100 group hover:bg-gray-50/30 transition-colors"
-                  >
-                    <td className="px-3 sm:px-6 lg:px-8 py-5 bg-gray-50/50">
-                      <p className="text-body-sm font-bold text-brand-navy/60">
-                        {param}
-                      </p>
-                    </td>
-                    {selectedDevices.map((device, dIdx) => {
-                      const value = device.specs[param];
-
-                      const isEmpty =
-                        value === null ||
-                        value === undefined ||
-                        value === "-" ||
-                        (typeof value === "string" && value.trim() === "");
-
-                      return (
-                        <td
-                          key={`${device.name}-${param}-${dIdx}`}
-                          className="px-3 sm:px-6 lg:px-8 py-5 text-center border-l border-gray-100 last:pr-3 sm:last:pr-6 lg:last:pr-10"
-                        >
-                          {typeof value === "boolean" ? (
-                            value ? (
-                              <div className="flex flex-col items-center gap-2">
-                                <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-1">
-                                  <Check size={14} weight="bold" />
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="flex flex-col items-center gap-2">
-                                <Minus
-                                  size={20}
-                                  weight="bold"
-                                  className="text-gray-500"
-                                />
-                              </div>
-                            )
-                          ) : !isEmpty ? (
-                            <span className="text-body-sm font-bold text-brand-navy">
-                              {String(value)}
-                            </span>
-                          ) : (
-                            <div className="flex flex-col items-center gap-2">
-                              <Minus
-                                size={20}
-                                weight="bold"
-                                className="text-gray-500"
-                              />
-                            </div>
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+    <>
+      <section className="sp-hero cmp-hero">
+        <div className="sp-grid-pulses" aria-hidden="true">
+          <i />
+          <i />
+          <i />
         </div>
-      </div>
+        <div className="sp-shell cmp-hero-inner">
+          <button type="button" onClick={() => router.back()} className="sp-back cmp-back">
+            <ArrowLeft aria-hidden="true" />
+            Back to Lineup
+          </button>
+          <p className="sp-eyebrow">SIDE BY SIDE</p>
+          <h1>
+            Device <span>Comparison</span>
+          </h1>
+          <p className="sp-lead">
+            Comparing {selectedDevices.length}{" "}
+            {selectedDevices.length === 1 ? "device" : "devices"}:{" "}
+            {selectedDevices.map((device) => device.name).join(" · ")}
+          </p>
+        </div>
+      </section>
 
-      <div className="mt-12 text-center">
-        <p className="text-body-sm text-gray-400">
-          * Specifications are subject to change. Please contact support for the
-          most up-to-date information.
-        </p>
-      </div>
-    </div>
+      <section className="sp-section cmp-section-wrap">
+        <div className="sp-shell">
+          <div className="cmp-toolbar">
+            <label className="cmp-toggle">
+              <input
+                type="checkbox"
+                checked={showDifferencesOnly}
+                onChange={(e) => setShowDifferencesOnly(e.target.checked)}
+              />
+              <span className="cmp-toggle-track" aria-hidden="true" />
+              <span>Show differences only</span>
+            </label>
+          </div>
+
+          <div className="cmp-card">
+            <div className="cmp-scroll">
+              <table className="cmp-table">
+                <thead>
+                  <tr>
+                    <th className="cmp-param-head" scope="col">
+                      Parameters
+                    </th>
+                    {selectedDevices.map((device, idx) => (
+                      <th key={idx} scope="col" className="cmp-device-head">
+                        <span
+                          className={`cmp-pill ${
+                            String(device.connectivity).toLowerCase().includes("2g")
+                              ? ""
+                              : "cmp-pill-4g"
+                          }`}
+                        >
+                          {device.connectivity} Network
+                        </span>
+                        <strong>{device.name}</strong>
+                        <small>{device.series}</small>
+                        <Link href={trackingDeviceDetailHref(device.name)}>
+                          View details
+                        </Link>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {visibleRows.map((row, rIdx) => {
+                    if (row.type === "section") {
+                      return (
+                        <tr key={`section-${rIdx}`} className="cmp-section-row">
+                          <td colSpan={selectedDevices.length + 1}>{row.label}</td>
+                        </tr>
+                      );
+                    }
+
+                    const param = row.label;
+                    return (
+                      <tr key={`param-${rIdx}-${param}`}>
+                        <th scope="row" className="cmp-param">
+                          {param}
+                        </th>
+                        {selectedDevices.map((device, dIdx) => {
+                          const value = device.specs[param];
+
+                          const isEmpty =
+                            value === null ||
+                            value === undefined ||
+                            value === "-" ||
+                            (typeof value === "string" && value.trim() === "");
+
+                          return (
+                            <td key={`${device.name}-${param}-${dIdx}`}>
+                              {typeof value === "boolean" ? (
+                                value ? (
+                                  <span className="cmp-yes" aria-label="Supported">
+                                    <Check aria-hidden="true" />
+                                  </span>
+                                ) : (
+                                  <Minus className="cmp-no" aria-label="Not available" />
+                                )
+                              ) : !isEmpty ? (
+                                <span className="cmp-value">{String(value)}</span>
+                              ) : (
+                                <Minus className="cmp-no" aria-label="Not available" />
+                              )}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p className="cmp-note">
+            * Specifications are subject to change. Please contact support for
+            the most up-to-date information.
+          </p>
+        </div>
+      </section>
+    </>
   );
 };
 
 const ComparisonPage = () => {
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased text-brand-navy">
+    <div className="min-h-screen bg-white font-sans antialiased text-brand-navy">
       <Navbar />
-      <main className="pt-20">
-        <Suspense
-          fallback={
-            <div className="min-h-screen flex items-center justify-center">
-              Loading...
-            </div>
-          }
-        >
-          <ComparisonContent />
-        </Suspense>
-      </main>
+      <div className="sp-page cmp-page">
+        <main>
+          <Suspense
+            fallback={
+              <div className="cmp-state">
+                <p>Loading…</p>
+              </div>
+            }
+          >
+            <ComparisonContent />
+          </Suspense>
+        </main>
+      </div>
       <Footer />
     </div>
   );

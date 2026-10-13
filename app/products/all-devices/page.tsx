@@ -4,7 +4,8 @@ import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import Image from "next/image";
 import Footer from "@/components/Footer";
-import { Check, X, Funnel } from "phosphor-react";
+import { Check, X, Funnel, ArrowRight } from "phosphor-react";
+import "./all-devices-page.css";
 
 interface Device {
   name: string;
@@ -597,196 +598,169 @@ const AllDevicesPage = () => {
 
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-sans antialiased text-brand-navy">
+    <div className="ad-page min-h-screen font-sans antialiased">
       <Navbar />
 
-      <main className="pt-20">
-        {/* Hero Section */}
-        <section className="relative h-[calc(100vh-5rem)] min-h-[calc(100dvh-5rem)] flex items-center overflow-hidden bg-brand-light-3 product-background-image all-devices-hero-background">
-          <div className="absolute inset-0 z-40 w-full max-w-[1440px] mx-auto px-[clamp(1rem,2.4vw,2.5rem)] flex items-start lg:items-center pt-4 sm:pt-6 lg:pt-0">
-            <div className="text-left max-w-lg">
-              <p className="text-caption mb-4 text-brand-navy">
-                COMPLETE CATALOG
-              </p>
-              <h1 className="text-h1 mb-6">Explore All Devices</h1>
-              <p className="text-body-lg text-brand-navy">
+      <main>
+        <section className="ad-hero">
+          <div className="ad-hero-grid" aria-hidden="true" />
+          <div className="ad-shell ad-hero-layout">
+            <div className="ad-hero-copy">
+              <p className="ad-eyebrow">COMPLETE CATALOG</p>
+              <h1>Explore All Devices</h1>
+              <p className="ad-lead">
                 Filter through our entire range of START, SMART, and SIGNAL
                 series trackers to find the perfect fit for your project.
               </p>
             </div>
+            <div className="ad-hero-stage">
+              <div className="ad-stage-glow" aria-hidden="true" />
+              <span className="ad-pulse" aria-hidden="true" />
+              <span className="ad-pulse" aria-hidden="true" />
+              <span className="ad-pulse" aria-hidden="true" />
+              <div className="ad-stage-floor" aria-hidden="true" />
+              <Link
+                href="/products/tracking-devices/start-series"
+                className="ad-unit ad-unit-start"
+                tabIndex={-1}
+                aria-hidden="true"
+              >
+                <img src="/tracking-devices/start-hero.png" alt="" />
+              </Link>
+              <Link
+                href="/products/tracking-devices/signal-series"
+                className="ad-unit ad-unit-signal"
+                tabIndex={-1}
+                aria-hidden="true"
+              >
+                <img src="/tracking-devices/signal-hero.png" alt="" />
+              </Link>
+              <Link
+                href="/products/tracking-devices/smart-series"
+                className="ad-unit ad-unit-smart"
+                tabIndex={-1}
+                aria-hidden="true"
+              >
+                <img src="/tracking-devices/smart-hero.png" alt="" />
+              </Link>
+              <nav className="ad-stage-tags" aria-label="Browse by series">
+                <Link href="/products/tracking-devices/start-series" className="ad-tag-start">
+                  <i />START<ArrowRight size={12} weight="bold" />
+                </Link>
+                <Link href="/products/tracking-devices/smart-series" className="ad-tag-smart">
+                  <i />SMART<ArrowRight size={12} weight="bold" />
+                </Link>
+                <Link href="/products/tracking-devices/signal-series" className="ad-tag-signal">
+                  <i />SIGNAL<ArrowRight size={12} weight="bold" />
+                </Link>
+              </nav>
+            </div>
           </div>
         </section>
 
-        {/* Quick Filters (Old Style) */}
-        <section className="py-8 bg-[#F8FAFC] border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap justify-center gap-8">
-              {/* Series Quick Filter */}
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-black uppercase tracking-widest text-gray-400">
-                  Series:
-                </span>
-                <div className="flex bg-white p-1 rounded-xl border border-gray-200 shadow-sm">
-                  {["all", "start", "smart", "signal"].map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => setQuickSeries(s)}
-                      className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
-                        quickSeries === s
-                          ? "bg-brand-navy text-white shadow-md"
-                          : "text-gray-500 hover:text-brand-navy"
-                      }`}
-                    >
-                      {s.toUpperCase()}
-                    </button>
-                  ))}
-                </div>
+        <section className="ad-toolbar">
+          <div className="ad-shell ad-toolbar-inner">
+            <div className="ad-toolbar-group">
+              <span className="ad-toolbar-label">SERIES</span>
+              <div className="ad-chip-row">
+                {["all", "start", "smart", "signal"].map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setQuickSeries(s)}
+                    className={`ad-chip${quickSeries === s ? " is-active" : ""}`}
+                  >
+                    {s.toUpperCase()}
+                  </button>
+                ))}
               </div>
-
-              {/* Network Quick Filter */}
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-black uppercase tracking-widest text-gray-400">
-                  Network:
-                </span>
-                <div className="flex bg-white p-1 rounded-xl border border-gray-200 shadow-sm">
-                  {["all", "2g", "4g"].map((n) => (
-                    <button
-                      key={n}
-                      onClick={() => setQuickNetwork(n)}
-                      className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
-                        quickNetwork === n
-                          ? "bg-brand-navy text-white shadow-md"
-                          : "text-gray-500 hover:text-brand-navy"
-                      }`}
-                    >
-                      {n.toUpperCase()}
-                    </button>
-                  ))}
-                </div>
+            </div>
+            <div className="ad-toolbar-group">
+              <span className="ad-toolbar-label">NETWORK</span>
+              <div className="ad-chip-row">
+                {["all", "2g", "4g"].map((n) => (
+                  <button
+                    key={n}
+                    onClick={() => setQuickNetwork(n)}
+                    className={`ad-chip${quickNetwork === n ? " is-active" : ""}`}
+                  >
+                    {n.toUpperCase()}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Desktop Filters Sidebar */}
-            <aside className="hidden lg:block w-72 flex-shrink-0 space-y-8">
-              <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm sticky top-28">
-                <div className="flex items-center justify-between mb-8">
-                  <h2 className="text-h3 flex items-center gap-2">
-                    <Funnel
-                      size={20}
-                      weight="bold"
-                      className="text-brand-primary"
-                    />
-                    Filters
-                  </h2>
-                  <button
-                    onClick={resetFilters}
-                    className="text-xs font-bold text-gray-400 hover:text-brand-primary transition-colors"
-                  >
-                    RESET
-                  </button>
-                </div>
-
-                <div className="space-y-6 overflow-y-auto max-h-[calc(100vh-350px)] pr-2 custom-scrollbar">
-                  {Object.entries(filterOptions).map(([key, options]) => (
-                    <div key={key} className="space-y-3">
-                      <h3 className="text-label text-brand-navy/60">{key}</h3>
-                      <div className="space-y-2">
-                        {options.map((option) => {
-                          const filterKey = key as keyof typeof filters;
-                          return (
-                            <label
-                              key={option}
-                              className="flex items-center gap-3 cursor-pointer group"
-                            >
-                              <div
-                                onClick={() => toggleFilter(filterKey, option)}
-                                className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
-                                  filters[filterKey].includes(option)
-                                    ? "bg-brand-primary border-brand-primary text-white"
-                                    : "border-gray-200 group-hover:border-brand-primary"
-                                }`}
-                              >
-                                {filters[filterKey].includes(option) && (
-                                  <Check size={12} weight="bold" />
-                                )}
-                              </div>
-                              <span className="text-body-sm group-hover:text-brand-navy transition-colors">
-                                {option}
-                              </span>
-                            </label>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+        <div className="ad-shell ad-catalog">
+          <div className="ad-layout">
+            <aside className="ad-filters">
+              <div className="ad-filters-head">
+                <h2>
+                  <Funnel size={18} weight="bold" />
+                  Filters
+                </h2>
+                <button type="button" onClick={resetFilters} className="ad-reset">
+                  Reset
+                </button>
+              </div>
+              <div className="ad-filter-list">
+                {Object.entries(filterOptions).map(([key, options]) => (
+                  <div key={key} className="ad-filter-group">
+                    <h3>{key}</h3>
+                    {options.map((option) => {
+                      const filterKey = key as keyof typeof filters;
+                      const on = filters[filterKey].includes(option);
+                      return (
+                        <label key={option} className="ad-check">
+                          <div
+                            onClick={() => toggleFilter(filterKey, option)}
+                            className={`ad-box${on ? " is-on" : ""}`}
+                          >
+                            {on && <Check size={12} weight="bold" />}
+                          </div>
+                          <span>{option}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                ))}
               </div>
             </aside>
 
-            {/* Mobile Filter Button */}
             <button
+              type="button"
               onClick={() => setIsFilterOpen(true)}
-              className="lg:hidden w-full bg-white p-4 rounded-full border border-gray-200 flex items-center justify-center gap-2 font-bold text-brand-navy shadow-sm mb-8"
+              className="ad-mobile-filters"
             >
-              <Funnel size={20} weight="bold" />
-              Detailed Filters ({Object.values(filters).flat().length})
+              <Funnel size={18} weight="bold" />
+              Detailed filters ({Object.values(filters).flat().length})
             </button>
 
-            {/* Devices Grid */}
-            <div className="flex-1">
-              <div className="flex items-center justify-between mb-8">
-                <p className="text-body-sm font-bold text-gray-400">
-                  SHOWING{" "}
-                  <span className="text-brand-navy">
-                    {sortedDevices.length}
-                  </span>{" "}
-                  DEVICES
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                {sortedDevices.map((device) => (
-                  <div
-                    key={device.name}
-                    className="bg-gray-50/50 flex flex-col border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden group relative"
-                  >
-                    <div className="p-10 pb-0 flex flex-col items-start">
-                      {/* Compare Checkbox */}
-                      <div className="absolute top-6 right-6 z-10">
+            <div className="ad-results">
+              <p className="ad-count">
+                SHOWING <strong>{sortedDevices.length}</strong> DEVICES
+              </p>
+              <div className="ad-grid">
+                {sortedDevices.map((device) => {
+                  const selected = selectedDevices.some((d) => d.name === device.name);
+                  return (
+                    <article key={device.name} className="ad-card">
+                      <div className="ad-card-top">
+                        <span className="ad-series">{device.series} SERIES</span>
                         <button
+                          type="button"
                           onClick={() => handleCompareToggle(device)}
-                          className={`w-7 h-7 rounded-full border-2 flex items-center justify-center transition-colors duration-200 ${
-                            selectedDevices.some((d) => d.name === device.name)
-                              ? "bg-brand-primary border-brand-primary text-white"
-                              : "bg-white border-gray-300 text-transparent hover:border-brand-primary"
-                          }`}
+                          className={`ad-compare${selected ? " is-on" : ""}`}
+                          aria-label={`Compare ${device.name}`}
                         >
-                          {selectedDevices.some(
-                            (d) => d.name === device.name,
-                          ) && <Check size={16} weight="bold" />}
+                          {selected && <Check size={14} weight="bold" />}
                         </button>
                       </div>
-
-                      {/* Series Badge */}
-                      <div className="mb-6 mt-2">
-                        <span className="px-3 py-1 bg-brand-light-3 text-brand-navy text-[10px] font-black uppercase tracking-widest rounded-full">
-                          {device.series} SERIES
-                        </span>
-                      </div>
-
-                      {/* Device name + hardware visualization */}
-                      <h3 className="text-3xl font-black tracking-widest uppercase text-brand-navy mb-4 leading-none">
-                        {device.name}
-                      </h3>
-                      <div className="w-full aspect-[4/3] mb-4 bg-[#EFEFEF] rounded-2xl flex items-center justify-center relative overflow-hidden">
+                      <h3>{device.name}</h3>
+                      <div className="ad-visual">
                         <Image
                           src={
-                            device.series === "START" &&
-                            startModelImages[device.name]
+                            device.series === "START" && startModelImages[device.name]
                               ? startModelImages[device.name]
                               : seriesImages[device.series]
                           }
@@ -795,9 +769,7 @@ const AllDevicesPage = () => {
                           className="object-contain object-bottom"
                         />
                       </div>
-
-                      {/* Specs Summary */}
-                      <div className="space-y-4 mb-10 w-full">
+                      <div className="ad-specs">
                         {(device.cardDisplay
                           ? [
                               device.cardDisplay.connectivity,
@@ -808,52 +780,23 @@ const AllDevicesPage = () => {
                           : [
                               device.connectivity,
                               `${device.inputs}, ${device.outputs}`,
-                              [...device.interfaces, device.bluetooth]
-                                .filter(Boolean)
-                                .join(", ") || device.bluetooth,
-                              device.battery === "—"
-                                ? "No battery"
-                                : `Battery ${device.battery}`,
+                              [...device.interfaces, device.bluetooth].filter(Boolean).join(", ") || device.bluetooth,
+                              device.battery === "—" ? "No battery" : `Battery ${device.battery}`,
                             ]
-                        ).map((line, i) => (
-                          <div key={i} className="flex items-center gap-2">
-                            <div className="w-2 h-2 rounded-full bg-brand-primary flex-shrink-0" />
-                            <span className="text-body-sm text-gray-500 line-clamp-2">
-                              {line}
-                            </span>
-                          </div>
+                        ).map((line) => (
+                          <p key={line}><i />{line}</p>
                         ))}
                       </div>
-                    </div>
-
-                    <div className="p-10 pt-0 mt-auto">
-                      <Link
-                        href={device.href}
-                        className="w-full bg-brand-navy text-white py-5 rounded-full font-black text-sm hover:bg-brand-primary transition-all text-center block uppercase tracking-widest shadow-xl shadow-brand-navy/10 transform hover:-translate-y-1 active:scale-95"
-                      >
-                        Learn More
-                      </Link>
-                    </div>
-                  </div>
-                ))}
+                      <Link href={device.href} className="ad-more">Learn more</Link>
+                    </article>
+                  );
+                })}
               </div>
-
               {filteredDevices.length === 0 && (
-                <div className="text-center py-20 bg-white rounded-[3rem] border border-dashed border-gray-200">
-                  <Funnel
-                    size={48}
-                    weight="light"
-                    className="mx-auto text-gray-200 mb-4"
-                  />
-                  <p className="text-body-lg text-gray-400">
-                    No devices match your selected filters.
-                  </p>
-                  <button
-                    onClick={resetFilters}
-                    className="mt-6 text-brand-primary font-bold hover:underline"
-                  >
-                    Clear all filters
-                  </button>
+                <div className="ad-empty">
+                  <Funnel size={40} weight="light" />
+                  <p>No devices match your selected filters.</p>
+                  <button type="button" onClick={resetFilters}>Clear all filters</button>
                 </div>
               )}
             </div>
@@ -863,104 +806,71 @@ const AllDevicesPage = () => {
 
       {/* Mobile Filter Modal */}
       {isFilterOpen && (
-        <div className="fixed inset-0 z-[100] lg:hidden">
-          <div
-            className="absolute inset-0 bg-brand-navy/80 backdrop-blur-sm"
-            onClick={() => setIsFilterOpen(false)}
-          ></div>
-          <div className="absolute inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
-            <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-              <h2 className="text-h3">Filters</h2>
-              <button
-                onClick={() => setIsFilterOpen(false)}
-                className="p-2 hover:bg-gray-100 rounded-full"
-              >
-                <X size={24} weight="bold" />
+        <div className="ad-sheet">
+          <div className="ad-sheet-backdrop" onClick={() => setIsFilterOpen(false)} />
+          <div className="ad-sheet-panel">
+            <div className="ad-sheet-head">
+              <h2>Filters</h2>
+              <button type="button" onClick={() => setIsFilterOpen(false)} aria-label="Close filters">
+                <X size={18} weight="bold" />
               </button>
             </div>
-            <div className="flex-1 overflow-y-auto p-6 space-y-8">
+            <div className="ad-sheet-body">
               {Object.entries(filterOptions).map(([key, options]) => (
-                <div key={key} className="space-y-4">
-                  <h3 className="text-label text-brand-navy/60">{key}</h3>
-                  <div className="space-y-3">
-                    {options.map((option) => {
-                      const filterKey = key as keyof typeof filters;
-                      return (
-                        <label key={option} className="flex items-center gap-3">
-                          <div
-                            onClick={() => toggleFilter(filterKey, option)}
-                            className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all ${
-                              filters[filterKey].includes(option)
-                                ? "bg-brand-primary border-brand-primary text-white"
-                                : "border-gray-200"
-                            }`}
-                          >
-                            {filters[filterKey].includes(option) && (
-                              <Check size={14} weight="bold" />
-                            )}
-                          </div>
-                          <span className="text-body">{option}</span>
-                        </label>
-                      );
-                    })}
-                  </div>
+                <div key={key} className="ad-filter-group">
+                  <h3>{key}</h3>
+                  {options.map((option) => {
+                    const filterKey = key as keyof typeof filters;
+                    const on = filters[filterKey].includes(option);
+                    return (
+                      <label key={option} className="ad-check">
+                        <div
+                          onClick={() => toggleFilter(filterKey, option)}
+                          className={`ad-box${on ? " is-on" : ""}`}
+                        >
+                          {on && <Check size={12} weight="bold" />}
+                        </div>
+                        <span>{option}</span>
+                      </label>
+                    );
+                  })}
                 </div>
               ))}
             </div>
-            <div className="p-6 border-t border-gray-100">
-              <button
-                onClick={() => setIsFilterOpen(false)}
-                className="w-full py-4 bg-brand-navy text-white rounded-full font-black uppercase tracking-widest"
-              >
-                Apply Filters
+            <div className="ad-sheet-foot">
+              <button type="button" onClick={() => setIsFilterOpen(false)} className="ad-apply">
+                Apply filters
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Floating Compare Bar */}
       {selectedDevices.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-brand-navy text-white p-4 z-50 shadow-lg">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="text-body-sm font-bold whitespace-nowrap">
-                Devices selected for comparison:
-              </span>
+        <div className="ad-compare-bar">
+          <div className="ad-shell ad-compare-inner">
+            <div className="ad-picks">
+              <p>Devices selected for comparison:</p>
               {selectedDevices.map((device) => (
-                <span
-                  key={device.name}
-                  className="bg-brand-primary text-white px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1"
-                >
+                <span key={device.name} className="ad-pick">
                   {device.name}
-                  <button
-                    onClick={() => handleCompareToggle(device)}
-                    className="ml-1 text-white/80 hover:text-white"
-                  >
+                  <button type="button" onClick={() => handleCompareToggle(device)} aria-label={`Remove ${device.name}`}>
                     <X size={12} weight="bold" />
                   </button>
                 </span>
               ))}
               {selectedDevices.length < 4 && (
-                <span className="text-body-sm text-gray-400">
-                  Select up to {4 - selectedDevices.length} more
-                </span>
+                <span className="ad-more-note">Select up to {4 - selectedDevices.length} more</span>
               )}
             </div>
-            <div className="flex items-center gap-3">
+            <div className="ad-compare-actions">
               <Link
-                href={`/products/compare?devices=${selectedDevices
-                  .map((d) => d.name)
-                  .join(",")}`}
-                className="bg-white text-brand-navy px-6 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition-colors whitespace-nowrap"
+                href={`/products/compare?devices=${selectedDevices.map((d) => d.name).join(",")}`}
+                className="ad-compare-go"
               >
-                Compare Now ({selectedDevices.length})
+                Compare now ({selectedDevices.length})
               </Link>
-              <button
-                type="button"
-                onClick={handleCompareCancel}
-                className="px-5 py-2 rounded-full border border-white/70 text-sm font-bold text-white hover:bg-white/10 transition-colors whitespace-nowrap"
-              >
+              <button type="button" onClick={handleCompareCancel} className="ad-compare-cancel">
                 Cancel
               </button>
             </div>

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "GPS Tracking Devices",
   description:
-    "Comprehensive range of Navtelecom telematics devices for fleet management, asset tracking, and vehicle monitoring. START, SMART, and SIGNAL series.",
+    "Comprehensive range of telematics devices designed for fleet management, vehicle tracking, fuel monitoring and industrial automation.",
   keywords: [
     "GPS trackers",
     "telematics hardware",

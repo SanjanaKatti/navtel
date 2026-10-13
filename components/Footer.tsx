@@ -1,11 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { X, EnvelopeSimple, LinkedinLogo, InstagramLogo } from "phosphor-react";
-import Image from "next/image";
+import { X } from "phosphor-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import LayoutContainer from "./LayoutContainer";
 import { FieldError } from "@/components/forms/FieldError";
 import {
   newsletterSchema,
@@ -13,9 +11,51 @@ import {
 } from "@/lib/validation/form-schemas";
 import { SuccessPopup } from "@/components/forms/SuccessPopup";
 import { submitToBrevo } from "@/lib/formspree/send-form";
+import "./footer.css";
 
-const footerLinkClass =
-  "text-sm text-white/70 hover:text-brand-primary transition-colors duration-200";
+const footerGroups = [
+  {
+    title: "Tracking devices",
+    links: [
+      ["Overview", "/products/tracking-devices"],
+      ["START Series", "/products/tracking-devices/start-series"],
+      ["SMART Series", "/products/tracking-devices/smart-series"],
+      ["SIGNAL Series", "/products/tracking-devices/signal-series"],
+      ["All devices", "/products/all-devices"],
+    ],
+  },
+  {
+    title: "Software",
+    links: [
+      ["All solutions", "/products/software-solutions"],
+      ["NTC Configurator", "/products/software-solutions/ntc-configurator"],
+      ["CAN Spy", "/products/software-solutions/can-spy"],
+      ["DRC", "/products/software-solutions/drc"],
+      ["NTC Control", "/products/software-solutions/ntc-control"],
+      ["Complex Events", "/products/software-solutions/complex-events"],
+      ["Eco Driving", "/products/software-solutions/eco-driving"],
+    ],
+  },
+  {
+    title: "Support & company",
+    links: [
+      ["About us", "/about"],
+      ["Support", "/support"],
+      ["FAQ", "/support/faq"],
+      ["Knowledge base", "/support/knowledge-base"],
+      ["Warranty", "/support/warranty"],
+      ["Contact us", "/contact"],
+    ],
+  },
+];
+
+function ArrowIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
 
 const Footer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -74,31 +114,18 @@ const Footer = () => {
     }`;
 
   return (
-    <div className="relative bg-brand-navy text-white border-t border-white/10">
-      {/* Newsletter — kept per product request */}
-      <section className="relative">
-        <LayoutContainer className="relative py-14 sm:py-16 md:py-20">
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-label text-brand-primary mb-3 sm:mb-4">
-              Stay in the loop
-            </p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4 sm:mb-5">
-              Subscribe to our Newsletter
-            </h2>
-            <p className="text-body-sm sm:text-base text-white/75 mb-8 sm:mb-10 max-w-lg mx-auto leading-relaxed">
-              Stay updated with the latest news, product updates, and industry
-              insights.
-            </p>
-            <button
-              type="button"
-              onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center justify-center bg-brand-primary text-white px-10 sm:px-12 py-3.5 sm:py-4 font-black text-sm sm:text-base tracking-wide rounded-full hover:brightness-110 transition-all shadow-lg shadow-brand-primary/25 hover:shadow-brand-primary/40 hover:-translate-y-0.5 active:scale-[0.98]"
-            >
-              SUBSCRIBE NOW
-            </button>
+    <footer className="nt-footer">
+      <div className="nt-footer-shell">
+        <section className="nt-footer-newsletter" aria-labelledby="newsletter-title">
+          <div>
+            <p className="nt-footer-eyebrow">STAY IN THE LOOP</p>
+            <h2 id="newsletter-title">Subscribe to our Newsletter</h2>
+            <p>Stay updated with the latest news, product updates and industry insights.</p>
           </div>
-        </LayoutContainer>
-      </section>
+          <button type="button" className="nt-footer-subscribe" onClick={() => setIsModalOpen(true)}>
+            Subscribe now <ArrowIcon />
+          </button>
+        </section>
 
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -261,285 +288,50 @@ const Footer = () => {
         </div>
       )}
 
-      <footer className="relative">
-        <LayoutContainer className="py-14 sm:py-16 lg:py-20">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 pb-12 lg:pb-16 border-b border-white/10">
-            {/* Brand — mirrors navbar trust, inverted for dark ground */}
-            <div className="lg:col-span-3 space-y-5">
-              <Link href="/" className="inline-block">
-                <div className="relative h-11 w-44 sm:h-12 sm:w-48 brightness-0 invert opacity-95 hover:opacity-100 transition-opacity">
-                  <Image
-                    src="/Navtelecom/Navtelecom_logo.svg"
-                    alt="Navtelecom"
-                    fill
-                    className="object-contain object-left"
-                  />
-                </div>
-              </Link>
-              <p className="text-sm text-white/65 leading-relaxed max-w-sm">
-                Developer and manufacturer of professional telematics hardware
-                and software for fleet management, asset tracking, and
-                industrial integration.
-              </p>
-              <div className="flex items-center gap-3 pt-1">
-                <a
-                  href="https://www.linkedin.com/company/navtelecom"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 hover:border-brand-primary hover:text-brand-primary transition-colors"
-                  aria-label="LinkedIn"
-                >
-                  <LinkedinLogo size={22} weight="fill" />
-                </a>
-                <a
-                  href="https://www.instagram.com/navtelecom?igsh=OWRkZ3kyOG5mdjZq"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 hover:border-brand-primary hover:text-brand-primary transition-colors"
-                  aria-label="Instagram"
-                >
-                  <InstagramLogo size={22} weight="regular" />
-                </a>
-              </div>
-            </div>
-
-            {/* Tracking — aligned with Products dropdown */}
-            <div className="lg:col-span-2">
-              <h3 className="text-label text-brand-primary mb-4 sm:mb-5">
-                Tracking devices
-              </h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link
-                    href="/products/tracking-devices"
-                    className={footerLinkClass}
-                  >
-                    Overview
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/products/tracking-devices/start-series"
-                    className={footerLinkClass}
-                  >
-                    START Series
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/products/tracking-devices/smart-series"
-                    className={footerLinkClass}
-                  >
-                    SMART Series
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/products/tracking-devices/signal-series"
-                    className={footerLinkClass}
-                  >
-                    SIGNAL Series
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/products/all-devices"
-                    className={footerLinkClass}
-                  >
-                    All devices
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Software — matches navbar submenu */}
-            <div className="lg:col-span-2">
-              <h3 className="text-label text-brand-primary mb-4 sm:mb-5">
-                Software
-              </h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link
-                    href="/products/software-solutions"
-                    className={footerLinkClass}
-                  >
-                    All solutions
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/products/software-solutions/ntc-configurator"
-                    className={footerLinkClass}
-                  >
-                    NTC Configurator
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/products/software-solutions/can-spy"
-                    className={footerLinkClass}
-                  >
-                    CAN SPY
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/products/software-solutions/drc"
-                    className={footerLinkClass}
-                  >
-                    DRC
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/products/software-solutions/ntc-control"
-                    className={footerLinkClass}
-                  >
-                    NTC Control
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/products/software-solutions/complex-events"
-                    className={footerLinkClass}
-                  >
-                    Complex Events
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/products/software-solutions/eco-driving"
-                    className={footerLinkClass}
-                  >
-                    Eco Driving
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Support + company */}
-            <div className="lg:col-span-2">
-              <h3 className="text-label text-brand-primary mb-4 sm:mb-5">
-                Support &amp; company
-              </h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link href="/about" className={footerLinkClass}>
-                    About us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/support" className={footerLinkClass}>
-                    Support
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/support/faq" className={footerLinkClass}>
-                    FAQ
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/support/knowledge-base"
-                    className={footerLinkClass}
-                  >
-                    Knowledge base
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/support/warranty" className={footerLinkClass}>
-                    Warranty
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className={footerLinkClass}>
-                    Contact us
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div className="lg:col-span-3">
-              <h3 className="text-label text-brand-primary mb-4 sm:mb-5">
-                Contact
-              </h3>
-              <ul className="space-y-4">
-                <li>
-                  <a
-                    href="mailto:sales@navtelecom-iot.com"
-                    className="group flex items-start gap-3 text-sm text-white/70 hover:text-brand-primary transition-colors"
-                  >
-                    <EnvelopeSimple
-                      className="mt-0.5 shrink-0 text-brand-primary/90 group-hover:text-brand-primary"
-                      size={20}
-                      weight="duotone"
-                    />
-                    <span className="leading-snug">
-                      <span className="block text-white/90 font-medium">Sales Department</span>
-                      <span className="whitespace-nowrap">
-                        sales@navtelecom-iot.com
-                      </span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="mailto:support@navtelecom.ru"
-                    className="group flex items-start gap-3 text-sm text-white/70 hover:text-brand-primary transition-colors"
-                  >
-                    <EnvelopeSimple
-                      className="mt-0.5 shrink-0 text-brand-primary/90 group-hover:text-brand-primary"
-                      size={20}
-                      weight="duotone"
-                    />
-                    <span className="leading-snug">
-                      <span className="block text-white/90 font-medium">Support</span>
-                      <span className="whitespace-nowrap">
-                        support@navtelecom.ru
-                      </span>
-                    </span>
-                  </a>
-                </li>
-              </ul>
-              <p className="mt-6 text-xs text-white/45 leading-relaxed">
-                For integration and technical questions, reach out via email or
-                your regional partner.
-              </p>
-            </div>
+        <div className="nt-footer-main">
+          <div className="nt-footer-brand">
+            <Link href="/" aria-label="Navtelecom home">
+              <img className="nt-footer-logo-image" src="/Navtelecom/logo-navtelecom-EN-light.png" alt="Navtelecom" />
+            </Link>
+            <p>Developer and manufacturer of professional telematics hardware and software for fleet management, asset tracking and industrial integration.</p>
           </div>
 
-          <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-white/50">
-            <p>© {new Date().getFullYear()} Navtelecom. All rights reserved.</p>
-            <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
-              <Link
-                href="/privacy"
-                className="hover:text-brand-primary transition-colors"
-              >
-                Privacy &amp; data
-              </Link>
-              <Link
-                href="/cookie-policy"
-                className="hover:text-brand-primary transition-colors"
-              >
-                Cookie policy
-              </Link>
-              <Link
-                href="/terms-of-use"
-                className="hover:text-brand-primary transition-colors"
-              >
-                Terms of use
-              </Link>
-            </div>
+          {footerGroups.map((group) => (
+            <nav className="nt-footer-column" aria-label={group.title} key={group.title}>
+              <h3>{group.title}</h3>
+              {group.links.map(([label, href]) => (
+                <Link href={href} key={label}>{label}</Link>
+              ))}
+            </nav>
+          ))}
+
+          <div className="nt-footer-column nt-footer-contact">
+            <h3>Contact</h3>
+            <span>Sales Department</span>
+            <a href="mailto:sales@navtelecom-iot.com">sales@navtelecom-iot.com</a>
+            <span>Support</span>
+            <a href="mailto:support@navtelecom.ru">support@navtelecom.ru</a>
+            <p>For integration and technical questions, reach out via email or your regional partner.</p>
           </div>
-        </LayoutContainer>
-      </footer>
+        </div>
+
+        <div className="nt-footer-bottom">
+          <p suppressHydrationWarning>
+            © {new Date().getFullYear()} Navtelecom. All rights reserved.
+          </p>
+          <nav aria-label="Legal links">
+            <Link href="/privacy">Privacy & data</Link>
+            <Link href="/cookie-policy">Cookie policy</Link>
+            <Link href="/terms-of-use">Terms of use</Link>
+          </nav>
+        </div>
+      </div>
 
       <SuccessPopup
         isOpen={showSuccessPopup}
         onClose={() => setShowSuccessPopup(false)}
       />
-    </div>
+    </footer>
   );
 };
 

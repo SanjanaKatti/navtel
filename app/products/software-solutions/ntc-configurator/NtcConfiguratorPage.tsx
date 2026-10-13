@@ -19,7 +19,7 @@ import {
   Scan,
   SlidersHorizontal,
 } from "phosphor-react";
-import "./ntc-configurator-test.css";
+import "./ntc-configurator.css";
 
 const DOWNLOADS_URL =
   "https://wiki.navtelecom.ru/en/home/ntc_configurator#downloads";
@@ -196,13 +196,13 @@ const platforms = [
   { name: "Linux", icon: LinuxIcon, className: "linux" },
 ];
 
-export default function NtcConfiguratorTest() {
+export default function NtcConfiguratorPage() {
   const [activeTab, setActiveTab] = useState(technicalTabs[0].id);
   const activeTechnicalTab =
     technicalTabs.find((tab) => tab.id === activeTab) ?? technicalTabs[0];
 
   return (
-    <div className="ntc-page pt-20">
+    <div className="ntc-page">
       <main>
         <section className="ntc-hero">
           <div className="ntc-shell ntc-hero-grid">

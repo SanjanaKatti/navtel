@@ -49,15 +49,23 @@ const products = [
   },
 ];
 
+const RECOMMEND_MESSAGE =
+  "I would like a device recommendation for my fleet.";
+
 const ProductLineup = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [inquiryIntent, setInquiryIntent] = useState<"sales" | "recommend">(
+    "sales",
+  );
 
   const {
     register,
     handleSubmit,
     reset,
     setError,
+    setValue,
+    getValues,
     clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<SalesInquiryFormValues>({
@@ -75,7 +83,10 @@ const ProductLineup = () => {
   const onSalesSubmit = async (data: SalesInquiryFormValues) => {
     clearErrors("root");
     const payload = {
-      formType: "Sales inquiry (product lineup)",
+      formType:
+        inquiryIntent === "recommend"
+          ? "Device recommendation"
+          : "Sales inquiry (product lineup)",
       fullName: data.fullName,
       userEmail: data.email,
       company: "—",
@@ -98,6 +109,14 @@ const ProductLineup = () => {
     }
   };
 
+  const openRecommend = () => {
+    setInquiryIntent("recommend");
+    if (!getValues("message")?.trim()) {
+      setValue("message", RECOMMEND_MESSAGE);
+    }
+    setIsModalOpen(true);
+  };
+
   const inputClass = (hasError: boolean) =>
     `w-full px-5 py-3.5 bg-brand-light-3 border rounded-xl focus:outline-none focus:bg-white transition-all text-body-sm ${
       hasError
@@ -115,6 +134,14 @@ const ProductLineup = () => {
           <h2 className="text-h1 px-2 sm:px-0">
             Device Series for Every Fleet
           </h2>
+          <div className="mt-8 flex items-center justify-center">
+            <Link
+              href="/products/all-devices"
+              className="inline-flex items-center justify-center bg-[#004A8C] text-white px-8 py-3.5 min-h-[48px] font-bold rounded-full hover:bg-[#003366] transition-colors shadow-lg shadow-blue-900/20 uppercase tracking-wider text-xs sm:text-sm"
+            >
+              Compare all devices
+            </Link>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
@@ -186,13 +213,14 @@ const ProductLineup = () => {
                   href={product.href}
                   className="w-full bg-[#004A8C] text-white py-3 sm:py-4 px-6 sm:px-8 font-bold rounded-full hover:bg-[#003366] transition-colors shadow-lg shadow-blue-900/20 flex items-center justify-center uppercase tracking-wider text-xs sm:text-sm"
                 >
-                  View Specifications
+                  {`Explore ${product.label.charAt(0)}${product.label.slice(1).toLowerCase()} Series`}
                 </Link>
                 <button
-                  onClick={() => setIsModalOpen(true)}
+                  type="button"
+                  onClick={openRecommend}
                   className="w-full bg-[#004A8C] text-white py-3 sm:py-4 px-6 sm:px-8 font-bold rounded-full hover:bg-[#003366] transition-colors shadow-lg shadow-blue-900/20 uppercase tracking-wider text-xs sm:text-sm"
                 >
-                  Contact Us
+                  Recommend a device
                 </button>
               </div>
             </div>
@@ -218,10 +246,21 @@ const ProductLineup = () => {
 
             <div className="text-center mb-10">
               <h2 className="text-h2 mb-3">
-                Contact <span className="text-brand-primary">Sales</span>
+                {inquiryIntent === "recommend" ? (
+                  <>
+                    Recommend a{" "}
+                    <span className="text-brand-primary">device</span>
+                  </>
+                ) : (
+                  <>
+                    Contact <span className="text-brand-primary">Sales</span>
+                  </>
+                )}
               </h2>
               <p className="text-body-sm">
-                Our team will get back to you shortly.
+                {inquiryIntent === "recommend"
+                  ? "Tell us about your fleet and we will suggest a suitable tracker."
+                  : "Our team will get back to you shortly."}
               </p>
             </div>
 

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Software Solutions",
   description:
-    "Professional software tools for Navtelecom devices – NTC Configurator, CAN SPY, DRC, Complex Events, NTC Control, and Eco Driving for configuration, diagnostics, and fleet management.",
+    "Configure devices, decode vehicle data, deploy updates, build custom logic and support fleet operations with a connected suite of Navtelecom tools.",
   keywords: [
     "NTC Configurator",
     "CAN SPY",

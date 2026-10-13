@@ -3,11 +3,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "NTC Control Mobile App",
   description:
-    "NTC Control – configure and validate Navtelecom devices directly from your smartphone. Efficient on-site setup and device management.",
+    "Configure, diagnose and service supported Navtelecom devices locally or remotely from your smartphone, without carrying a laptop.",
   keywords: [
     "NTC Control",
     "mobile app",
-    "smartphone device config",
+    "Bluetooth",
+    "device configuration",
   ],
 };
 

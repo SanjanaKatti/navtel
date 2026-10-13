@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "NTC Configurator",
   description:
-    "Full control over Navtelecom device settings, live telemetry, and remote configuration. Professional configuration tool for all Navtelecom devices.",
+    "Configure, diagnose and update Navtelecom devices. Connect locally via USB or Bluetooth, or work remotely through RCS.",
   keywords: [
     "NTC Configurator",
     "device configuration",

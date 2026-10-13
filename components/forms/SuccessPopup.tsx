@@ -7,14 +7,31 @@ interface SuccessPopupProps {
   isOpen: boolean;
   onClose: () => void;
   message?: string;
+  variant?: "default" | "software";
 }
 
 export function SuccessPopup({
   isOpen,
   onClose,
   message = "Thank you, we will contact you at the earliest.",
+  variant = "default",
 }: SuccessPopupProps) {
   if (!isOpen) return null;
+
+  if (variant === "software") {
+    return (
+      <div className="contact-success" role="dialog" aria-modal="true">
+        <div className="contact-success-backdrop" onClick={onClose} aria-hidden />
+        <div className="contact-success-panel">
+          <CheckCircle size={48} weight="fill" aria-hidden />
+          <p>{message}</p>
+          <button type="button" onClick={onClose} className="contact-submit">
+            OK
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">

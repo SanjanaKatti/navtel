@@ -61,6 +61,17 @@ export const salesInquirySchema = z.object({
   message: messageSchema,
 });
 
+const optionalPhone = z
+  .string()
+  .trim()
+  .max(24, "Phone number is too long")
+  .refine(
+    (val) =>
+      val === "" ||
+      (/^[\d\s+().-]+$/.test(val) && val.replace(/\D/g, "").length >= 7),
+    "Enter a valid phone number",
+  );
+
 /** /contact page */
 export const contactPageSchema = z.object({
   name: textField(2, 120, "Name is required"),
@@ -69,10 +80,14 @@ export const contactPageSchema = z.object({
     .trim()
     .min(1, "Email is required")
     .email("Enter a valid email address"),
-  company: textField(2, 200, "Company name is required"),
-  mobile: phoneSchema,
+  company: z.string().trim().max(200, "Use at most 200 characters"),
   country: textField(2, 100, "Country is required"),
+  mobile: optionalPhone,
+  inquiry: z.string().trim().min(1, "Select an inquiry type"),
   message: messageSchema,
+  consent: z.boolean().refine((value) => value, {
+    message: "Please confirm so we can respond to your inquiry",
+  }),
 });
 
 export type NewsletterFormValues = ZodInfer<typeof newsletterSchema>;

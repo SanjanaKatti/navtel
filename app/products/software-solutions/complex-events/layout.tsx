@@ -3,11 +3,13 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Complex Events",
   description:
-    "Complex Events – advanced tool for custom tracker logic. Deploy custom algorithms, seamless integration, and CAN-based automation for Navtelecom devices.",
+    "Build custom automation, integrate third-party equipment and process data directly on supported Navtelecom devices with Complex Events.",
   keywords: [
     "Complex Events",
-    "custom logic",
-    "NTC Configurator automation",
+    "CE Blocks",
+    "CE Code",
+    "on-device logic",
+    "NTC Configurator",
   ],
 };
 

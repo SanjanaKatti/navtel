@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "FAQ",
   description:
-    "Frequently asked questions about Navtelecom GPS trackers – configurator download, remote management, SMS commands, setup, and integration.",
+    "Browse practical guidance for Navtelecom devices, software, installation, integration and technical support.",
   keywords: [
     "Navtelecom FAQ",
     "configurator download",

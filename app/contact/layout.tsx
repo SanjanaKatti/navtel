@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Contact Navtelecom for sales inquiries, GPS tracker quotes, and technical support. Get in touch with our team for fleet management solutions.",
+    "Have a question about our products, software, partnership opportunities or company? Choose the appropriate contact channel or send us a message.",
   keywords: [
     "Contact Navtelecom",
     "sales inquiry",

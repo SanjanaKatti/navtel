@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Warranty",
   description:
-    "Navtelecom limited warranty – coverage details, service terms, and straightforward claims process for all Navtelecom GPS trackers and telematics devices.",
+    "Understand what is covered, prepare the right diagnostic information and move through the service process with fewer delays.",
   keywords: [
     "Navtelecom warranty",
     "device coverage",

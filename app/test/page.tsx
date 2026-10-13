@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import NtcConfiguratorTest from "./NtcConfiguratorTest";
+import HomeTest from "./HomeTest";
 
 export const metadata: Metadata = {
-  title: "NTC Configurator",
+  title: "Navtelecom",
   description:
-    "Configure, diagnose and update Navtelecom devices. Connect locally via USB or Bluetooth, or work remotely through RCS.",
+    "GPS trackers and professional software for fleet management, device configuration, and telematics integration.",
   robots: {
     index: false,
     follow: false,
   },
 };
 
-export default function NtcConfiguratorTestPage() {
+export default function HomeTestPage() {
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-brand-navy">
       <Navbar />
-      <NtcConfiguratorTest />
+      <HomeTest />
       <Footer />
     </div>
   );

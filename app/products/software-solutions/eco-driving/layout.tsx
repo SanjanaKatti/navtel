@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Eco Driving",
   description:
-    "Eco Driving – understand how vehicles are really driven. Analyze driving behavior using motion sensors and vehicle telemetry to improve fleet safety and fuel efficiency.",
+    "Detect acceleration, braking, cornering and other critical events with calibrated on-device motion analysis. Send structured driving data to your fleet platform for scoring, reporting and driver coaching.",
   keywords: [
     "Eco Driving",
     "driving behavior",
+    "on-device analysis",
     "fleet safety",
-    "fuel efficiency",
   ],
 };
 

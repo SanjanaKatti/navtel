@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "CAN SPY",
+  title: "CAN Spy",
   description:
-    "Navtelecom CAN SPY – integrated CAN analysis module for real-time monitoring, ID filtering, data export, and vehicle diagnostics.",
-  keywords: ["CAN SPY", "CAN bus analysis", "vehicle diagnostics"],
+    "CAN Spy is Navtelecom’s professional environment for capturing, analyzing and decoding vehicle CAN data, testing decoding files and recording CAN traffic.",
+  keywords: [
+    "CAN Spy",
+    "CAN bus analysis",
+    "CAN decoding",
+    "vehicle diagnostics",
+    "NTC Configurator",
+  ],
 };
 
 export default function CanSpyLayout({

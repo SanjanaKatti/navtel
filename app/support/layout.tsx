@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Support",
   description:
-    "Access Navtelecom support resources – knowledge base, Telegram bot, warranty information, and FAQ for GPS trackers and telematics devices.",
+    "Find technical documentation or create a support ticket for device configuration, installation, diagnostics and integration questions.",
   keywords: [
     "Navtelecom support",
     "technical support",

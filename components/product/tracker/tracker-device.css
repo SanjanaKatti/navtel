@@ -1,0 +1,21 @@
+.tracker-device {
+  background: #fff;
+  color: #102e49;
+}
+
+.tracker-device #specifications {
+  scroll-margin-top: 110px;
+}
+
+.tracker-device a.s-button-primary,
+.tracker-device a.s-button-ghost {
+  color: #fff;
+}
+
+.tracker-device a.s-button-light {
+  color: #075c96;
+}
+
+.tracker-device a.s-button-secondary {
+  color: #0b6099;
+}

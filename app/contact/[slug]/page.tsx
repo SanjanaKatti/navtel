@@ -104,9 +104,9 @@ export default async function BusinessContactPage({ params }: Props) {
   const websiteLabel = contact.websiteUrl.replace(/^https?:\/\//, "");
 
   return (
-    <div className="min-h-dvh min-h-screen bg-brand-light-3 font-sans antialiased text-brand-navy overflow-x-hidden">
+    <div className="min-h-dvh min-h-screen font-sans antialiased text-[#082f4d] overflow-x-hidden bg-[linear-gradient(118deg,#f4fbff_0%,#d8f1fc_54%,#bde6f7_100%)]">
       <main className="flex flex-col items-center justify-center min-h-dvh pb-[max(2rem,env(safe-area-inset-bottom,0px))] px-4 pt-[max(1.5rem,env(safe-area-inset-top,0px))]">
-        <article className="w-full max-w-[22rem] rounded-[1.75rem] bg-white shadow-2xl shadow-brand-navy/12 overflow-hidden border border-white/80">
+        <article className="w-full max-w-[22rem] rounded-[26px] bg-white shadow-[0_24px_60px_rgba(21,70,94,0.16)] overflow-hidden border border-[#d8e8ef]">
           {/* Header band */}
           <div
             className="relative h-40 sm:h-44 overflow-hidden"
@@ -116,7 +116,7 @@ export default async function BusinessContactPage({ params }: Props) {
 
           {/* Avatar overlaps header + body */}
           <div className="flex flex-col items-center -mt-[5rem] sm:-mt-[5.5rem] relative z-10 px-6">
-            <div className="relative h-40 w-40 sm:h-44 sm:w-44 shrink-0 rounded-full border-[5px] border-white shadow-lg overflow-hidden bg-brand-light-2 ring-1 ring-black/5">
+            <div className="relative h-40 w-40 sm:h-44 sm:w-44 shrink-0 rounded-full border-[5px] border-white shadow-lg overflow-hidden bg-[#eaf8fe] ring-1 ring-black/5">
               <Image
                 src={contact.imageSrc}
                 alt={contact.name}
@@ -129,19 +129,19 @@ export default async function BusinessContactPage({ params }: Props) {
           </div>
 
           <div className="px-6 pt-4 pb-7 text-center">
-            <h1 className="text-xl sm:text-[1.35rem] font-black text-brand-navy tracking-tight">
+            <h1 className="text-xl sm:text-[1.5rem] font-semibold text-[#082f4d] tracking-[-0.03em]">
               {contact.name}
             </h1>
-            <p className="mt-1 text-sm font-semibold text-neutral-dark-gray leading-snug">
+            <p className="mt-1 text-sm font-semibold text-[#1688bf] leading-snug">
               {contact.title}
             </p>
-            <p className="mt-0.5 text-sm text-gray-500">{contact.company}</p>
+            <p className="mt-0.5 text-sm text-[#627d8e]">{contact.company}</p>
 
             <ul className="mt-6 space-y-3.5 text-left">
               <li>
                 <a
                   href={`tel:${contact.phoneE164}`}
-                  className="flex items-center gap-3 min-w-0 group rounded-xl -mx-1 px-1 py-0.5 transition-colors hover:bg-brand-light-3/80"
+                  className="flex items-center gap-3 min-w-0 group rounded-xl -mx-1 px-1 py-0.5 transition-colors hover:bg-[#eaf8fe]"
                 >
                   <span
                     className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm"
@@ -149,7 +149,7 @@ export default async function BusinessContactPage({ params }: Props) {
                   >
                     <IconPhone className="h-[18px] w-[18px]" />
                   </span>
-                  <span className="text-sm font-semibold text-gray-800 truncate group-hover:text-brand-primary transition-colors">
+                  <span className="text-sm font-semibold text-[#082f4d] truncate group-hover:text-[#1688bf] transition-colors">
                     {contact.phoneDisplay}
                   </span>
                 </a>
@@ -157,7 +157,7 @@ export default async function BusinessContactPage({ params }: Props) {
               <li>
                 <a
                   href={`mailto:${contact.email}`}
-                  className="flex items-center gap-3 min-w-0 group rounded-xl -mx-1 px-1 py-0.5 transition-colors hover:bg-brand-light-3/80"
+                  className="flex items-center gap-3 min-w-0 group rounded-xl -mx-1 px-1 py-0.5 transition-colors hover:bg-[#eaf8fe]"
                 >
                   <span
                     className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm"
@@ -165,7 +165,7 @@ export default async function BusinessContactPage({ params }: Props) {
                   >
                     <IconMail className="h-[18px] w-[18px]" />
                   </span>
-                  <span className="text-sm font-semibold text-gray-800 break-all group-hover:text-brand-primary transition-colors">
+                  <span className="text-sm font-semibold text-[#082f4d] break-all group-hover:text-[#1688bf] transition-colors">
                     {contact.email}
                   </span>
                 </a>
@@ -175,7 +175,7 @@ export default async function BusinessContactPage({ params }: Props) {
                   href={contact.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 min-w-0 group rounded-xl -mx-1 px-1 py-0.5 transition-colors hover:bg-brand-light-3/80"
+                  className="flex items-center gap-3 min-w-0 group rounded-xl -mx-1 px-1 py-0.5 transition-colors hover:bg-[#eaf8fe]"
                 >
                   <span
                     className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm"
@@ -183,7 +183,7 @@ export default async function BusinessContactPage({ params }: Props) {
                   >
                     <IconLink className="h-[18px] w-[18px]" />
                   </span>
-                  <span className="text-sm font-semibold text-gray-800 break-all group-hover:text-brand-primary transition-colors">
+                  <span className="text-sm font-semibold text-[#082f4d] break-all group-hover:text-[#1688bf] transition-colors">
                     {websiteLabel}
                   </span>
                 </a>
@@ -194,7 +194,7 @@ export default async function BusinessContactPage({ params }: Props) {
                     href={contact.linkedInUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 min-w-0 group rounded-xl -mx-1 px-1 py-0.5 transition-colors hover:bg-brand-light-3/80"
+                    className="flex items-center gap-3 min-w-0 group rounded-xl -mx-1 px-1 py-0.5 transition-colors hover:bg-[#eaf8fe]"
                   >
                     <span
                       className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm"
@@ -202,7 +202,7 @@ export default async function BusinessContactPage({ params }: Props) {
                     >
                       <IconLinkedIn className="h-[17px] w-[17px]" />
                     </span>
-                    <span className="text-sm font-semibold text-gray-800 truncate group-hover:text-brand-primary transition-colors">
+                    <span className="text-sm font-semibold text-[#082f4d] truncate group-hover:text-[#1688bf] transition-colors">
                       LinkedIn profile
                     </span>
                   </a>
@@ -210,11 +210,11 @@ export default async function BusinessContactPage({ params }: Props) {
               ) : null}
             </ul>
 
-            <div className="mt-8 pt-6 border-t border-gray-100">
+            <div className="mt-8 pt-6 border-t border-[#e3eef3]">
               <a
                 href={vcardHref}
                 download
-                className="flex w-full items-center justify-center gap-2.5 rounded-full px-5 py-3.5 text-sm font-black uppercase tracking-wide text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:opacity-95 active:scale-[0.98]"
+                className="flex w-full items-center justify-center gap-2.5 rounded-xl px-5 py-3.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(17,133,189,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:opacity-95 active:scale-[0.98]"
                 style={{ backgroundColor: accent }}
               >
                 <svg

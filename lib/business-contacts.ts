@@ -19,11 +19,11 @@ export type BusinessContact = {
   };
 };
 
-/** Matches --navtel-blue-* in app/globals.css (brand-primary → brand-deep → brand-navy) */
+/** Matches the site-wide blue theme used by the series, product and software pages. */
 export const BRAND_CARD_THEME = {
   headerBackground:
-    "radial-gradient(ellipse 120% 80% at 20% 10%, rgba(255,255,255,0.22) 0%, transparent 55%), radial-gradient(ellipse 90% 60% at 85% 90%, rgba(0,0,0,0.14) 0%, transparent 50%), linear-gradient(155deg, #32bef0 0%, #003e66 45%, #002d49 100%)",
-  accent: "#32bef0",
+    "radial-gradient(ellipse 120% 80% at 18% 8%, rgba(255,255,255,0.28) 0%, transparent 55%), radial-gradient(ellipse 90% 60% at 88% 92%, rgba(164,232,244,0.22) 0%, transparent 55%), linear-gradient(135deg, #1599c8 0%, #0a537b 52%, #082f4d 100%)",
+  accent: "#1688bf",
 } as const;
 
 export const BUSINESS_CONTACTS: readonly BusinessContact[] = [

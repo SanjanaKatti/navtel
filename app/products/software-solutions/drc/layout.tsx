@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "DRC Device Management",
   description:
-    "DRC – mass device management for Navtelecom fleet. Control, update, and manage thousands of devices from a single web interface. Bulk configuration and firmware updates.",
+    "Configure, diagnose and maintain Navtelecom devices remotely—from individual units to large-scale deployments—through a single web interface.",
   keywords: [
     "DRC",
-    "mass device management",
-    "fleet configuration",
+    "remote device management",
     "firmware updates",
+    "bulk configuration",
   ],
 };
 
