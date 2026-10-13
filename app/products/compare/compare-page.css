@@ -1,0 +1,60 @@
+/* Device comparison page — extends the shared series-page.css (sp-*) system. */
+
+.cmp-page .sp-hero{min-height:0;padding:0}
+.cmp-hero-inner{position:relative;z-index:2;padding:56px 0 64px}
+.cmp-back{display:inline-flex;align-items:center;gap:8px;margin-bottom:34px;border:0;background:none;padding:0;cursor:pointer;font:inherit;font-size:14px;font-weight:500;color:#648296;transition:color .2s}
+.cmp-back:hover{color:var(--blue)}
+.cmp-back svg{width:16px;height:16px;transition:transform .2s}
+.cmp-back:hover svg{transform:translateX(-3px)}
+.cmp-page .sp-hero h1{font-size:clamp(54px,6.4vw,88px);line-height:.9}
+.cmp-page .sp-hero h1 span{display:inline;margin:0 0 0 .18em;font-size:1em;letter-spacing:-.07em}
+.cmp-page .sp-lead{margin:22px 0 0}
+
+.cmp-section-wrap{padding:56px 0 100px;background:linear-gradient(180deg,#eff8fc,#f9fcfd)}
+.cmp-toolbar{display:flex;justify-content:flex-end;margin-bottom:16px}
+.cmp-toggle{display:inline-flex;align-items:center;gap:12px;cursor:pointer;color:var(--navy);font-size:14px;font-weight:600;user-select:none}
+.cmp-toggle input{position:absolute;opacity:0;width:1px;height:1px}
+.cmp-toggle-track{position:relative;width:42px;height:24px;border-radius:999px;background:#c5dbe6;transition:background .2s}
+.cmp-toggle-track::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(8,47,77,.25);transition:transform .2s}
+.cmp-toggle input:checked+.cmp-toggle-track{background:var(--blue)}
+.cmp-toggle input:checked+.cmp-toggle-track::after{transform:translateX(18px)}
+.cmp-toggle input:focus-visible+.cmp-toggle-track{outline:2px solid var(--blue);outline-offset:3px}
+
+.cmp-card{border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 18px 45px rgba(21,70,94,.09);overflow:hidden}
+.cmp-scroll{overflow-x:auto}
+.cmp-table{width:100%;min-width:640px;border-collapse:separate;border-spacing:0;table-layout:fixed}
+.cmp-table th,.cmp-table td{padding:0}
+
+.cmp-param-head{position:sticky;left:0;z-index:3;width:210px;padding:26px 28px!important;text-align:left;vertical-align:bottom;background:#f4fafc;border-bottom:1px solid var(--line);color:#7f98a6;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.cmp-device-head{min-width:210px;padding:28px 20px 24px!important;text-align:center;vertical-align:bottom;border-bottom:1px solid var(--line);border-left:1px solid #e3eef3;font-weight:inherit}
+.cmp-device-head strong{display:block;margin-top:14px;color:var(--navy);font-size:30px;font-weight:600;letter-spacing:-.03em;line-height:1}
+.cmp-device-head small{display:block;margin-top:8px;color:#7f98a6;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.cmp-device-head a{display:inline-block;margin-top:14px;color:var(--blue);font-size:13px;font-weight:600;border-bottom:1px solid currentColor;padding-bottom:1px;transition:color .2s,opacity .2s}
+.cmp-device-head a:hover{opacity:.7}
+.cmp-pill{display:inline-block;padding:6px 11px;border-radius:999px;background:#eef3f6;color:#5a7384;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.cmp-pill-4g{background:#e6f6fb;color:#167cae}
+
+.cmp-section-row td{padding:16px 28px;background:var(--pale);border-bottom:1px solid var(--line);color:var(--navy);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.cmp-param{position:sticky;left:0;z-index:2;padding:18px 28px!important;text-align:left;background:#f9fcfd;border-bottom:1px solid #e9f1f5;color:var(--muted);font-size:14px;font-weight:600}
+.cmp-table tbody td{padding:18px 20px;text-align:center;border-bottom:1px solid #e9f1f5;border-left:1px solid #edf4f7}
+.cmp-table tbody tr:hover td,.cmp-table tbody tr:hover .cmp-param{background-color:#f4fafc}
+.cmp-table tbody tr:last-child td,.cmp-table tbody tr:last-child .cmp-param{border-bottom:0}
+.cmp-value{color:var(--navy);font-size:15px;font-weight:600;line-height:1.45}
+.cmp-yes{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#e6f6fb;color:var(--blue)}
+.cmp-yes svg{width:15px;height:15px;stroke-width:2.6}
+.cmp-no{width:18px;height:18px;color:#a9bfca}
+.cmp-note{margin:28px 0 0;text-align:center;color:#7f98a6;font-size:13px}
+
+.cmp-state{min-height:60vh;padding:80px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.cmp-state h2{margin:0 0 14px;color:var(--navy);font-size:clamp(32px,4vw,46px);font-weight:500;letter-spacing:-.04em}
+.cmp-state p{color:var(--muted);font-size:17px;margin:0 0 28px}
+.cmp-state .sp-eyebrow{margin-bottom:14px;color:var(--blue)}
+
+@media(max-width:780px){
+  .cmp-hero-inner{padding:40px 0 48px}
+  .cmp-section-wrap{padding:40px 0 70px}
+  .cmp-param-head,.cmp-param{width:150px;padding:16px 16px!important}
+  .cmp-device-head{min-width:170px}
+  .cmp-device-head strong{font-size:24px}
+  .cmp-section-row td{padding:14px 16px}
+}
