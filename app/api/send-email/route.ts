@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { subscribeToProductUpdates } from "@/lib/unisender";
+import { subscribeToUnisender } from "@/lib/unisender";
 
 export async function POST(request: NextRequest) {
   const apiKey = process.env.BREVO_API_KEY;
@@ -123,15 +123,19 @@ export async function POST(request: NextRequest) {
 
   console.log("[NAVTEL_SEND_EMAIL] Email sent successfully.");
 
-  if (marketingOptIn && userEmail) {
-    const subscribed = await subscribeToProductUpdates({
+  const newsletter = formType === "Newsletter";
+  if (userEmail && (newsletter || marketingOptIn)) {
+    const subscribed = await subscribeToUnisender({
       email: userEmail,
       fullName,
       phone: mobile,
+      company,
+      country,
+      tag: newsletter ? "newsletter" : "project-updates",
     });
     if (!subscribed.ok) {
       console.error(
-        "[NAVTEL_SEND_EMAIL] Product-updates opt-in was not added to Unisender:",
+        "[NAVTEL_SEND_EMAIL] Contact was not added to Unisender:",
         subscribed.error,
       );
     }

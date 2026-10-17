@@ -2,6 +2,9 @@ type SubscribeInput = {
   email: string;
   fullName: string;
   phone?: string;
+  company?: string;
+  country?: string;
+  tag: string;
 };
 
 type SubscribeResult = { ok: true } | { ok: false; error: string };
@@ -13,12 +16,16 @@ function internationalPhone(value: string | undefined): string {
   return /^\+\d{7,15}$/.test(compact) ? compact : "";
 }
 
+function fieldValue(value: string | undefined): string {
+  const trimmed = value?.trim() ?? "";
+  return trimmed && trimmed !== "—" ? trimmed : "";
+}
+
 /**
- * Adds a contact to the product-updates list.
- * Called only after the person checks the optional updates box.
+ * Adds a contact to the Unisender subscription list.
  * The API key stays on the server.
  */
-export async function subscribeToProductUpdates(
+export async function subscribeToUnisender(
   input: SubscribeInput,
 ): Promise<SubscribeResult> {
   const apiKey = process.env.UNISENDER_API_KEY;
@@ -36,10 +43,14 @@ export async function subscribeToProductUpdates(
   body.set("fields[Name]", input.fullName);
   const phone = internationalPhone(input.phone);
   if (phone) body.set("fields[phone]", phone);
+  const company = fieldValue(input.company);
+  if (company) body.set("fields[company]", company);
+  const country = fieldValue(input.country);
+  if (country) body.set("fields[country]", country);
   // 3 = consent was already collected on the form, so no second confirmation letter.
   body.set("double_optin", "3");
   body.set("overwrite", "2");
-  body.set("tags", "project-updates");
+  body.set("tags", input.tag);
 
   let response: Response;
   try {
