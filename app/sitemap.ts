@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { getBusinessContactSlugs } from "@/lib/business-contacts";
+import { useCases } from "@/lib/use-cases";
 
 const BASE_URL = "https://navtelecom-iot.com";
 
@@ -48,6 +49,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
+    },
+    {
+      url: `${BASE_URL}/support/software-developers`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/support/compatible-platforms`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/use-cases`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     // Products
     {
@@ -287,5 +306,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticRoutes, ...contactRoutes];
+  const useCaseRoutes: MetadataRoute.Sitemap = useCases.map((item) => ({
+    url: `${BASE_URL}${item.path}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...contactRoutes, ...useCaseRoutes];
 }

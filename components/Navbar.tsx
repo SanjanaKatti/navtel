@@ -11,6 +11,7 @@ type NavbarProps = {
 function sectionFromPath(pathname: string) {
   if (pathname === "/") return "home";
   if (pathname.startsWith("/products")) return "products";
+  if (pathname.startsWith("/use-cases")) return "use-cases";
   if (pathname.startsWith("/support")) return "support";
   if (pathname.startsWith("/about")) return "about";
   if (pathname.startsWith("/contact")) return "contact";

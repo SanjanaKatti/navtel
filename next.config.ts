@@ -41,6 +41,15 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      { source: "/terms", destination: "/terms-of-use", permanent: true },
+      { source: "/privacy-policy", destination: "/privacy", permanent: true },
+      { source: "/contact-cards/company", destination: "/follow-us", permanent: false },
+      { source: "/contact-cards/alina", destination: "/contact/Alina_Iliina", permanent: true },
+      { source: "/contact-cards/angelina", destination: "/contact/Angelina_Siris", permanent: true },
+      { source: "/contact-cards/denis", destination: "/contact/Denis_Shulkov", permanent: true },
+      { source: "/contact-cards/ekaterina", destination: "/contact/Ekaterina_Petrova", permanent: true },
+      { source: "/contact-cards/hardik", destination: "/contact/Hardik_Chaudhary", permanent: true },
+      { source: "/contact-cards/rosemary", destination: "/contact/Rosemary_Anyango", permanent: true },
     ];
   },
   async headers() {

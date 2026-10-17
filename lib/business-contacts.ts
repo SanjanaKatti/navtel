@@ -78,6 +78,31 @@ export const BUSINESS_CONTACTS: readonly BusinessContact[] = [
     linkedInUrl: "https://www.linkedin.com/in/ekaterina-petrova-6981141b3/",
     cardTheme: BRAND_CARD_THEME,
   },
+  {
+    slug: "Angelina_Siris",
+    name: "Angelina Siris",
+    title: "Business Development Manager",
+    company: "Navtelecom",
+    phoneDisplay: "+7 (901) 782-27-48",
+    phoneE164: "+79017822748",
+    email: "a.siris@navtelecom-iot.com",
+    imageSrc: "/Navtelecom/Angelina%20Siris.jpg",
+    websiteUrl: "https://navtelecom-iot.com",
+    cardTheme: BRAND_CARD_THEME,
+  },
+  {
+    slug: "Rosemary_Anyango",
+    name: "Rosemary Anyango",
+    title: "Regional Representative – East Africa",
+    company: "Navtelecom",
+    phoneDisplay: "+254 725 965 313",
+    phoneE164: "+254725965313",
+    email: "r.anyango@navtelecom-iot.com",
+    imageSrc: "/Navtelecom/Rosemary%20Anyango.jpg",
+    websiteUrl: "https://navtelecom-iot.com",
+    linkedInUrl: "https://www.linkedin.com/in/rosemary-anyango-80375a186/",
+    cardTheme: BRAND_CARD_THEME,
+  },
 ] as const;
 
 const bySlug = new Map(

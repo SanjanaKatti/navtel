@@ -8,6 +8,8 @@ export type FormPayload = {
   mobile: string;
   country: string;
   message: string;
+  /** Discuss-a-project updates checkbox. Adds the contact to Unisender. */
+  marketingOptIn?: boolean;
 };
 
 export function isFormspreeConfigured(): boolean {
@@ -108,6 +110,7 @@ export async function submitToBrevo(params: FormPayload): Promise<void> {
       mobile: params.mobile,
       country: params.country,
       message: params.message?.trim() || "—",
+      ...(params.marketingOptIn ? { marketingOptIn: true } : {}),
     }),
   });
   if (!res.ok) {

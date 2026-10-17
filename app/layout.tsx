@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Barlow, Geist_Mono } from "next/font/google";
 import { CookieConsent } from "@/components/CookieConsent";
 import { GoogleAnalyticsConsentGate } from "@/components/GoogleAnalyticsConsentGate";
+import { SiteDialogs } from "@/components/lead-modal/SiteDialogs";
 import "./globals.css";
 import { WithChunkLoadProtection } from "@/components/ChunkLoadErrorBoundary";
 
@@ -47,7 +48,9 @@ export default function RootLayout({
         className={`${barlow.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <WithChunkLoadProtection>{children}</WithChunkLoadProtection>
+        <SiteDialogs>
+          <WithChunkLoadProtection>{children}</WithChunkLoadProtection>
+        </SiteDialogs>
         <GoogleAnalyticsConsentGate />
         <CookieConsent />
       </body>

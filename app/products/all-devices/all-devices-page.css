@@ -115,9 +115,9 @@
 .ad-hero-stage:has(.ad-tag-signal:hover, .ad-tag-signal:focus-visible) .ad-unit-signal img {
   filter: drop-shadow(0 16px 16px rgba(8, 44, 73, 0.22)) drop-shadow(0 0 22px rgba(34, 184, 220, 0.55));
 }
-.ad-unit-smart { z-index: 2; left: 35%; top: 4%; width: 45%; }
-.ad-unit-signal { z-index: 2; right: 0; top: 36%; width: 36%; }
-.ad-unit-start { z-index: 3; left: -1%; top: 31%; width: 52%; }
+.ad-unit-smart { z-index: 2; left: 30%; top: 16%; width: 44%; }
+.ad-unit-signal { z-index: 2; right: 6%; top: 29%; width: 37%; }
+.ad-unit-start { z-index: 3; left: 6%; top: 25%; width: 50%; }
 .ad-stage-tags {
   position: absolute;
   z-index: 4;

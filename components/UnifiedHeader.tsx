@@ -44,6 +44,7 @@ const supportResources = [
   ["Frequently Asked Questions", "/support/faq"],
   ["Knowledge Base", "/support/knowledge-base"],
   ["Software Developers", "/support/software-developers"],
+  ["Compatible Platforms", "/support/compatible-platforms"],
   ["Warranty", "/support/warranty"],
 ];
 
@@ -167,6 +168,9 @@ export default function UnifiedHeader({ active = "" }: { active?: string }) {
             </Link>
             <ProductsMenu onNavigate={close} />
           </div>
+          <Link className={activeClass("use-cases")} href="/use-cases" onClick={close}>
+            Use Cases
+          </Link>
           <div className="unified-support-nav">
             <Link className={activeClass("support")} href="/support">
               Support <ChevronIcon />
@@ -201,6 +205,7 @@ export default function UnifiedHeader({ active = "" }: { active?: string }) {
       <div className="unified-mobile-panel">
         <nav aria-label="Mobile navigation">
           <Link href="/" onClick={close}>Home</Link>
+          <Link href="/use-cases" onClick={close}>Use Cases</Link>
           <Link href="/support" onClick={close}>Support</Link>
           <Link href="/about" onClick={close}>About Us</Link>
           <Link href="/contact" onClick={close}>Contact Sales</Link>

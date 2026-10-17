@@ -35,7 +35,22 @@ const messageSchema = z
   .min(10, "Please enter at least 10 characters")
   .max(4000, "Message is too long (max 4000 characters)");
 
-/** Footer newsletter modal */
+const optionalPhone = z
+  .string()
+  .trim()
+  .max(24, "Phone number is too long")
+  .refine(
+    (val) =>
+      val === "" ||
+      (/^[\d\s+().-]+$/.test(val) && val.replace(/\D/g, "").length >= 7),
+    "Enter a valid phone number",
+  );
+
+const privacyConsent = z.boolean().refine((value) => value, {
+  message: "Please agree before continuing.",
+});
+
+/** Footer / site newsletter dialog */
 export const newsletterSchema = z.object({
   company: textField(2, 200, "Company name is required"),
   fullName: textField(2, 120, "Full name is required"),
@@ -46,6 +61,24 @@ export const newsletterSchema = z.object({
     .email("Enter a valid email address"),
   mobile: phoneSchema,
   country: textField(2, 100, "Country is required"),
+  privacyConsent,
+});
+
+/** “Discuss a project” dialog */
+export const projectInquirySchema = z.object({
+  company: textField(2, 200, "Company name is required"),
+  fullName: textField(2, 120, "Full name is required"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email is required")
+    .email("Enter a valid email address"),
+  phone: optionalPhone,
+  country: textField(2, 100, "Country is required"),
+  region: z.string().trim().max(100, "Use at most 100 characters"),
+  message: messageSchema,
+  privacyConsent,
+  updatesConsent: z.boolean(),
 });
 
 /** Product lineup “Contact sales” modal */
@@ -60,17 +93,6 @@ export const salesInquirySchema = z.object({
   country: textField(2, 100, "Country is required"),
   message: messageSchema,
 });
-
-const optionalPhone = z
-  .string()
-  .trim()
-  .max(24, "Phone number is too long")
-  .refine(
-    (val) =>
-      val === "" ||
-      (/^[\d\s+().-]+$/.test(val) && val.replace(/\D/g, "").length >= 7),
-    "Enter a valid phone number",
-  );
 
 /** /contact page */
 export const contactPageSchema = z.object({
@@ -91,5 +113,6 @@ export const contactPageSchema = z.object({
 });
 
 export type NewsletterFormValues = ZodInfer<typeof newsletterSchema>;
+export type ProjectInquiryFormValues = ZodInfer<typeof projectInquirySchema>;
 export type SalesInquiryFormValues = ZodInfer<typeof salesInquirySchema>;
 export type ContactPageFormValues = ZodInfer<typeof contactPageSchema>;
