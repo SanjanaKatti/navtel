@@ -34,6 +34,7 @@ export default function AdminPage() {
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
+  const [wikiLinks, setWikiLinks] = useState("");
   const uploadInputRef = useRef<HTMLInputElement>(null);
   const replaceInputRef = useRef<HTMLInputElement>(null);
   const replaceIdRef = useRef<string | null>(null);
@@ -83,6 +84,58 @@ export default function AdminPage() {
       await loadFiles();
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Upload failed.");
+      await loadFiles().catch(() => undefined);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function onAddWiki(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const urls = wikiLinks
+      .split(/\n+/)
+      .map((line) => line.trim())
+      .filter(Boolean);
+    if (urls.length === 0) {
+      setError("Paste a Wikipedia or NTC Wiki link.");
+      return;
+    }
+    if (urls.length > 10) {
+      setError("Add up to 10 links at a time.");
+      return;
+    }
+
+    setBusy(true);
+    setNotice(null);
+    setError(null);
+    setPendingDeleteId(null);
+    const added: string[] = [];
+    try {
+      for (let index = 0; index < urls.length; index += 1) {
+        const url = urls[index];
+        setNotice(`Converting ${index + 1} of ${urls.length} to PDF…`);
+        const response = await fetch("/api/admin/wiki", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url }),
+        });
+        if (!response.ok) {
+          const message = await readError(response);
+          throw new Error(`${url}: ${message}`);
+        }
+        const body = (await response.json()) as { file: KnowledgeFile };
+        added.push(body.file.filename);
+      }
+      setNotice(
+        added.length === 1
+          ? `${added[0]} is indexed.`
+          : `${added.length} pages are indexed.`,
+      );
+      setWikiLinks("");
+      await loadFiles();
+    } catch (err: unknown) {
+      setNotice(null);
+      setError(err instanceof Error ? err.message : "Could not convert that link.");
       await loadFiles().catch(() => undefined);
     } finally {
       setBusy(false);
@@ -140,8 +193,9 @@ export default function AdminPage() {
         <p className="text-label">Admin</p>
         <h1 className="mt-2 text-h2">Knowledge PDFs</h1>
         <p className="mt-3 max-w-2xl text-body">
-          Upload a PDF into the chatbot knowledge store. A file with the same
-          name replaces the copy already stored. Indexing can take a minute.
+          Upload a PDF, or paste a Wikipedia or NTC Wiki link. A link is
+          converted to a PDF and stored with the other files. A file with the
+          same name replaces the copy already stored. Indexing can take a minute.
         </p>
 
         <form
@@ -166,6 +220,36 @@ export default function AdminPage() {
           >
             {busy ? "Working…" : "Upload PDF"}
           </button>
+        </form>
+
+        <form
+          onSubmit={onAddWiki}
+          className="mt-4 flex flex-col gap-4 rounded-3xl bg-white p-5 shadow-sm"
+        >
+          <label className="flex flex-col gap-2 text-sm font-semibold">
+            Wikipedia or NTC Wiki links
+            <textarea
+              value={wikiLinks}
+              onChange={(event) => setWikiLinks(event.target.value)}
+              disabled={busy}
+              rows={4}
+              placeholder={"https://en.wikipedia.org/wiki/Telematics\nhttps://wiki.navtelecom.ru/en/home/devices/s2010"}
+              className="w-full rounded-2xl border border-neutral-light-gray-1 px-4 py-3 text-sm font-medium text-brand-navy outline-none focus:border-brand-primary"
+            />
+          </label>
+          <p className="text-sm font-medium text-neutral-dark-gray">
+            One link per line. Wikipedia pages use Wikipedia&apos;s own PDF.
+            NTC Wiki pages are saved as a text PDF.
+          </p>
+          <div>
+            <button
+              type="submit"
+              disabled={busy}
+              className="rounded-full bg-brand-navy px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-primary disabled:opacity-60"
+            >
+              {busy ? "Working…" : "Convert to PDF"}
+            </button>
+          </div>
         </form>
 
         <input
