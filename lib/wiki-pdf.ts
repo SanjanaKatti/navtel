@@ -22,6 +22,13 @@ export type WikiPdf = {
   sourceUrl: string;
 };
 
+export type WikiDocuments = {
+  files: WikiPdf[];
+  warnings: string[];
+};
+
+const MAX_LINKED_FILES = 12;
+
 function isWikipediaHost(hostname: string): boolean {
   const host = hostname.toLowerCase();
   return host === "wikipedia.org" || host.endsWith(".wikipedia.org");
@@ -291,7 +298,53 @@ async function markdownToPdf(title: string, source: string, markdown: string): P
   return Buffer.from(await pdf.save());
 }
 
-async function ntcWikiPdf(url: URL): Promise<WikiPdf> {
+function linkedPdfUrls(html: string, pageUrl: string): URL[] {
+  const seen = new Set<string>();
+  const urls: URL[] = [];
+  for (const match of html.matchAll(/href="([^"]+)"/gi)) {
+    const href = match[1];
+    if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("javascript:")) {
+      continue;
+    }
+    let linked: URL;
+    try {
+      linked = new URL(href, pageUrl);
+    } catch {
+      continue;
+    }
+    if (linked.protocol !== "https:" || !isNtcWikiHost(linked.hostname)) continue;
+    if (!linked.pathname.toLowerCase().endsWith(".pdf")) continue;
+    linked.hash = "";
+    const key = linked.toString();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    urls.push(linked);
+    if (urls.length >= MAX_LINKED_FILES) break;
+  }
+  return urls;
+}
+
+async function downloadWikiPdf(url: URL, filename: string): Promise<WikiPdf> {
+  const response = await fetchAllowed(url.toString(), isNtcWikiHost);
+  if (response.status === 404) {
+    throw new WikiFetchError(`Could not download ${filename}.`);
+  }
+  if (!response.ok) {
+    throw new WikiFetchError(`Could not download ${filename}.`);
+  }
+  const bytes = await readLimited(response, MAX_REMOTE_PDF_BYTES);
+  if (bytes.subarray(0, 5).toString("latin1") !== "%PDF-") {
+    throw new WikiFetchError(`${filename} is not a PDF.`);
+  }
+  return { filename: pdfFilename(filename), bytes, sourceUrl: url.toString() };
+}
+
+async function ntcWikiDocuments(url: URL): Promise<WikiDocuments> {
+  if (url.pathname.toLowerCase().endsWith(".pdf")) {
+    const name = decodeURIComponent(url.pathname.split("/").pop() || "wiki-file.pdf");
+    return { files: [await downloadWikiPdf(url, name)], warnings: [] };
+  }
+
   const response = await fetchAllowed(url.toString(), isNtcWikiHost);
   if (response.status === 404) {
     throw new WikiFetchError("That wiki page could not be found.");
@@ -308,16 +361,31 @@ async function ntcWikiPdf(url: URL): Promise<WikiPdf> {
   }
 
   const name = pageTitle(title, "NTC Wiki page");
-  const bytes = await markdownToPdf(name, `Source: ${url.toString()}`, md);
-  return {
+  const pagePdf: WikiPdf = {
     filename: pdfFilename(`NTC Wiki - ${name}`),
-    bytes,
+    bytes: await markdownToPdf(name, `Source: ${url.toString()}`, md),
     sourceUrl: url.toString(),
   };
+
+  const files: WikiPdf[] = [pagePdf];
+  const warnings: string[] = [];
+  for (const linked of linkedPdfUrls(html, url.toString())) {
+    const rawName = decodeURIComponent(linked.pathname.split("/").pop() || "attachment.pdf");
+    try {
+      files.push(await downloadWikiPdf(linked, rawName));
+    } catch (err) {
+      warnings.push(
+        err instanceof Error ? `${rawName}: ${err.message}` : `Could not download ${rawName}.`,
+      );
+    }
+  }
+  return { files, warnings };
 }
 
-export async function wikiUrlToPdf(rawUrl: string): Promise<WikiPdf> {
+export async function wikiUrlToDocuments(rawUrl: string): Promise<WikiDocuments> {
   const url = parseWikiUrl(rawUrl);
-  if (isWikipediaHost(url.hostname)) return wikipediaPdf(url);
-  return ntcWikiPdf(url);
+  if (isWikipediaHost(url.hostname)) {
+    return { files: [await wikipediaPdf(url)], warnings: [] };
+  }
+  return ntcWikiDocuments(url);
 }

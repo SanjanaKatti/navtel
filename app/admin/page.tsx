@@ -110,6 +110,7 @@ export default function AdminPage() {
     setError(null);
     setPendingDeleteId(null);
     const added: string[] = [];
+    const warnings: string[] = [];
     try {
       for (let index = 0; index < urls.length; index += 1) {
         const url = urls[index];
@@ -123,13 +124,20 @@ export default function AdminPage() {
           const message = await readError(response);
           throw new Error(`${url}: ${message}`);
         }
-        const body = (await response.json()) as { file: KnowledgeFile };
-        added.push(body.file.filename);
+        const body = (await response.json()) as {
+          files?: KnowledgeFile[];
+          file?: KnowledgeFile;
+          warnings?: string[];
+        };
+        const names =
+          body.files?.map((file) => file.filename) ?? (body.file ? [body.file.filename] : []);
+        added.push(...names);
+        warnings.push(...(body.warnings ?? []));
       }
+      const indexed =
+        added.length === 1 ? `${added[0]} is indexed.` : `${added.length} files are indexed.`;
       setNotice(
-        added.length === 1
-          ? `${added[0]} is indexed.`
-          : `${added.length} pages are indexed.`,
+        warnings.length > 0 ? `${indexed} Some linked files were skipped.` : indexed,
       );
       setWikiLinks("");
       await loadFiles();
@@ -239,7 +247,8 @@ export default function AdminPage() {
           </label>
           <p className="text-sm font-medium text-neutral-dark-gray">
             One link per line. Wikipedia pages use Wikipedia&apos;s own PDF.
-            NTC Wiki pages are saved as a text PDF.
+            An NTC Wiki page is saved as text, and every PDF linked from that
+            page, such as a datasheet, is indexed too.
           </p>
           <div>
             <button

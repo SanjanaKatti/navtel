@@ -4,7 +4,7 @@ import {
   uploadKnowledgePdf,
   type KnowledgeFile,
 } from "@/lib/openai-knowledge";
-import { WikiFetchError, wikiUrlToPdf } from "@/lib/wiki-pdf";
+import { WikiFetchError, wikiUrlToDocuments } from "@/lib/wiki-pdf";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -32,22 +32,28 @@ export async function POST(request: NextRequest) {
       : "";
 
   try {
-    const pdf = await wikiUrlToPdf(url);
-    const uploaded: KnowledgeFile = await uploadKnowledgePdf({
-      bytes: pdf.bytes,
-      filename: pdf.filename,
-    });
-    if (uploaded.status !== "completed") {
+    const documents = await wikiUrlToDocuments(url);
+    const files: KnowledgeFile[] = [];
+    const failures: string[] = [...documents.warnings];
+    for (const pdf of documents.files) {
+      const uploaded = await uploadKnowledgePdf({
+        bytes: pdf.bytes,
+        filename: pdf.filename,
+      });
+      if (uploaded.status !== "completed") {
+        failures.push(uploaded.error ?? `OpenAI could not index ${pdf.filename}.`);
+        continue;
+      }
+      files.push(uploaded);
+    }
+    if (files.length === 0) {
       return NextResponse.json(
-        {
-          error: uploaded.error ?? "OpenAI could not index this page.",
-          file: uploaded,
-        },
+        { error: failures[0] ?? "OpenAI could not index this page." },
         { status: 422 },
       );
     }
     return NextResponse.json(
-      { file: uploaded, sourceUrl: pdf.sourceUrl },
+      { files, warnings: failures, sourceUrl: url },
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (err) {
