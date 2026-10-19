@@ -129,16 +129,15 @@ export default function AdminPage() {
           file?: KnowledgeFile;
           warnings?: string[];
         };
-        const names =
-          body.files?.map((file) => file.filename) ?? (body.file ? [body.file.filename] : []);
-        added.push(...names);
+        const listed = body.files ?? (body.file ? [body.file] : []);
+        added.push(
+          ...listed.flatMap((file) => (file?.filename ? [file.filename] : [])),
+        );
         warnings.push(...(body.warnings ?? []));
       }
       const indexed =
         added.length === 1 ? `${added[0]} is indexed.` : `${added.length} files are indexed.`;
-      setNotice(
-        warnings.length > 0 ? `${indexed} Some linked files were skipped.` : indexed,
-      );
+      setNotice(warnings.length > 0 ? `${indexed} Skipped: ${warnings.join(" ")}` : indexed);
       setWikiLinks("");
       await loadFiles();
     } catch (err: unknown) {

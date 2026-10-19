@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
       );
     }
     return NextResponse.json(
-      { files, warnings: failures, sourceUrl: url },
+      { file: files[0], files, warnings: failures, sourceUrl: url },
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (err) {
