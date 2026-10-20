@@ -1,6 +1,13 @@
 "use client";
 
-import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import {
+  type ChangeEvent,
+  type FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 type KnowledgeFile = {
   id: string;
@@ -9,6 +16,8 @@ type KnowledgeFile = {
   createdAt: number;
   error: string | null;
 };
+
+const BATCH_LIMIT = 10;
 
 const STATUS_LABEL: Record<KnowledgeFile["status"], string> = {
   completed: "Indexed",
@@ -35,6 +44,7 @@ export default function AdminPage() {
   const [error, setError] = useState<string | null>(null);
   const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
   const [wikiLinks, setWikiLinks] = useState("");
+  const [selectedPdfs, setSelectedPdfs] = useState<File[]>([]);
   const uploadInputRef = useRef<HTMLInputElement>(null);
   const replaceInputRef = useRef<HTMLInputElement>(null);
   const replaceIdRef = useRef<string | null>(null);
@@ -90,18 +100,29 @@ export default function AdminPage() {
     }
   }
 
-  async function onAddWiki(event: FormEvent<HTMLFormElement>) {
+  function onPdfsChosen(event: ChangeEvent<HTMLInputElement>) {
+    setSelectedPdfs(Array.from(event.target.files ?? []));
+  }
+
+  async function onAddBatch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const urls = wikiLinks
       .split(/\n+/)
       .map((line) => line.trim())
       .filter(Boolean);
-    if (urls.length === 0) {
-      setError("Paste a Wikipedia or NTC Wiki link.");
+    const pdfs = selectedPdfs;
+    const total = pdfs.length + urls.length;
+    if (total === 0) {
+      setError("Choose PDFs or paste wiki links.");
       return;
     }
-    if (urls.length > 10) {
-      setError("Add up to 10 links at a time.");
+    if (total > BATCH_LIMIT) {
+      setError(`Add up to ${BATCH_LIMIT} PDFs and links at a time.`);
+      return;
+    }
+    const notPdf = pdfs.find((file) => !file.name.toLowerCase().endsWith(".pdf"));
+    if (notPdf) {
+      setError(`${notPdf.name} is not a PDF.`);
       return;
     }
 
@@ -111,53 +132,69 @@ export default function AdminPage() {
     setPendingDeleteId(null);
     const added: string[] = [];
     const warnings: string[] = [];
+    const failures: string[] = [];
+    let step = 0;
+
+    const fail = (label: string, err: unknown) => {
+      failures.push(
+        `${label}: ${err instanceof Error ? err.message : "Could not index this item."}`,
+      );
+    };
+
     try {
-      for (let index = 0; index < urls.length; index += 1) {
-        const url = urls[index];
-        setNotice(`Converting ${index + 1} of ${urls.length} to PDF…`);
-        const response = await fetch("/api/admin/wiki", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url }),
-        });
-        if (!response.ok) {
-          const message = await readError(response);
-          throw new Error(`${url}: ${message}`);
+      for (const file of pdfs) {
+        step += 1;
+        setNotice(`Uploading ${step} of ${total}: ${file.name}`);
+        try {
+          const form = new FormData();
+          form.set("file", file);
+          const response = await fetch("/api/admin/files", { method: "POST", body: form });
+          if (!response.ok) throw new Error(await readError(response));
+          added.push(file.name);
+        } catch (err: unknown) {
+          fail(file.name, err);
         }
-        const body = (await response.json()) as {
-          files?: KnowledgeFile[];
-          file?: KnowledgeFile;
-          warnings?: string[];
-        };
-        const listed = body.files ?? (body.file ? [body.file] : []);
-        added.push(
-          ...listed.flatMap((file) => (file?.filename ? [file.filename] : [])),
-        );
-        warnings.push(...(body.warnings ?? []));
       }
-      const indexed =
-        added.length === 1 ? `${added[0]} is indexed.` : `${added.length} files are indexed.`;
-      setNotice(warnings.length > 0 ? `${indexed} Skipped: ${warnings.join(" ")}` : indexed);
-      setWikiLinks("");
+
+      for (const url of urls) {
+        step += 1;
+        setNotice(`Converting ${step} of ${total}: ${url}`);
+        try {
+          const response = await fetch("/api/admin/wiki", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ url }),
+          });
+          if (!response.ok) throw new Error(await readError(response));
+          const body = (await response.json()) as {
+            files?: KnowledgeFile[];
+            file?: KnowledgeFile;
+            warnings?: string[];
+          };
+          const listed = body.files ?? (body.file ? [body.file] : []);
+          added.push(...listed.flatMap((item) => (item?.filename ? [item.filename] : [])));
+          warnings.push(...(body.warnings ?? []));
+        } catch (err: unknown) {
+          fail(url, err);
+        }
+      }
+
+      if (added.length === 0) {
+        setNotice(null);
+        setError(failures.join(" ") || "Nothing was indexed.");
+      } else {
+        const indexed =
+          added.length === 1 ? `${added[0]} is indexed.` : `${added.length} files are indexed.`;
+        const extra = [...warnings, ...failures];
+        setNotice(extra.length > 0 ? `${indexed} ${extra.join(" ")}` : indexed);
+        setSelectedPdfs([]);
+        setWikiLinks("");
+        if (uploadInputRef.current) uploadInputRef.current.value = "";
+      }
       await loadFiles();
-    } catch (err: unknown) {
-      setNotice(null);
-      setError(err instanceof Error ? err.message : "Could not convert that link.");
-      await loadFiles().catch(() => undefined);
     } finally {
       setBusy(false);
     }
-  }
-
-  async function onUpload(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const file = uploadInputRef.current?.files?.[0];
-    if (!file) {
-      setError("Choose a PDF to upload.");
-      return;
-    }
-    await uploadPdf(file);
-    if (uploadInputRef.current) uploadInputRef.current.value = "";
   }
 
   function startReplace(id: string) {
@@ -200,39 +237,36 @@ export default function AdminPage() {
         <p className="text-label">Admin</p>
         <h1 className="mt-2 text-h2">Knowledge PDFs</h1>
         <p className="mt-3 max-w-2xl text-body">
-          Upload a PDF, or paste a Wikipedia or NTC Wiki link. A link is
-          converted to a PDF and stored with the other files. A file with the
-          same name replaces the copy already stored. Indexing can take a minute.
+          Add up to 10 PDFs and wiki links together. A link is converted to a
+          PDF, and PDFs linked from an NTC Wiki page are stored too. A file
+          with the same name replaces the copy already stored.
         </p>
 
         <form
-          onSubmit={onUpload}
-          className="mt-8 flex flex-col gap-4 rounded-3xl bg-white p-5 shadow-sm sm:flex-row sm:items-end"
+          onSubmit={onAddBatch}
+          className="mt-8 flex flex-col gap-5 rounded-3xl bg-white p-5 shadow-sm"
         >
-          <label className="flex min-w-0 flex-1 flex-col gap-2 text-sm font-semibold">
-            PDF file
+          <label className="flex flex-col gap-2 text-sm font-semibold">
+            PDF files
             <input
               ref={uploadInputRef}
               type="file"
               name="file"
               accept="application/pdf,.pdf"
+              multiple
               disabled={busy}
+              onChange={onPdfsChosen}
               className="block w-full text-sm font-medium text-neutral-dark-gray file:mr-4 file:rounded-full file:border-0 file:bg-brand-navy file:px-4 file:py-2 file:text-sm file:font-bold file:text-white hover:file:bg-brand-primary"
             />
           </label>
-          <button
-            type="submit"
-            disabled={busy}
-            className="rounded-full bg-brand-navy px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-primary disabled:opacity-60"
-          >
-            {busy ? "Working…" : "Upload PDF"}
-          </button>
-        </form>
+          {selectedPdfs.length > 0 ? (
+            <ul className="text-sm font-medium text-neutral-dark-gray">
+              {selectedPdfs.map((file) => (
+                <li key={`${file.name}-${file.size}`}>{file.name}</li>
+              ))}
+            </ul>
+          ) : null}
 
-        <form
-          onSubmit={onAddWiki}
-          className="mt-4 flex flex-col gap-4 rounded-3xl bg-white p-5 shadow-sm"
-        >
           <label className="flex flex-col gap-2 text-sm font-semibold">
             Wikipedia or NTC Wiki links
             <textarea
@@ -245,9 +279,8 @@ export default function AdminPage() {
             />
           </label>
           <p className="text-sm font-medium text-neutral-dark-gray">
-            One link per line. Wikipedia pages use Wikipedia&apos;s own PDF.
-            An NTC Wiki page is saved as text, and every PDF linked from that
-            page, such as a datasheet, is indexed too.
+            One link per line. PDFs and links together cannot be more than{" "}
+            {BATCH_LIMIT}.
           </p>
           <div>
             <button
@@ -255,7 +288,7 @@ export default function AdminPage() {
               disabled={busy}
               className="rounded-full bg-brand-navy px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-primary disabled:opacity-60"
             >
-              {busy ? "Working…" : "Convert to PDF"}
+              {busy ? "Working…" : "Add to knowledge"}
             </button>
           </div>
         </form>
